@@ -3,8 +3,6 @@
 Download datasets from [Dataverse](https://dataverse.harvard.edu/) repositories using dataset IDs.  
 Return format: Files downloaded to specified directory.
 
-This module was written by [Abolfazl Berajabasht](https://github.com/abearab).
-
 **Positional argument**  
 `table`  
 File containing the dataset IDs to download (CSV/TSV format). The file must contain the following columns:
