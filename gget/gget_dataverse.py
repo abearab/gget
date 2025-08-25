@@ -36,13 +36,13 @@ def get_file_metadata(file_id):
     Returns:
         dict: metadata containing checksum info, or None if unavailable
     """
-    metadata_url = f"https://dataverse.harvard.edu/api/files/{file_id}/metadata"
+    file_url = f"https://dataverse.harvard.edu/api/files/{file_id}"
     try:
-        response = requests.get(metadata_url, timeout=30)
+        response = requests.get(file_url, timeout=30)
         response.raise_for_status()
         metadata = response.json()
         
-        # Extract checksum information if available
+        # Extract checksum information from the direct file API response
         if "data" in metadata and isinstance(metadata["data"], dict):
             data = metadata["data"]
             if "checksum" in data:
