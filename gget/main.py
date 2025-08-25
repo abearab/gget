@@ -2354,6 +2354,12 @@ def main():
         required=False,
         help="Path to the directory the datasets will be saved in. Default: current working directory.",
     )
+    parser_dataverse.add_argument(
+        "-c",
+        "--checksum",
+        action="store_true",
+        help="Verify MD5 checksums of downloaded files against remote checksums.",
+    )
     
     ### Define return values
     args = parent_parser.parse_args()
@@ -3336,5 +3342,6 @@ def main():
             df=args.table,
             path=args.out,
             sep=sep,
+            verify_checksum=args.checksum,
             verbose=args.quiet,
         )

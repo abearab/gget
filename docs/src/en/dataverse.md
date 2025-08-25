@@ -14,10 +14,17 @@ File containing the dataset IDs to download (CSV/TSV format). The file must cont
 `-o` `--out`    
 Path to the directory where the datasets will be saved. Default: current working directory.
 
+`-c` `--checksum`  
+Verify MD5 checksums of downloaded files against remote checksums. This ensures file integrity by comparing the local file's checksum with the checksum stored in Dataverse. Note: This requires additional API calls and may slow down the process.
+
 **Flags**   
 `-q` `--quiet`   
 Command-line only. Prevents progress information from being displayed.  
 Python: Use `verbose=False` to prevent progress information from being displayed.
+
+Python-only flags:  
+`verify_checksum`  
+Verify MD5 checksums of downloaded files against remote checksums. Default: False.
   
   
 ### Examples
@@ -79,6 +86,21 @@ gget.dataverse(df, path="./data")
 
 <br/><br/>
 
+**Download datasets with checksum verification**
+
+```bash
+gget dataverse datasets.csv --checksum
+```
+
+```python
+import gget
+gget.dataverse("datasets.csv", verify_checksum=True)
+```
+
+&rarr; Downloads the specified datafiles and verifies their MD5 checksums against the remote checksums stored in Dataverse to ensure file integrity.
+
+<br/><br/>
+
 ### Notes
 
 - Files are downloaded with progress bars showing download status
@@ -86,3 +108,9 @@ gget.dataverse(df, path="./data")
 - The module validates that the input table contains the required columns (`id`, `name`, `type`)
 - Supports both CSV (comma-separated) and TSV (tab-separated) input files
 - Error handling provides clear messages for common issues like missing files or invalid formats
+- **Checksum verification**: When enabled, files are verified against their remote MD5 checksums stored in Dataverse. This feature:
+  - Ensures downloaded files are complete and uncorrupted
+  - Works for both newly downloaded files and existing local files  
+  - Requires additional API calls to retrieve metadata
+  - Shows verification results in the log output
+  - Currently supports MD5 checksums only

@@ -14,10 +14,17 @@ Archivo que contiene los IDs de los conjuntos de datos para descargar (formato C
 `-o` `--out`    
 Ruta al directorio donde se guardarán los conjuntos de datos. Por defecto: directorio de trabajo actual.
 
+`-c` `--checksum`  
+Verificar sumas de verificación MD5 de archivos descargados contra las sumas de verificación remotas. Esto garantiza la integridad del archivo comparando la suma de verificación del archivo local con la suma de verificación almacenada en Dataverse. Nota: Esto requiere llamadas adicionales a la API y puede ralentizar el proceso.
+
 **Banderas**   
 `-q` `--quiet`   
 Solo línea de comandos. Evita que se muestre información de progreso.  
 Python: Use `verbose=False` para evitar que se muestre información de progreso.
+
+Banderas solo para Python:  
+`verify_checksum`  
+Verificar sumas de verificación MD5 de archivos descargados contra las sumas de verificación remotas. Por defecto: False.
   
   
 ### Ejemplos
@@ -79,6 +86,21 @@ gget.dataverse(df, path="./data")
 
 <br/><br/>
 
+**Descargar conjuntos de datos con verificación de suma de verificación**
+
+```bash
+gget dataverse datasets.csv --checksum
+```
+
+```python
+import gget
+gget.dataverse("datasets.csv", verify_checksum=True)
+```
+
+&rarr; Descarga los archivos de datos especificados y verifica sus sumas de verificación MD5 contra las sumas de verificación remotas almacenadas en Dataverse para garantizar la integridad del archivo.
+
+<br/><br/>
+
 ### Notas
 
 - Los archivos se descargan con barras de progreso que muestran el estado de descarga
@@ -86,3 +108,9 @@ gget.dataverse(df, path="./data")
 - El módulo valida que la tabla de entrada contenga las columnas requeridas (`id`, `name`, `type`)
 - Soporta archivos de entrada tanto CSV (separado por comas) como TSV (separado por tabulaciones)
 - El manejo de errores proporciona mensajes claros para problemas comunes como archivos faltantes o formatos inválidos
+- **Verificación de suma de verificación**: Cuando está habilitada, los archivos se verifican contra sus sumas de verificación MD5 remotas almacenadas en Dataverse. Esta característica:
+  - Garantiza que los archivos descargados están completos y no corruptos
+  - Funciona tanto para archivos recién descargados como para archivos locales existentes
+  - Requiere llamadas adicionales a la API para recuperar metadatos
+  - Muestra resultados de verificación en la salida del registro
+  - Actualmente soporta solo sumas de verificación MD5
