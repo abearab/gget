@@ -3,8 +3,6 @@
 Descargar conjuntos de datos de repositorios [Dataverse](https://dataverse.harvard.edu/) usando IDs de conjuntos de datos.  
 Formato de devolución: Archivos descargados al directorio especificado.
 
-Este módulo fue escrito por [Abolfazl Berajabasht](https://github.com/abearab).
-
 **Argumento posicional**  
 `table`  
 Archivo que contiene los IDs de los conjuntos de datos para descargar (formato CSV/TSV). El archivo debe contener las siguientes columnas:
