@@ -58,6 +58,7 @@
 * [gget cbio](es/cbio.md)  
 * [gget cellxgene](es/cellxgene.md)
 * [gget cosmic](es/cosmic.md)  
+* [gget dataverse](es/dataverse.md)  
 * [gget diamond](es/diamond.md)  
 * [gget elm](es/elm.md)  
 * [gget enrichr](es/enrichr.md)  
