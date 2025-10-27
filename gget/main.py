@@ -2334,20 +2334,25 @@ def main():
         add_help=True,
         formatter_class=CustomHelpFormatter,
     )
+    # dataverse parser arguments
     parser_dataverse.add_argument(
-        "-o",
-        "--path",
+        "table",
         type=str,
-        required=True,
-        help="Path to the directory the datasets will be saved in, e.g. 'path/to/directory'.",
+        help="File containing the dataset IDs to download (csv/tsv format with 'id', 'name', 'type' columns), e.g. 'datasets.tsv'.",
     )
     parser_dataverse.add_argument(
-        "-t",
-        "--table",
+        "-o",
+        "--out",
         type=str,
-        default=None,
+        default=".",
         required=False,
-        help="File containing the dataset IDs to download, e.g. 'datasets.tsv'.",
+        help="Path to the directory the datasets will be saved in. Default: current working directory.",
+    )
+    parser_dataverse.add_argument(
+        "-c",
+        "--checksum",
+        action="store_true",
+        help="Verify MD5 checksums of downloaded files against remote checksums.",
     )
     
     ### Define return values
@@ -3324,9 +3329,13 @@ def main():
             sep = ','
         elif '.tsv' in args.table:
             sep = '\t'
+        else:
+            sep = ','  # default to comma-separated
         # Run gget dataverse function
         dataverse(
-            df = args.table,
-            path = args.out,
-            sep = sep,
+            df=args.table,
+            path=args.out,
+            sep=sep,
+            verify_checksum=args.checksum,
+            verbose=args.quiet,
         )
