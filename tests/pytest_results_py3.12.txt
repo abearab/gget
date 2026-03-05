@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-03-02T16:10:16Z
+Pytest results (Python 3.12) - 2026-03-05T16:14:59Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.12, pytest-9.0.2, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.12/x64/bin/python
@@ -6,231 +6,1474 @@ cachedir: .pytest_cache
 rootdir: /home/runner/work/gget/gget
 configfile: pyproject.toml
 plugins: zarr-3.1.5, fast-array-utils-1.3.1, cov-7.0.0
-collecting ... collected 247 items / 1 error
+collecting ... collected 250 items
 
-==================================== ERRORS ====================================
-______________________ ERROR collecting tests/test_elm.py ______________________
+tests/test_8cube.py::TestSpecificity::test_specificity_basic PASSED      [  0%]
+tests/test_8cube.py::TestPsiBlock::test_psi_block_basic PASSED           [  0%]
+tests/test_8cube.py::TestGeneExpression::test_gene_expression_basic PASSED [  1%]
+tests/test_archs4.py::TestArchs4::test_archs4_bad_ensembl PASSED         [  1%]
+tests/test_archs4.py::TestArchs4::test_archs4_bad_gene PASSED            [  2%]
+tests/test_archs4.py::TestArchs4::test_archs4_bad_gene_tissue PASSED     [  2%]
+tests/test_archs4.py::TestArchs4::test_archs4_bad_species PASSED         [  2%]
+tests/test_archs4.py::TestArchs4::test_archs4_bad_which PASSED           [  3%]
+tests/test_archs4.py::TestArchs4::test_archs4_defaults PASSED            [  3%]
+tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl PASSED  [  4%]
+tests/test_archs4.py::TestArchs4::test_archs4_tissue PASSED              [  4%]
+tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl PASSED      [  4%]
+tests/test_archs4.py::TestArchs4::test_archs4_tissue_json PASSED         [  5%]
+tests/test_archs4.py::TestArchs4::test_archs4_tissue_mouse PASSED        [  5%]
+tests/test_bgee.py::TestBgee::test_bgee_expression PASSED                [  6%]
+tests/test_bgee.py::TestBgee::test_bgee_expression_multiple PASSED       [  6%]
+tests/test_bgee.py::TestBgee::test_bgee_orthologs PASSED                 [  6%]
+tests/test_bgee.py::TestBgee::test_error_bgee_expression_no_exist PASSED [  7%]
+tests/test_bgee.py::TestBgee::test_error_bgee_orthologs_no_exist PASSED  [  7%]
+tests/test_bgee.py::TestBgee::test_error_bgee_unknown_type PASSED        [  8%]
+tests/test_blast.py::TestBlast::test_blast_bad_db1 PASSED                [  8%]
+tests/test_blast.py::TestBlast::test_blast_bad_db2 PASSED                [  8%]
+tests/test_blast.py::TestBlast::test_blast_bad_fasta PASSED              [  9%]
+tests/test_blast.py::TestBlast::test_blast_bad_program PASSED            [  9%]
+tests/test_blast.py::TestBlast::test_blast_bad_seq PASSED                [ 10%]
+tests/test_blast.py::TestBlast::test_blast_db_missing PASSED             [ 10%]
+tests/test_blast.py::TestBlast::test_blast_nt PASSED                     [ 10%]
+tests/test_blat.py::TestBlat::test_blat_aa PASSED                        [ 11%]
+tests/test_blat.py::TestBlat::test_blat_aa_RNA PASSED                    [ 11%]
+tests/test_blat.py::TestBlat::test_blat_aa_protein PASSED                [ 12%]
+tests/test_blat.py::TestBlat::test_blat_bad_assembly PASSED              [ 12%]
+tests/test_blat.py::TestBlat::test_blat_bad_fasta PASSED                 [ 12%]
+tests/test_blat.py::TestBlat::test_blat_bad_fileformat PASSED            [ 13%]
+tests/test_blat.py::TestBlat::test_blat_bad_seqtype PASSED               [ 13%]
+tests/test_blat.py::TestBlat::test_blat_bad_txt PASSED                   [ 14%]
+tests/test_blat.py::TestBlat::test_blat_nt PASSED                        [ 14%]
+tests/test_blat.py::TestBlat::test_blat_nt_DNA PASSED                    [ 14%]
+tests/test_blat.py::TestBlat::test_blat_nt_RNA PASSED                    [ 15%]
+tests/test_blat.py::TestBlat::test_blat_nt_fasta PASSED                  [ 15%]
+tests/test_blat.py::TestBlat::test_blat_nt_json PASSED                   [ 16%]
+tests/test_blat.py::TestBlat::test_blat_nt_protein PASSED                [ 16%]
+tests/test_blat.py::TestBlat::test_blat_nt_transDNA PASSED               [ 16%]
+tests/test_blat.py::TestBlat::test_blat_nt_txt PASSED                    [ 17%]
+tests/test_blat.py::TestBlat::test_blat_shortseq PASSED                  [ 17%]
+tests/test_cbio.py::TestCbioSearch::test_cbio_search PASSED              [ 18%]
+tests/test_cbio.py::TestCbio::test_cbio_download PASSED                  [ 18%]
+tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files PASSED [ 18%]
+tests/test_cbio.py::TestCbio::test_error_cbio_download PASSED            [ 19%]
+tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata PASSED      [ 19%]
+tests/test_cellxgene.py::TestCellxgene::test_cellxgene_metadata PASSED   [ 20%]
+tests/test_compile.py::TestCompilerWindows::test_compiler_windows PASSED [ 20%]
+tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults PASSED    [ 20%]
+tests/test_diamond.py::TestDiamond::test_diamond_JSON_out PASSED         [ 21%]
+tests/test_diamond.py::TestDiamond::test_diamond_both_files PASSED       [ 21%]
+tests/test_diamond.py::TestDiamond::test_diamond_query_file PASSED       [ 22%]
+tests/test_diamond.py::TestDiamond::test_diamond_ref_file PASSED         [ 22%]
+tests/test_diamond.py::TestDiamond::test_diamond_seqs_multiple PASSED    [ 22%]
+tests/test_diamond.py::TestDiamond::test_diamond_seqs_single PASSED      [ 23%]
+tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq PASSED         [ 23%]
+tests/test_elm.py::TestELM::test_elm_uniprot_id_in_elm PASSED            [ 24%]
+tests/test_elm.py::TestELM::test_elm_uniprot_id_new PASSED               [ 24%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_background PASSED       [ 24%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl PASSED [ 25%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_background PASSED   [ 25%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_background_list PASSED [ 26%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_database_shortcut PASSED [ 26%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_gene PASSED         [ 26%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_species PASSED      [ 27%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_celltypes PASSED        [ 27%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_diseases_drugs PASSED   [ 28%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids PASSED      [ 28%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_fish PASSED             [ 28%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_fly PASSED              [ 29%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_json PASSED             [ 29%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_kinase_interactions PASSED [ 30%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_mouse_is_human PASSED   [ 30%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_none PASSED             [ 30%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_ontology PASSED         [ 31%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_pathway PASSED          [ 31%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_plot PASSED             [ 32%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_transcription PASSED    [ 32%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_worm PASSED             [ 32%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_yeast PASSED            [ 33%]
+tests/test_gpt.py::TestGpt::test_gpt PASSED                              [ 33%]
+tests/test_info.py::TestInfo::test_info_WB_transcript PASSED             [ 34%]
+tests/test_info.py::TestInfo::test_info_exon PASSED                      [ 34%]
+tests/test_info.py::TestInfo::test_info_gene PASSED                      [ 34%]
+tests/test_info.py::TestInfo::test_info_gene_list_non_model PASSED       [ 35%]
+tests/test_info.py::TestInfo::test_info_mix PASSED                       [ 35%]
+tests/test_info.py::TestInfo::test_info_ncbifalse_uniprotfalse PASSED    [ 36%]
+tests/test_info.py::TestInfo::test_info_ncbifalse_uniprottrue PASSED     [ 36%]
+tests/test_info.py::TestInfo::test_info_ncbitrue_uniprotfalse PASSED     [ 36%]
+tests/test_info.py::TestInfo::test_info_transcript PASSED                [ 37%]
+tests/test_muscle.py::TestMuscle::test_muscle_nt PASSED                  [ 37%]
+tests/test_muscle.py::TestMuscle::test_muscle_nt_txt PASSED              [ 38%]
+tests/test_muscle.py::TestMuscleSuper::test_muscle_nt_super5 PASSED      [ 38%]
+tests/test_muscle.py::TestMuscleAA::test_muscle_aa PASSED                [ 38%]
+tests/test_muscle.py::TestMuscleSeqsInput::test_muscle_seqs_as_input PASSED [ 39%]
+tests/test_muscle.py::TestMuscleAASuper::test_muscle_aa_super5 PASSED    [ 39%]
+tests/test_muscle.py::TestMusclePrints::test_muscle_print_nt PASSED      [ 40%]
+tests/test_mutate.py::TestMutate::test_ambiguous_mutation PASSED         [ 40%]
+tests/test_mutate.py::TestMutate::test_index_error PASSED                [ 40%]
+tests/test_mutate.py::TestMutate::test_intron_mutation_minus PASSED      [ 41%]
+tests/test_mutate.py::TestMutate::test_intron_mutation_plus PASSED       [ 41%]
+tests/test_mutate.py::TestMutate::test_inversion_with_overlaps PASSED    [ 42%]
+tests/test_mutate.py::TestMutate::test_large_k PASSED                    [ 42%]
+tests/test_mutate.py::TestMutate::test_list_of_mutations PASSED          [ 42%]
+tests/test_mutate.py::TestMutate::test_multi_deletion PASSED             [ 43%]
+tests/test_mutate.py::TestMutate::test_multi_deletion_with_right_repeats PASSED [ 43%]
+tests/test_mutate.py::TestMutate::test_multi_delins PASSED               [ 44%]
+tests/test_mutate.py::TestMutate::test_multi_delins_with_psuedo_left_repeats PASSED [ 44%]
+tests/test_mutate.py::TestMutate::test_multi_delins_with_true_left_repeats PASSED [ 44%]
+tests/test_mutate.py::TestMutate::test_multi_delins_with_true_right_repeats PASSED [ 45%]
+tests/test_mutate.py::TestMutate::test_multi_dup PASSED                  [ 45%]
+tests/test_mutate.py::TestMutate::test_multi_insertion PASSED            [ 46%]
+tests/test_mutate.py::TestMutate::test_multi_insertion_with_left_repeats PASSED [ 46%]
+tests/test_mutate.py::TestMutate::test_posttranslational_mutation PASSED [ 46%]
+tests/test_mutate.py::TestMutate::test_single_deletion PASSED            [ 47%]
+tests/test_mutate.py::TestMutate::test_single_deletion_with_left_repeats PASSED [ 47%]
+tests/test_mutate.py::TestMutate::test_single_deletion_with_right_repeats PASSED [ 48%]
+tests/test_mutate.py::TestMutate::test_single_delins PASSED              [ 48%]
+tests/test_mutate.py::TestMutate::test_single_dup PASSED                 [ 48%]
+tests/test_mutate.py::TestMutate::test_single_insertion PASSED           [ 49%]
+tests/test_mutate.py::TestMutate::test_single_substitution PASSED        [ 49%]
+tests/test_mutate.py::TestMutate::test_single_substitution_near_left_end PASSED [ 50%]
+tests/test_mutate.py::TestMutate::test_single_substitution_near_right_end PASSED [ 50%]
+tests/test_mutate.py::TestMutate::test_uncertain_mutation PASSED         [ 50%]
+tests/test_mutate.py::test_csv_of_mutations PASSED                       [ 51%]
+tests/test_mutate.py::test_mismatch_error PASSED                         [ 51%]
+tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_bad_limit PASSED [ 52%]
+tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_bad_resource PASSED [ 52%]
+tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_diseases_filter PASSED [ 52%]
+tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_drugs_invalid_filter PASSED [ 53%]
+tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_nonexistent_id PASSED [ 53%]
+tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_tractability_limit PASSED [ 54%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets PASSED      [ 54%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap PASSED [ 54%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap_filter PASSED [ 55%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs PASSED [ 55%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs_no_limit PASSED [ 56%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_expression_no_limit PASSED [ 56%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_interactions_no_limit PASSED [ 56%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_interactions_simple_filter PASSED [ 57%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_no_limit PASSED [ 57%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_no_limit_accurate_coverage PASSED [ 58%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_pharmacogenetics_filter_or PASSED [ 58%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_pharmacogenetics_no_limit PASSED [ 58%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_tractability PASSED [ 59%]
+tests/test_pdb.py::TestPDB::test_pdb_assembly FAILED                     [ 59%]
+tests/test_pdb.py::TestPDB::test_pdb_pdb PASSED                          [ 60%]
+tests/test_ref.py::TestRef::test_ref PASSED                              [ 60%]
+tests/test_ref.py::TestRef::test_ref_bad_rel PASSED                      [ 60%]
+tests/test_ref.py::TestRef::test_ref_bad_species PASSED                  [ 61%]
+tests/test_ref.py::TestRef::test_ref_bad_which PASSED                    [ 61%]
+tests/test_ref.py::TestRef::test_ref_ftp PASSED                          [ 62%]
+tests/test_ref.py::TestRef::test_ref_list PASSED                         [ 62%]
+tests/test_ref.py::TestRef::test_ref_plant PASSED                        [ 62%]
+tests/test_ref.py::TestRef::test_ref_rel PASSED                          [ 63%]
+tests/test_ref.py::TestRef::test_ref_rel_ftp PASSED                      [ 63%]
+tests/test_ref.py::TestRef::test_ref_rel_ftp_octopus PASSED              [ 64%]
+tests/test_ref.py::TestRef::test_ref_rel_protist PASSED                  [ 64%]
+tests/test_ref.py::TestRef::test_ref_which PASSED                        [ 64%]
+tests/test_ref.py::TestRef::test_ref_which_plant PASSED                  [ 65%]
+tests/test_search.py::TestSearch::test_search_db PASSED                  [ 65%]
+tests/test_search.py::TestSearch::test_search_gene_bad_andor PASSED      [ 66%]
+tests/test_search.py::TestSearch::test_search_gene_bad_species PASSED    [ 66%]
+tests/test_search.py::TestSearch::test_search_gene_one_sw PASSED         [ 66%]
+tests/test_search.py::TestSearch::test_search_gene_one_sw_json PASSED    [ 67%]
+tests/test_search.py::TestSearch::test_search_gene_one_sw_limit PASSED   [ 67%]
+tests/test_search.py::TestSearch::test_search_gene_two_sw_and PASSED     [ 68%]
+tests/test_search.py::TestSearch::test_search_gene_two_sw_limit PASSED   [ 68%]
+tests/test_search.py::TestSearch::test_search_gene_two_sw_or PASSED      [ 68%]
+tests/test_search.py::TestSearch::test_search_octopus FAILED             [ 69%]
+tests/test_search.py::TestSearch::test_search_plant PASSED               [ 69%]
+tests/test_search.py::TestSearch::test_search_plant_db PASSED            [ 70%]
+tests/test_search.py::TestSearch::test_search_release PASSED             [ 70%]
+tests/test_search.py::TestSearch::test_search_transcript_bad_andor PASSED [ 70%]
+tests/test_search.py::TestSearch::test_search_transcript_bad_species PASSED [ 71%]
+tests/test_search.py::TestSearch::test_search_transcript_one_sw PASSED   [ 71%]
+tests/test_search.py::TestSearch::test_search_transcript_two_sw_and PASSED [ 72%]
+tests/test_search.py::TestSearch::test_search_transcript_two_sw_or PASSED [ 72%]
+tests/test_seq.py::TestSeq::test_seq_gene PASSED                         [ 72%]
+tests/test_seq.py::TestSeq::test_seq_gene_iso PASSED                     [ 73%]
+tests/test_seq.py::TestSeq::test_seq_gene_transcript_iso PASSED          [ 73%]
+tests/test_seq.py::TestSeq::test_seq_missing_uniprot_gene_name PASSED    [ 74%]
+tests/test_seq.py::TestSeq::test_seq_transcript PASSED                   [ 74%]
+tests/test_seq.py::TestSeq::test_seq_transcript_gene PASSED              [ 74%]
+tests/test_seq.py::TestSeq::test_seq_transcript_gene_WB PASSED           [ 75%]
+tests/test_seq.py::TestSeq::test_seq_transcript_gene_iso PASSED          [ 75%]
+tests/test_seq.py::TestSeq::test_seq_transcript_transcript_WB PASSED     [ 76%]
+tests/test_seq.py::TestSeq::test_seq_transcript_transcript_iso PASSED    [ 76%]
+tests/test_utils.py::TestUtils::test_aa_colors PASSED                    [ 76%]
+tests/test_utils.py::TestUtils::test_find_latest_ens_rel PASSED          [ 77%]
+tests/test_utils.py::TestUtils::test_get_uniprot_info_gene PASSED        [ 77%]
+tests/test_utils.py::TestUtils::test_get_uniprot_info_transcript PASSED  [ 78%]
+tests/test_utils.py::TestUtils::test_get_uniprot_seqs PASSED             [ 78%]
+tests/test_utils.py::TestUtils::test_n_colors PASSED                     [ 78%]
+tests/test_utils.py::TestUtils::test_read_fasta PASSED                   [ 79%]
+tests/test_utils.py::TestUtils::test_ref_iv_species_options PASSED       [ 79%]
+tests/test_utils.py::TestUtils::test_ref_species_options PASSED          [ 80%]
+tests/test_utils.py::TestUtils::test_ref_species_options_bad_type PASSED [ 80%]
+tests/test_utils.py::TestUtils::test_rest_query PASSED                   [ 80%]
+tests/test_utils.py::TestUtils::test_rest_query_bad_type PASSED          [ 81%]
+tests/test_utils.py::TestUtils::test_search_iv_species_options PASSED    [ 81%]
+tests/test_utils.py::TestUtils::test_search_species_options PASSED       [ 82%]
+tests/test_utils.py::TestUtils::test_search_species_options_bad_type PASSED [ 82%]
+tests/test_virus.py::TestVirus::test_datasets_cli_version_output PASSED  [ 82%]
+tests/test_virus.py::TestVirus::test_get_datasets_path_returns_valid_path PASSED [ 83%]
+tests/test_virus.py::TestVirus::test_get_datasets_path_uses_bundled_binary PASSED [ 83%]
+tests/test_virus.py::TestVirus::test_virus_completeness_filter_verification PASSED [ 84%]
+tests/test_virus.py::TestVirus::test_virus_empty_virus_name PASSED       [ 84%]
+tests/test_virus.py::TestVirus::test_virus_host_filter_verification PASSED [ 84%]
+tests/test_virus.py::TestVirus::test_virus_integer_virus_id PASSED       [ 85%]
+tests/test_virus.py::TestVirus::test_virus_invalid_annotated_type PASSED [ 85%]
+tests/test_virus.py::TestVirus::test_virus_invalid_completeness PASSED   [ 86%]
+tests/test_virus.py::TestVirus::test_virus_invalid_genbank_batch_size_negative PASSED [ 86%]
+tests/test_virus.py::TestVirus::test_virus_invalid_genbank_batch_size_type PASSED [ 86%]
+tests/test_virus.py::TestVirus::test_virus_invalid_genbank_batch_size_zero PASSED [ 87%]
+tests/test_virus.py::TestVirus::test_virus_invalid_genbank_metadata_type PASSED [ 87%]
+tests/test_virus.py::TestVirus::test_virus_invalid_is_accession_type PASSED [ 88%]
+tests/test_virus.py::TestVirus::test_virus_invalid_keep_temp_type PASSED [ 88%]
+tests/test_virus.py::TestVirus::test_virus_invalid_lab_passaged_type PASSED [ 88%]
+tests/test_virus.py::TestVirus::test_virus_invalid_proteins_complete_type PASSED [ 89%]
+tests/test_virus.py::TestVirus::test_virus_invalid_refseq_only_type PASSED [ 89%]
+tests/test_virus.py::TestVirus::test_virus_metadata_schema_validation PASSED [ 90%]
+tests/test_virus.py::TestVirus::test_virus_min_greater_than_max_collection_date PASSED [ 90%]
+tests/test_virus.py::TestVirus::test_virus_min_greater_than_max_gene_count PASSED [ 90%]
+tests/test_virus.py::TestVirus::test_virus_min_greater_than_max_peptide_count PASSED [ 91%]
+tests/test_virus.py::TestVirus::test_virus_min_greater_than_max_protein_count PASSED [ 91%]
+tests/test_virus.py::TestVirus::test_virus_min_greater_than_max_release_date PASSED [ 92%]
+tests/test_virus.py::TestVirus::test_virus_min_greater_than_max_seq_length PASSED [ 92%]
+tests/test_virus.py::TestVirus::test_virus_multiple_filters_relationship_check PASSED [ 92%]
+tests/test_virus.py::TestVirus::test_virus_none_virus_name PASSED        [ 93%]
+tests/test_virus.py::TestVirus::test_virus_relationship_check_counts_match PASSED [ 93%]
+tests/test_virus.py::TestVirus::test_virus_release_date_filter_verification PASSED [ 94%]
+tests/test_virus.py::TestVirus::test_virus_specific_accession_file_creation PASSED [ 94%]
+tests/test_virus.py::TestVirus::test_virus_with_annotated_filter PASSED  [ 94%]
+tests/test_virus.py::TestVirus::test_virus_with_collection_date_filters PASSED [ 95%]
+tests/test_virus.py::TestVirus::test_virus_with_completeness_filter PASSED [ 95%]
+tests/test_virus.py::TestVirus::test_virus_with_genbank_metadata_retrieval PASSED [ 96%]
+tests/test_virus.py::TestVirus::test_virus_with_geographic_location_filter PASSED [ 96%]
+tests/test_virus.py::TestVirus::test_virus_with_has_proteins_filter PASSED [ 96%]
+tests/test_virus.py::TestVirus::test_virus_with_host_filter PASSED       [ 97%]
+tests/test_virus.py::TestVirus::test_virus_with_lab_passaged_filter PASSED [ 97%]
+tests/test_virus.py::TestVirus::test_virus_with_length_filters PASSED    [ 98%]
+tests/test_virus.py::TestVirus::test_virus_with_max_ambiguous_chars_filter PASSED [ 98%]
+tests/test_virus.py::TestVirus::test_virus_with_multiple_filters PASSED  [ 98%]
+tests/test_virus.py::TestVirus::test_virus_with_protein_count_filters PASSED [ 99%]
+tests/test_virus.py::TestVirus::test_virus_with_refseq_filter PASSED     [ 99%]
+tests/test_virus.py::TestVirus::test_virus_with_source_database_filter PASSED [100%]
 
-    import unittest
-    import json
-    
-    from gget.gget_elm import elm
-    from gget.gget_setup import setup as gget_setup
-    
-    # Load dictionary containing arguments and expected results
-    with open("./tests/fixtures/test_elm.json") as json_file:
-        elm_dict = json.load(json_file)
-    
->   gget_setup(module="elm")
+=================================== FAILURES ===================================
+__________________________ TestPDB.test_pdb_assembly ___________________________
 
-tests/test_elm.py:11: 
+self = <tests.test_pdb.TestPDB testMethod=test_pdb_assembly>
+
+    def test_pdb_assembly(self):
+        test = "test1"
+        expected_result = pdb_dict[test]["expected_result"]
+        result_to_test = pdb(**pdb_dict[test]["args"])
+    
+>       self.assertEqual(result_to_test, expected_result)
+E       AssertionError: {'pdb[2345 chars]: 2316.9225073146845, 'total_number_interface_[977 chars]2.2'} != {'pdb[2345 chars]: 2315.334008113287, 'total_number_interface_r[976 chars]1.1'}
+E         {'pdbx_struct_assembly': {'details': 'author_and_software_defined_assembly',
+E                                   'id': '1',
+E                                   'method_details': 'PISA',
+E                                   'oligomeric_count': 3,
+E                                   'oligomeric_details': 'trimeric',
+E                                   'rcsb_candidate_assembly': 'Y',
+E                                   'rcsb_details': 'author_and_software_defined_assembly'},
+E          'pdbx_struct_assembly_gen': [{'assembly_id': '1',
+E                                        'asym_id_list': ['A',
+E                                                         'B',
+E                                                         'C',
+E                                                         'G',
+E                                                         'H',
+E                                                         'I',
+E                                                         'J',
+E                                                         'K',
+E                                                         'O',
+E                                                         'P',
+E                                                         'Q'],
+E                                        'oper_expression': '1',
+E                                        'ordinal': 1}],
+E          'pdbx_struct_oper_list': [{'id': '1',
+E                                     'matrix11': 1.0,
+E                                     'matrix12': 0.0,
+E                                     'matrix13': 0.0,
+E                                     'matrix21': 0.0,
+E                                     'matrix22': 1.0,
+E                                     'matrix23': 0.0,
+E                                     'matrix31': 0.0,
+E                                     'matrix32': 0.0,
+E                                     'matrix33': 1.0,
+E                                     'name': '1_555',
+E                                     'symmetry_operation': 'x,y,z',
+E                                     'type': 'identity operation',
+E                                     'vector1': 0.0,
+E                                     'vector2': 0.0,
+E                                     'vector3': 0.0}],
+E          'rcsb_assembly_container_identifiers': {'assembly_id': '1',
+E                                                  'entry_id': '1RH7',
+E                                                  'interface_ids': ['1', '2', '3'],
+E                                                  'rcsb_id': '1RH7-1'},
+E          'rcsb_assembly_info': {'assembly_id': '1',
+E                                 'atom_count': 1762,
+E                                 'branched_atom_count': 0,
+E                                 'branched_entity_count': 0,
+E                                 'branched_entity_instance_count': 0,
+E                                 'deuterated_water_count': 0,
+E                                 'entry_id': '1RH7',
+E                                 'hydrogen_atom_count': 0,
+E                                 'modeled_polymer_monomer_count': 243,
+E                                 'na_polymer_entity_types': 'Other',
+E                                 'nonpolymer_atom_count': 29,
+E                                 'nonpolymer_entity_count': 2,
+E                                 'nonpolymer_entity_instance_count': 5,
+E                                 'num_heterologous_interface_entities': 0,
+E                                 'num_heteromeric_interface_entities': 0,
+E                                 'num_homomeric_interface_entities': 1,
+E                                 'num_interface_entities': 1,
+E                                 'num_interfaces': 3,
+E                                 'num_isologous_interface_entities': 1,
+E                                 'num_na_interface_entities': 0,
+E                                 'num_prot_na_interface_entities': 0,
+E                                 'num_protein_interface_entities': 1,
+E                                 'polymer_atom_count': 1658,
+E                                 'polymer_composition': 'homomeric protein',
+E                                 'polymer_entity_count': 1,
+E                                 'polymer_entity_count_dna': 0,
+E                                 'polymer_entity_count_nucleic_acid': 0,
+E                                 'polymer_entity_count_nucleic_acid_hybrid': 0,
+E                                 'polymer_entity_count_protein': 1,
+E                                 'polymer_entity_count_rna': 0,
+E                                 'polymer_entity_instance_count': 3,
+E                                 'polymer_entity_instance_count_dna': 0,
+E                                 'polymer_entity_instance_count_nucleic_acid': 0,
+E                                 'polymer_entity_instance_count_nucleic_acid_hybrid': 0,
+E                                 'polymer_entity_instance_count_protein': 3,
+E                                 'polymer_entity_instance_count_rna': 0,
+E                                 'polymer_monomer_count': 243,
+E                                 'selected_polymer_entity_types': 'Protein (only)',
+E                                 'solvent_atom_count': 75,
+E                                 'solvent_entity_count': 1,
+E                                 'solvent_entity_instance_count': 3,
+E       -                         'total_assembly_buried_surface_area': 2316.9225073146845,
+E       ?                                                                  ^ ^ ^^^ -------
+E       
+E       +                         'total_assembly_buried_surface_area': 2315.334008113287,
+E       ?                                                                  ^ ^^^^^^^^^ ^
+E       
+E       -                         'total_number_interface_residues': 160,
+E       ?                                                              ^
+E       
+E       +                         'total_number_interface_residues': 161,
+E       ?                                                              ^
+E       
+E                                 'unmodeled_polymer_monomer_count': 0},
+E          'rcsb_id': '1RH7-1',
+E          'rcsb_struct_symmetry': [{'clusters': [{'avg_rmsd': 0.8418294327358263,
+E                                                  'members': [{'asym_id': 'A',
+E                                                               'pdbx_struct_oper_list_ids': ['1']},
+E                                                              {'asym_id': 'C',
+E                                                               'pdbx_struct_oper_list_ids': ['1']},
+E                                                              {'asym_id': 'B',
+E                                                               'pdbx_struct_oper_list_ids': ['1']}]}],
+E                                    'kind': 'Global Symmetry',
+E                                    'oligomeric_state': 'Homo 3-mer',
+E                                    'rotation_axes': [{'end': [13.473746075056361,
+E                                                               41.0962265805248,
+E                                                               -5.777587727129287],
+E                                                       'order': 3,
+E                                                       'start': [13.838143875349235,
+E                                                                 28.581996104345052,
+E                                                                 78.43743587115125]}],
+E                                    'stoichiometry': ['A3'],
+E                                    'symbol': 'C3',
+E                                    'type': 'Cyclic'}],
+E          'rcsb_struct_symmetry_lineage': [{'depth': 0,
+E                                            'id': 'Global Symmetry',
+E                                            'name': 'Global Symmetry'},
+E                                           {'depth': 2,
+E                                            'id': 'Global Symmetry.Cyclic.C3',
+E                                            'name': 'C3'},
+E                                           {'depth': 3,
+E                                            'id': 'Global Symmetry.Cyclic.C3.Homo 3-mer',
+E                                            'name': 'Homo 3-mer'},
+E                                           {'depth': 1,
+E                                            'id': 'Global Symmetry.Cyclic',
+E                                            'name': 'Cyclic'}],
+E       -  'rcsb_struct_symmetry_provenance_code': 'biojava-7.2.2'}
+E       ?                                                     ^ ^
+E       
+E       +  'rcsb_struct_symmetry_provenance_code': 'biojava-7.1.1'}
+E       ?                                                     ^ ^
+
+tests/test_pdb.py:19: AssertionError
+________________________ TestSearch.test_search_octopus ________________________
+
+self = <pandas.io.sql.SQLiteDatabase object at 0x7f18fc0ef080>
+sql = "\n            SELECT gene.stable_id AS 'ensembl_id', xref.display_label AS 'gene_name', gene.description AS 'ensembl_...lay_label LIKE '%methi%' OR external_synonym.synonym LIKE '%methi%' OR gene_attrib.value LIKE '%methi%')\n            "
+params = None
+
+    def execute(self, sql: str | Select | TextClause, params=None):
+        if not isinstance(sql, str):
+            raise TypeError("Query must be a string unless using sqlalchemy.")
+        args = [] if params is None else [params]
+        cur = self.con.cursor()
+        try:
+            cur.execute(sql, *args)
+            return cur
+        except Exception as exc:
+            try:
+>               self.con.rollback()
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/sql.py:2668: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-module = 'elm', verbose = True, out = None
+self = <mysql.connector.connection.MySQLConnection object at 0x7f18fc0ee420>
 
-    def setup(module, verbose=True, out=None):
+    def rollback(self) -> None:
+        """Rollback current transaction"""
+        if self.unread_result:
+            self.get_rows()
+    
+>       self._execute_query("ROLLBACK")
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/mysql/connector/connection.py:1463: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mysql.connector.connection.MySQLConnection object at 0x7f18fc0ee420>
+query = 'ROLLBACK'
+
+    def _execute_query(self, query: str) -> None:
+        """Execute a query
+    
+        This method simply calls cmd_query() after checking for unread
+        result. If there are still unread result, an InterfaceError
+        is raised. Otherwise whatever cmd_query() returns is returned.
+    
+        Returns a dict()
         """
-        Function to install third-party dependencies for a specified gget module.
-        Some modules require pip to be installed (https://pip.pypa.io/en/stable/installation).
-        Some modules require curl to be installed (https://everything.curl.dev/get).
+        self.handle_unread_result()
+>       self.cmd_query(query)
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/mysql/connector/connection.py:1475: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cnx = <mysql.connector.connection.MySQLConnection object at 0x7f18fc0ee420>
+args = ('ROLLBACK',), kwargs = {}
+
+    def wrapper(cnx: "MySQLConnectionAbstract", *args: Any, **kwargs: Any) -> Any:
+        """Context propagation decorator."""
+        # pylint: disable=possibly-used-before-assignment
+        if not OTEL_ENABLED or not cnx.otel_context_propagation:
+>           return method(cnx, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/mysql/connector/opentelemetry/context_propagation.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cnx = <mysql.connector.connection.MySQLConnection object at 0x7f18fc0ee420>
+args = ('ROLLBACK',), kwargs = {}
+
+    @functools.wraps(cnx_method)
+    def handle_cnx_method(
+        cnx: "MySQLConnectionAbstract", *args: Any, **kwargs: Any
+    ) -> Any:
+        try:
+            return cnx_method(cnx, *args, **kwargs)
+        except Exception as err:
+            if isinstance(err, TimeoutError):
+                cnx.close()
+>           raise err
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/mysql/connector/_decorating.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cnx = <mysql.connector.connection.MySQLConnection object at 0x7f18fc0ee420>
+args = ('ROLLBACK',), kwargs = {}
+
+    @functools.wraps(cnx_method)
+    def handle_cnx_method(
+        cnx: "MySQLConnectionAbstract", *args: Any, **kwargs: Any
+    ) -> Any:
+        try:
+>           return cnx_method(cnx, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/mysql/connector/_decorating.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mysql.connector.connection.MySQLConnection object at 0x7f18fc0ee420>
+query = b'ROLLBACK', raw = False, buffered = False, raw_as_string = False
+kwargs = {}, charset = 'utf8', packet = bytearray(b'ROLLBACK')
+
+    @with_context_propagation
+    @handle_read_write_timeout()
+    def cmd_query(
+        self,
+        query: StrOrBytes,
+        raw: bool = False,
+        buffered: bool = False,
+        raw_as_string: bool = False,
+        **kwargs: Any,
+    ) -> ResultType:
+        if not isinstance(query, bytearray):
+            if isinstance(query, str):
+                query = query.encode("utf-8")
+            query = bytearray(query)
+    
+        # Set/Reset internal state related to query execution
+        self._query = query
+        self._local_infile_filenames = None
+    
+        # Prepare query attrs
+        charset = self.charset if self.charset != "utf8mb4" else "utf8"
+        packet = bytearray()
+        if not self._query_attrs_supported and self._query_attrs:
+            warnings.warn(
+                "This version of the server does not support Query Attributes",
+                category=Warning,
+            )
+        if self._client_flags & ClientFlag.CLIENT_QUERY_ATTRIBUTES:
+            names = []
+            types = []
+            values: List[bytes] = []
+            null_bitmap = [0] * ((len(self._query_attrs) + 7) // 8)
+            for pos, attr_tuple in enumerate(self._query_attrs.items()):
+                value = attr_tuple[1]
+                flags = 0
+                if value is None:
+                    null_bitmap[(pos // 8)] |= 1 << (pos % 8)
+                    types.append(int1store(FieldType.NULL) + int1store(flags))
+                    continue
+                if isinstance(value, int):
+                    (
+                        packed,
+                        field_type,
+                        flags,
+                    ) = self._protocol.prepare_binary_integer(value)
+                    values.append(packed)
+                elif isinstance(value, str):
+                    value = value.encode(charset)
+                    values.append(lc_int(len(value)) + value)
+                    field_type = FieldType.STRING
+                elif isinstance(value, bytes):
+                    values.append(lc_int(len(value)) + value)
+                    field_type = FieldType.STRING
+                elif isinstance(value, Decimal):
+                    values.append(
+                        lc_int(len(str(value).encode(charset)))
+                        + str(value).encode(charset)
+                    )
+                    field_type = FieldType.DECIMAL
+                elif isinstance(value, float):
+                    values.append(struct.pack("<d", value))
+                    field_type = FieldType.DOUBLE
+                elif isinstance(value, (datetime.datetime, datetime.date)):
+                    (
+                        packed,
+                        field_type,
+                    ) = self._protocol.prepare_binary_timestamp(value)
+                    values.append(packed)
+                elif isinstance(value, (datetime.timedelta, datetime.time)):
+                    (packed, field_type) = self._protocol.prepare_binary_time(value)
+                    values.append(packed)
+                else:
+                    raise ProgrammingError(
+                        "MySQL binary protocol can not handle "
+                        f"'{value.__class__.__name__}' objects"
+                    )
+                types.append(int1store(field_type) + int1store(flags))
+                name = attr_tuple[0].encode(charset)
+                names.append(lc_int(len(name)) + name)
+    
+            # int<lenenc>    parameter_count    Number of parameters
+            packet.extend(lc_int(len(self._query_attrs)))
+            # int<lenenc>    parameter_set_count    Number of parameter sets.
+            # Currently always 1
+            packet.extend(lc_int(1))
+            if values:
+                packet.extend(
+                    b"".join([struct.pack("B", bit) for bit in null_bitmap])
+                    + int1store(1)
+                )
+                for _type, name in zip(types, names):
+                    packet.extend(_type)
+                    packet.extend(name)
+    
+                for value in values:
+                    packet.extend(value)
+    
+        packet.extend(query)
+        query = bytes(packet)
+        try:
+            read_timeout = kwargs.get("read_timeout", None)
+            write_timeout = kwargs.get("write_timeout", None)
+    
+>           result = self._handle_result(
+                self._send_cmd(
+                    ServerCmd.QUERY,
+                    query,
+                    read_timeout=read_timeout,
+                    write_timeout=write_timeout,
+                ),
+                read_timeout,
+                write_timeout,
+            )
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/mysql/connector/connection.py:984: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cnx = <mysql.connector.connection.MySQLConnection object at 0x7f18fc0ee420>
+args = (bytearray(b"M\x00\x00\t\x10GeneID_128249166\x0cTrnam-cau-22\'transfer RNA methionine (anticodon CAU)\xfb\x04tRNA\xfb"), None, None)
+kwargs = {}
+
+    @functools.wraps(cnx_method)
+    def handle_cnx_method(
+        cnx: "MySQLConnectionAbstract", *args: Any, **kwargs: Any
+    ) -> Any:
+        try:
+            return cnx_method(cnx, *args, **kwargs)
+        except Exception as err:
+            if isinstance(err, TimeoutError):
+                cnx.close()
+>           raise err
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/mysql/connector/_decorating.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cnx = <mysql.connector.connection.MySQLConnection object at 0x7f18fc0ee420>
+args = (bytearray(b"M\x00\x00\t\x10GeneID_128249166\x0cTrnam-cau-22\'transfer RNA methionine (anticodon CAU)\xfb\x04tRNA\xfb"), None, None)
+kwargs = {}
+
+    @functools.wraps(cnx_method)
+    def handle_cnx_method(
+        cnx: "MySQLConnectionAbstract", *args: Any, **kwargs: Any
+    ) -> Any:
+        try:
+>           return cnx_method(cnx, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/mysql/connector/_decorating.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mysql.connector.connection.MySQLConnection object at 0x7f18fc0ee420>
+packet = bytearray(b"M\x00\x00\t\x10GeneID_128249166\x0cTrnam-cau-22\'transfer RNA methionine (anticodon CAU)\xfb\x04tRNA\xfb")
+read_timeout = None, write_timeout = None
+
+    @handle_read_write_timeout()
+    def _handle_result(
+        self,
+        packet: bytes,
+        read_timeout: Optional[int] = None,
+        write_timeout: Optional[int] = None,
+    ) -> ResultType:
+        """Handle a MySQL Result
+    
+        This method handles a MySQL result, for example, after sending the
+        query command. OK and EOF packets will be handled and returned. If
+        the packet is an Error packet, an Error-exception will be
+        raised.
+    
+        The dictionary returned of:
+        - columns: column information
+        - eof: the EOF-packet information
+    
+        Returns a dict()
+        """
+        if not packet or len(packet) < 4:
+            raise InterfaceError("Empty response")
+        if packet[4] == OK_STATUS:
+            return self._handle_ok(packet)
+        if packet[4] == LOCAL_INFILE_STATUS:
+            filename = packet[5:].decode()
+            return self._handle_load_data_infile(filename, read_timeout, write_timeout)
+        if packet[4] == EOF_STATUS:
+            return self._handle_eof(packet)
+        if packet[4] == ERR_STATUS:
+            raise get_exception(packet)
+    
+        # We have a text result set
+        column_count = self._protocol.parse_column_count(packet)
+        if not column_count or not isinstance(column_count, int):
+            raise InterfaceError("Illegal result set")
+    
+        self._columns_desc = [
+            None,
+        ] * column_count
+        for i in range(0, column_count):
+>           self._columns_desc[i] = self._protocol.parse_column(
+                self._socket.recv(read_timeout or self._read_timeout),
+                self.python_charset,
+            )
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/mysql/connector/connection.py:756: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+packet = bytearray(b''), encoding = 'utf8'
+
+    @staticmethod
+    def parse_column(packet: bytes, encoding: str = "utf-8") -> DescriptionType:
+        """Parse a MySQL column-packet."""
+        packet, _ = utils.read_lc_string(packet[4:])  # catalog
+        packet, _ = utils.read_lc_string(packet)  # db
+        packet, _ = utils.read_lc_string(packet)  # table
+        packet, _ = utils.read_lc_string(packet)  # org_table
+        packet, name = utils.read_lc_string(packet)  # name
+        packet, _ = utils.read_lc_string(packet)  # org_name
+    
+        try:
+            (
+                charset,
+                _,
+                column_type,
+                flags,
+                _,
+            ) = struct.unpack("<xHIBHBxx", packet)
+        except struct.error:
+>           raise InterfaceError("Failed parsing column information") from None
+E           mysql.connector.errors.InterfaceError: Failed parsing column information
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/mysql/connector/protocol.py:552: InterfaceError
+
+The above exception was the direct cause of the following exception:
+
+self = <tests.test_search.TestSearch testMethod=test_search_octopus>
+
+    def assert_equal_na(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+>       result_to_test = do_call(func, td[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/from_json.py:87: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+func = <function search at 0x7f1901ec32e0>
+args = {'limit': 1, 'searchwords': 'methi', 'species': 'octopus_bimaculoides'}
+
+    def do_call(func, args):
+        if isinstance(args, dict):
+>           return func(**args)
+                   ^^^^^^^^^^^^
+
+tests/from_json.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+searchwords = ['methi'], species = 'octopus_bimaculoides', release = None
+id_type = 'gene', seqtype = None, andor = 'or', limit = 1, wrap_text = False
+json = False, save = False, verbose = True
+
+    def search(
+        searchwords,
+        species,
+        release=None,
+        id_type="gene",
+        seqtype=None,
+        andor="or",
+        limit=None,
+        wrap_text=False,
+        json=False,
+        save=False,
+        verbose=True,
+    ):
+        """
+        Function to query Ensembl for genes based on species and free form search terms.
+        Automatically fetches results from latest Ensembl release, unless user specifies database (see 'species' argument)
+        or release database (see 'release' argument).
     
         Args:
-        - module    (str) gget module for which dependencies should be installed, e.g. "alphafold", "cellxgene", "elm", "gpt", or "cbio".
-        - verbose   True/False whether to print progress information. Default True.
-        - out       (str) Path to directory to save downloaded files in (currently only applies when module='elm').
-                    NOTE: Do not use this argument when downloading the files for use with 'gget.elm'.
-                    Default None (files are saved in the gget installation directory).
+        - searchwords     Free form search words (not case-sensitive) as a string or list of strings
+                          (e.g.searchwords = ["GABA", "gamma-aminobutyric"]).
+        - species         Species can be passed in the format "genus_species", e.g. "homo_sapiens" or "arabidopsis_thaliana".
+                          To pass a specific database, enter the name of the core database, e.g. "mus_musculus_dba2j_core_105_1".
+                          All available core databases can be found here:
+                          Vertebrates: http://ftp.ensembl.org/pub/current/mysql/
+                          Invertebrates: http://ftp.ensemblgenomes.org/pub/current/ + kingdom + mysql/
+        - release         Defines the Ensembl release number from which the files are fetched, e.g. 104.
+                          Note: This argument does not apply to invertebrate species (you can pass a specific core database (which includes release number) to the species argument instead).
+                          This argument is overwritten if a specific database (which includes a release number) is passed to the species argument.
+                          Default: None -> latest Ensembl release is used
+        - id_type         "gene" (default) or "transcript"
+                          Defines whether genes or transcripts matching the searchwords are returned.
+        - andor           "or" (default) or "and"
+                          "or": Returns all genes that INCLUDE AT LEAST ONE of the searchwords in their name/description.
+                          "and": Returns only genes that INCLUDE ALL of the searchwords in their name/description.
+        - limit           (int) Limit the number of search results returned (default: None).
+        - wrap_text       If True, displays data frame with wrapped text for easy reading. Default: False.
+        - json            If True, returns results in json format instead of data frame. Default: False.
+        - save            If True, the data frame is saved as a csv in the current directory (default: False).
+        - verbose         True/False whether to print progress information. Default True.
+    
+        Returns a data frame with the query results.
+    
+        Note: Only returns results based on matches in the "gene name" or "description" sections in the Ensembl database.
+    
+        Deprecated arguments: 'seqtype' (renamed to id_type)
         """
-        supported_modules = ["alphafold", "cellxgene", "elm", "gpt", "cbio"]
-        if module not in supported_modules:
+        # Handle deprecated arguments
+        if seqtype:
+            logger.error(
+                "'seqtype' argument deprecated! Please use argument 'id_type' instead."
+            )
+            return
+    
+        start_time = time.time()
+    
+        ## Check validity or arguments
+        # Check if id_type is valid
+        id_types = ["gene", "transcript"]
+        id_type = id_type.lower()
+        if id_type not in id_types:
             raise ValueError(
-                f"'module' argument specified as {module}. Expected one of: {', '.join(supported_modules)}"
+                f"ID type (id_type) specified is '{id_type}'. Expected one of: {', '.join(id_types)}"
             )
     
-        if module == "gpt":
-            _install("openai<=0.28.1", "openai", verbose=verbose)
+        # Check if 'andor' arg is valid
+        andors = ["and", "or"]
+        andor = andor.lower()
+        if andor not in andors:
+            raise ValueError(
+                f"'andor' argument specified as {andor}. Expected one of {', '.join(andors)}"
+            )
     
-        elif module == "cellxgene":
-            _install("cellxgene-census", "cellxgene_census", verbose=verbose)
+        ## Get database for specified species
+        # Species shortcuts
+        if species == "human":
+            species = "homo_sapiens"
+        if species == "mouse":
+            species = "mus_musculus"
     
-        elif module == "elm":
-            if verbose:
-                logger.info(
-                    "ELM data can be downloaded & distributed for non-commercial use according to the following license: http://elm.eu.org/media/Elm_academic_license.pdf"
+        # If a specific database is passed with the "/" at the end, remove it
+        if "/" in species:
+            species = species.split("/")[0]
+    
+        # In case species was passed with upper case letters
+        species = species.lower()
+    
+        if "core" in species:
+            db = species
+            if release:
+                logger.warning(
+                    "Specified release overwritten because database name was provided."
                 )
-                logger.info(
-                    "Downloading ELM database files (requires curl to be installed)..."
+        else:
+            if release:
+                ens_rel = release
+            else:
+                # Find latest Ensembl release
+                ens_rel = find_latest_ens_rel()
+    
+            # Fetch ensembl databases
+            databases = search_species_options(database=ENSEMBL_FTP_URL, release=ens_rel)
+    
+            # Add ensembl invertebrate databases
+            databases += search_species_options(database=ENSEMBL_FTP_URL_NV, release=None)
+    
+            db = []
+            for datab in databases:
+                if species in datab:
+                    db.append(datab)
+    
+            # Unless an unambigious mouse database is specified,
+            # the standard core database will be used
+            if len(db) > 1 and "mus_musculus" in species:
+                db = f"mus_musculus_core_{ens_rel}_39"
+                logger.warning(
+                    f"Defaulting to mus musculus core database: {db}.\n"
+                    "All available vertebrate databases can be found here:\n"
+                    f"http://ftp.ensembl.org/pub/release-{ens_rel}/mysql/ \n"
                 )
     
-            if out is not None:
-                elm_files_out = os.path.abspath(out)
-                elm_instances_fasta = os.path.join(elm_files_out, "elm_instances.fasta")
-                elm_classes_tsv = os.path.join(elm_files_out, "elms_classes.tsv")
-                elm_instances_tsv = os.path.join(elm_files_out, "elm_instances.tsv")
-                elm_intdomains_tsv = os.path.join(
-                    elm_files_out, "elm_interaction_domains.tsv"
-                )
+            elif len(db) > 1 and "homo_sapiens" in species:
+                db = f"homo_sapiens_core_{ens_rel}_38"
     
-                # Create folder for ELM files (if it does not exist)
-                if not os.path.exists(elm_files_out):
-                    os.makedirs(elm_files_out)
+            # Check for ambiguous species matches in species other than mouse and human
+            elif (
+                len(db) > 1
+                and "mus_musculus" not in species
+                and "homo_sapiens" not in species
+            ):
+                logger.warning(
+                    f"Species matches more than one database. Defaulting to first database: {db[0]}.\n"
+                    "All available databases can be found here:\n"
+                    f"Vertebrates: http://ftp.ensembl.org/pub/release-{ens_rel}/mysql/ \n"
+                    f"Invertebrates: http://ftp.ensemblgenomes.org/pub/release-{find_latest_ens_rel(database=ENSEMBL_FTP_URL_NV)} + kingdom + mysql/"
+                )
+                db = db[0]
+    
+            # Raise error if no matching database was found
+            elif len(db) == 0:
+                raise ValueError(
+                    "Species not found. Please double-check spelling or pass a specific CORE database.\n"
+                    "All available CORE databases can be found here:\n"
+                    f"Vertebrates: http://ftp.ensembl.org/pub/release-{ens_rel}/mysql/ \n"
+                    f"Invertebrates: http://ftp.ensemblgenomes.org/pub/release-{find_latest_ens_rel(database=ENSEMBL_FTP_URL_NV)} + kingdom + mysql/"
+                )
     
             else:
-                elm_instances_fasta = ELM_INSTANCES_FASTA
-                elm_classes_tsv = ELM_CLASSES_TSV
-                elm_instances_tsv = ELM_INSTANCES_TSV
-                elm_intdomains_tsv = ELM_INTDOMAINS_TSV
+                db = db[0]
     
-                # Create folder for ELM files (if it does not exist)
-                if not os.path.exists(ELM_FILES):
-                    os.makedirs(ELM_FILES)
+        if verbose:
+            logger.info(f"Fetching results from database: {db}")
     
-            if platform.system() == "Windows":
-                # The double-quotation marks allow white spaces in the path, but this does not work for Windows
-                command = f"""
-                    curl -o {elm_instances_fasta} \"{ELM_INSTANCES_FASTA_DOWNLOAD}\" \\
-                    &&  curl -o {elm_classes_tsv} \"{ELM_CLASSES_TSV_DOWNLOAD}\" \\
-                    &&  curl -o {elm_instances_tsv} \"{ELM_INSTANCES_TSV_DOWNLOAD}\" \\
-                    &&  curl -o {elm_intdomains_tsv} \"{ELM_INTDOMAINS_TSV_DOWNLOAD}\"
+        ## Connect to Ensembl SQL server data for specified species
+        # Ports to try (some databases are stored in different ports)
+        # 3306 (and 5306) for the Ensembl instances, 3337 for GRCh37, 4157 for Ensembl Genomes, and 5316 for mart
+        ports = [3306, 5306, 4157, 3337, 5316]
+    
+        connection_successful = False
+        last_exception = None
+        for port in ports:
+            try:
+                db_connection = sql.connect(
+                    host="mysql-eg-publicsql.ebi.ac.uk",
+                    database=db,
+                    user="anonymous",
+                    password="",
+                    port=port,
+                )
+                connection_successful = True
+                break
+            except Exception as e:
+                last_exception = e
+                # Continue to the next port if the connection is unsuccessful
+                continue
+    
+        # If none of the ports work, raise an error with the last exception encountered
+        if not connection_successful:
+            if "Access denied" in str(last_exception):
+                raise RuntimeError(
+                    f"""
+                    The Ensembl server returned the following error: {str(last_exception)}.
+                    This might be caused by the Ensembl release number being too low.
+                    Please try again with a more recent release.
                     """
-    
-            else:
-                command = f"""
-                    curl -o '{elm_instances_fasta}' {ELM_INSTANCES_FASTA_DOWNLOAD} \\
-                    &&  curl -o '{elm_classes_tsv}' {ELM_CLASSES_TSV_DOWNLOAD} \\
-                    &&  curl -o '{elm_instances_tsv}' {ELM_INSTANCES_TSV_DOWNLOAD} \\
-                    &&  curl -o '{elm_intdomains_tsv}' '{ELM_INTDOMAINS_TSV_DOWNLOAD}'
-                    """
-    
-            with subprocess.Popen(command, shell=True, stderr=subprocess.PIPE) as process:
-                stderr = process.stderr.read().decode("utf-8")
-                # Log the standard error if it is not empty
-                if stderr:
-                    sys.stderr.write(stderr)
-    
-            # Exit system if the subprocess returned with an error
-            if process.wait() != 0:
-                logger.error("ELM database files download failed.")
-                return
-    
-            # Check if files are present
-            if os.path.exists(elm_instances_fasta):
-                # Check that file does not just contain an error message
-                check_file_for_error_message(
-                    elm_instances_fasta,
-                    "ELM instances fasta file",
-                    ELM_INSTANCES_FASTA_DOWNLOAD,
                 )
-                if verbose:
-                    logger.info(f"ELM sequences file present.")
             else:
-                logger.error("ELM FASTA file missing.")
-    
-            if os.path.exists(elm_classes_tsv):
-                # Check that file does not just contain an error message
-                check_file_for_error_message(
-                    elm_classes_tsv, "ELM classes tsv file", ELM_CLASSES_TSV_DOWNLOAD
+                raise RuntimeError(
+                    f"The Ensembl server returned the following error: {str(last_exception)}"
                 )
-                if verbose:
-                    logger.info("ELM classes file present.")
-            else:
-                logger.error("ELM classes file missing.")
     
-            if os.path.exists(elm_instances_tsv):
-                # Check that file does not just contain an error message
->               check_file_for_error_message(
-                    elm_instances_tsv, "ELM instances tsv file", ELM_INSTANCES_TSV_DOWNLOAD
-                )
+        ## Clean up list of searchwords
+        # If single searchword passed as string, convert to list
+        if type(searchwords) == str:
+            searchwords = [searchwords]
+    
+        ## Find genes
+        for i, searchword in enumerate(searchwords):
+            if id_type == "gene":
+                query = f"""
+                SELECT gene.stable_id AS 'ensembl_id', xref.display_label AS 'gene_name', gene.description AS 'ensembl_description', xref.description AS 'ext_ref_description', gene.biotype AS 'biotype', external_synonym.synonym AS 'synonym'
+                FROM gene
+                LEFT JOIN xref ON gene.display_xref_id = xref.xref_id
+                LEFT JOIN external_synonym ON gene.display_xref_id = external_synonym.xref_id
+                LEFT JOIN gene_attrib ON gene.gene_id = gene_attrib.gene_id
+                WHERE (gene.description LIKE '%{searchword}%' OR xref.description LIKE '%{searchword}%' OR xref.display_label LIKE '%{searchword}%' OR external_synonym.synonym LIKE '%{searchword}%' OR gene_attrib.value LIKE '%{searchword}%')
+                """
+    
+                # Fetch the search results from the host using the specified query
+>               df_temp = pd.read_sql(query, con=db_connection)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-gget/gget_setup.py:203: 
+gget/gget_search.py:244: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-filepath = '/home/runner/work/gget/gget/gget/elm_files/elm_instances.tsv'
-filename = 'ELM instances tsv file'
-download_path = 'http://elm.eu.org/instances.tsv?q=*&taxon=&instance_logic='
+sql = "\n            SELECT gene.stable_id AS 'ensembl_id', xref.display_label AS 'gene_name', gene.description AS 'ensembl_...lay_label LIKE '%methi%' OR external_synonym.synonym LIKE '%methi%' OR gene_attrib.value LIKE '%methi%')\n            "
+con = <mysql.connector.connection.MySQLConnection object at 0x7f18fc0ee420>
+index_col = None, coerce_float = True, params = None, parse_dates = None
+columns = None, chunksize = None, dtype_backend = 'numpy', dtype = None
 
-    def check_file_for_error_message(filepath, filename, download_path):
-        with open(filepath, "r", encoding="utf-8") as file:
-            content = file.read().strip()
+    def read_sql(
+        sql,
+        con,
+        index_col: str | list[str] | None = None,
+        coerce_float: bool = True,
+        params=None,
+        parse_dates=None,
+        columns: list[str] | None = None,
+        chunksize: int | None = None,
+        dtype_backend: DtypeBackend | lib.NoDefault = lib.no_default,
+        dtype: DtypeArg | None = None,
+    ) -> DataFrame | Iterator[DataFrame]:
+        """
+        Read SQL query or database table into a DataFrame.
     
-        # Define common error indicators
-        error_keywords = [
-            "Internal Server Error",
-            "Bad Gateway",
-            "Service Unavailable",
-            "502 Bad Gateway",
-            "500 Internal Server Error",
-        ]
+        This function is a convenience wrapper around ``read_sql_table`` and
+        ``read_sql_query`` (for backward compatibility). It will delegate
+        to the specific function depending on the provided input. A SQL query
+        will be routed to ``read_sql_query``, while a database table name will
+        be routed to ``read_sql_table``. Note that the delegated function might
+        have more specific notes about their functionality not listed here.
     
-        # Check if the file contains an error message and raise ValueError + print error message if so
-        if any(keyword in content for keyword in error_keywords):
->           raise ValueError(
-                f"""
-                The {filename} downloaded from {download_path}
-                contains an error message instead of valid data.\n
-                Error message:\n{content}\n
-                Please try again. If the problem persists, please report it here: https://github.com/pachterlab/gget/issues/new?template=issue_report.yml
-                """
-            )
-E           ValueError: 
-E                       The ELM instances tsv file downloaded from http://elm.eu.org/instances.tsv?q=*&taxon=&instance_logic= 
-E                       contains an error message instead of valid data.
-E           
-E                       Error message:
-E           <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-E           <html><head>
-E           <title>500 Internal Server Error</title>
-E           </head><body>
-E           <h1>Internal Server Error</h1>
-E           <p>The server encountered an internal error or
-E           misconfiguration and was unable to complete
-E           your request.</p>
-E           <p>Please contact the server administrator,
-E            gibson-admin@embl.de and inform them of the time the error occurred,
-E           and anything you might have done that may have
-E           caused the error.</p>
-E           <p>More information about this error may be available
-E           in the server error log.</p>
-E           </body></html>
-E           
-E                       Please try again. If the problem persists, please report it here: https://github.com/pachterlab/gget/issues/new?template=issue_report.yml
+        Parameters
+        ----------
+        sql : str or SQLAlchemy Selectable (select or text object)
+            SQL query to be executed or a table name.
+        con : ADBC Connection, SQLAlchemy connectable, str, or sqlite3 connection
+            ADBC provides high performance I/O with native type support, where available.
+            Using SQLAlchemy makes it possible to use any DB supported by that
+            library. If a DBAPI2 object, only sqlite3 is supported. The user is responsible
+            for engine disposal and connection closure for the ADBC connection and
+            SQLAlchemy connectable; str connections are closed automatically. See
+            `here <https://docs.sqlalchemy.org/en/20/core/connections.html>`_.
+        index_col : str or list of str, optional, default: None
+            Column(s) to set as index(MultiIndex).
+        coerce_float : bool, default True
+            Attempts to convert values of non-string, non-numeric objects (like
+            decimal.Decimal) to floating point, useful for SQL result sets.
+        params : list, tuple or dict, optional, default: None
+            List of parameters to pass to execute method.  The syntax used
+            to pass parameters is database driver dependent. Check your
+            database driver documentation for which of the five syntax styles,
+            described in PEP 249's paramstyle, is supported.
+            Eg. for psycopg2, uses %(name)s so use params={'name' : 'value'}.
+        parse_dates : list or dict, default: None
+            - List of column names to parse as dates.
+            - Dict of ``{column_name: format string}`` where format string is
+              strftime compatible in case of parsing string times, or is one of
+              (D, s, ns, ms, us) in case of parsing integer timestamps.
+            - Dict of ``{column_name: arg dict}``, where the arg dict corresponds
+              to the keyword arguments of :func:`pandas.to_datetime`
+              Especially useful with databases without native Datetime support,
+              such as SQLite.
+        columns : list, default: None
+            List of column names to select from SQL table (only used when reading
+            a table).
+        chunksize : int, default None
+            If specified, return an iterator where `chunksize` is the
+            number of rows to include in each chunk.
+        dtype_backend : {'numpy_nullable', 'pyarrow'}, default 'numpy_nullable'
+            Back-end data type applied to the resultant :class:`DataFrame`
+            (still experimental). Behaviour is as follows:
+    
+            * ``"numpy_nullable"``: returns nullable-dtype-backed :class:`DataFrame`
+              (default).
+            * ``"pyarrow"``: returns pyarrow-backed nullable :class:`ArrowDtype`
+              DataFrame.
+    
+            .. versionadded:: 2.0
+        dtype : Type name or dict of columns
+            Data type for data or columns. E.g. np.float64 or
+            {'a': np.float64, 'b': np.int32, 'c': 'Int64'}.
+            The argument is ignored if a table is passed instead of a query.
+    
+            .. versionadded:: 2.0.0
+    
+        Returns
+        -------
+        DataFrame or Iterator[DataFrame]
+    
+        See Also
+        --------
+        read_sql_table : Read SQL database table into a DataFrame.
+        read_sql_query : Read SQL query into a DataFrame.
+    
+        Examples
+        --------
+        Read data from SQL via either a SQL query or a SQL tablename.
+        When using a SQLite database only SQL queries are accepted,
+        providing only the SQL tablename will result in an error.
+    
+        >>> from sqlite3 import connect
+        >>> conn = connect(':memory:')
+        >>> df = pd.DataFrame(data=[[0, '10/11/12'], [1, '12/11/10']],
+        ...                   columns=['int_column', 'date_column'])
+        >>> df.to_sql(name='test_data', con=conn)
+        2
+    
+        >>> pd.read_sql('SELECT int_column, date_column FROM test_data', conn)
+           int_column date_column
+        0           0    10/11/12
+        1           1    12/11/10
+    
+        >>> pd.read_sql('test_data', 'postgres:///db_name')  # doctest:+SKIP
+    
+        Apply date parsing to columns through the ``parse_dates`` argument
+        The ``parse_dates`` argument calls ``pd.to_datetime`` on the provided columns.
+        Custom argument values for applying ``pd.to_datetime`` on a column are specified
+        via a dictionary format:
+    
+        >>> pd.read_sql('SELECT int_column, date_column FROM test_data',
+        ...             conn,
+        ...             parse_dates={"date_column": {"format": "%d/%m/%y"}})
+           int_column date_column
+        0           0  2012-11-10
+        1           1  2010-11-12
+    
+        .. versionadded:: 2.2.0
+    
+           pandas now supports reading via ADBC drivers
+    
+        >>> from adbc_driver_postgresql import dbapi  # doctest:+SKIP
+        >>> with dbapi.connect('postgres:///db_name') as conn:  # doctest:+SKIP
+        ...     pd.read_sql('SELECT int_column FROM test_data', conn)
+           int_column
+        0           0
+        1           1
+        """
+    
+        check_dtype_backend(dtype_backend)
+        if dtype_backend is lib.no_default:
+            dtype_backend = "numpy"  # type: ignore[assignment]
+        assert dtype_backend is not lib.no_default
+    
+        with pandasSQL_builder(con) as pandas_sql:
+            if isinstance(pandas_sql, SQLiteDatabase):
+>               return pandas_sql.read_query(
+                    sql,
+                    index_col=index_col,
+                    params=params,
+                    coerce_float=coerce_float,
+                    parse_dates=parse_dates,
+                    chunksize=chunksize,
+                    dtype_backend=dtype_backend,
+                    dtype=dtype,
+                )
 
-gget/utils.py:95: ValueError
-------------------------------- Captured stderr --------------------------------
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0   % Tota l%   T o t%a lR e c e i%v eRde c%e iXvfeedr d%   XAfveerrda g eA vSepreaegde   S pTeiemde      T iTmiem e      T i mTei m e     CTuirmree n tC
-u r r e n t 
-                                                      D l o a d    DUlpolaoda d  U p lTooatda l    T oStpaeln t    S p eLnetf t     SLpeefetd 
- Speed 
- 0       00         00         00        0  0        00           00            00   - - : - -0: ---- :----::----: ---- :----::----: ---- : - - : -0-     0100 38626  100 38626    0     0  58823      0 --:--:-- --:--:-- --:--:-- 58881
-  5 2148k    5  125k    0     0   127k      0  0:00:16 --:--:--  0:00:16  127k  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0 31 2148k   31  675k    0     0   343k      0  0:00:06  0:00:01  0:00:05  343k  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0100 2148k  100 2148k    0     0   754k      0  0:00:02  0:00:02 --:--:--  754k
-  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:05 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:06 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:07 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:08 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:09 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:10 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:11 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:12 --:--:--     0 15 88298   15 13896    0     0   1047      0  0:01:24  0:00:13  0:01:11  2871100 88298  100 88298    0     0   6438      0  0:00:13  0:00:13 --:--:-- 20601
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:05 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:06 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:07 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:08 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:09 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:10 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:11 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:12 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:13 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:14 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:15 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:16 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:17 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:18 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:19 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:20 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:21 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:22 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:23 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:24 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:25 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:26 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:27 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:28 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:29 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:30 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:31 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:32 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:33 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:34 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:35 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:36 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:37 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:38 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:39 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:40 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:41 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:42 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:43 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:44 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:45 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:46 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:47 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:48 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:49 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:50 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:51 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:52 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:53 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:54 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:55 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:56 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:57 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:58 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:59 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:01:00 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:01:01 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:01:02 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:01:03 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:01:04 --:--:--     0100   540  100   540    0     0      8      0  0:01:07  0:01:05  0:00:02   108100   540  100   540    0     0      8      0  0:01:07  0:01:05  0:00:02   135
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/sql.py:708: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pandas.io.sql.SQLiteDatabase object at 0x7f18fc0ef080>
+sql = "\n            SELECT gene.stable_id AS 'ensembl_id', xref.display_label AS 'gene_name', gene.description AS 'ensembl_...lay_label LIKE '%methi%' OR external_synonym.synonym LIKE '%methi%' OR gene_attrib.value LIKE '%methi%')\n            "
+index_col = None, coerce_float = True, parse_dates = None, params = None
+chunksize = None, dtype = None, dtype_backend = 'numpy'
+
+    def read_query(
+        self,
+        sql,
+        index_col=None,
+        coerce_float: bool = True,
+        parse_dates=None,
+        params=None,
+        chunksize: int | None = None,
+        dtype: DtypeArg | None = None,
+        dtype_backend: DtypeBackend | Literal["numpy"] = "numpy",
+    ) -> DataFrame | Iterator[DataFrame]:
+>       cursor = self.execute(sql, params)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/sql.py:2728: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pandas.io.sql.SQLiteDatabase object at 0x7f18fc0ef080>
+sql = "\n            SELECT gene.stable_id AS 'ensembl_id', xref.display_label AS 'gene_name', gene.description AS 'ensembl_...lay_label LIKE '%methi%' OR external_synonym.synonym LIKE '%methi%' OR gene_attrib.value LIKE '%methi%')\n            "
+params = None
+
+    def execute(self, sql: str | Select | TextClause, params=None):
+        if not isinstance(sql, str):
+            raise TypeError("Query must be a string unless using sqlalchemy.")
+        args = [] if params is None else [params]
+        cur = self.con.cursor()
+        try:
+            cur.execute(sql, *args)
+            return cur
+        except Exception as exc:
+            try:
+                self.con.rollback()
+            except Exception as inner_exc:  # pragma: no cover
+                ex = DatabaseError(
+                    f"Execution failed on sql: {sql}\n{exc}\nunable to rollback"
+                )
+>               raise ex from inner_exc
+E               pandas.errors.DatabaseError: Execution failed on sql: 
+E                           SELECT gene.stable_id AS 'ensembl_id', xref.display_label AS 'gene_name', gene.description AS 'ensembl_description', xref.description AS 'ext_ref_description', gene.biotype AS 'biotype', external_synonym.synonym AS 'synonym'
+E                           FROM gene 
+E                           LEFT JOIN xref ON gene.display_xref_id = xref.xref_id 
+E                           LEFT JOIN external_synonym ON gene.display_xref_id = external_synonym.xref_id 
+E                           LEFT JOIN gene_attrib ON gene.gene_id = gene_attrib.gene_id 
+E                           WHERE (gene.description LIKE '%methi%' OR xref.description LIKE '%methi%' OR xref.display_label LIKE '%methi%' OR external_synonym.synonym LIKE '%methi%' OR gene_attrib.value LIKE '%methi%')
+E                           
+E               Expected EOF packet
+E               unable to rollback
+
+/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/sql.py:2673: DatabaseError
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_search.py:186 Fetching results from database: octopus_bimaculoides_gca001194135v2rs_core_61_114_1
+=============================== warnings summary ===============================
+tests/test_blast.py::TestBlast::test_blast_nt
+  /home/runner/work/gget/gget/gget/gget_blast.py:327: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
+    results_df = pd.read_html(str(dsc_table))[0]
+
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+  /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/swagger_spec_validator/validator12.py:18: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema import RefResolver
+
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+  /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/swagger_spec_validator/ref_validators.py:14: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema.validators import RefResolver
+
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+  /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/swagger_spec_validator/validator20.py:18: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema.validators import RefResolver
+
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+  /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/bravado_core/swagger20_validator.py:6: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema import RefResolver
+
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+  /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/bravado_core/spec.py:14: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema.validators import RefResolver
+
+tests/test_cbio.py: 16 warnings
+  /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/bravado_core/model.py:888: DeprecationWarning: jsonschema.RefResolver.in_scope is deprecated and will be removed in a future release.
+    with spec.resolver.in_scope(additional_uri):
+
+tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+  /home/runner/work/gget/gget/gget/gget_cellxgene.py:222: FutureWarning: The argument `column_names` is deprecated and will be removed in a future release. Please use `obs_column_names` and `var_column_names` instead.
+    adata = cellxgene_census.get_anndata(
+
+tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+  /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/functools.py:912: ImplicitModificationWarning: Transforming to str index.
+    return dispatch(args[0].__class__)(*args, **kw)
+
+tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+  /home/runner/work/gget/gget/gget/gget_cosmic.py:183: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+    tar.extractall(path=tar_folder_path)
+
+tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+  /home/runner/work/gget/gget/tests/from_json.py:69: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+    expected_result = expected_result.replace({None: np.nan})
+
+tests/test_mutate.py: 29 warnings
+  /home/runner/work/gget/gget/gget/gget_mutate.py:663: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
+    mask = mutations[mut_column].str.contains(combined_pattern)
+
+tests/test_ref.py: 22 warnings
+tests/test_utils.py: 1 warning
+  /home/runner/work/gget/gget/gget/utils.py:924: DeprecationWarning: Call to deprecated method findAll. (Replaced by find_all) -- Deprecated since version 4.0.0.
+    for subsoup in soup.body.findAll("a"):
+
+tests/test_ref.py: 39 warnings
+  /home/runner/work/gget/gget/gget/gget_ref.py:43: DeprecationWarning: Call to deprecated method findAll. (Replaced by find_all) -- Deprecated since version 4.0.0.
+    links = [stuff.text.strip() for stuff in soup.findAll("td")]
+
+tests/test_ref.py::TestRef::test_ref
+tests/test_ref.py::TestRef::test_ref_ftp
+  /home/runner/work/gget/gget/gget/gget_ref.py:350: DeprecationWarning: Call to deprecated method findAll. (Replaced by find_all) -- Deprecated since version 4.0.0.
+    links = [stuff.text.strip() for stuff in soup.findAll("td")]
+
+tests/test_ref.py: 32 warnings
+tests/test_utils.py: 4 warnings
+  /home/runner/work/gget/gget/gget/utils.py:899: DeprecationWarning: Call to deprecated method findAll. (Replaced by find_all) -- Deprecated since version 4.0.0.
+    for subsoup in soup.body.findAll("a"):
+
+tests/test_ref.py: 7 warnings
+tests/test_search.py: 41 warnings
+  /home/runner/work/gget/gget/gget/utils.py:845: DeprecationWarning: Call to deprecated method findAll. (Replaced by find_all) -- Deprecated since version 4.0.0.
+    for subsoup in soup.body.findAll("a"):
+
+tests/test_search.py: 10 warnings
+  /home/runner/work/gget/gget/gget/gget_search.py:244: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+    df_temp = pd.read_sql(query, con=db_connection)
+
+tests/test_search.py: 9 warnings
+tests/test_utils.py: 1 warning
+  /home/runner/work/gget/gget/gget/utils.py:822: DeprecationWarning: Call to deprecated method findAll. (Replaced by find_all) -- Deprecated since version 4.0.0.
+    for subsoup in soup.body.findAll("a"):
+
+tests/test_search.py: 36 warnings
+tests/test_utils.py: 4 warnings
+  /home/runner/work/gget/gget/gget/utils.py:804: DeprecationWarning: Call to deprecated method findAll. (Replaced by find_all) -- Deprecated since version 4.0.0.
+    for subsoup in soup.body.findAll("a"):
+
+tests/test_search.py::TestSearch::test_search_gene_two_sw_limit
+tests/test_search.py::TestSearch::test_search_transcript_one_sw
+tests/test_search.py::TestSearch::test_search_transcript_two_sw_and
+tests/test_search.py::TestSearch::test_search_transcript_two_sw_or
+  /home/runner/work/gget/gget/gget/gget_search.py:279: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+    df_temp = pd.read_sql(query, con=db_connection)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.12.12-final-0 _______________
+
+Name                       Stmts   Miss  Cover   Missing
+--------------------------------------------------------
+gget/__init__.py              35      2    94%   34-35
+gget/__main__.py               2      2     0%   1-3
+gget/compile.py               39     27    31%   30-84
+gget/constants.py             34      0   100%
+gget/gget_8cube.py            83     28    66%   26-27, 34-43, 93, 105, 112, 115-118, 158, 175, 182, 185-188, 229, 246, 255, 258-261
+gget/gget_alphafold.py       362    321    11%   86-108, 115-116, 123-149, 181-186, 233-867
+gget/gget_archs4.py           79     13    84%   75-78, 84, 107, 123-126, 139-142, 148, 170, 198-201, 207
+gget/gget_bgee.py             56      6    89%   60, 83, 103, 130, 154, 175
+gget/gget_blast.py           127     36    72%   92, 124-142, 163-165, 204, 207, 246-248, 296-299, 302-303, 322-325, 332-333, 336-341, 346, 351-354
+gget/gget_blat.py             86     10    88%   58-62, 95, 136, 139, 168, 232-233, 239
+gget/gget_cbio.py            524    403    23%   28, 39-67, 77-87, 136-137, 143-147, 154-157, 161, 164, 172-177, 208, 226, 265, 271-275, 278, 282-294, 296, 322-331, 334, 376-389, 393-416, 420-441, 447-450, 454-473, 477, 494-537, 540-757, 760-789, 802-1164, 1218-1254
+gget/gget_cellxgene.py        53      9    83%   21-22, 140-149, 176, 215, 231, 247
+gget/gget_cosmic.py          277    153    45%   24-26, 30-82, 94-109, 112-114, 117-119, 122-126, 131-135, 140-142, 155-168, 189-202, 220, 242-243, 283-308, 311, 396-398, 410, 416, 424, 427-429, 454-472, 496-621, 637-646, 649, 651, 653, 852-855, 868-870, 879-891, 896-901
+gget/gget_diamond.py          98     26    73%   16, 69, 75, 77, 95, 98-99, 105, 111, 117-121, 130-132, 145, 147, 160, 162, 181, 184, 216-217, 223
+gget/gget_elm.py             158     22    86%   128, 278, 301, 325-332, 353, 420-423, 426, 436, 490, 503, 506-515, 519-520
+gget/gget_enrichr.py         213     42    80%   39-42, 48, 172, 226-237, 254-255, 263-264, 290, 310, 316-322, 336, 364-374, 403-418, 439, 451-453, 555, 564-565, 575-576, 583
+gget/gget_gpt.py              20      6    70%   56-65, 88, 110-111
+gget/gget_info.py            316    106    66%   58-59, 63-64, 150-152, 161-162, 175, 201-206, 213-216, 242, 255-266, 300-308, 324-342, 368-369, 453-454, 461-462, 465-466, 469-470, 473-474, 507-508, 511-512, 515-516, 543-544, 547-548, 551-552, 575-576, 579-673, 677
+gget/gget_muscle.py           85     12    86%   17, 45, 68-69, 78-80, 91, 94, 115, 162-163
+gget/gget_mutate.py          434    193    56%   124-175, 186, 190-198, 215-226, 274-278, 283-287, 291-296, 300-305, 309-312, 317-320, 324-334, 340-350, 493, 516-520, 528, 538-542, 553-557, 576, 583, 593-600, 611, 616, 624, 635, 730-741, 855-879, 891-904, 948-985, 1032-1050, 1053-1056, 1070-1077, 1083-1093, 1109-1110, 1147, 1152, 1156, 1160, 1165-1241, 1255-1258, 1299, 1308-1324, 1332-1336, 1341, 1349, 1353
+gget/gget_opentargets.py     148      6    96%   75, 184, 192-195, 204-205
+gget/gget_pdb.py              60     22    63%   52, 58, 67, 75, 83, 104, 108-110, 113-129, 141-147
+gget/gget_ref.py             215     57    73%   32, 97-98, 117-118, 124-152, 161, 174, 176, 178-179, 186-187, 225, 244, 256-258, 279-281, 308-310, 329-331, 384-386, 485-494, 507, 512-513, 529-534, 538, 542, 548, 553-554
+gget/gget_search.py          142     23    84%   84-87, 96, 113, 117, 125, 149-150, 157, 165-171, 213-222, 308-309, 315-316, 368-369, 376-377, 385
+gget/gget_seq.py             146     24    84%   44-47, 49, 119, 140-143, 177-178, 207-208, 245-248, 271-272, 293, 312-315, 334, 356, 365, 402-405
+gget/gget_setup.py           215    149    31%   49-90, 108, 113, 116, 128-138, 152, 175-176, 189, 199, 209, 221-466
+gget/gget_virus.py          1962    950    52%   131, 154, 158, 169-170, 211-215, 220-234, 241, 252-253, 271-276, 305-331, 480-504, 508-614, 652-736, 764-765, 801-802, 835-970, 995-1035, 1085-1220, 1268-1362, 1416-1505, 1539, 1546-1547, 1617, 1631-1642, 1714-1717, 1726, 1753-1777, 1784, 1795-1797, 1813-1833, 1900-1901, 1943-1950, 1987-1995, 2046, 2244-2245, 2249-2251, 2288, 2291-2292, 2294-2296, 2332, 2335-2336, 2338-2340, 2352-2353, 2366-2369, 2503-2505, 2540-2542, 2614, 2617, 2629-2630, 2659-2660, 2664-2672, 2676-2693, 2703, 2706, 2710-2714, 2779-2781, 2812, 2822-2887, 3005, 3042-3048, 3058, 3103-3106, 3133-3136, 3146, 3149-3150, 3215, 3258, 3270-3273, 3405-3407, 3414-3416, 3485, 3518-3520, 3534-3548, 3552-3562, 3566-3570, 3575-3577, 3581-3594, 3607-3617, 3623-3625, 3635-3653, 3657-3676, 3688-3691, 3694-3697, 3841-3845, 3917, 3971-3973, 3993-4019, 4028-4053, 4075-4091, 4117-4118, 4131-4133, 4150-4151, 4220-4221, 4230-4249, 4254, 4298, 4311-4313, 4322-4325, 4359-4373, 4391-4400, 4433-4436, 4455-4603, 4618-4624, 4633
+gget/main.py                 838    838     0%   1-3773
+gget/utils.py                448     77    83%   31, 36-42, 72, 95, 119, 122, 186, 193, 245, 257, 285, 296, 347, 367, 378, 411-412, 452-453, 468-469, 476-478, 494-495, 501-502, 623-639, 676, 695, 757, 797, 837, 953, 961, 969-989, 994, 999, 1005-1006, 1024-1025, 1116, 1140-1141, 1156, 1164
+--------------------------------------------------------
+TOTAL                       7255   3563    51%
+============================= slowest 10 durations =============================
+77.50s call     tests/test_blast.py::TestBlast::test_blast_nt
+56.25s call     tests/test_search.py::TestSearch::test_search_gene_two_sw_limit
+55.71s call     tests/test_virus.py::TestVirus::test_virus_with_lab_passaged_filter
+53.98s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+35.77s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+30.42s call     tests/test_virus.py::TestVirus::test_virus_with_has_proteins_filter
+30.01s call     tests/test_virus.py::TestVirus::test_virus_with_source_database_filter
+29.42s call     tests/test_virus.py::TestVirus::test_virus_with_max_ambiguous_chars_filter
+27.78s call     tests/test_virus.py::TestVirus::test_virus_integer_virus_id
+25.43s call     tests/test_virus.py::TestVirus::test_virus_with_protein_count_filters
 =========================== short test summary info ============================
-ERROR tests/test_elm.py - ValueError: 
-            The ELM instances tsv file downloaded from http://elm.eu.org/instances.tsv?q=*&taxon=&instance_logic= 
-            contains an error message instead of valid data.
+FAILED tests/test_pdb.py::TestPDB::test_pdb_assembly - AssertionError: {'pdb[2345 chars]: 2316.9225073146845, 'total_number_interface_[977 chars]2.2'} != {'pdb[2345 chars]: 2315.334008113287, 'total_number_interface_r[976 chars]1.1'}
+  {'pdbx_struct_assembly': {'details': 'author_and_software_defined_assembly',
+                            'id': '1',
+                            'method_details': 'PISA',
+                            'oligomeric_count': 3,
+                            'oligomeric_details': 'trimeric',
+                            'rcsb_candidate_assembly': 'Y',
+                            'rcsb_details': 'author_and_software_defined_assembly'},
+   'pdbx_struct_assembly_gen': [{'assembly_id': '1',
+                                 'asym_id_list': ['A',
+                                                  'B',
+                                                  'C',
+                                                  'G',
+                                                  'H',
+                                                  'I',
+                                                  'J',
+                                                  'K',
+                                                  'O',
+                                                  'P',
+                                                  'Q'],
+                                 'oper_expression': '1',
+                                 'ordinal': 1}],
+   'pdbx_struct_oper_list': [{'id': '1',
+                              'matrix11': 1.0,
+                              'matrix12': 0.0,
+                              'matrix13': 0.0,
+                              'matrix21': 0.0,
+                              'matrix22': 1.0,
+                              'matrix23': 0.0,
+                              'matrix31': 0.0,
+                              'matrix32': 0.0,
+                              'matrix33': 1.0,
+                              'name': '1_555',
+                              'symmetry_operation': 'x,y,z',
+                              'type': 'identity operation',
+                              'vector1': 0.0,
+                              'vector2': 0.0,
+                              'vector3': 0.0}],
+   'rcsb_assembly_container_identifiers': {'assembly_id': '1',
+                                           'entry_id': '1RH7',
+                                           'interface_ids': ['1', '2', '3'],
+                                           'rcsb_id': '1RH7-1'},
+   'rcsb_assembly_info': {'assembly_id': '1',
+                          'atom_count': 1762,
+                          'branched_atom_count': 0,
+                          'branched_entity_count': 0,
+                          'branched_entity_instance_count': 0,
+                          'deuterated_water_count': 0,
+                          'entry_id': '1RH7',
+                          'hydrogen_atom_count': 0,
+                          'modeled_polymer_monomer_count': 243,
+                          'na_polymer_entity_types': 'Other',
+                          'nonpolymer_atom_count': 29,
+                          'nonpolymer_entity_count': 2,
+                          'nonpolymer_entity_instance_count': 5,
+                          'num_heterologous_interface_entities': 0,
+                          'num_heteromeric_interface_entities': 0,
+                          'num_homomeric_interface_entities': 1,
+                          'num_interface_entities': 1,
+                          'num_interfaces': 3,
+                          'num_isologous_interface_entities': 1,
+                          'num_na_interface_entities': 0,
+                          'num_prot_na_interface_entities': 0,
+                          'num_protein_interface_entities': 1,
+                          'polymer_atom_count': 1658,
+                          'polymer_composition': 'homomeric protein',
+                          'polymer_entity_count': 1,
+                          'polymer_entity_count_dna': 0,
+                          'polymer_entity_count_nucleic_acid': 0,
+                          'polymer_entity_count_nucleic_acid_hybrid': 0,
+                          'polymer_entity_count_protein': 1,
+                          'polymer_entity_count_rna': 0,
+                          'polymer_entity_instance_count': 3,
+                          'polymer_entity_instance_count_dna': 0,
+                          'polymer_entity_instance_count_nucleic_acid': 0,
+                          'polymer_entity_instance_count_nucleic_acid_hybrid': 0,
+                          'polymer_entity_instance_count_protein': 3,
+                          'polymer_entity_instance_count_rna': 0,
+                          'polymer_monomer_count': 243,
+                          'selected_polymer_entity_types': 'Protein (only)',
+                          'solvent_atom_count': 75,
+                          'solvent_entity_count': 1,
+                          'solvent_entity_instance_count': 3,
+-                         'total_assembly_buried_surface_area': 2316.9225073146845,
+?                                                                  ^ ^ ^^^ -------
 
-            Error message:
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>500 Internal Server Error</title>
-</head><body>
-<h1>Internal Server Error</h1>
-<p>The server encountered an internal error or
-misconfiguration and was unable to complete
-your request.</p>
-<p>Please contact the server administrator,
- gibson-admin@embl.de and inform them of the time the error occurred,
-and anything you might have done that may have
-caused the error.</p>
-<p>More information about this error may be available
-in the server error log.</p>
-</body></html>
++                         'total_assembly_buried_surface_area': 2315.334008113287,
+?                                                                  ^ ^^^^^^^^^ ^
 
-            Please try again. If the problem persists, please report it here: https://github.com/pachterlab/gget/issues/new?template=issue_report.yml
-!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
-========================= 1 error in 83.17s (0:01:23) ==========================
+-                         'total_number_interface_residues': 160,
+?                                                              ^
+
++                         'total_number_interface_residues': 161,
+?                                                              ^
+
+                          'unmodeled_polymer_monomer_count': 0},
+   'rcsb_id': '1RH7-1',
+   'rcsb_struct_symmetry': [{'clusters': [{'avg_rmsd': 0.8418294327358263,
+                                           'members': [{'asym_id': 'A',
+                                                        'pdbx_struct_oper_list_ids': ['1']},
+                                                       {'asym_id': 'C',
+                                                        'pdbx_struct_oper_list_ids': ['1']},
+                                                       {'asym_id': 'B',
+                                                        'pdbx_struct_oper_list_ids': ['1']}]}],
+                             'kind': 'Global Symmetry',
+                             'oligomeric_state': 'Homo 3-mer',
+                             'rotation_axes': [{'end': [13.473746075056361,
+                                                        41.0962265805248,
+                                                        -5.777587727129287],
+                                                'order': 3,
+                                                'start': [13.838143875349235,
+                                                          28.581996104345052,
+                                                          78.43743587115125]}],
+                             'stoichiometry': ['A3'],
+                             'symbol': 'C3',
+                             'type': 'Cyclic'}],
+   'rcsb_struct_symmetry_lineage': [{'depth': 0,
+                                     'id': 'Global Symmetry',
+                                     'name': 'Global Symmetry'},
+                                    {'depth': 2,
+                                     'id': 'Global Symmetry.Cyclic.C3',
+                                     'name': 'C3'},
+                                    {'depth': 3,
+                                     'id': 'Global Symmetry.Cyclic.C3.Homo 3-mer',
+                                     'name': 'Homo 3-mer'},
+                                    {'depth': 1,
+                                     'id': 'Global Symmetry.Cyclic',
+                                     'name': 'Cyclic'}],
+-  'rcsb_struct_symmetry_provenance_code': 'biojava-7.2.2'}
+?                                                     ^ ^
+
++  'rcsb_struct_symmetry_provenance_code': 'biojava-7.1.1'}
+?                                                     ^ ^
+FAILED tests/test_search.py::TestSearch::test_search_octopus - pandas.errors.DatabaseError: Execution failed on sql: 
+            SELECT gene.stable_id AS 'ensembl_id', xref.display_label AS 'gene_name', gene.description AS 'ensembl_description', xref.description AS 'ext_ref_description', gene.biotype AS 'biotype', external_synonym.synonym AS 'synonym'
+            FROM gene 
+            LEFT JOIN xref ON gene.display_xref_id = xref.xref_id 
+            LEFT JOIN external_synonym ON gene.display_xref_id = external_synonym.xref_id 
+            LEFT JOIN gene_attrib ON gene.gene_id = gene_attrib.gene_id 
+            WHERE (gene.description LIKE '%methi%' OR xref.description LIKE '%methi%' OR xref.display_label LIKE '%methi%' OR external_synonym.synonym LIKE '%methi%' OR gene_attrib.value LIKE '%methi%')
+            
+Expected EOF packet
+unable to rollback
+=========== 2 failed, 248 passed, 270 warnings in 973.35s (0:16:13) ============
