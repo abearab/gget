@@ -1,7 +1,7 @@
-Pytest results (Python 3.12) - 2026-04-06T16:14:13Z
+Pytest results (Python 3.12) - 2026-04-09T16:27:34Z
 
 ============================= test session starts ==============================
-platform linux -- Python 3.12.13, pytest-9.0.2, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
+platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/gget/gget
 configfile: pyproject.toml
@@ -235,7 +235,7 @@ self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_drugs
 tests/from_json.py:65: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function opentargets at 0x7f64645585e0>
+func = <function opentargets at 0x7f48b3fd4ea0>
 args = {'ensembl_id': 'ENSG00000169194', 'limit': 2, 'resource': 'drugs'}
 
     def do_call(func, args):
@@ -437,7 +437,7 @@ self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_drugs
 tests/from_json.py:117: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function opentargets at 0x7f64645585e0>
+func = <function opentargets at 0x7f48b3fd4ea0>
 args = {'ensembl_id': 'ENSG00000169194', 'resource': 'drugs'}
 
     def do_call(func, args):
@@ -703,16 +703,16 @@ tests/test_mutate.py: 29 warnings
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-318.66s call     tests/test_blast.py::TestBlast::test_blast_nt
-46.94s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-34.56s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
-13.33s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-12.06s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+74.01s call     tests/test_blast.py::TestBlast::test_blast_nt
+41.26s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+34.81s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+13.62s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+11.99s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 10.05s call     tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-8.02s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-4.61s call     tests/test_cbio.py::TestCbio::test_cbio_download
-4.60s call     tests/test_info.py::TestInfo::test_info_gene
-3.51s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_metadata
+9.63s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+5.76s call     tests/test_cbio.py::TestCbio::test_cbio_download
+5.17s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_ensembl
+4.95s call     tests/test_info.py::TestInfo::test_info_ncbifalse_uniprotfalse
 =========================== short test summary info ============================
 FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets - AssertionError: Lists differ: [['EF[171 chars]', 0.7297489019498119], ['MONDO_0004979', 'ast[535 chars]653]] != [['EF[171 chars]', 0.6908981975876463], ['MONDO_0004979', 'ast[535 chars]614]]
 
@@ -746,4 +746,4 @@ FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_expression_n
 - 4024b12c2134734ce8f952fdd7155135
 + c1300a64c439e9b1a0adf4475cf138db
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-============ 5 failed, 136 passed, 58 warnings in 633.23s (0:10:33) ============
+============ 5 failed, 136 passed, 58 warnings in 311.97s (0:05:11) ============
