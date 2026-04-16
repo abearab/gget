@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-04-13T16:25:35Z
+Pytest results (Python 3.12) - 2026-04-16T16:30:09Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
@@ -66,9 +66,9 @@ tests/test_diamond.py::TestDiamond::test_diamond_query_file PASSED       [ 22%]
 tests/test_diamond.py::TestDiamond::test_diamond_ref_file PASSED         [ 22%]
 tests/test_diamond.py::TestDiamond::test_diamond_seqs_multiple PASSED    [ 22%]
 tests/test_diamond.py::TestDiamond::test_diamond_seqs_single PASSED      [ 23%]
-tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq FAILED         [ 23%]
-tests/test_elm.py::TestELM::test_elm_uniprot_id_in_elm FAILED            [ 24%]
-tests/test_elm.py::TestELM::test_elm_uniprot_id_new FAILED               [ 24%]
+tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq PASSED         [ 23%]
+tests/test_elm.py::TestELM::test_elm_uniprot_id_in_elm PASSED            [ 24%]
+tests/test_elm.py::TestELM::test_elm_uniprot_id_new PASSED               [ 24%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_background PASSED       [ 24%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl PASSED [ 25%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_background PASSED   [ 25%]
@@ -145,207 +145,12 @@ tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_nonexistent_i
 tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_tractability_limit PASSED [ 54%]
 tests/test_opentargets.py::TestOpenTargets::test_opentargets FAILED      [ 54%]
 tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap FAILED [ 54%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap_filter PASSED [ 55%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs FAILED [ 55%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs_no_limit FAILED [ 56%]
+tests/test_opentargets.py::TestOpenTargets::test_opentargets_expression_no_limit FAILED [ 56%]
 
 =================================== FAILURES ===================================
-____________________ TestELM.test_elm_uniprot_aminoacidseq _____________________
-
-self = <tests.test_elm.TestELM testMethod=test_elm_uniprot_aminoacidseq>
-
-    def test_elm_uniprot_aminoacidseq(self):
-        test = "test3"
-        expected_result = elm_dict[test]["expected_result"]
-    
->       result1, result2 = elm(**elm_dict[test]["args"])
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-tests/test_elm.py:42: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-sequence = 'GGETISAWESQMEELVISISALIVELQVEFRANKLINPACHTERLABRQCKSFKIEPPGLFRGRG'
-uniprot = False, sensitivity = 'very-sensitive', threads = 1
-diamond_binary = None, expand = False, verbose = True, json = False, out = None
-
-    def elm(
-        sequence,
-        uniprot=False,
-        sensitivity="very-sensitive",
-        threads=1,
-        diamond_binary=None,
-        expand=False,
-        verbose=True,
-        json=False,
-        out=None,
-    ):
-        """
-        Locally predicts Eukaryotic Linear Motifs from an amino acid sequence or UniProt Acc using
-        data from the ELM database (http://elm.eu.org/).
-    
-        Args:
-        - sequence         Amino acid sequence or Uniprot Acc (str).
-                           If Uniprot Acc, set 'uniprot==True'.
-        - uniprot          Set to True if the input is a Uniprot Acc instead of an amino acid sequence. Default: False.
-        - sensitivity      Sensitivity of DIAMOND alignment.
-                           One of the following: fast, mid-sensitive, sensitive, more-sensitive, very-sensitive, or ultra-sensitive.
-                           Default: "very-sensitive"
-        - threads          Number of threads used in DIAMOND alignment. Default: 1.
-        - diamond_binary   Path to DIAMOND binary. Default: None -> Uses DIAMOND binary installed with gget.
-        - expand           Expand the information returned in the regex data frame to include the protein names, organisms
-                           and references that the motif was orignally validated on. Default: False.
-        - verbose          True/False whether to print progress information. Default: True.
-        - json             If True, returns results in json format instead of data frame. Default: False.
-        - out              Path to folder to save results in. Default: Standard out, temporary files are deleted.
-    
-        Returns two data frames (or JSON formatted dictionaries if json=True):
-        The first contains information on motifs experimentally validated in orthologous proteins and
-        the second contains motifs found directly based on regex matches in the provided sequence.
-    
-        ELM data can be downloaded & distributed for non-commercial use according to the ELM Software License Agreement (http://elm.eu.org/media/Elm_academic_license.pdf).
-        """
-        # Check if ELM files were downloaded
-        if (
-            not os.path.exists(ELM_INSTANCES_FASTA)
-            or not os.path.exists(ELM_CLASSES_TSV)
-            or not os.path.exists(ELM_INSTANCES_TSV)
-            or not os.path.exists(ELM_INTDOMAINS_TSV)
-        ):
->           raise FileNotFoundError(
-                f"Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files."
-            )
-E           FileNotFoundError: Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files.
-
-gget/gget_elm.py:278: FileNotFoundError
-______________________ TestELM.test_elm_uniprot_id_in_elm ______________________
-
-self = <tests.test_elm.TestELM testMethod=test_elm_uniprot_id_in_elm>
-
-    def test_elm_uniprot_id_in_elm(self):
-        test = "test1"
-        expected_result = elm_dict[test]["expected_result"]
-    
->       result1, result2 = elm(**elm_dict[test]["args"])
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-tests/test_elm.py:18: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-sequence = 'P11387', uniprot = True, sensitivity = 'very-sensitive', threads = 1
-diamond_binary = None, expand = True, verbose = True, json = False, out = None
-
-    def elm(
-        sequence,
-        uniprot=False,
-        sensitivity="very-sensitive",
-        threads=1,
-        diamond_binary=None,
-        expand=False,
-        verbose=True,
-        json=False,
-        out=None,
-    ):
-        """
-        Locally predicts Eukaryotic Linear Motifs from an amino acid sequence or UniProt Acc using
-        data from the ELM database (http://elm.eu.org/).
-    
-        Args:
-        - sequence         Amino acid sequence or Uniprot Acc (str).
-                           If Uniprot Acc, set 'uniprot==True'.
-        - uniprot          Set to True if the input is a Uniprot Acc instead of an amino acid sequence. Default: False.
-        - sensitivity      Sensitivity of DIAMOND alignment.
-                           One of the following: fast, mid-sensitive, sensitive, more-sensitive, very-sensitive, or ultra-sensitive.
-                           Default: "very-sensitive"
-        - threads          Number of threads used in DIAMOND alignment. Default: 1.
-        - diamond_binary   Path to DIAMOND binary. Default: None -> Uses DIAMOND binary installed with gget.
-        - expand           Expand the information returned in the regex data frame to include the protein names, organisms
-                           and references that the motif was orignally validated on. Default: False.
-        - verbose          True/False whether to print progress information. Default: True.
-        - json             If True, returns results in json format instead of data frame. Default: False.
-        - out              Path to folder to save results in. Default: Standard out, temporary files are deleted.
-    
-        Returns two data frames (or JSON formatted dictionaries if json=True):
-        The first contains information on motifs experimentally validated in orthologous proteins and
-        the second contains motifs found directly based on regex matches in the provided sequence.
-    
-        ELM data can be downloaded & distributed for non-commercial use according to the ELM Software License Agreement (http://elm.eu.org/media/Elm_academic_license.pdf).
-        """
-        # Check if ELM files were downloaded
-        if (
-            not os.path.exists(ELM_INSTANCES_FASTA)
-            or not os.path.exists(ELM_CLASSES_TSV)
-            or not os.path.exists(ELM_INSTANCES_TSV)
-            or not os.path.exists(ELM_INTDOMAINS_TSV)
-        ):
->           raise FileNotFoundError(
-                f"Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files."
-            )
-E           FileNotFoundError: Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files.
-
-gget/gget_elm.py:278: FileNotFoundError
-_______________________ TestELM.test_elm_uniprot_id_new ________________________
-
-self = <tests.test_elm.TestELM testMethod=test_elm_uniprot_id_new>
-
-    def test_elm_uniprot_id_new(self):
-        test = "test2"
-        expected_result = elm_dict[test]["expected_result"]
-    
->       result1, result2 = elm(**elm_dict[test]["args"])
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-tests/test_elm.py:30: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-sequence = 'O35923', uniprot = True, sensitivity = 'very-sensitive', threads = 1
-diamond_binary = None, expand = True, verbose = True, json = False, out = None
-
-    def elm(
-        sequence,
-        uniprot=False,
-        sensitivity="very-sensitive",
-        threads=1,
-        diamond_binary=None,
-        expand=False,
-        verbose=True,
-        json=False,
-        out=None,
-    ):
-        """
-        Locally predicts Eukaryotic Linear Motifs from an amino acid sequence or UniProt Acc using
-        data from the ELM database (http://elm.eu.org/).
-    
-        Args:
-        - sequence         Amino acid sequence or Uniprot Acc (str).
-                           If Uniprot Acc, set 'uniprot==True'.
-        - uniprot          Set to True if the input is a Uniprot Acc instead of an amino acid sequence. Default: False.
-        - sensitivity      Sensitivity of DIAMOND alignment.
-                           One of the following: fast, mid-sensitive, sensitive, more-sensitive, very-sensitive, or ultra-sensitive.
-                           Default: "very-sensitive"
-        - threads          Number of threads used in DIAMOND alignment. Default: 1.
-        - diamond_binary   Path to DIAMOND binary. Default: None -> Uses DIAMOND binary installed with gget.
-        - expand           Expand the information returned in the regex data frame to include the protein names, organisms
-                           and references that the motif was orignally validated on. Default: False.
-        - verbose          True/False whether to print progress information. Default: True.
-        - json             If True, returns results in json format instead of data frame. Default: False.
-        - out              Path to folder to save results in. Default: Standard out, temporary files are deleted.
-    
-        Returns two data frames (or JSON formatted dictionaries if json=True):
-        The first contains information on motifs experimentally validated in orthologous proteins and
-        the second contains motifs found directly based on regex matches in the provided sequence.
-    
-        ELM data can be downloaded & distributed for non-commercial use according to the ELM Software License Agreement (http://elm.eu.org/media/Elm_academic_license.pdf).
-        """
-        # Check if ELM files were downloaded
-        if (
-            not os.path.exists(ELM_INSTANCES_FASTA)
-            or not os.path.exists(ELM_CLASSES_TSV)
-            or not os.path.exists(ELM_INSTANCES_TSV)
-            or not os.path.exists(ELM_INTDOMAINS_TSV)
-        ):
->           raise FileNotFoundError(
-                f"Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files."
-            )
-E           FileNotFoundError: Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files.
-
-gget/gget_elm.py:278: FileNotFoundError
 _______________________ TestOpenTargets.test_opentargets _______________________
 
 self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets>
@@ -417,6 +222,433 @@ E       + 4c0393626ee958f860d4c1fd0b6b77ee
 tests/from_json.py:125: AssertionError
 ------------------------------ Captured log call -------------------------------
 INFO     gget.utils:gget_opentargets.py:345 Retrieved 29/29 DepMap entries.
+____________________ TestOpenTargets.test_opentargets_drugs ____________________
+
+self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_drugs>
+
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+>       result_to_test = do_call(func, td[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/from_json.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+func = <function opentargets at 0x7fab7c1ecea0>
+args = {'ensembl_id': 'ENSG00000169194', 'limit': 2, 'resource': 'drugs'}
+
+    def do_call(func, args):
+        if isinstance(args, dict):
+>           return func(**args)
+                   ^^^^^^^^^^^^
+
+tests/from_json.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ensembl_id = 'ENSG00000169194', resource = 'drugs', limit = 2, verbose = True
+wrap_text = False, filters = None, filter_mode = 'and', json = False
+
+    def opentargets(
+        ensembl_id,
+        resource="diseases",
+        limit=None,
+        verbose=True,
+        wrap_text=False,
+        filters=None,
+        filter_mode="and",
+        json=False,
+    ):
+        """
+        Query OpenTargets for data associated with a given Ensembl gene ID.
+    
+        Args:
+    
+        - ensembl_id    Ensembl gene ID to be queried (str), e.g. "ENSG00000169194".
+        - resource      Defines type of information to be returned.
+                        "diseases":         Returns diseases associated with the gene (default).
+                        "drugs":            Returns drugs associated with the gene.
+                        "tractability":     Returns tractability data for the gene.
+                        "pharmacogenetics": Returns pharmacogenetics data for the gene.
+                        "expression":       Returns gene expression data (by tissues, organs, and anatomical systems).
+                        "depmap":           Returns DepMap gene-disease effect data for the gene.
+                        "interactions":     Returns protein-protein interactions for the gene.
+        - limit         Limit the number of results returned (default: No limit).
+                        Note: Not compatible with the 'tractability' and 'depmap' resources.
+        - verbose       Print progress messages (default: True).
+        - wrap_text     If True, displays data frame with wrapped text for easy reading. Default: False.
+        - filters       Filters to apply to the data. Supported filters by resource:
+                        "diseases": None
+                        "drugs": disease_id (e.g. "EFO_0000274")
+                        "tractability": None
+                        "pharmacogenetics": drug_id (e.g. "CHEMBL535")
+                        "expression": tissue_id (e.g. "UBERON_0002245"), anatomical_system (e.g. "nervous system"), organ (e.g. "brain")
+                        "depmap": tissue_id (e.g. "UBERON_0002245")
+                        "interactions": protein_a_id (e.g. "ENSP00000304915"), protein_b_id (e.g. "ENSP00000379111"), gene_b_id (e.g. "ENSG00000077238")
+        - filter_mode   For resources that support multiple types of filters, this argument specifies how to combine them.
+        - json          If True, returns results in JSON format instead of as a Data Frame. Default: False.
+    
+    
+        Returns requested information in DataFrame format.
+        """
+    
+        # check if resource argument is valid
+        if resource not in _RESOURCES:
+            raise ValueError(
+                f"'resource' argument specified as {resource}. Expected one of: {', '.join(_RESOURCES)}"
+            )
+    
+        # Wrap everything into a list
+        if filters is not None:
+            filters = {k: v if isinstance(v, list) else [v] for k, v in filters.items()}
+    
+>       df: pd.DataFrame = _RESOURCES[resource](
+            ensembl_id,
+            limit=limit,
+            verbose=verbose,
+            wrap_text=wrap_text,
+            filters=filters,
+            filter_mode=filter_mode,
+        )
+
+gget/gget_opentargets.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ensembl_id = 'ENSG00000169194', limit = 2, verbose = True, wrap_text = False
+filters = None, filter_mode = 'and'
+
+    def fun(
+        ensembl_id,
+        limit=None,
+        verbose=True,
+        wrap_text=False,
+        filters=None,
+        filter_mode="and",
+    ):
+        if limit_key is None:
+            query_string = """
+            query target($ensemblId: String!) {
+                target(ensemblId: $ensemblId) {
+                    <TOP_LEVEL_KEY>{
+                        <ROW_QUERY>
+                    }
+                }
+            }
+            """.replace(
+                "<TOP_LEVEL_KEY>", top_level_key
+            ).replace(
+                "<ROW_QUERY>", inner_query
+            )
+        else:
+            if is_rows_based_query:
+                query_tmp = """
+                count
+                rows{
+                    <INNER_QUERY>
+                }""".replace(
+                    "<INNER_QUERY>", inner_query
+                )
+            else:
+                query_tmp = inner_query
+            query_string = (
+                """
+            query target($ensemblId: String!, $pagination: <LIMIT_TYPE>) {
+                target(ensemblId: $ensemblId) {
+                    <TOP_LEVEL_KEY>(<LIMIT_KEY>: $pagination){
+                        <QUERY>
+                    }
+                }
+            }
+            """.replace(
+                    "<TOP_LEVEL_KEY>", top_level_key
+                )
+                .replace("<LIMIT_TYPE>", limit_type)
+                .replace("<LIMIT_KEY>", limit_key)
+                .replace("<QUERY>", query_tmp)
+            )
+    
+        actual_limit = limit
+    
+        if filters is not None and len(filters) > 0:
+            if user_filter is None:
+                raise ValueError("Filters are not supported for this resource.")
+            valid_keys, filter_func = user_filter
+            invalid_keys = set(filters.keys()) - valid_keys
+            if len(invalid_keys) > 0:
+                invalid_keys = [f"'{k}'" for k in invalid_keys]
+                valid_keys = [f"'{k}'" for k in valid_keys]
+                raise ValueError(
+                    f"The following filter keys are invalid for this resource: {', '.join(invalid_keys)}. Valid keys are: {', '.join(valid_keys)}"
+                )
+            # we have to fetch all data to be able to apply limit in a sane way when filters are specified
+            limit = None
+    
+        pagination = limit_func(limit, is_rows_based_query)
+        variables = {"ensemblId": ensembl_id, "pagination": pagination}
+    
+        if limit_key is None:
+            del variables["pagination"]
+    
+>       results = graphql_query(OPENTARGETS_GRAPHQL_API, query_string, variables)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_opentargets.py:325: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+server = 'https://api.platform.opentargets.org/api/v4/graphql'
+query = '\n            query target($ensemblId: String!, $pagination: Int) {\n                target(ensemblId: $ensemblId) {\...pproved\n        }\n        \n                }\n                    }\n                }\n            }\n            '
+variables = {'ensemblId': 'ENSG00000169194', 'pagination': 2}
+
+    def graphql_query(server, query, variables):
+        """
+        Function to perform a GraphQL API query.
+    
+        Args:
+        - server        Server to query.
+        - query         Query that is passed to server.
+        - variables     Variables that are passed to server.
+    
+        Returns server output.
+        """
+    
+        r = requests.post(server, json={"query": query, "variables": variables})
+    
+        if not r.ok:
+            logger.debug(
+                f"Server: {server}, Query: {query}, Variables: {variables}, Response: {r.text}"
+            )
+>           raise RuntimeError(
+                f"{server} returned error status code {r.status_code}. "
+                "Please double-check arguments and try again.\n"
+            )
+E           RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
+
+gget/utils.py:721: RuntimeError
+_______________ TestOpenTargets.test_opentargets_drugs_no_limit ________________
+
+self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_drugs_no_limit>
+
+    def assert_equal_json_hash(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+>       result_to_test = do_call(func, td[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/from_json.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+func = <function opentargets at 0x7fab7c1ecea0>
+args = {'ensembl_id': 'ENSG00000169194', 'resource': 'drugs'}
+
+    def do_call(func, args):
+        if isinstance(args, dict):
+>           return func(**args)
+                   ^^^^^^^^^^^^
+
+tests/from_json.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ensembl_id = 'ENSG00000169194', resource = 'drugs', limit = None, verbose = True
+wrap_text = False, filters = None, filter_mode = 'and', json = False
+
+    def opentargets(
+        ensembl_id,
+        resource="diseases",
+        limit=None,
+        verbose=True,
+        wrap_text=False,
+        filters=None,
+        filter_mode="and",
+        json=False,
+    ):
+        """
+        Query OpenTargets for data associated with a given Ensembl gene ID.
+    
+        Args:
+    
+        - ensembl_id    Ensembl gene ID to be queried (str), e.g. "ENSG00000169194".
+        - resource      Defines type of information to be returned.
+                        "diseases":         Returns diseases associated with the gene (default).
+                        "drugs":            Returns drugs associated with the gene.
+                        "tractability":     Returns tractability data for the gene.
+                        "pharmacogenetics": Returns pharmacogenetics data for the gene.
+                        "expression":       Returns gene expression data (by tissues, organs, and anatomical systems).
+                        "depmap":           Returns DepMap gene-disease effect data for the gene.
+                        "interactions":     Returns protein-protein interactions for the gene.
+        - limit         Limit the number of results returned (default: No limit).
+                        Note: Not compatible with the 'tractability' and 'depmap' resources.
+        - verbose       Print progress messages (default: True).
+        - wrap_text     If True, displays data frame with wrapped text for easy reading. Default: False.
+        - filters       Filters to apply to the data. Supported filters by resource:
+                        "diseases": None
+                        "drugs": disease_id (e.g. "EFO_0000274")
+                        "tractability": None
+                        "pharmacogenetics": drug_id (e.g. "CHEMBL535")
+                        "expression": tissue_id (e.g. "UBERON_0002245"), anatomical_system (e.g. "nervous system"), organ (e.g. "brain")
+                        "depmap": tissue_id (e.g. "UBERON_0002245")
+                        "interactions": protein_a_id (e.g. "ENSP00000304915"), protein_b_id (e.g. "ENSP00000379111"), gene_b_id (e.g. "ENSG00000077238")
+        - filter_mode   For resources that support multiple types of filters, this argument specifies how to combine them.
+        - json          If True, returns results in JSON format instead of as a Data Frame. Default: False.
+    
+    
+        Returns requested information in DataFrame format.
+        """
+    
+        # check if resource argument is valid
+        if resource not in _RESOURCES:
+            raise ValueError(
+                f"'resource' argument specified as {resource}. Expected one of: {', '.join(_RESOURCES)}"
+            )
+    
+        # Wrap everything into a list
+        if filters is not None:
+            filters = {k: v if isinstance(v, list) else [v] for k, v in filters.items()}
+    
+>       df: pd.DataFrame = _RESOURCES[resource](
+            ensembl_id,
+            limit=limit,
+            verbose=verbose,
+            wrap_text=wrap_text,
+            filters=filters,
+            filter_mode=filter_mode,
+        )
+
+gget/gget_opentargets.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ensembl_id = 'ENSG00000169194', limit = None, verbose = True, wrap_text = False
+filters = None, filter_mode = 'and'
+
+    def fun(
+        ensembl_id,
+        limit=None,
+        verbose=True,
+        wrap_text=False,
+        filters=None,
+        filter_mode="and",
+    ):
+        if limit_key is None:
+            query_string = """
+            query target($ensemblId: String!) {
+                target(ensemblId: $ensemblId) {
+                    <TOP_LEVEL_KEY>{
+                        <ROW_QUERY>
+                    }
+                }
+            }
+            """.replace(
+                "<TOP_LEVEL_KEY>", top_level_key
+            ).replace(
+                "<ROW_QUERY>", inner_query
+            )
+        else:
+            if is_rows_based_query:
+                query_tmp = """
+                count
+                rows{
+                    <INNER_QUERY>
+                }""".replace(
+                    "<INNER_QUERY>", inner_query
+                )
+            else:
+                query_tmp = inner_query
+            query_string = (
+                """
+            query target($ensemblId: String!, $pagination: <LIMIT_TYPE>) {
+                target(ensemblId: $ensemblId) {
+                    <TOP_LEVEL_KEY>(<LIMIT_KEY>: $pagination){
+                        <QUERY>
+                    }
+                }
+            }
+            """.replace(
+                    "<TOP_LEVEL_KEY>", top_level_key
+                )
+                .replace("<LIMIT_TYPE>", limit_type)
+                .replace("<LIMIT_KEY>", limit_key)
+                .replace("<QUERY>", query_tmp)
+            )
+    
+        actual_limit = limit
+    
+        if filters is not None and len(filters) > 0:
+            if user_filter is None:
+                raise ValueError("Filters are not supported for this resource.")
+            valid_keys, filter_func = user_filter
+            invalid_keys = set(filters.keys()) - valid_keys
+            if len(invalid_keys) > 0:
+                invalid_keys = [f"'{k}'" for k in invalid_keys]
+                valid_keys = [f"'{k}'" for k in valid_keys]
+                raise ValueError(
+                    f"The following filter keys are invalid for this resource: {', '.join(invalid_keys)}. Valid keys are: {', '.join(valid_keys)}"
+                )
+            # we have to fetch all data to be able to apply limit in a sane way when filters are specified
+            limit = None
+    
+        pagination = limit_func(limit, is_rows_based_query)
+        variables = {"ensemblId": ensembl_id, "pagination": pagination}
+    
+        if limit_key is None:
+            del variables["pagination"]
+    
+>       results = graphql_query(OPENTARGETS_GRAPHQL_API, query_string, variables)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_opentargets.py:325: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+server = 'https://api.platform.opentargets.org/api/v4/graphql'
+query = '\n            query target($ensemblId: String!, $pagination: Int) {\n                target(ensemblId: $ensemblId) {\...pproved\n        }\n        \n                }\n                    }\n                }\n            }\n            '
+variables = {'ensemblId': 'ENSG00000169194', 'pagination': 1}
+
+    def graphql_query(server, query, variables):
+        """
+        Function to perform a GraphQL API query.
+    
+        Args:
+        - server        Server to query.
+        - query         Query that is passed to server.
+        - variables     Variables that are passed to server.
+    
+        Returns server output.
+        """
+    
+        r = requests.post(server, json={"query": query, "variables": variables})
+    
+        if not r.ok:
+            logger.debug(
+                f"Server: {server}, Query: {query}, Variables: {variables}, Response: {r.text}"
+            )
+>           raise RuntimeError(
+                f"{server} returned error status code {r.status_code}. "
+                "Please double-check arguments and try again.\n"
+            )
+E           RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
+
+gget/utils.py:721: RuntimeError
+_____________ TestOpenTargets.test_opentargets_expression_no_limit _____________
+
+self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_expression_no_limit>
+
+    def assert_equal_json_hash(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+        result_to_test = do_call(func, td[test]["args"])
+        # If result is a DataFrame, convert to list
+        if isinstance(result_to_test, pd.DataFrame):
+            result_to_test = result_to_test.dropna(axis=1).values.tolist()
+    
+        result_to_test = json.dumps(result_to_test)
+        result_to_test = hashlib.md5(result_to_test.encode()).hexdigest()
+    
+>       self.assertEqual(result_to_test, expected_result)
+E       AssertionError: '4024b12c2134734ce8f952fdd7155135' != 'c1300a64c439e9b1a0adf4475cf138db'
+E       - 4024b12c2134734ce8f952fdd7155135
+E       + c1300a64c439e9b1a0adf4475cf138db
+
+tests/from_json.py:125: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_opentargets.py:345 Retrieved 110/110 baseline expressions.
 =============================== warnings summary ===============================
 tests/test_blast.py::TestBlast::test_blast_nt
   /home/runner/work/gget/gget/gget/gget_blast.py:327: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
@@ -471,20 +703,17 @@ tests/test_mutate.py: 29 warnings
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-125.67s call     tests/test_blast.py::TestBlast::test_blast_nt
-37.28s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-12.37s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-10.07s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+94.39s call     tests/test_blast.py::TestBlast::test_blast_nt
+45.56s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+35.96s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+13.57s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+13.51s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 10.05s call     tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-5.26s call     tests/test_cbio.py::TestCbio::test_cbio_download
-5.25s call     tests/test_blat.py::TestBlat::test_blat_aa_RNA
-5.00s call     tests/test_info.py::TestInfo::test_info_ncbifalse_uniprottrue
-4.44s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-4.43s call     tests/test_info.py::TestInfo::test_info_gene
+8.88s call     tests/test_cbio.py::TestCbio::test_cbio_download
+7.79s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+5.50s call     tests/test_8cube.py::TestGeneExpression::test_gene_expression_basic
+5.34s call     tests/test_info.py::TestInfo::test_info_ncbifalse_uniprotfalse
 =========================== short test summary info ============================
-FAILED tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq - FileNotFoundError: Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files.
-FAILED tests/test_elm.py::TestELM::test_elm_uniprot_id_in_elm - FileNotFoundError: Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files.
-FAILED tests/test_elm.py::TestELM::test_elm_uniprot_id_new - FileNotFoundError: Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files.
 FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets - AssertionError: Lists differ: [['EF[171 chars]', 0.7297489019498119], ['MONDO_0004979', 'ast[535 chars]653]] != [['EF[171 chars]', 0.6908981975876463], ['MONDO_0004979', 'ast[535 chars]614]]
 
 First differing element 0:
@@ -511,5 +740,10 @@ First differing element 0:
 FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap - AssertionError: '4c550571d29a7e0136e12e2fa9297655' != '4c0393626ee958f860d4c1fd0b6b77ee'
 - 4c550571d29a7e0136e12e2fa9297655
 + 4c0393626ee958f860d4c1fd0b6b77ee
+FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs - RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
+FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs_no_limit - RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
+FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_expression_no_limit - AssertionError: '4024b12c2134734ce8f952fdd7155135' != 'c1300a64c439e9b1a0adf4475cf138db'
+- 4024b12c2134734ce8f952fdd7155135
++ c1300a64c439e9b1a0adf4475cf138db
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-============ 5 failed, 132 passed, 58 warnings in 422.00s (0:07:02) ============
+============ 5 failed, 136 passed, 58 warnings in 338.26s (0:05:38) ============
