@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-05-18T16:55:59Z
+Pytest results (Python 3.12) - 2026-05-21T16:52:05Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
@@ -59,7 +59,7 @@ tests/test_cbio.py::TestCbio::test_error_cbio_download PASSED            [ 19%]
 tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata PASSED      [ 19%]
 tests/test_cellxgene.py::TestCellxgene::test_cellxgene_metadata PASSED   [ 20%]
 tests/test_compile.py::TestCompilerWindows::test_compiler_windows PASSED [ 20%]
-tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults PASSED    [ 20%]
+tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults ERROR     [ 20%]
 tests/test_diamond.py::TestDiamond::test_diamond_JSON_out PASSED         [ 21%]
 tests/test_diamond.py::TestDiamond::test_diamond_both_files PASSED       [ 21%]
 tests/test_diamond.py::TestDiamond::test_diamond_query_file PASSED       [ 22%]
@@ -148,8 +148,58 @@ tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap FAILED [ 54%
 tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap_filter PASSED [ 55%]
 tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs FAILED [ 55%]
 tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs_no_limit FAILED [ 56%]
-tests/test_opentargets.py::TestOpenTargets::test_opentargets_expression_no_limit FAILED [ 56%]
 
+==================================== ERRORS ====================================
+__________ ERROR at setup of TestCosmicWorkflow.test_cosmic_defaults ___________
+
+cls = <class 'tests.test_cosmic.TestCosmicWorkflow'>
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        time.sleep(sleep_time)
+    
+        # Download data if it doesn't already exist
+        mut_class, grch_version, file_name, version = arg_combinations[0]
+    
+        if mut_class == "cancer_example":
+            cls.tarred_folder = f"example_GRCh{grch_version}"
+        else:
+            cls.tarred_folder = f"{file_name}_Tsv_v{version}_GRCh{grch_version}"
+    
+        cls.file_name = file_name
+        cls.grch_version = grch_version
+        cls.cosmic_version = version
+    
+        expected_file = os.path.join(cls.tarred_folder, f"{file_name}_v{version}_GRCh{grch_version}.tsv")
+    
+        if not os.path.exists(expected_file):
+            cosmic(
+                searchterm=None,
+                download_cosmic=True,
+                cosmic_project=mut_class,
+                cosmic_version=version,
+                grch_version=grch_version,
+                gget_mutate=True,
+            )
+    
+        # Check that files were downloaded correctly
+        contained_file = f"{file_name}_v{version}_GRCh{grch_version}.tsv"
+        gm_file = f"{file_name}_v{version}_GRCh{grch_version}_mutation_workflow.csv"
+    
+        path1 = pl.Path(os.path.abspath(os.path.join(cls.tarred_folder, contained_file)))
+        path2 = pl.Path(os.path.abspath(os.path.join(cls.tarred_folder, gm_file)))
+    
+        if not path1.is_file() or not path2.is_file():
+>           raise FileNotFoundError("Expected COSMIC files were not found after download.")
+E           FileNotFoundError: Expected COSMIC files were not found after download.
+
+tests/test_cosmic.py:79: FileNotFoundError
+------------------------------ Captured log setup ------------------------------
+INFO     gget.utils:gget_cosmic.py:391 NOTE: Licence fees apply for the commercial use of COSMIC (https://www.cosmickb.org/licensing).
+INFO     gget.utils:gget_cosmic.py:185 Extracted tar file to /home/runner/work/gget/gget/example_GRCh37
+INFO     gget.utils:gget_cosmic.py:441 Creating modified mutations file for use with gget mutate...
+INFO     gget.utils:gget_cosmic.py:659 Modified mutations file for use with gget mutate created at /home/runner/work/gget/gget/example_GRCh37/CancerMutationCensus_AllData_v104_GRCh37_mutation_workflow.csv
 =================================== FAILURES ===================================
 _______________________ TestOpenTargets.test_opentargets _______________________
 
@@ -235,7 +285,7 @@ self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_drugs
 tests/from_json.py:65: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function opentargets at 0x7fa06fb50cc0>
+func = <function opentargets at 0x7f41840bccc0>
 args = {'ensembl_id': 'ENSG00000169194', 'limit': 2, 'resource': 'drugs'}
 
     def do_call(func, args):
@@ -437,7 +487,7 @@ self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_drugs
 tests/from_json.py:117: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function opentargets at 0x7fa06fb50cc0>
+func = <function opentargets at 0x7f41840bccc0>
 args = {'ensembl_id': 'ENSG00000169194', 'resource': 'drugs'}
 
     def do_call(func, args):
@@ -626,29 +676,6 @@ variables = {'ensemblId': 'ENSG00000169194', 'pagination': 1}
 E           RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
 
 gget/utils.py:721: RuntimeError
-_____________ TestOpenTargets.test_opentargets_expression_no_limit _____________
-
-self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_expression_no_limit>
-
-    def assert_equal_json_hash(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
-        result_to_test = json.dumps(result_to_test)
-        result_to_test = hashlib.md5(result_to_test.encode()).hexdigest()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: '4024b12c2134734ce8f952fdd7155135' != 'c1300a64c439e9b1a0adf4475cf138db'
-E       - 4024b12c2134734ce8f952fdd7155135
-E       + c1300a64c439e9b1a0adf4475cf138db
-
-tests/from_json.py:125: AssertionError
------------------------------- Captured log call -------------------------------
-INFO     gget.utils:gget_opentargets.py:345 Retrieved 110/110 baseline expressions.
 =============================== warnings summary ===============================
 tests/test_blast.py::TestBlast::test_blast_nt
   /home/runner/work/gget/gget/gget/gget_blast.py:327: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
@@ -693,27 +720,24 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
   /home/runner/work/gget/gget/gget/gget_cosmic.py:183: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
     tar.extractall(path=tar_folder_path)
 
-tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-  /home/runner/work/gget/gget/tests/from_json.py:69: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
-    expected_result = expected_result.replace({None: np.nan})
-
 tests/test_mutate.py: 29 warnings
   /home/runner/work/gget/gget/gget/gget_mutate.py:663: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
     mask = mutations[mut_column].str.contains(combined_pattern)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-198.48s call     tests/test_blast.py::TestBlast::test_blast_nt
-35.52s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
-34.41s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-12.73s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-10.04s call     tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-10.00s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-8.90s call     tests/test_info.py::TestInfo::test_info_gene
-8.37s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-5.72s call     tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl
-5.61s call     tests/test_info.py::TestInfo::test_info_ncbitrue_uniprotfalse
+514.71s call     tests/test_blast.py::TestBlast::test_blast_nt
+36.72s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+32.68s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+13.73s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+12.04s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+10.99s call     tests/test_info.py::TestInfo::test_info_ncbitrue_uniprotfalse
+8.07s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+5.13s call     tests/test_info.py::TestInfo::test_info_gene
+4.78s call     tests/test_info.py::TestInfo::test_info_ncbifalse_uniprottrue
+4.76s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_gene
 =========================== short test summary info ============================
+ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
 FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets - AssertionError: Lists differ: [['EF[171 chars]', 0.7297489019498119], ['MONDO_0004979', 'ast[535 chars]653]] != [['EF[171 chars]', 0.6908981975876463], ['MONDO_0004979', 'ast[535 chars]614]]
 
 First differing element 0:
@@ -742,8 +766,5 @@ FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap - Ass
 + 4c0393626ee958f860d4c1fd0b6b77ee
 FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs - RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
 FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs_no_limit - RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
-FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_expression_no_limit - AssertionError: '4024b12c2134734ce8f952fdd7155135' != 'c1300a64c439e9b1a0adf4475cf138db'
-- 4024b12c2134734ce8f952fdd7155135
-+ c1300a64c439e9b1a0adf4475cf138db
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-============ 5 failed, 136 passed, 58 warnings in 530.82s (0:08:50) ============
+======= 4 failed, 135 passed, 57 warnings, 1 error in 722.86s (0:12:02) ========
