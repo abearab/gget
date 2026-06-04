@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-06-01T18:00:03Z
+Pytest results (Python 3.12) - 2026-06-04T17:00:38Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
@@ -285,7 +285,7 @@ self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_drugs
 tests/from_json.py:65: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function opentargets at 0x7f908678cea0>
+func = <function opentargets at 0x7fa7969b8f40>
 args = {'ensembl_id': 'ENSG00000169194', 'limit': 2, 'resource': 'drugs'}
 
     def do_call(func, args):
@@ -487,7 +487,7 @@ self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_drugs
 tests/from_json.py:117: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function opentargets at 0x7f908678cea0>
+func = <function opentargets at 0x7fa7969b8f40>
 args = {'ensembl_id': 'ENSG00000169194', 'resource': 'drugs'}
 
     def do_call(func, args):
@@ -726,16 +726,16 @@ tests/test_mutate.py: 29 warnings
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-381.40s call     tests/test_blast.py::TestBlast::test_blast_nt
-36.67s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-27.85s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
-14.79s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-12.14s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-6.96s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-5.16s call     tests/test_info.py::TestInfo::test_info_gene
-4.85s call     tests/test_info.py::TestInfo::test_info_transcript
-4.66s call     tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files
-4.32s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+133.20s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+78.62s call     tests/test_bgee.py::TestBgee::test_bgee_expression_multiple
+74.70s call     tests/test_blast.py::TestBlast::test_blast_nt
+63.52s call     tests/test_bgee.py::TestBgee::test_bgee_expression
+47.45s call     tests/test_info.py::TestInfo::test_info_exon
+37.47s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+34.02s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
+29.22s call     tests/test_bgee.py::TestBgee::test_bgee_orthologs
+29.10s call     tests/test_info.py::TestInfo::test_info_gene_list_non_model
+27.43s call     tests/test_info.py::TestInfo::test_info_ncbifalse_uniprottrue
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
 FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets - AssertionError: Lists differ: [['EF[171 chars]', 0.7297489019498119], ['MONDO_0004979', 'ast[535 chars]653]] != [['EF[171 chars]', 0.6908981975876463], ['MONDO_0004979', 'ast[535 chars]614]]
@@ -767,4 +767,4 @@ FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap - Ass
 FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs - RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
 FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs_no_limit - RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======= 4 failed, 135 passed, 57 warnings, 1 error in 578.75s (0:09:38) ========
+======= 4 failed, 135 passed, 57 warnings, 1 error in 764.89s (0:12:44) ========
