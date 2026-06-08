@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-06-04T17:00:38Z
+Pytest results (Python 3.12) - 2026-06-08T17:03:37Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
@@ -35,175 +35,23 @@ tests/test_blast.py::TestBlast::test_blast_bad_program PASSED            [  9%]
 tests/test_blast.py::TestBlast::test_blast_bad_seq PASSED                [ 10%]
 tests/test_blast.py::TestBlast::test_blast_db_missing PASSED             [ 10%]
 tests/test_blast.py::TestBlast::test_blast_nt PASSED                     [ 10%]
-tests/test_blat.py::TestBlat::test_blat_aa PASSED                        [ 11%]
+tests/test_blat.py::TestBlat::test_blat_aa FAILED                        [ 11%]
 tests/test_blat.py::TestBlat::test_blat_aa_RNA PASSED                    [ 11%]
-tests/test_blat.py::TestBlat::test_blat_aa_protein PASSED                [ 12%]
+tests/test_blat.py::TestBlat::test_blat_aa_protein FAILED                [ 12%]
 tests/test_blat.py::TestBlat::test_blat_bad_assembly PASSED              [ 12%]
 tests/test_blat.py::TestBlat::test_blat_bad_fasta PASSED                 [ 12%]
 tests/test_blat.py::TestBlat::test_blat_bad_fileformat PASSED            [ 13%]
 tests/test_blat.py::TestBlat::test_blat_bad_seqtype PASSED               [ 13%]
 tests/test_blat.py::TestBlat::test_blat_bad_txt PASSED                   [ 14%]
-tests/test_blat.py::TestBlat::test_blat_nt PASSED                        [ 14%]
-tests/test_blat.py::TestBlat::test_blat_nt_DNA PASSED                    [ 14%]
+tests/test_blat.py::TestBlat::test_blat_nt FAILED                        [ 14%]
+tests/test_blat.py::TestBlat::test_blat_nt_DNA FAILED                    [ 14%]
 tests/test_blat.py::TestBlat::test_blat_nt_RNA PASSED                    [ 15%]
-tests/test_blat.py::TestBlat::test_blat_nt_fasta PASSED                  [ 15%]
-tests/test_blat.py::TestBlat::test_blat_nt_json PASSED                   [ 16%]
-tests/test_blat.py::TestBlat::test_blat_nt_protein PASSED                [ 16%]
-tests/test_blat.py::TestBlat::test_blat_nt_transDNA PASSED               [ 16%]
-tests/test_blat.py::TestBlat::test_blat_nt_txt PASSED                    [ 17%]
-tests/test_blat.py::TestBlat::test_blat_shortseq PASSED                  [ 17%]
-tests/test_cbio.py::TestCbioSearch::test_cbio_search PASSED              [ 18%]
-tests/test_cbio.py::TestCbio::test_cbio_download PASSED                  [ 18%]
-tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files PASSED [ 18%]
-tests/test_cbio.py::TestCbio::test_error_cbio_download PASSED            [ 19%]
-tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata PASSED      [ 19%]
-tests/test_cellxgene.py::TestCellxgene::test_cellxgene_metadata PASSED   [ 20%]
-tests/test_compile.py::TestCompilerWindows::test_compiler_windows PASSED [ 20%]
-tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults ERROR     [ 20%]
-tests/test_diamond.py::TestDiamond::test_diamond_JSON_out PASSED         [ 21%]
-tests/test_diamond.py::TestDiamond::test_diamond_both_files PASSED       [ 21%]
-tests/test_diamond.py::TestDiamond::test_diamond_query_file PASSED       [ 22%]
-tests/test_diamond.py::TestDiamond::test_diamond_ref_file PASSED         [ 22%]
-tests/test_diamond.py::TestDiamond::test_diamond_seqs_multiple PASSED    [ 22%]
-tests/test_diamond.py::TestDiamond::test_diamond_seqs_single PASSED      [ 23%]
-tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq PASSED         [ 23%]
-tests/test_elm.py::TestELM::test_elm_uniprot_id_in_elm PASSED            [ 24%]
-tests/test_elm.py::TestELM::test_elm_uniprot_id_new PASSED               [ 24%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_background PASSED       [ 24%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl PASSED [ 25%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_background PASSED   [ 25%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_background_list PASSED [ 26%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_database_shortcut PASSED [ 26%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_gene PASSED         [ 26%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_species PASSED      [ 27%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_celltypes PASSED        [ 27%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_diseases_drugs PASSED   [ 28%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids PASSED      [ 28%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_fish PASSED             [ 28%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_fly PASSED              [ 29%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_json PASSED             [ 29%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_kinase_interactions PASSED [ 30%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_mouse_is_human PASSED   [ 30%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_none PASSED             [ 30%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_ontology PASSED         [ 31%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_pathway PASSED          [ 31%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_plot PASSED             [ 32%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_transcription PASSED    [ 32%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_worm PASSED             [ 32%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_yeast PASSED            [ 33%]
-tests/test_gpt.py::TestGpt::test_gpt PASSED                              [ 33%]
-tests/test_info.py::TestInfo::test_info_WB_transcript PASSED             [ 34%]
-tests/test_info.py::TestInfo::test_info_exon PASSED                      [ 34%]
-tests/test_info.py::TestInfo::test_info_gene PASSED                      [ 34%]
-tests/test_info.py::TestInfo::test_info_gene_list_non_model PASSED       [ 35%]
-tests/test_info.py::TestInfo::test_info_mix PASSED                       [ 35%]
-tests/test_info.py::TestInfo::test_info_ncbifalse_uniprotfalse PASSED    [ 36%]
-tests/test_info.py::TestInfo::test_info_ncbifalse_uniprottrue PASSED     [ 36%]
-tests/test_info.py::TestInfo::test_info_ncbitrue_uniprotfalse PASSED     [ 36%]
-tests/test_info.py::TestInfo::test_info_transcript PASSED                [ 37%]
-tests/test_muscle.py::TestMuscle::test_muscle_nt PASSED                  [ 37%]
-tests/test_muscle.py::TestMuscle::test_muscle_nt_txt PASSED              [ 38%]
-tests/test_muscle.py::TestMuscleSuper::test_muscle_nt_super5 PASSED      [ 38%]
-tests/test_muscle.py::TestMuscleAA::test_muscle_aa PASSED                [ 38%]
-tests/test_muscle.py::TestMuscleSeqsInput::test_muscle_seqs_as_input PASSED [ 39%]
-tests/test_muscle.py::TestMuscleAASuper::test_muscle_aa_super5 PASSED    [ 39%]
-tests/test_muscle.py::TestMusclePrints::test_muscle_print_nt PASSED      [ 40%]
-tests/test_mutate.py::TestMutate::test_ambiguous_mutation PASSED         [ 40%]
-tests/test_mutate.py::TestMutate::test_index_error PASSED                [ 40%]
-tests/test_mutate.py::TestMutate::test_intron_mutation_minus PASSED      [ 41%]
-tests/test_mutate.py::TestMutate::test_intron_mutation_plus PASSED       [ 41%]
-tests/test_mutate.py::TestMutate::test_inversion_with_overlaps PASSED    [ 42%]
-tests/test_mutate.py::TestMutate::test_large_k PASSED                    [ 42%]
-tests/test_mutate.py::TestMutate::test_list_of_mutations PASSED          [ 42%]
-tests/test_mutate.py::TestMutate::test_multi_deletion PASSED             [ 43%]
-tests/test_mutate.py::TestMutate::test_multi_deletion_with_right_repeats PASSED [ 43%]
-tests/test_mutate.py::TestMutate::test_multi_delins PASSED               [ 44%]
-tests/test_mutate.py::TestMutate::test_multi_delins_with_psuedo_left_repeats PASSED [ 44%]
-tests/test_mutate.py::TestMutate::test_multi_delins_with_true_left_repeats PASSED [ 44%]
-tests/test_mutate.py::TestMutate::test_multi_delins_with_true_right_repeats PASSED [ 45%]
-tests/test_mutate.py::TestMutate::test_multi_dup PASSED                  [ 45%]
-tests/test_mutate.py::TestMutate::test_multi_insertion PASSED            [ 46%]
-tests/test_mutate.py::TestMutate::test_multi_insertion_with_left_repeats PASSED [ 46%]
-tests/test_mutate.py::TestMutate::test_posttranslational_mutation PASSED [ 46%]
-tests/test_mutate.py::TestMutate::test_single_deletion PASSED            [ 47%]
-tests/test_mutate.py::TestMutate::test_single_deletion_with_left_repeats PASSED [ 47%]
-tests/test_mutate.py::TestMutate::test_single_deletion_with_right_repeats PASSED [ 48%]
-tests/test_mutate.py::TestMutate::test_single_delins PASSED              [ 48%]
-tests/test_mutate.py::TestMutate::test_single_dup PASSED                 [ 48%]
-tests/test_mutate.py::TestMutate::test_single_insertion PASSED           [ 49%]
-tests/test_mutate.py::TestMutate::test_single_substitution PASSED        [ 49%]
-tests/test_mutate.py::TestMutate::test_single_substitution_near_left_end PASSED [ 50%]
-tests/test_mutate.py::TestMutate::test_single_substitution_near_right_end PASSED [ 50%]
-tests/test_mutate.py::TestMutate::test_uncertain_mutation PASSED         [ 50%]
-tests/test_mutate.py::test_csv_of_mutations PASSED                       [ 51%]
-tests/test_mutate.py::test_mismatch_error PASSED                         [ 51%]
-tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_bad_limit PASSED [ 52%]
-tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_bad_resource PASSED [ 52%]
-tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_diseases_filter PASSED [ 52%]
-tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_drugs_invalid_filter PASSED [ 53%]
-tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_nonexistent_id PASSED [ 53%]
-tests/test_opentargets.py::TestOpenTargets::test_error_opentargets_tractability_limit PASSED [ 54%]
-tests/test_opentargets.py::TestOpenTargets::test_opentargets FAILED      [ 54%]
-tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap FAILED [ 54%]
-tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap_filter PASSED [ 55%]
-tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs FAILED [ 55%]
-tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs_no_limit FAILED [ 56%]
+tests/test_blat.py::TestBlat::test_blat_nt_fasta FAILED                  [ 15%]
 
-==================================== ERRORS ====================================
-__________ ERROR at setup of TestCosmicWorkflow.test_cosmic_defaults ___________
-
-cls = <class 'tests.test_cosmic.TestCosmicWorkflow'>
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        time.sleep(sleep_time)
-    
-        # Download data if it doesn't already exist
-        mut_class, grch_version, file_name, version = arg_combinations[0]
-    
-        if mut_class == "cancer_example":
-            cls.tarred_folder = f"example_GRCh{grch_version}"
-        else:
-            cls.tarred_folder = f"{file_name}_Tsv_v{version}_GRCh{grch_version}"
-    
-        cls.file_name = file_name
-        cls.grch_version = grch_version
-        cls.cosmic_version = version
-    
-        expected_file = os.path.join(cls.tarred_folder, f"{file_name}_v{version}_GRCh{grch_version}.tsv")
-    
-        if not os.path.exists(expected_file):
-            cosmic(
-                searchterm=None,
-                download_cosmic=True,
-                cosmic_project=mut_class,
-                cosmic_version=version,
-                grch_version=grch_version,
-                gget_mutate=True,
-            )
-    
-        # Check that files were downloaded correctly
-        contained_file = f"{file_name}_v{version}_GRCh{grch_version}.tsv"
-        gm_file = f"{file_name}_v{version}_GRCh{grch_version}_mutation_workflow.csv"
-    
-        path1 = pl.Path(os.path.abspath(os.path.join(cls.tarred_folder, contained_file)))
-        path2 = pl.Path(os.path.abspath(os.path.join(cls.tarred_folder, gm_file)))
-    
-        if not path1.is_file() or not path2.is_file():
->           raise FileNotFoundError("Expected COSMIC files were not found after download.")
-E           FileNotFoundError: Expected COSMIC files were not found after download.
-
-tests/test_cosmic.py:79: FileNotFoundError
------------------------------- Captured log setup ------------------------------
-INFO     gget.utils:gget_cosmic.py:391 NOTE: Licence fees apply for the commercial use of COSMIC (https://www.cosmickb.org/licensing).
-INFO     gget.utils:gget_cosmic.py:185 Extracted tar file to /home/runner/work/gget/gget/example_GRCh37
-INFO     gget.utils:gget_cosmic.py:441 Creating modified mutations file for use with gget mutate...
-INFO     gget.utils:gget_cosmic.py:659 Modified mutations file for use with gget mutate created at /home/runner/work/gget/gget/example_GRCh37/CancerMutationCensus_AllData_v104_GRCh37_mutation_workflow.csv
 =================================== FAILURES ===================================
-_______________________ TestOpenTargets.test_opentargets _______________________
+____________________________ TestBlat.test_blat_aa _____________________________
 
-self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets>
+self = <tests.test_blat.TestBlat testMethod=test_blat_aa>
 
     def assert_equal(self: unittest.TestCase):
         test = name
@@ -222,549 +70,161 @@ self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets>
             result_to_test = result_to_test.dropna(axis=1).values.tolist()
     
 >       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: Lists differ: [['EF[171 chars]', 0.7297489019498119], ['MONDO_0004979', 'ast[535 chars]653]] != [['EF[171 chars]', 0.6908981975876463], ['MONDO_0004979', 'ast[535 chars]614]]
-E       
-E       First differing element 0:
-E       ['EFO[129 chars] occurs during the first 2 years of life.', 0.7297489019498119]
-E       ['EFO[129 chars] occurs during the first 2 years of life.', 0.6908981975876463]
-E       
-E         [['EFO_0000274',
-E           'atopic eczema',
-E           'A common chronic pruritic inflammatory skin disease with a strong genetic '
-E           'component. Onset typically occurs during the first 2 years of life.',
-E       -   0.7297489019498119],
-E       +   0.6908981975876463],
-E          ['MONDO_0004979',
-E           'asthma',
-E           'A bronchial disease that is characterized by chronic inflammation and '
-E           'narrowing of the airways, which is caused by a combination of environmental '
-E           'and genetic factors resulting in recurring periods of wheezing (a whistling '
-E           'sound while breathing), chest tightness, shortness of breath, mucus '
-E           'production and coughing. The symptoms appear due to a variety of triggers '
-E           'such as allergens, irritants, respiratory infections, weather changes, '
-E           'exercise, stress, reflux disease, medications, foods and emotional anxiety.',
-E       -   0.6642728577751653]]
-E       +   0.6506508395200614]]
+E       AssertionError: None != [['mm39', 64, 25, 64, 35, 5, 62.5, 87.5, 'chrX', '+-', 17437571, 17437690]]
 
 tests/from_json.py:78: AssertionError
 ------------------------------ Captured log call -------------------------------
-INFO     gget.utils:gget_opentargets.py:345 Retrieved 2/1367 associated diseases.
-___________________ TestOpenTargets.test_opentargets_depmap ____________________
+INFO     gget.utils:gget_blat.py:90 Sequence recognized as amino acid sequence. 'seqtype' will be set as protein.
+ERROR    gget.utils:gget_blat.py:148 
+            BLAT of seqtype 'protein' using assembly 'mm39' was unsuccesful. 
+            Possible causes: 
+            - Sequence possibly too short (required minimum: 20 characters). 
+            - Assembly possibly invalid. All available species with their respective assemblies are listed at https://genome.ucsc.edu/cgi-bin/hgBlat
+________________________ TestBlat.test_blat_aa_protein _________________________
 
-self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_depmap>
-
-    def assert_equal_json_hash(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
-        result_to_test = json.dumps(result_to_test)
-        result_to_test = hashlib.md5(result_to_test.encode()).hexdigest()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: '4c550571d29a7e0136e12e2fa9297655' != '4c0393626ee958f860d4c1fd0b6b77ee'
-E       - 4c550571d29a7e0136e12e2fa9297655
-E       + 4c0393626ee958f860d4c1fd0b6b77ee
-
-tests/from_json.py:125: AssertionError
------------------------------- Captured log call -------------------------------
-INFO     gget.utils:gget_opentargets.py:345 Retrieved 29/29 DepMap entries.
-____________________ TestOpenTargets.test_opentargets_drugs ____________________
-
-self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_drugs>
+self = <tests.test_blat.TestBlat testMethod=test_blat_aa_protein>
 
     def assert_equal(self: unittest.TestCase):
         test = name
         expected_result = td[test]["expected_result"]
->       result_to_test = do_call(func, td[test]["args"])
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        result_to_test = do_call(func, td[test]["args"])
+        if test == "test_cosmic_defaults":  # special case for cosmic
+            import numpy as np
+            expected_result = pd.DataFrame(expected_result[0])
+            expected_result = expected_result.replace({None: np.nan})
+            # result_to_test.equals(expected_result)
+            pd.testing.assert_frame_equal(result_to_test, expected_result)
+            return
+    
+        # If result is a DataFrame, convert to list
+        if isinstance(result_to_test, pd.DataFrame):
+            result_to_test = result_to_test.dropna(axis=1).values.tolist()
+    
+>       self.assertEqual(result_to_test, expected_result)
+E       AssertionError: None != [['mm39', 64, 25, 64, 35, 5, 62.5, 87.5, 'chrX', '+-', 17437571, 17437690]]
 
-tests/from_json.py:65: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/from_json.py:78: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    gget.utils:gget_blat.py:148 
+            BLAT of seqtype 'protein' using assembly 'mm39' was unsuccesful. 
+            Possible causes: 
+            - Sequence possibly too short (required minimum: 20 characters). 
+            - Assembly possibly invalid. All available species with their respective assemblies are listed at https://genome.ucsc.edu/cgi-bin/hgBlat
+____________________________ TestBlat.test_blat_nt _____________________________
 
-func = <function opentargets at 0x7fa7969b8f40>
-args = {'ensembl_id': 'ENSG00000169194', 'limit': 2, 'resource': 'drugs'}
+self = <tests.test_blat.TestBlat testMethod=test_blat_nt>
 
-    def do_call(func, args):
-        if isinstance(args, dict):
->           return func(**args)
-                   ^^^^^^^^^^^^
-
-tests/from_json.py:57: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-ensembl_id = 'ENSG00000169194', resource = 'drugs', limit = 2, verbose = True
-wrap_text = False, filters = None, filter_mode = 'and', json = False
-
-    def opentargets(
-        ensembl_id,
-        resource="diseases",
-        limit=None,
-        verbose=True,
-        wrap_text=False,
-        filters=None,
-        filter_mode="and",
-        json=False,
-    ):
-        """
-        Query OpenTargets for data associated with a given Ensembl gene ID.
-    
-        Args:
-    
-        - ensembl_id    Ensembl gene ID to be queried (str), e.g. "ENSG00000169194".
-        - resource      Defines type of information to be returned.
-                        "diseases":         Returns diseases associated with the gene (default).
-                        "drugs":            Returns drugs associated with the gene.
-                        "tractability":     Returns tractability data for the gene.
-                        "pharmacogenetics": Returns pharmacogenetics data for the gene.
-                        "expression":       Returns gene expression data (by tissues, organs, and anatomical systems).
-                        "depmap":           Returns DepMap gene-disease effect data for the gene.
-                        "interactions":     Returns protein-protein interactions for the gene.
-        - limit         Limit the number of results returned (default: No limit).
-                        Note: Not compatible with the 'tractability' and 'depmap' resources.
-        - verbose       Print progress messages (default: True).
-        - wrap_text     If True, displays data frame with wrapped text for easy reading. Default: False.
-        - filters       Filters to apply to the data. Supported filters by resource:
-                        "diseases": None
-                        "drugs": disease_id (e.g. "EFO_0000274")
-                        "tractability": None
-                        "pharmacogenetics": drug_id (e.g. "CHEMBL535")
-                        "expression": tissue_id (e.g. "UBERON_0002245"), anatomical_system (e.g. "nervous system"), organ (e.g. "brain")
-                        "depmap": tissue_id (e.g. "UBERON_0002245")
-                        "interactions": protein_a_id (e.g. "ENSP00000304915"), protein_b_id (e.g. "ENSP00000379111"), gene_b_id (e.g. "ENSG00000077238")
-        - filter_mode   For resources that support multiple types of filters, this argument specifies how to combine them.
-        - json          If True, returns results in JSON format instead of as a Data Frame. Default: False.
-    
-    
-        Returns requested information in DataFrame format.
-        """
-    
-        # check if resource argument is valid
-        if resource not in _RESOURCES:
-            raise ValueError(
-                f"'resource' argument specified as {resource}. Expected one of: {', '.join(_RESOURCES)}"
-            )
-    
-        # Wrap everything into a list
-        if filters is not None:
-            filters = {k: v if isinstance(v, list) else [v] for k, v in filters.items()}
-    
->       df: pd.DataFrame = _RESOURCES[resource](
-            ensembl_id,
-            limit=limit,
-            verbose=verbose,
-            wrap_text=wrap_text,
-            filters=filters,
-            filter_mode=filter_mode,
-        )
-
-gget/gget_opentargets.py:63: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-ensembl_id = 'ENSG00000169194', limit = 2, verbose = True, wrap_text = False
-filters = None, filter_mode = 'and'
-
-    def fun(
-        ensembl_id,
-        limit=None,
-        verbose=True,
-        wrap_text=False,
-        filters=None,
-        filter_mode="and",
-    ):
-        if limit_key is None:
-            query_string = """
-            query target($ensemblId: String!) {
-                target(ensemblId: $ensemblId) {
-                    <TOP_LEVEL_KEY>{
-                        <ROW_QUERY>
-                    }
-                }
-            }
-            """.replace(
-                "<TOP_LEVEL_KEY>", top_level_key
-            ).replace(
-                "<ROW_QUERY>", inner_query
-            )
-        else:
-            if is_rows_based_query:
-                query_tmp = """
-                count
-                rows{
-                    <INNER_QUERY>
-                }""".replace(
-                    "<INNER_QUERY>", inner_query
-                )
-            else:
-                query_tmp = inner_query
-            query_string = (
-                """
-            query target($ensemblId: String!, $pagination: <LIMIT_TYPE>) {
-                target(ensemblId: $ensemblId) {
-                    <TOP_LEVEL_KEY>(<LIMIT_KEY>: $pagination){
-                        <QUERY>
-                    }
-                }
-            }
-            """.replace(
-                    "<TOP_LEVEL_KEY>", top_level_key
-                )
-                .replace("<LIMIT_TYPE>", limit_type)
-                .replace("<LIMIT_KEY>", limit_key)
-                .replace("<QUERY>", query_tmp)
-            )
-    
-        actual_limit = limit
-    
-        if filters is not None and len(filters) > 0:
-            if user_filter is None:
-                raise ValueError("Filters are not supported for this resource.")
-            valid_keys, filter_func = user_filter
-            invalid_keys = set(filters.keys()) - valid_keys
-            if len(invalid_keys) > 0:
-                invalid_keys = [f"'{k}'" for k in invalid_keys]
-                valid_keys = [f"'{k}'" for k in valid_keys]
-                raise ValueError(
-                    f"The following filter keys are invalid for this resource: {', '.join(invalid_keys)}. Valid keys are: {', '.join(valid_keys)}"
-                )
-            # we have to fetch all data to be able to apply limit in a sane way when filters are specified
-            limit = None
-    
-        pagination = limit_func(limit, is_rows_based_query)
-        variables = {"ensemblId": ensembl_id, "pagination": pagination}
-    
-        if limit_key is None:
-            del variables["pagination"]
-    
->       results = graphql_query(OPENTARGETS_GRAPHQL_API, query_string, variables)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-gget/gget_opentargets.py:325: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-server = 'https://api.platform.opentargets.org/api/v4/graphql'
-query = '\n            query target($ensemblId: String!, $pagination: Int) {\n                target(ensemblId: $ensemblId) {\...pproved\n        }\n        \n                }\n                    }\n                }\n            }\n            '
-variables = {'ensemblId': 'ENSG00000169194', 'pagination': 2}
-
-    def graphql_query(server, query, variables):
-        """
-        Function to perform a GraphQL API query.
-    
-        Args:
-        - server        Server to query.
-        - query         Query that is passed to server.
-        - variables     Variables that are passed to server.
-    
-        Returns server output.
-        """
-    
-        r = requests.post(server, json={"query": query, "variables": variables})
-    
-        if not r.ok:
-            logger.debug(
-                f"Server: {server}, Query: {query}, Variables: {variables}, Response: {r.text}"
-            )
->           raise RuntimeError(
-                f"{server} returned error status code {r.status_code}. "
-                "Please double-check arguments and try again.\n"
-            )
-E           RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
-
-gget/utils.py:721: RuntimeError
-_______________ TestOpenTargets.test_opentargets_drugs_no_limit ________________
-
-self = <tests.test_opentargets.TestOpenTargets testMethod=test_opentargets_drugs_no_limit>
-
-    def assert_equal_json_hash(self: unittest.TestCase):
+    def assert_equal(self: unittest.TestCase):
         test = name
         expected_result = td[test]["expected_result"]
->       result_to_test = do_call(func, td[test]["args"])
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        result_to_test = do_call(func, td[test]["args"])
+        if test == "test_cosmic_defaults":  # special case for cosmic
+            import numpy as np
+            expected_result = pd.DataFrame(expected_result[0])
+            expected_result = expected_result.replace({None: np.nan})
+            # result_to_test.equals(expected_result)
+            pd.testing.assert_frame_equal(result_to_test, expected_result)
+            return
+    
+        # If result is a DataFrame, convert to list
+        if isinstance(result_to_test, pd.DataFrame):
+            result_to_test = result_to_test.dropna(axis=1).values.tolist()
+    
+>       self.assertEqual(result_to_test, expected_result)
+E       AssertionError: None != [['hg38', 44, 17, 44, 28, 0, 63.64, 100.0, 'chr18', '+', 1952614, 1952647]]
 
-tests/from_json.py:117: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/from_json.py:78: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_blat.py:82 Sequence recognized as nucleotide sequence. 'seqtype' will be set as DNA.
+ERROR    gget.utils:gget_blat.py:148 
+            BLAT of seqtype 'DNA' using assembly 'hg38' was unsuccesful. 
+            Possible causes: 
+            - Sequence possibly too short (required minimum: 20 characters). 
+            - Assembly possibly invalid. All available species with their respective assemblies are listed at https://genome.ucsc.edu/cgi-bin/hgBlat
+__________________________ TestBlat.test_blat_nt_DNA ___________________________
 
-func = <function opentargets at 0x7fa7969b8f40>
-args = {'ensembl_id': 'ENSG00000169194', 'resource': 'drugs'}
+self = <tests.test_blat.TestBlat testMethod=test_blat_nt_DNA>
 
-    def do_call(func, args):
-        if isinstance(args, dict):
->           return func(**args)
-                   ^^^^^^^^^^^^
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+        result_to_test = do_call(func, td[test]["args"])
+        if test == "test_cosmic_defaults":  # special case for cosmic
+            import numpy as np
+            expected_result = pd.DataFrame(expected_result[0])
+            expected_result = expected_result.replace({None: np.nan})
+            # result_to_test.equals(expected_result)
+            pd.testing.assert_frame_equal(result_to_test, expected_result)
+            return
+    
+        # If result is a DataFrame, convert to list
+        if isinstance(result_to_test, pd.DataFrame):
+            result_to_test = result_to_test.dropna(axis=1).values.tolist()
+    
+>       self.assertEqual(result_to_test, expected_result)
+E       AssertionError: None != [['hg38', 44, 17, 44, 28, 0, 63.64, 100.0, 'chr18', '+', 1952614, 1952647]]
 
-tests/from_json.py:57: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/from_json.py:78: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    gget.utils:gget_blat.py:148 
+            BLAT of seqtype 'DNA' using assembly 'hg38' was unsuccesful. 
+            Possible causes: 
+            - Sequence possibly too short (required minimum: 20 characters). 
+            - Assembly possibly invalid. All available species with their respective assemblies are listed at https://genome.ucsc.edu/cgi-bin/hgBlat
+_________________________ TestBlat.test_blat_nt_fasta __________________________
 
-ensembl_id = 'ENSG00000169194', resource = 'drugs', limit = None, verbose = True
-wrap_text = False, filters = None, filter_mode = 'and', json = False
+self = <tests.test_blat.TestBlat testMethod=test_blat_nt_fasta>
 
-    def opentargets(
-        ensembl_id,
-        resource="diseases",
-        limit=None,
-        verbose=True,
-        wrap_text=False,
-        filters=None,
-        filter_mode="and",
-        json=False,
-    ):
-        """
-        Query OpenTargets for data associated with a given Ensembl gene ID.
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+        result_to_test = do_call(func, td[test]["args"])
+        if test == "test_cosmic_defaults":  # special case for cosmic
+            import numpy as np
+            expected_result = pd.DataFrame(expected_result[0])
+            expected_result = expected_result.replace({None: np.nan})
+            # result_to_test.equals(expected_result)
+            pd.testing.assert_frame_equal(result_to_test, expected_result)
+            return
     
-        Args:
+        # If result is a DataFrame, convert to list
+        if isinstance(result_to_test, pd.DataFrame):
+            result_to_test = result_to_test.dropna(axis=1).values.tolist()
     
-        - ensembl_id    Ensembl gene ID to be queried (str), e.g. "ENSG00000169194".
-        - resource      Defines type of information to be returned.
-                        "diseases":         Returns diseases associated with the gene (default).
-                        "drugs":            Returns drugs associated with the gene.
-                        "tractability":     Returns tractability data for the gene.
-                        "pharmacogenetics": Returns pharmacogenetics data for the gene.
-                        "expression":       Returns gene expression data (by tissues, organs, and anatomical systems).
-                        "depmap":           Returns DepMap gene-disease effect data for the gene.
-                        "interactions":     Returns protein-protein interactions for the gene.
-        - limit         Limit the number of results returned (default: No limit).
-                        Note: Not compatible with the 'tractability' and 'depmap' resources.
-        - verbose       Print progress messages (default: True).
-        - wrap_text     If True, displays data frame with wrapped text for easy reading. Default: False.
-        - filters       Filters to apply to the data. Supported filters by resource:
-                        "diseases": None
-                        "drugs": disease_id (e.g. "EFO_0000274")
-                        "tractability": None
-                        "pharmacogenetics": drug_id (e.g. "CHEMBL535")
-                        "expression": tissue_id (e.g. "UBERON_0002245"), anatomical_system (e.g. "nervous system"), organ (e.g. "brain")
-                        "depmap": tissue_id (e.g. "UBERON_0002245")
-                        "interactions": protein_a_id (e.g. "ENSP00000304915"), protein_b_id (e.g. "ENSP00000379111"), gene_b_id (e.g. "ENSG00000077238")
-        - filter_mode   For resources that support multiple types of filters, this argument specifies how to combine them.
-        - json          If True, returns results in JSON format instead of as a Data Frame. Default: False.
-    
-    
-        Returns requested information in DataFrame format.
-        """
-    
-        # check if resource argument is valid
-        if resource not in _RESOURCES:
-            raise ValueError(
-                f"'resource' argument specified as {resource}. Expected one of: {', '.join(_RESOURCES)}"
-            )
-    
-        # Wrap everything into a list
-        if filters is not None:
-            filters = {k: v if isinstance(v, list) else [v] for k, v in filters.items()}
-    
->       df: pd.DataFrame = _RESOURCES[resource](
-            ensembl_id,
-            limit=limit,
-            verbose=verbose,
-            wrap_text=wrap_text,
-            filters=filters,
-            filter_mode=filter_mode,
-        )
+>       self.assertEqual(result_to_test, expected_result)
+E       AssertionError: None != [['taeGut2', 63, 1, 63, 63, 0, 100.0, 100[108 chars]346]]
 
-gget/gget_opentargets.py:63: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-ensembl_id = 'ENSG00000169194', limit = None, verbose = True, wrap_text = False
-filters = None, filter_mode = 'and'
-
-    def fun(
-        ensembl_id,
-        limit=None,
-        verbose=True,
-        wrap_text=False,
-        filters=None,
-        filter_mode="and",
-    ):
-        if limit_key is None:
-            query_string = """
-            query target($ensemblId: String!) {
-                target(ensemblId: $ensemblId) {
-                    <TOP_LEVEL_KEY>{
-                        <ROW_QUERY>
-                    }
-                }
-            }
-            """.replace(
-                "<TOP_LEVEL_KEY>", top_level_key
-            ).replace(
-                "<ROW_QUERY>", inner_query
-            )
-        else:
-            if is_rows_based_query:
-                query_tmp = """
-                count
-                rows{
-                    <INNER_QUERY>
-                }""".replace(
-                    "<INNER_QUERY>", inner_query
-                )
-            else:
-                query_tmp = inner_query
-            query_string = (
-                """
-            query target($ensemblId: String!, $pagination: <LIMIT_TYPE>) {
-                target(ensemblId: $ensemblId) {
-                    <TOP_LEVEL_KEY>(<LIMIT_KEY>: $pagination){
-                        <QUERY>
-                    }
-                }
-            }
-            """.replace(
-                    "<TOP_LEVEL_KEY>", top_level_key
-                )
-                .replace("<LIMIT_TYPE>", limit_type)
-                .replace("<LIMIT_KEY>", limit_key)
-                .replace("<QUERY>", query_tmp)
-            )
-    
-        actual_limit = limit
-    
-        if filters is not None and len(filters) > 0:
-            if user_filter is None:
-                raise ValueError("Filters are not supported for this resource.")
-            valid_keys, filter_func = user_filter
-            invalid_keys = set(filters.keys()) - valid_keys
-            if len(invalid_keys) > 0:
-                invalid_keys = [f"'{k}'" for k in invalid_keys]
-                valid_keys = [f"'{k}'" for k in valid_keys]
-                raise ValueError(
-                    f"The following filter keys are invalid for this resource: {', '.join(invalid_keys)}. Valid keys are: {', '.join(valid_keys)}"
-                )
-            # we have to fetch all data to be able to apply limit in a sane way when filters are specified
-            limit = None
-    
-        pagination = limit_func(limit, is_rows_based_query)
-        variables = {"ensemblId": ensembl_id, "pagination": pagination}
-    
-        if limit_key is None:
-            del variables["pagination"]
-    
->       results = graphql_query(OPENTARGETS_GRAPHQL_API, query_string, variables)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-gget/gget_opentargets.py:325: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-server = 'https://api.platform.opentargets.org/api/v4/graphql'
-query = '\n            query target($ensemblId: String!, $pagination: Int) {\n                target(ensemblId: $ensemblId) {\...pproved\n        }\n        \n                }\n                    }\n                }\n            }\n            '
-variables = {'ensemblId': 'ENSG00000169194', 'pagination': 1}
-
-    def graphql_query(server, query, variables):
-        """
-        Function to perform a GraphQL API query.
-    
-        Args:
-        - server        Server to query.
-        - query         Query that is passed to server.
-        - variables     Variables that are passed to server.
-    
-        Returns server output.
-        """
-    
-        r = requests.post(server, json={"query": query, "variables": variables})
-    
-        if not r.ok:
-            logger.debug(
-                f"Server: {server}, Query: {query}, Variables: {variables}, Response: {r.text}"
-            )
->           raise RuntimeError(
-                f"{server} returned error status code {r.status_code}. "
-                "Please double-check arguments and try again.\n"
-            )
-E           RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
-
-gget/utils.py:721: RuntimeError
+tests/from_json.py:78: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_blat.py:52 File contains more than one sequence. Only the first sequence will be submitted to BLAT.
+INFO     gget.utils:gget_blat.py:82 Sequence recognized as nucleotide sequence. 'seqtype' will be set as DNA.
+ERROR    gget.utils:gget_blat.py:148 
+            BLAT of seqtype 'DNA' using assembly 'taeGut2' was unsuccesful. 
+            Possible causes: 
+            - Sequence possibly too short (required minimum: 20 characters). 
+            - Assembly possibly invalid. All available species with their respective assemblies are listed at https://genome.ucsc.edu/cgi-bin/hgBlat
 =============================== warnings summary ===============================
 tests/test_blast.py::TestBlast::test_blast_nt
   /home/runner/work/gget/gget/gget/gget_blast.py:327: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
     results_df = pd.read_html(str(dsc_table))[0]
 
-tests/test_cbio.py::TestCbioSearch::test_cbio_search
-tests/test_cbio.py::TestCbioSearch::test_cbio_search
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/swagger_spec_validator/validator12.py:18: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
-    from jsonschema import RefResolver
-
-tests/test_cbio.py::TestCbioSearch::test_cbio_search
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/swagger_spec_validator/ref_validators.py:14: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
-    from jsonschema.validators import RefResolver
-
-tests/test_cbio.py::TestCbioSearch::test_cbio_search
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/swagger_spec_validator/validator20.py:18: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
-    from jsonschema.validators import RefResolver
-
-tests/test_cbio.py::TestCbioSearch::test_cbio_search
-tests/test_cbio.py::TestCbioSearch::test_cbio_search
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/bravado_core/swagger20_validator.py:6: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
-    from jsonschema import RefResolver
-
-tests/test_cbio.py::TestCbioSearch::test_cbio_search
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/bravado_core/spec.py:14: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
-    from jsonschema.validators import RefResolver
-
-tests/test_cbio.py: 16 warnings
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/bravado_core/model.py:888: DeprecationWarning: jsonschema.RefResolver.in_scope is deprecated and will be removed in a future release.
-    with spec.resolver.in_scope(additional_uri):
-
-tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-  /home/runner/work/gget/gget/gget/gget_cellxgene.py:222: FutureWarning: The argument `column_names` is deprecated and will be removed in a future release. Please use `obs_column_names` and `var_column_names` instead.
-    adata = cellxgene_census.get_anndata(
-
-tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/functools.py:912: ImplicitModificationWarning: Transforming to str index.
-    return dispatch(args[0].__class__)(*args, **kw)
-
-tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-  /home/runner/work/gget/gget/gget/gget_cosmic.py:183: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
-    tar.extractall(path=tar_folder_path)
-
-tests/test_mutate.py: 29 warnings
-  /home/runner/work/gget/gget/gget/gget_mutate.py:663: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
-    mask = mutations[mut_column].str.contains(combined_pattern)
-
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-133.20s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-78.62s call     tests/test_bgee.py::TestBgee::test_bgee_expression_multiple
-74.70s call     tests/test_blast.py::TestBlast::test_blast_nt
-63.52s call     tests/test_bgee.py::TestBgee::test_bgee_expression
-47.45s call     tests/test_info.py::TestInfo::test_info_exon
-37.47s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-34.02s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-29.22s call     tests/test_bgee.py::TestBgee::test_bgee_orthologs
-29.10s call     tests/test_info.py::TestInfo::test_info_gene_list_non_model
-27.43s call     tests/test_info.py::TestInfo::test_info_ncbifalse_uniprottrue
+135.54s call     tests/test_blast.py::TestBlast::test_blast_nt
+8.81s call     tests/test_bgee.py::TestBgee::test_bgee_orthologs
+8.55s call     tests/test_bgee.py::TestBgee::test_bgee_expression
+6.47s call     tests/test_bgee.py::TestBgee::test_bgee_expression_multiple
+2.91s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+2.08s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+1.71s call     tests/test_archs4.py::TestArchs4::test_archs4_defaults
+1.67s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_ensembl
+1.63s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_gene
+1.39s call     tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl
 =========================== short test summary info ============================
-ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
-FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets - AssertionError: Lists differ: [['EF[171 chars]', 0.7297489019498119], ['MONDO_0004979', 'ast[535 chars]653]] != [['EF[171 chars]', 0.6908981975876463], ['MONDO_0004979', 'ast[535 chars]614]]
-
-First differing element 0:
-['EFO[129 chars] occurs during the first 2 years of life.', 0.7297489019498119]
-['EFO[129 chars] occurs during the first 2 years of life.', 0.6908981975876463]
-
-  [['EFO_0000274',
-    'atopic eczema',
-    'A common chronic pruritic inflammatory skin disease with a strong genetic '
-    'component. Onset typically occurs during the first 2 years of life.',
--   0.7297489019498119],
-+   0.6908981975876463],
-   ['MONDO_0004979',
-    'asthma',
-    'A bronchial disease that is characterized by chronic inflammation and '
-    'narrowing of the airways, which is caused by a combination of environmental '
-    'and genetic factors resulting in recurring periods of wheezing (a whistling '
-    'sound while breathing), chest tightness, shortness of breath, mucus '
-    'production and coughing. The symptoms appear due to a variety of triggers '
-    'such as allergens, irritants, respiratory infections, weather changes, '
-    'exercise, stress, reflux disease, medications, foods and emotional anxiety.',
--   0.6642728577751653]]
-+   0.6506508395200614]]
-FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_depmap - AssertionError: '4c550571d29a7e0136e12e2fa9297655' != '4c0393626ee958f860d4c1fd0b6b77ee'
-- 4c550571d29a7e0136e12e2fa9297655
-+ 4c0393626ee958f860d4c1fd0b6b77ee
-FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs - RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
-FAILED tests/test_opentargets.py::TestOpenTargets::test_opentargets_drugs_no_limit - RuntimeError: https://api.platform.opentargets.org/api/v4/graphql returned error status code 400. Please double-check arguments and try again.
+FAILED tests/test_blat.py::TestBlat::test_blat_aa - AssertionError: None != [['mm39', 64, 25, 64, 35, 5, 62.5, 87.5, 'chrX', '+-', 17437571, 17437690]]
+FAILED tests/test_blat.py::TestBlat::test_blat_aa_protein - AssertionError: None != [['mm39', 64, 25, 64, 35, 5, 62.5, 87.5, 'chrX', '+-', 17437571, 17437690]]
+FAILED tests/test_blat.py::TestBlat::test_blat_nt - AssertionError: None != [['hg38', 44, 17, 44, 28, 0, 63.64, 100.0, 'chr18', '+', 1952614, 1952647]]
+FAILED tests/test_blat.py::TestBlat::test_blat_nt_DNA - AssertionError: None != [['hg38', 44, 17, 44, 28, 0, 63.64, 100.0, 'chr18', '+', 1952614, 1952647]]
+FAILED tests/test_blat.py::TestBlat::test_blat_nt_fasta - AssertionError: None != [['taeGut2', 63, 1, 63, 63, 0, 100.0, 100[108 chars]346]]
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======= 4 failed, 135 passed, 57 warnings, 1 error in 764.89s (0:12:44) ========
+============= 5 failed, 34 passed, 1 warning in 317.52s (0:05:17) ==============
