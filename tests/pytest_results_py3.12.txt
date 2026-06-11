@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-06-08T17:03:37Z
+Pytest results (Python 3.12) - 2026-06-11T17:11:21Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
@@ -22,9 +22,9 @@ tests/test_archs4.py::TestArchs4::test_archs4_tissue PASSED              [  4%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl PASSED      [  4%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_json PASSED         [  5%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_mouse PASSED        [  5%]
-tests/test_bgee.py::TestBgee::test_bgee_expression PASSED                [  6%]
-tests/test_bgee.py::TestBgee::test_bgee_expression_multiple PASSED       [  6%]
-tests/test_bgee.py::TestBgee::test_bgee_orthologs PASSED                 [  6%]
+tests/test_bgee.py::TestBgee::test_bgee_expression FAILED                [  6%]
+tests/test_bgee.py::TestBgee::test_bgee_expression_multiple FAILED       [  6%]
+tests/test_bgee.py::TestBgee::test_bgee_orthologs FAILED                 [  6%]
 tests/test_bgee.py::TestBgee::test_error_bgee_expression_no_exist PASSED [  7%]
 tests/test_bgee.py::TestBgee::test_error_bgee_orthologs_no_exist PASSED  [  7%]
 tests/test_bgee.py::TestBgee::test_error_bgee_unknown_type PASSED        [  8%]
@@ -35,196 +35,554 @@ tests/test_blast.py::TestBlast::test_blast_bad_program PASSED            [  9%]
 tests/test_blast.py::TestBlast::test_blast_bad_seq PASSED                [ 10%]
 tests/test_blast.py::TestBlast::test_blast_db_missing PASSED             [ 10%]
 tests/test_blast.py::TestBlast::test_blast_nt PASSED                     [ 10%]
-tests/test_blat.py::TestBlat::test_blat_aa FAILED                        [ 11%]
+tests/test_blat.py::TestBlat::test_blat_aa PASSED                        [ 11%]
 tests/test_blat.py::TestBlat::test_blat_aa_RNA PASSED                    [ 11%]
-tests/test_blat.py::TestBlat::test_blat_aa_protein FAILED                [ 12%]
+tests/test_blat.py::TestBlat::test_blat_aa_protein PASSED                [ 12%]
 tests/test_blat.py::TestBlat::test_blat_bad_assembly PASSED              [ 12%]
 tests/test_blat.py::TestBlat::test_blat_bad_fasta PASSED                 [ 12%]
 tests/test_blat.py::TestBlat::test_blat_bad_fileformat PASSED            [ 13%]
 tests/test_blat.py::TestBlat::test_blat_bad_seqtype PASSED               [ 13%]
 tests/test_blat.py::TestBlat::test_blat_bad_txt PASSED                   [ 14%]
-tests/test_blat.py::TestBlat::test_blat_nt FAILED                        [ 14%]
-tests/test_blat.py::TestBlat::test_blat_nt_DNA FAILED                    [ 14%]
+tests/test_blat.py::TestBlat::test_blat_nt PASSED                        [ 14%]
+tests/test_blat.py::TestBlat::test_blat_nt_DNA PASSED                    [ 14%]
 tests/test_blat.py::TestBlat::test_blat_nt_RNA PASSED                    [ 15%]
-tests/test_blat.py::TestBlat::test_blat_nt_fasta FAILED                  [ 15%]
+tests/test_blat.py::TestBlat::test_blat_nt_fasta PASSED                  [ 15%]
+tests/test_blat.py::TestBlat::test_blat_nt_json PASSED                   [ 16%]
+tests/test_blat.py::TestBlat::test_blat_nt_protein PASSED                [ 16%]
+tests/test_blat.py::TestBlat::test_blat_nt_transDNA PASSED               [ 16%]
+tests/test_blat.py::TestBlat::test_blat_nt_txt PASSED                    [ 17%]
+tests/test_blat.py::TestBlat::test_blat_shortseq PASSED                  [ 17%]
+tests/test_cbio.py::TestCbioSearch::test_cbio_search PASSED              [ 18%]
+tests/test_cbio.py::TestCbio::test_cbio_download PASSED                  [ 18%]
+tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files PASSED [ 18%]
+tests/test_cbio.py::TestCbio::test_error_cbio_download PASSED            [ 19%]
+tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata PASSED      [ 19%]
+tests/test_cellxgene.py::TestCellxgene::test_cellxgene_metadata PASSED   [ 20%]
+tests/test_compile.py::TestCompilerWindows::test_compiler_windows PASSED [ 20%]
+tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults ERROR     [ 20%]
+tests/test_diamond.py::TestDiamond::test_diamond_JSON_out PASSED         [ 21%]
+tests/test_diamond.py::TestDiamond::test_diamond_both_files PASSED       [ 21%]
+tests/test_diamond.py::TestDiamond::test_diamond_query_file PASSED       [ 22%]
+tests/test_diamond.py::TestDiamond::test_diamond_ref_file PASSED         [ 22%]
+tests/test_diamond.py::TestDiamond::test_diamond_seqs_multiple PASSED    [ 22%]
+tests/test_diamond.py::TestDiamond::test_diamond_seqs_single PASSED      [ 23%]
+tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq FAILED         [ 23%]
 
+==================================== ERRORS ====================================
+__________ ERROR at setup of TestCosmicWorkflow.test_cosmic_defaults ___________
+
+cls = <class 'tests.test_cosmic.TestCosmicWorkflow'>
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        time.sleep(sleep_time)
+    
+        # Download data if it doesn't already exist
+        mut_class, grch_version, file_name, version = arg_combinations[0]
+    
+        if mut_class == "cancer_example":
+            cls.tarred_folder = f"example_GRCh{grch_version}"
+        else:
+            cls.tarred_folder = f"{file_name}_Tsv_v{version}_GRCh{grch_version}"
+    
+        cls.file_name = file_name
+        cls.grch_version = grch_version
+        cls.cosmic_version = version
+    
+        expected_file = os.path.join(cls.tarred_folder, f"{file_name}_v{version}_GRCh{grch_version}.tsv")
+    
+        if not os.path.exists(expected_file):
+            cosmic(
+                searchterm=None,
+                download_cosmic=True,
+                cosmic_project=mut_class,
+                cosmic_version=version,
+                grch_version=grch_version,
+                gget_mutate=True,
+            )
+    
+        # Check that files were downloaded correctly
+        contained_file = f"{file_name}_v{version}_GRCh{grch_version}.tsv"
+        gm_file = f"{file_name}_v{version}_GRCh{grch_version}_mutation_workflow.csv"
+    
+        path1 = pl.Path(os.path.abspath(os.path.join(cls.tarred_folder, contained_file)))
+        path2 = pl.Path(os.path.abspath(os.path.join(cls.tarred_folder, gm_file)))
+    
+        if not path1.is_file() or not path2.is_file():
+>           raise FileNotFoundError("Expected COSMIC files were not found after download.")
+E           FileNotFoundError: Expected COSMIC files were not found after download.
+
+tests/test_cosmic.py:79: FileNotFoundError
+------------------------------ Captured log setup ------------------------------
+INFO     gget.utils:gget_cosmic.py:391 NOTE: Licence fees apply for the commercial use of COSMIC (https://www.cosmickb.org/licensing).
+INFO     gget.utils:gget_cosmic.py:185 Extracted tar file to /home/runner/work/gget/gget/example_GRCh37
+INFO     gget.utils:gget_cosmic.py:441 Creating modified mutations file for use with gget mutate...
+INFO     gget.utils:gget_cosmic.py:659 Modified mutations file for use with gget mutate created at /home/runner/work/gget/gget/example_GRCh37/CancerMutationCensus_AllData_v104_GRCh37_mutation_workflow.csv
 =================================== FAILURES ===================================
-____________________________ TestBlat.test_blat_aa _____________________________
+________________________ TestBgee.test_bgee_expression _________________________
 
-self = <tests.test_blat.TestBlat testMethod=test_blat_aa>
-
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
-    
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: None != [['mm39', 64, 25, 64, 35, 5, 62.5, 87.5, 'chrX', '+-', 17437571, 17437690]]
-
-tests/from_json.py:78: AssertionError
------------------------------- Captured log call -------------------------------
-INFO     gget.utils:gget_blat.py:90 Sequence recognized as amino acid sequence. 'seqtype' will be set as protein.
-ERROR    gget.utils:gget_blat.py:148 
-            BLAT of seqtype 'protein' using assembly 'mm39' was unsuccesful. 
-            Possible causes: 
-            - Sequence possibly too short (required minimum: 20 characters). 
-            - Assembly possibly invalid. All available species with their respective assemblies are listed at https://genome.ucsc.edu/cgi-bin/hgBlat
-________________________ TestBlat.test_blat_aa_protein _________________________
-
-self = <tests.test_blat.TestBlat testMethod=test_blat_aa_protein>
+self = <tests.test_bgee.TestBgee testMethod=test_bgee_expression>
 
     def assert_equal(self: unittest.TestCase):
         test = name
         expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
-    
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: None != [['mm39', 64, 25, 64, 35, 5, 62.5, 87.5, 'chrX', '+-', 17437571, 17437690]]
+>       result_to_test = do_call(func, td[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-tests/from_json.py:78: AssertionError
+tests/from_json.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+func = <function bgee at 0x7f757dfe65c0>
+args = {'gene_id': 'ENSBTAG00000047356', 'type': 'expression'}
+
+    def do_call(func, args):
+        if isinstance(args, dict):
+>           return func(**args)
+                   ^^^^^^^^^^^^
+
+tests/from_json.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene_id = 'ENSBTAG00000047356', type = 'expression', json = False
+verbose = True
+
+    def bgee(
+        gene_id,
+        type="orthologs",
+        json=False,
+        verbose=True,
+    ):
+        """
+        Get orthologs/expression data for a gene from Bgee (https://www.bgee.org/).
+    
+        Args:
+        type        type of data to retrieve ('expression' or 'orthologs')
+        gene_id     Ensembl gene ID
+        json        return JSON instead of DataFrame
+        verbose     log progress
+    
+        Returns requested information as a DataFrame or JSON.
+        """
+        if type == "expression":
+>           return _bgee_expression(gene_id, json=json, verbose=verbose)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_bgee.py:199: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene_id = 'ENSBTAG00000047356', json = False, verbose = True
+
+    def _bgee_expression(gene_id, json=False, verbose=True):
+        """
+        Get expression data from Bgee
+    
+        Args:
+    
+        :param gene_id: Ensembl gene ID(s)
+        :param json:    return JSON instead of DataFrame
+        :param verbose: log progress
+    
+        Returns requested information as a DataFrame or JSON
+        """
+        # if single Ensembl ID passed as string, convert to list
+        if isinstance(gene_id, str):
+            gene_ids = [gene_id]
+        else:
+            gene_ids = gene_id
+    
+        # make sure all gene IDs correspond to the same species
+>       species_set = {_bgee_species(gene_id, verbose=verbose) for gene_id in gene_ids}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_bgee.py:127: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene_id = 'ENSBTAG00000047356', verbose = True
+
+    def _bgee_species(gene_id: str, verbose=True):
+        """
+        Get species ID from Bgee
+        :param gene_id: Ensembl gene ID
+        :param verbose: log progress
+        :return: species ID
+        """
+    
+        if verbose:
+            logger.info(f"Getting species ID for gene {gene_id} from Bgee")
+    
+        response = requests.get(
+            "https://bgee.org/api/",
+            params={
+                "display_type": "json",
+                "page": "gene",
+                "action": "general_info",
+                "gene_id": gene_id,
+            },
+        )
+    
+        if not response.ok:
+>           raise RuntimeError(
+                f"Bgee API request returned with error code: {response.status_code}. "
+                "Please double-check the arguments and try again.\n"
+            )
+E           RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
+
+gget/gget_bgee.py:33: RuntimeError
 ------------------------------ Captured log call -------------------------------
-ERROR    gget.utils:gget_blat.py:148 
-            BLAT of seqtype 'protein' using assembly 'mm39' was unsuccesful. 
-            Possible causes: 
-            - Sequence possibly too short (required minimum: 20 characters). 
-            - Assembly possibly invalid. All available species with their respective assemblies are listed at https://genome.ucsc.edu/cgi-bin/hgBlat
-____________________________ TestBlat.test_blat_nt _____________________________
+INFO     gget.utils:gget_bgee.py:20 Getting species ID for gene ENSBTAG00000047356 from Bgee
+____________________ TestBgee.test_bgee_expression_multiple ____________________
 
-self = <tests.test_blat.TestBlat testMethod=test_blat_nt>
+self = <tests.test_bgee.TestBgee testMethod=test_bgee_expression_multiple>
 
     def assert_equal(self: unittest.TestCase):
         test = name
         expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
-    
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: None != [['hg38', 44, 17, 44, 28, 0, 63.64, 100.0, 'chr18', '+', 1952614, 1952647]]
+>       result_to_test = do_call(func, td[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-tests/from_json.py:78: AssertionError
+tests/from_json.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+func = <function bgee at 0x7f757dfe65c0>
+args = {'gene_id': ['ENSBTAG00000047356', 'ENSBTAG00000018317'], 'type': 'expression'}
+
+    def do_call(func, args):
+        if isinstance(args, dict):
+>           return func(**args)
+                   ^^^^^^^^^^^^
+
+tests/from_json.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene_id = ['ENSBTAG00000047356', 'ENSBTAG00000018317'], type = 'expression'
+json = False, verbose = True
+
+    def bgee(
+        gene_id,
+        type="orthologs",
+        json=False,
+        verbose=True,
+    ):
+        """
+        Get orthologs/expression data for a gene from Bgee (https://www.bgee.org/).
+    
+        Args:
+        type        type of data to retrieve ('expression' or 'orthologs')
+        gene_id     Ensembl gene ID
+        json        return JSON instead of DataFrame
+        verbose     log progress
+    
+        Returns requested information as a DataFrame or JSON.
+        """
+        if type == "expression":
+>           return _bgee_expression(gene_id, json=json, verbose=verbose)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_bgee.py:199: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene_id = ['ENSBTAG00000047356', 'ENSBTAG00000018317'], json = False
+verbose = True
+
+    def _bgee_expression(gene_id, json=False, verbose=True):
+        """
+        Get expression data from Bgee
+    
+        Args:
+    
+        :param gene_id: Ensembl gene ID(s)
+        :param json:    return JSON instead of DataFrame
+        :param verbose: log progress
+    
+        Returns requested information as a DataFrame or JSON
+        """
+        # if single Ensembl ID passed as string, convert to list
+        if isinstance(gene_id, str):
+            gene_ids = [gene_id]
+        else:
+            gene_ids = gene_id
+    
+        # make sure all gene IDs correspond to the same species
+>       species_set = {_bgee_species(gene_id, verbose=verbose) for gene_id in gene_ids}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_bgee.py:127: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene_id = 'ENSBTAG00000047356', verbose = True
+
+    def _bgee_species(gene_id: str, verbose=True):
+        """
+        Get species ID from Bgee
+        :param gene_id: Ensembl gene ID
+        :param verbose: log progress
+        :return: species ID
+        """
+    
+        if verbose:
+            logger.info(f"Getting species ID for gene {gene_id} from Bgee")
+    
+        response = requests.get(
+            "https://bgee.org/api/",
+            params={
+                "display_type": "json",
+                "page": "gene",
+                "action": "general_info",
+                "gene_id": gene_id,
+            },
+        )
+    
+        if not response.ok:
+>           raise RuntimeError(
+                f"Bgee API request returned with error code: {response.status_code}. "
+                "Please double-check the arguments and try again.\n"
+            )
+E           RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
+
+gget/gget_bgee.py:33: RuntimeError
 ------------------------------ Captured log call -------------------------------
-INFO     gget.utils:gget_blat.py:82 Sequence recognized as nucleotide sequence. 'seqtype' will be set as DNA.
-ERROR    gget.utils:gget_blat.py:148 
-            BLAT of seqtype 'DNA' using assembly 'hg38' was unsuccesful. 
-            Possible causes: 
-            - Sequence possibly too short (required minimum: 20 characters). 
-            - Assembly possibly invalid. All available species with their respective assemblies are listed at https://genome.ucsc.edu/cgi-bin/hgBlat
-__________________________ TestBlat.test_blat_nt_DNA ___________________________
+INFO     gget.utils:gget_bgee.py:20 Getting species ID for gene ENSBTAG00000047356 from Bgee
+_________________________ TestBgee.test_bgee_orthologs _________________________
 
-self = <tests.test_blat.TestBlat testMethod=test_blat_nt_DNA>
+self = <tests.test_bgee.TestBgee testMethod=test_bgee_orthologs>
 
     def assert_equal(self: unittest.TestCase):
         test = name
         expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
-    
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: None != [['hg38', 44, 17, 44, 28, 0, 63.64, 100.0, 'chr18', '+', 1952614, 1952647]]
+>       result_to_test = do_call(func, td[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-tests/from_json.py:78: AssertionError
+tests/from_json.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+func = <function bgee at 0x7f757dfe65c0>
+args = {'gene_id': 'ENSOARG00000019163'}
+
+    def do_call(func, args):
+        if isinstance(args, dict):
+>           return func(**args)
+                   ^^^^^^^^^^^^
+
+tests/from_json.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene_id = 'ENSOARG00000019163', type = 'orthologs', json = False, verbose = True
+
+    def bgee(
+        gene_id,
+        type="orthologs",
+        json=False,
+        verbose=True,
+    ):
+        """
+        Get orthologs/expression data for a gene from Bgee (https://www.bgee.org/).
+    
+        Args:
+        type        type of data to retrieve ('expression' or 'orthologs')
+        gene_id     Ensembl gene ID
+        json        return JSON instead of DataFrame
+        verbose     log progress
+    
+        Returns requested information as a DataFrame or JSON.
+        """
+        if type == "expression":
+            return _bgee_expression(gene_id, json=json, verbose=verbose)
+        elif type == "orthologs":
+>           return _bgee_orthologs(gene_id, json=json, verbose=verbose)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_bgee.py:201: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene_id = 'ENSOARG00000019163', json = False, verbose = True
+
+    def _bgee_orthologs(gene_id, json=False, verbose=True):
+        """
+        Get orthologs for a gene from Bgee
+    
+        Args:
+    
+        :param gene_id: Ensembl gene ID
+        :param json:    return JSON instead of DataFrame
+        :param verbose: log progress
+    
+        Returns requested information as a DataFrame or JSON
+        """
+        # if single Ensembl ID passed as string, convert to list
+        if isinstance(gene_id, list):
+            raise ValueError(
+                "One a single gene ID can be passed at a time for ortholog searches."
+            )
+    
+        # must first obtain species
+>       species = _bgee_species(gene_id, verbose=verbose)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_bgee.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene_id = 'ENSOARG00000019163', verbose = True
+
+    def _bgee_species(gene_id: str, verbose=True):
+        """
+        Get species ID from Bgee
+        :param gene_id: Ensembl gene ID
+        :param verbose: log progress
+        :return: species ID
+        """
+    
+        if verbose:
+            logger.info(f"Getting species ID for gene {gene_id} from Bgee")
+    
+        response = requests.get(
+            "https://bgee.org/api/",
+            params={
+                "display_type": "json",
+                "page": "gene",
+                "action": "general_info",
+                "gene_id": gene_id,
+            },
+        )
+    
+        if not response.ok:
+>           raise RuntimeError(
+                f"Bgee API request returned with error code: {response.status_code}. "
+                "Please double-check the arguments and try again.\n"
+            )
+E           RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
+
+gget/gget_bgee.py:33: RuntimeError
 ------------------------------ Captured log call -------------------------------
-ERROR    gget.utils:gget_blat.py:148 
-            BLAT of seqtype 'DNA' using assembly 'hg38' was unsuccesful. 
-            Possible causes: 
-            - Sequence possibly too short (required minimum: 20 characters). 
-            - Assembly possibly invalid. All available species with their respective assemblies are listed at https://genome.ucsc.edu/cgi-bin/hgBlat
-_________________________ TestBlat.test_blat_nt_fasta __________________________
+INFO     gget.utils:gget_bgee.py:20 Getting species ID for gene ENSOARG00000019163 from Bgee
+____________________ TestELM.test_elm_uniprot_aminoacidseq _____________________
 
-self = <tests.test_blat.TestBlat testMethod=test_blat_nt_fasta>
+self = <tests.test_elm.TestELM testMethod=test_elm_uniprot_aminoacidseq>
 
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
+    def test_elm_uniprot_aminoacidseq(self):
+        test = "test3"
+        expected_result = elm_dict[test]["expected_result"]
     
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: None != [['taeGut2', 63, 1, 63, 63, 0, 100.0, 100[108 chars]346]]
+>       result1, result2 = elm(**elm_dict[test]["args"])
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-tests/from_json.py:78: AssertionError
------------------------------- Captured log call -------------------------------
-INFO     gget.utils:gget_blat.py:52 File contains more than one sequence. Only the first sequence will be submitted to BLAT.
-INFO     gget.utils:gget_blat.py:82 Sequence recognized as nucleotide sequence. 'seqtype' will be set as DNA.
-ERROR    gget.utils:gget_blat.py:148 
-            BLAT of seqtype 'DNA' using assembly 'taeGut2' was unsuccesful. 
-            Possible causes: 
-            - Sequence possibly too short (required minimum: 20 characters). 
-            - Assembly possibly invalid. All available species with their respective assemblies are listed at https://genome.ucsc.edu/cgi-bin/hgBlat
+tests/test_elm.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+sequence = 'GGETISAWESQMEELVISISALIVELQVEFRANKLINPACHTERLABRQCKSFKIEPPGLFRGRG'
+uniprot = False, sensitivity = 'very-sensitive', threads = 1
+diamond_binary = None, expand = False, verbose = True, json = False, out = None
+
+    def elm(
+        sequence,
+        uniprot=False,
+        sensitivity="very-sensitive",
+        threads=1,
+        diamond_binary=None,
+        expand=False,
+        verbose=True,
+        json=False,
+        out=None,
+    ):
+        """
+        Locally predicts Eukaryotic Linear Motifs from an amino acid sequence or UniProt Acc using
+        data from the ELM database (http://elm.eu.org/).
+    
+        Args:
+        - sequence         Amino acid sequence or Uniprot Acc (str).
+                           If Uniprot Acc, set 'uniprot==True'.
+        - uniprot          Set to True if the input is a Uniprot Acc instead of an amino acid sequence. Default: False.
+        - sensitivity      Sensitivity of DIAMOND alignment.
+                           One of the following: fast, mid-sensitive, sensitive, more-sensitive, very-sensitive, or ultra-sensitive.
+                           Default: "very-sensitive"
+        - threads          Number of threads used in DIAMOND alignment. Default: 1.
+        - diamond_binary   Path to DIAMOND binary. Default: None -> Uses DIAMOND binary installed with gget.
+        - expand           Expand the information returned in the regex data frame to include the protein names, organisms
+                           and references that the motif was orignally validated on. Default: False.
+        - verbose          True/False whether to print progress information. Default: True.
+        - json             If True, returns results in json format instead of data frame. Default: False.
+        - out              Path to folder to save results in. Default: Standard out, temporary files are deleted.
+    
+        Returns two data frames (or JSON formatted dictionaries if json=True):
+        The first contains information on motifs experimentally validated in orthologous proteins and
+        the second contains motifs found directly based on regex matches in the provided sequence.
+    
+        ELM data can be downloaded & distributed for non-commercial use according to the ELM Software License Agreement (http://elm.eu.org/media/Elm_academic_license.pdf).
+        """
+        # Check if ELM files were downloaded
+        if (
+            not os.path.exists(ELM_INSTANCES_FASTA)
+            or not os.path.exists(ELM_CLASSES_TSV)
+            or not os.path.exists(ELM_INSTANCES_TSV)
+            or not os.path.exists(ELM_INTDOMAINS_TSV)
+        ):
+>           raise FileNotFoundError(
+                f"Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files."
+            )
+E           FileNotFoundError: Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files.
+
+gget/gget_elm.py:278: FileNotFoundError
 =============================== warnings summary ===============================
 tests/test_blast.py::TestBlast::test_blast_nt
   /home/runner/work/gget/gget/gget/gget_blast.py:327: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
     results_df = pd.read_html(str(dsc_table))[0]
 
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/swagger_spec_validator/validator12.py:18: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema import RefResolver
+
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/swagger_spec_validator/ref_validators.py:14: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema.validators import RefResolver
+
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/swagger_spec_validator/validator20.py:18: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema.validators import RefResolver
+
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/bravado_core/swagger20_validator.py:6: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema import RefResolver
+
+tests/test_cbio.py::TestCbioSearch::test_cbio_search
+  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/bravado_core/spec.py:14: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema.validators import RefResolver
+
+tests/test_cbio.py: 16 warnings
+  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/bravado_core/model.py:888: DeprecationWarning: jsonschema.RefResolver.in_scope is deprecated and will be removed in a future release.
+    with spec.resolver.in_scope(additional_uri):
+
+tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+  /home/runner/work/gget/gget/gget/gget_cellxgene.py:222: FutureWarning: The argument `column_names` is deprecated and will be removed in a future release. Please use `obs_column_names` and `var_column_names` instead.
+    adata = cellxgene_census.get_anndata(
+
+tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/functools.py:912: ImplicitModificationWarning: Transforming to str index.
+    return dispatch(args[0].__class__)(*args, **kw)
+
+tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+  /home/runner/work/gget/gget/gget/gget_cosmic.py:183: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+    tar.extractall(path=tar_folder_path)
+
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-135.54s call     tests/test_blast.py::TestBlast::test_blast_nt
-8.81s call     tests/test_bgee.py::TestBgee::test_bgee_orthologs
-8.55s call     tests/test_bgee.py::TestBgee::test_bgee_expression
-6.47s call     tests/test_bgee.py::TestBgee::test_bgee_expression_multiple
-2.91s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
-2.08s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
-1.71s call     tests/test_archs4.py::TestArchs4::test_archs4_defaults
-1.67s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_ensembl
-1.63s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_gene
-1.39s call     tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl
+74.35s call     tests/test_blast.py::TestBlast::test_blast_nt
+44.30s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+33.13s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+11.94s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+3.36s call     tests/test_cbio.py::TestCbioSearch::test_cbio_search
+3.08s call     tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files
+3.00s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_metadata
+2.99s call     tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl
+1.74s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_gene
+1.74s call     tests/test_archs4.py::TestArchs4::test_archs4_defaults
 =========================== short test summary info ============================
-FAILED tests/test_blat.py::TestBlat::test_blat_aa - AssertionError: None != [['mm39', 64, 25, 64, 35, 5, 62.5, 87.5, 'chrX', '+-', 17437571, 17437690]]
-FAILED tests/test_blat.py::TestBlat::test_blat_aa_protein - AssertionError: None != [['mm39', 64, 25, 64, 35, 5, 62.5, 87.5, 'chrX', '+-', 17437571, 17437690]]
-FAILED tests/test_blat.py::TestBlat::test_blat_nt - AssertionError: None != [['hg38', 44, 17, 44, 28, 0, 63.64, 100.0, 'chr18', '+', 1952614, 1952647]]
-FAILED tests/test_blat.py::TestBlat::test_blat_nt_DNA - AssertionError: None != [['hg38', 44, 17, 44, 28, 0, 63.64, 100.0, 'chr18', '+', 1952614, 1952647]]
-FAILED tests/test_blat.py::TestBlat::test_blat_nt_fasta - AssertionError: None != [['taeGut2', 63, 1, 63, 63, 0, 100.0, 100[108 chars]346]]
+ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
+FAILED tests/test_bgee.py::TestBgee::test_bgee_expression - RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
+FAILED tests/test_bgee.py::TestBgee::test_bgee_expression_multiple - RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
+FAILED tests/test_bgee.py::TestBgee::test_bgee_orthologs - RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
+FAILED tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq - FileNotFoundError: Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files.
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-============= 5 failed, 34 passed, 1 warning in 317.52s (0:05:17) ==============
+======== 4 failed, 54 passed, 28 warnings, 1 error in 335.34s (0:05:35) ========
