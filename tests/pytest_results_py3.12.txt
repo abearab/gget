@@ -1,7 +1,7 @@
-Pytest results (Python 3.12) - 2026-06-11T17:11:21Z
+Pytest results (Python 3.12) - 2026-06-15T17:37:12Z
 
 ============================= test session starts ==============================
-platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
+platform linux -- Python 3.12.13, pytest-9.1.0, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/gget/gget
 configfile: pyproject.toml
@@ -66,7 +66,33 @@ tests/test_diamond.py::TestDiamond::test_diamond_query_file PASSED       [ 22%]
 tests/test_diamond.py::TestDiamond::test_diamond_ref_file PASSED         [ 22%]
 tests/test_diamond.py::TestDiamond::test_diamond_seqs_multiple PASSED    [ 22%]
 tests/test_diamond.py::TestDiamond::test_diamond_seqs_single PASSED      [ 23%]
-tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq FAILED         [ 23%]
+tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq PASSED         [ 23%]
+tests/test_elm.py::TestELM::test_elm_uniprot_id_in_elm PASSED            [ 24%]
+tests/test_elm.py::TestELM::test_elm_uniprot_id_new PASSED               [ 24%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_background PASSED       [ 24%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl PASSED [ 25%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_background PASSED   [ 25%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_background_list PASSED [ 26%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_database_shortcut PASSED [ 26%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_gene PASSED         [ 26%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_species PASSED      [ 27%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_celltypes PASSED        [ 27%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_diseases_drugs PASSED   [ 28%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids PASSED      [ 28%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_fish PASSED             [ 28%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_fly PASSED              [ 29%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_json PASSED             [ 29%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_kinase_interactions PASSED [ 30%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_mouse_is_human PASSED   [ 30%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_none PASSED             [ 30%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_ontology PASSED         [ 31%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_pathway PASSED          [ 31%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_plot PASSED             [ 32%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_transcription PASSED    [ 32%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_worm PASSED             [ 32%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_yeast PASSED            [ 33%]
+tests/test_gpt.py::TestGpt::test_gpt PASSED                              [ 33%]
+tests/test_info.py::TestInfo::test_info_WB_transcript FAILED             [ 34%]
 
 ==================================== ERRORS ====================================
 __________ ERROR at setup of TestCosmicWorkflow.test_cosmic_defaults ___________
@@ -133,8 +159,8 @@ self = <tests.test_bgee.TestBgee testMethod=test_bgee_expression>
 tests/from_json.py:65: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function bgee at 0x7f757dfe65c0>
-args = {'gene_id': 'ENSBTAG00000047356', 'type': 'expression'}
+func = <function bgee at 0x7f78f9f90ae0>
+args = {'type': 'expression', 'gene_id': 'ENSBTAG00000047356'}
 
     def do_call(func, args):
         if isinstance(args, dict):
@@ -244,8 +270,8 @@ self = <tests.test_bgee.TestBgee testMethod=test_bgee_expression_multiple>
 tests/from_json.py:65: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function bgee at 0x7f757dfe65c0>
-args = {'gene_id': ['ENSBTAG00000047356', 'ENSBTAG00000018317'], 'type': 'expression'}
+func = <function bgee at 0x7f78f9f90ae0>
+args = {'type': 'expression', 'gene_id': ['ENSBTAG00000047356', 'ENSBTAG00000018317']}
 
     def do_call(func, args):
         if isinstance(args, dict):
@@ -356,7 +382,7 @@ self = <tests.test_bgee.TestBgee testMethod=test_bgee_orthologs>
 tests/from_json.py:65: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function bgee at 0x7f757dfe65c0>
+func = <function bgee at 0x7f78f9f90ae0>
 args = {'gene_id': 'ENSOARG00000019163'}
 
     def do_call(func, args):
@@ -455,73 +481,154 @@ E           RuntimeError: Bgee API request returned with error code: 403. Please
 gget/gget_bgee.py:33: RuntimeError
 ------------------------------ Captured log call -------------------------------
 INFO     gget.utils:gget_bgee.py:20 Getting species ID for gene ENSOARG00000019163 from Bgee
-____________________ TestELM.test_elm_uniprot_aminoacidseq _____________________
+_______________________ TestInfo.test_info_WB_transcript _______________________
 
-self = <tests.test_elm.TestELM testMethod=test_elm_uniprot_aminoacidseq>
+self = <tests.test_info.TestInfo testMethod=test_info_WB_transcript>
 
-    def test_elm_uniprot_aminoacidseq(self):
-        test = "test3"
-        expected_result = elm_dict[test]["expected_result"]
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+        result_to_test = do_call(func, td[test]["args"])
+        if test == "test_cosmic_defaults":  # special case for cosmic
+            import numpy as np
+            expected_result = pd.DataFrame(expected_result[0])
+            expected_result = expected_result.replace({None: np.nan})
+            # result_to_test.equals(expected_result)
+            pd.testing.assert_frame_equal(result_to_test, expected_result)
+            return
     
->       result1, result2 = elm(**elm_dict[test]["args"])
-                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-tests/test_elm.py:42: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-sequence = 'GGETISAWESQMEELVISISALIVELQVEFRANKLINPACHTERLABRQCKSFKIEPPGLFRGRG'
-uniprot = False, sensitivity = 'very-sensitive', threads = 1
-diamond_binary = None, expand = False, verbose = True, json = False, out = None
-
-    def elm(
-        sequence,
-        uniprot=False,
-        sensitivity="very-sensitive",
-        threads=1,
-        diamond_binary=None,
-        expand=False,
-        verbose=True,
-        json=False,
-        out=None,
-    ):
-        """
-        Locally predicts Eukaryotic Linear Motifs from an amino acid sequence or UniProt Acc using
-        data from the ELM database (http://elm.eu.org/).
+        # If result is a DataFrame, convert to list
+        if isinstance(result_to_test, pd.DataFrame):
+            result_to_test = result_to_test.dropna(axis=1).values.tolist()
     
-        Args:
-        - sequence         Amino acid sequence or Uniprot Acc (str).
-                           If Uniprot Acc, set 'uniprot==True'.
-        - uniprot          Set to True if the input is a Uniprot Acc instead of an amino acid sequence. Default: False.
-        - sensitivity      Sensitivity of DIAMOND alignment.
-                           One of the following: fast, mid-sensitive, sensitive, more-sensitive, very-sensitive, or ultra-sensitive.
-                           Default: "very-sensitive"
-        - threads          Number of threads used in DIAMOND alignment. Default: 1.
-        - diamond_binary   Path to DIAMOND binary. Default: None -> Uses DIAMOND binary installed with gget.
-        - expand           Expand the information returned in the regex data frame to include the protein names, organisms
-                           and references that the motif was orignally validated on. Default: False.
-        - verbose          True/False whether to print progress information. Default: True.
-        - json             If True, returns results in json format instead of data frame. Default: False.
-        - out              Path to folder to save results in. Default: Standard out, temporary files are deleted.
-    
-        Returns two data frames (or JSON formatted dictionaries if json=True):
-        The first contains information on motifs experimentally validated in orthologous proteins and
-        the second contains motifs found directly based on regex matches in the provided sequence.
-    
-        ELM data can be downloaded & distributed for non-commercial use according to the ELM Software License Agreement (http://elm.eu.org/media/Elm_academic_license.pdf).
-        """
-        # Check if ELM files were downloaded
-        if (
-            not os.path.exists(ELM_INSTANCES_FASTA)
-            or not os.path.exists(ELM_CLASSES_TSV)
-            or not os.path.exists(ELM_INSTANCES_TSV)
-            or not os.path.exists(ELM_INTDOMAINS_TSV)
-        ):
->           raise FileNotFoundError(
-                f"Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files."
-            )
-E           FileNotFoundError: Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files.
+>       self.assertEqual(result_to_test, expected_result)
+E       AssertionError: Lists differ: [['T1[86 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2746 chars]67]]] != [['T1[86 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2760 chars]67]]]
+E       
+E       First differing element 0:
+E       ['T14[85 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2745 chars]667]]
+E       ['T14[85 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2759 chars]667]]
+E       
+E         [['T14E8.4.1',
+E           ['Q5WRS0', 'Q6RYS9'],
+E           'caenorhabditis_elegans',
+E           'WBcel235',
+E           ['aaim-1', 'dop-3'],
+E       +   'aaim-1-201',
+E           [],
+E           'WBGene00043981',
+E           ['Protein aaim-1', 'Dopamine receptor 3'],
+E           ['(Microbial infection) Promotes infection by microsporidian pathogens such '
+E            'as N.parisii in the early larval stages of development (PubMed:34994689). '
+E            'Involved in ensuring the proper orientation and location of the spore '
+E            'proteins of N.parisii during intestinal cell invasion (PubMed:34994689) '
+E            'Plays a role in promoting resistance to bacterial pathogens such as '
+E            'P.aeruginosa by inhibiting bacterial intestinal colonization',
+E       -    'G protein-coupled receptor which binds to the neurotransmitter dopamine '
+E       ?      ^       ^
+E       
+E       +    'G-protein coupled receptor which binds to the neurotransmitter dopamine '
+E       ?      ^       ^
+E       
+E       -    'with high affinity leading to the activation of an associated G protein '
+E       ?                                                                    ^
+E       
+E       +    'with high affinity leading to the activation of an associated G-protein '
+E       ?                                                                    ^
+E       
+E            'and downstream signaling pathways (PubMed:15378064, PubMed:16001968). '
+E       -    'Couples to G proteins to inhibit adenylate cyclase (AC) activity and cAMP '
+E       ?                 ^
+E       
+E       +    'Couples to G-proteins to inhibit adenylate cyclase (AC) activity and cAMP '
+E       ?                 ^
+E       
+E            'production (PubMed:15378064, PubMed:16001968). Antagonizes the D1-like '
+E            'dopamine receptor dop-1 to negatively regulate the rate of locomotion '
+E            '(PubMed:15378064). Negatively regulates locomotion through the activation '
+E            'of goa-1 subunit proteins which inactivates the unc-77/nca-1 and nca-2 '
+E            'ion-channels in the command interneurons (PubMed:28968387). Inhibits '
+E            'early-stage swimming by modulating the unc-77/nca-1 and nca-2 ion channels '
+E            'of premotor interneurons (PubMed:33796839). In GABAergic, RIC, and SIA '
+E            'neurons, antagonizes the function of dop-1 to play a role in behavioral '
+E            'plasticity and regulate the decision-making process when conflicting '
+E            'alternatives are present (PubMed:25536037). Antagonizes octopamine '
+E            'signaling in response to food by promoting the dopamine-mediated '
+E            'suppression of crh-1/CREB1 transcription factor activation in cholinergic '
+E            'SIA neurons (PubMed:19609300). This is most likely in association with the '
+E       -    'G(o)-alpha G protein subunit goa-1 (PubMed:19609300). Promotes male mating '
+E       ?                 ^
+E       
+E       +    'G(o)-alpha G-protein subunit goa-1 (PubMed:19609300). Promotes male mating '
+E       ?                 ^
+E       
+E            'behavior by antagonizing acetylcholine signaling to control the protrusion '
+E            'of copulatory spicules from the tail of males during hermaphrodite vulval '
+E            'location (PubMed:23166505). Under mitochondria stress, plays a role in '
+E            'bacterial preference, resulting in learned avoidance behavior '
+E            '(PubMed:35074444)'],
+E           ['Secreted', 'Cell membrane'],
+E           'Transcript',
+E           'protein_coding',
+E           'X',
+E           -1,
+E           6559466,
+E           6562428,
+E           ['T14E8.4.1.e1',
+E            'T14E8.4.1.e2',
+E            'T14E8.4.1.e3',
+E            'T14E8.4.1.e4',
+E            'T14E8.4.1.e5',
+E            'T14E8.4.1.e6',
+E            'T14E8.4.1.e7',
+E            'T14E8.4.1.e8',
+E            'T14E8.4.1.e9'],
+E           [6562330,
+E            6562225,
+E            6562110,
+E            6561817,
+E            6561252,
+E            6560727,
+E            6560492,
+E            6560197,
+E            6559466],
+E           [6562428,
+E            6562286,
+E            6562183,
+E            6562059,
+E            6561378,
+E            6561206,
+E            6560671,
+E            6560443,
+E            6559667],
+E           ['T14E8.4.1.e1',
+E            'T14E8.4.1.e2',
+E            'T14E8.4.1.e3',
+E            'T14E8.4.1.e4',
+E            'T14E8.4.1.e5',
+E            'T14E8.4.1.e6',
+E            'T14E8.4.1.e7',
+E            'T14E8.4.1.e8',
+E            'T14E8.4.1.e9'],
+E           [6562330,
+E            6562225,
+E            6562110,
+E            6561817,
+E            6561252,
+E            6560727,
+E            6560492,
+E            6560197,
+E            6559466],
+E           [6562428,
+E            6562286,
+E            6562183,
+E            6562059,
+E            6561378,
+E            6561206,
+E            6560671,
+E            6560443,
+E            6559667]]]
 
-gget/gget_elm.py:278: FileNotFoundError
+tests/from_json.py:78: AssertionError
 =============================== warnings summary ===============================
 tests/test_blast.py::TestBlast::test_blast_nt
   /home/runner/work/gget/gget/gget/gget_blast.py:327: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
@@ -568,21 +675,145 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-74.35s call     tests/test_blast.py::TestBlast::test_blast_nt
-44.30s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-33.13s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
-11.94s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-3.36s call     tests/test_cbio.py::TestCbioSearch::test_cbio_search
-3.08s call     tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files
-3.00s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_metadata
-2.99s call     tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl
-1.74s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_gene
-1.74s call     tests/test_archs4.py::TestArchs4::test_archs4_defaults
+74.09s call     tests/test_blast.py::TestBlast::test_blast_nt
+33.10s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+25.00s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+13.35s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+12.83s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+12.12s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+3.57s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
+3.57s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+3.41s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_ensembl
+3.25s call     tests/test_cbio.py::TestCbioSearch::test_cbio_search
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
 FAILED tests/test_bgee.py::TestBgee::test_bgee_expression - RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
 FAILED tests/test_bgee.py::TestBgee::test_bgee_expression_multiple - RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
 FAILED tests/test_bgee.py::TestBgee::test_bgee_orthologs - RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
-FAILED tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq - FileNotFoundError: Some or all ELM database files are missing. Please run 'gget setup elm' (Python: gget.setup('elm')) once to download the necessary files.
+FAILED tests/test_info.py::TestInfo::test_info_WB_transcript - AssertionError: Lists differ: [['T1[86 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2746 chars]67]]] != [['T1[86 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2760 chars]67]]]
+
+First differing element 0:
+['T14[85 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2745 chars]667]]
+['T14[85 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2759 chars]667]]
+
+  [['T14E8.4.1',
+    ['Q5WRS0', 'Q6RYS9'],
+    'caenorhabditis_elegans',
+    'WBcel235',
+    ['aaim-1', 'dop-3'],
++   'aaim-1-201',
+    [],
+    'WBGene00043981',
+    ['Protein aaim-1', 'Dopamine receptor 3'],
+    ['(Microbial infection) Promotes infection by microsporidian pathogens such '
+     'as N.parisii in the early larval stages of development (PubMed:34994689). '
+     'Involved in ensuring the proper orientation and location of the spore '
+     'proteins of N.parisii during intestinal cell invasion (PubMed:34994689) '
+     'Plays a role in promoting resistance to bacterial pathogens such as '
+     'P.aeruginosa by inhibiting bacterial intestinal colonization',
+-    'G protein-coupled receptor which binds to the neurotransmitter dopamine '
+?      ^       ^
+
++    'G-protein coupled receptor which binds to the neurotransmitter dopamine '
+?      ^       ^
+
+-    'with high affinity leading to the activation of an associated G protein '
+?                                                                    ^
+
++    'with high affinity leading to the activation of an associated G-protein '
+?                                                                    ^
+
+     'and downstream signaling pathways (PubMed:15378064, PubMed:16001968). '
+-    'Couples to G proteins to inhibit adenylate cyclase (AC) activity and cAMP '
+?                 ^
+
++    'Couples to G-proteins to inhibit adenylate cyclase (AC) activity and cAMP '
+?                 ^
+
+     'production (PubMed:15378064, PubMed:16001968). Antagonizes the D1-like '
+     'dopamine receptor dop-1 to negatively regulate the rate of locomotion '
+     '(PubMed:15378064). Negatively regulates locomotion through the activation '
+     'of goa-1 subunit proteins which inactivates the unc-77/nca-1 and nca-2 '
+     'ion-channels in the command interneurons (PubMed:28968387). Inhibits '
+     'early-stage swimming by modulating the unc-77/nca-1 and nca-2 ion channels '
+     'of premotor interneurons (PubMed:33796839). In GABAergic, RIC, and SIA '
+     'neurons, antagonizes the function of dop-1 to play a role in behavioral '
+     'plasticity and regulate the decision-making process when conflicting '
+     'alternatives are present (PubMed:25536037). Antagonizes octopamine '
+     'signaling in response to food by promoting the dopamine-mediated '
+     'suppression of crh-1/CREB1 transcription factor activation in cholinergic '
+     'SIA neurons (PubMed:19609300). This is most likely in association with the '
+-    'G(o)-alpha G protein subunit goa-1 (PubMed:19609300). Promotes male mating '
+?                 ^
+
++    'G(o)-alpha G-protein subunit goa-1 (PubMed:19609300). Promotes male mating '
+?                 ^
+
+     'behavior by antagonizing acetylcholine signaling to control the protrusion '
+     'of copulatory spicules from the tail of males during hermaphrodite vulval '
+     'location (PubMed:23166505). Under mitochondria stress, plays a role in '
+     'bacterial preference, resulting in learned avoidance behavior '
+     '(PubMed:35074444)'],
+    ['Secreted', 'Cell membrane'],
+    'Transcript',
+    'protein_coding',
+    'X',
+    -1,
+    6559466,
+    6562428,
+    ['T14E8.4.1.e1',
+     'T14E8.4.1.e2',
+     'T14E8.4.1.e3',
+     'T14E8.4.1.e4',
+     'T14E8.4.1.e5',
+     'T14E8.4.1.e6',
+     'T14E8.4.1.e7',
+     'T14E8.4.1.e8',
+     'T14E8.4.1.e9'],
+    [6562330,
+     6562225,
+     6562110,
+     6561817,
+     6561252,
+     6560727,
+     6560492,
+     6560197,
+     6559466],
+    [6562428,
+     6562286,
+     6562183,
+     6562059,
+     6561378,
+     6561206,
+     6560671,
+     6560443,
+     6559667],
+    ['T14E8.4.1.e1',
+     'T14E8.4.1.e2',
+     'T14E8.4.1.e3',
+     'T14E8.4.1.e4',
+     'T14E8.4.1.e5',
+     'T14E8.4.1.e6',
+     'T14E8.4.1.e7',
+     'T14E8.4.1.e8',
+     'T14E8.4.1.e9'],
+    [6562330,
+     6562225,
+     6562110,
+     6561817,
+     6561252,
+     6560727,
+     6560492,
+     6560197,
+     6559466],
+    [6562428,
+     6562286,
+     6562183,
+     6562059,
+     6561378,
+     6561206,
+     6560671,
+     6560443,
+     6559667]]]
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======== 4 failed, 54 passed, 28 warnings, 1 error in 335.34s (0:05:35) ========
+======== 4 failed, 80 passed, 28 warnings, 1 error in 228.01s (0:03:48) ========
