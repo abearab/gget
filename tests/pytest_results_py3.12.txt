@@ -1,11 +1,11 @@
-Pytest results (Python 3.12) - 2026-06-15T17:37:12Z
+Pytest results (Python 3.12) - 2026-06-18T17:00:53Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.13, pytest-9.1.0, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/gget/gget
 configfile: pyproject.toml
-plugins: cov-7.1.0, fast-array-utils-1.4.1, zarr-3.2.1
+plugins: cov-7.1.0, zarr-3.2.1, fast-array-utils-1.4.1
 collecting ... collected 250 items
 
 tests/test_8cube.py::TestSpecificity::test_specificity_basic PASSED      [  0%]
@@ -159,7 +159,7 @@ self = <tests.test_bgee.TestBgee testMethod=test_bgee_expression>
 tests/from_json.py:65: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function bgee at 0x7f78f9f90ae0>
+func = <function bgee at 0x7fbe80e04ae0>
 args = {'type': 'expression', 'gene_id': 'ENSBTAG00000047356'}
 
     def do_call(func, args):
@@ -270,7 +270,7 @@ self = <tests.test_bgee.TestBgee testMethod=test_bgee_expression_multiple>
 tests/from_json.py:65: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function bgee at 0x7f78f9f90ae0>
+func = <function bgee at 0x7fbe80e04ae0>
 args = {'type': 'expression', 'gene_id': ['ENSBTAG00000047356', 'ENSBTAG00000018317']}
 
     def do_call(func, args):
@@ -382,7 +382,7 @@ self = <tests.test_bgee.TestBgee testMethod=test_bgee_orthologs>
 tests/from_json.py:65: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
 
-func = <function bgee at 0x7f78f9f90ae0>
+func = <function bgee at 0x7fbe80e04ae0>
 args = {'gene_id': 'ENSOARG00000019163'}
 
     def do_call(func, args):
@@ -675,16 +675,16 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-74.09s call     tests/test_blast.py::TestBlast::test_blast_nt
-33.10s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-25.00s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-13.35s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
-12.83s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-12.12s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-3.57s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-3.57s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
-3.41s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_ensembl
-3.25s call     tests/test_cbio.py::TestCbioSearch::test_cbio_search
+73.99s call     tests/test_blast.py::TestBlast::test_blast_nt
+45.91s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+36.72s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+34.54s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+12.54s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+11.74s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+6.33s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
+3.78s call     tests/test_cbio.py::TestCbioSearch::test_cbio_search
+3.17s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+3.16s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_ensembl
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
 FAILED tests/test_bgee.py::TestBgee::test_bgee_expression - RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
@@ -816,4 +816,4 @@ First differing element 0:
      6560443,
      6559667]]]
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======== 4 failed, 80 passed, 28 warnings, 1 error in 228.01s (0:03:48) ========
+======== 4 failed, 80 passed, 28 warnings, 1 error in 375.36s (0:06:15) ========
