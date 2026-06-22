@@ -1,7 +1,7 @@
-Pytest results (Python 3.12) - 2026-06-18T17:00:53Z
+Pytest results (Python 3.12) - 2026-06-22T17:31:17Z
 
 ============================= test session starts ==============================
-platform linux -- Python 3.12.13, pytest-9.1.0, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
+platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/gget/gget
 configfile: pyproject.toml
@@ -22,9 +22,9 @@ tests/test_archs4.py::TestArchs4::test_archs4_tissue PASSED              [  4%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl PASSED      [  4%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_json PASSED         [  5%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_mouse PASSED        [  5%]
-tests/test_bgee.py::TestBgee::test_bgee_expression FAILED                [  6%]
-tests/test_bgee.py::TestBgee::test_bgee_expression_multiple FAILED       [  6%]
-tests/test_bgee.py::TestBgee::test_bgee_orthologs FAILED                 [  6%]
+tests/test_bgee.py::TestBgee::test_bgee_expression PASSED                [  6%]
+tests/test_bgee.py::TestBgee::test_bgee_expression_multiple PASSED       [  6%]
+tests/test_bgee.py::TestBgee::test_bgee_orthologs PASSED                 [  6%]
 tests/test_bgee.py::TestBgee::test_error_bgee_expression_no_exist PASSED [  7%]
 tests/test_bgee.py::TestBgee::test_error_bgee_orthologs_no_exist PASSED  [  7%]
 tests/test_bgee.py::TestBgee::test_error_bgee_unknown_type PASSED        [  8%]
@@ -93,6 +93,10 @@ tests/test_enrichr.py::TestEnrichr::test_enrichr_worm PASSED             [ 32%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_yeast PASSED            [ 33%]
 tests/test_gpt.py::TestGpt::test_gpt PASSED                              [ 33%]
 tests/test_info.py::TestInfo::test_info_WB_transcript FAILED             [ 34%]
+tests/test_info.py::TestInfo::test_info_exon PASSED                      [ 34%]
+tests/test_info.py::TestInfo::test_info_gene FAILED                      [ 34%]
+tests/test_info.py::TestInfo::test_info_gene_list_non_model FAILED       [ 35%]
+tests/test_info.py::TestInfo::test_info_mix FAILED                       [ 35%]
 
 ==================================== ERRORS ====================================
 __________ ERROR at setup of TestCosmicWorkflow.test_cosmic_defaults ___________
@@ -146,341 +150,6 @@ INFO     gget.utils:gget_cosmic.py:185 Extracted tar file to /home/runner/work/g
 INFO     gget.utils:gget_cosmic.py:441 Creating modified mutations file for use with gget mutate...
 INFO     gget.utils:gget_cosmic.py:659 Modified mutations file for use with gget mutate created at /home/runner/work/gget/gget/example_GRCh37/CancerMutationCensus_AllData_v104_GRCh37_mutation_workflow.csv
 =================================== FAILURES ===================================
-________________________ TestBgee.test_bgee_expression _________________________
-
-self = <tests.test_bgee.TestBgee testMethod=test_bgee_expression>
-
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
->       result_to_test = do_call(func, td[test]["args"])
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-tests/from_json.py:65: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-func = <function bgee at 0x7fbe80e04ae0>
-args = {'type': 'expression', 'gene_id': 'ENSBTAG00000047356'}
-
-    def do_call(func, args):
-        if isinstance(args, dict):
->           return func(**args)
-                   ^^^^^^^^^^^^
-
-tests/from_json.py:57: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-gene_id = 'ENSBTAG00000047356', type = 'expression', json = False
-verbose = True
-
-    def bgee(
-        gene_id,
-        type="orthologs",
-        json=False,
-        verbose=True,
-    ):
-        """
-        Get orthologs/expression data for a gene from Bgee (https://www.bgee.org/).
-    
-        Args:
-        type        type of data to retrieve ('expression' or 'orthologs')
-        gene_id     Ensembl gene ID
-        json        return JSON instead of DataFrame
-        verbose     log progress
-    
-        Returns requested information as a DataFrame or JSON.
-        """
-        if type == "expression":
->           return _bgee_expression(gene_id, json=json, verbose=verbose)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-gget/gget_bgee.py:199: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-gene_id = 'ENSBTAG00000047356', json = False, verbose = True
-
-    def _bgee_expression(gene_id, json=False, verbose=True):
-        """
-        Get expression data from Bgee
-    
-        Args:
-    
-        :param gene_id: Ensembl gene ID(s)
-        :param json:    return JSON instead of DataFrame
-        :param verbose: log progress
-    
-        Returns requested information as a DataFrame or JSON
-        """
-        # if single Ensembl ID passed as string, convert to list
-        if isinstance(gene_id, str):
-            gene_ids = [gene_id]
-        else:
-            gene_ids = gene_id
-    
-        # make sure all gene IDs correspond to the same species
->       species_set = {_bgee_species(gene_id, verbose=verbose) for gene_id in gene_ids}
-                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-gget/gget_bgee.py:127: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-gene_id = 'ENSBTAG00000047356', verbose = True
-
-    def _bgee_species(gene_id: str, verbose=True):
-        """
-        Get species ID from Bgee
-        :param gene_id: Ensembl gene ID
-        :param verbose: log progress
-        :return: species ID
-        """
-    
-        if verbose:
-            logger.info(f"Getting species ID for gene {gene_id} from Bgee")
-    
-        response = requests.get(
-            "https://bgee.org/api/",
-            params={
-                "display_type": "json",
-                "page": "gene",
-                "action": "general_info",
-                "gene_id": gene_id,
-            },
-        )
-    
-        if not response.ok:
->           raise RuntimeError(
-                f"Bgee API request returned with error code: {response.status_code}. "
-                "Please double-check the arguments and try again.\n"
-            )
-E           RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
-
-gget/gget_bgee.py:33: RuntimeError
------------------------------- Captured log call -------------------------------
-INFO     gget.utils:gget_bgee.py:20 Getting species ID for gene ENSBTAG00000047356 from Bgee
-____________________ TestBgee.test_bgee_expression_multiple ____________________
-
-self = <tests.test_bgee.TestBgee testMethod=test_bgee_expression_multiple>
-
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
->       result_to_test = do_call(func, td[test]["args"])
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-tests/from_json.py:65: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-func = <function bgee at 0x7fbe80e04ae0>
-args = {'type': 'expression', 'gene_id': ['ENSBTAG00000047356', 'ENSBTAG00000018317']}
-
-    def do_call(func, args):
-        if isinstance(args, dict):
->           return func(**args)
-                   ^^^^^^^^^^^^
-
-tests/from_json.py:57: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-gene_id = ['ENSBTAG00000047356', 'ENSBTAG00000018317'], type = 'expression'
-json = False, verbose = True
-
-    def bgee(
-        gene_id,
-        type="orthologs",
-        json=False,
-        verbose=True,
-    ):
-        """
-        Get orthologs/expression data for a gene from Bgee (https://www.bgee.org/).
-    
-        Args:
-        type        type of data to retrieve ('expression' or 'orthologs')
-        gene_id     Ensembl gene ID
-        json        return JSON instead of DataFrame
-        verbose     log progress
-    
-        Returns requested information as a DataFrame or JSON.
-        """
-        if type == "expression":
->           return _bgee_expression(gene_id, json=json, verbose=verbose)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-gget/gget_bgee.py:199: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-gene_id = ['ENSBTAG00000047356', 'ENSBTAG00000018317'], json = False
-verbose = True
-
-    def _bgee_expression(gene_id, json=False, verbose=True):
-        """
-        Get expression data from Bgee
-    
-        Args:
-    
-        :param gene_id: Ensembl gene ID(s)
-        :param json:    return JSON instead of DataFrame
-        :param verbose: log progress
-    
-        Returns requested information as a DataFrame or JSON
-        """
-        # if single Ensembl ID passed as string, convert to list
-        if isinstance(gene_id, str):
-            gene_ids = [gene_id]
-        else:
-            gene_ids = gene_id
-    
-        # make sure all gene IDs correspond to the same species
->       species_set = {_bgee_species(gene_id, verbose=verbose) for gene_id in gene_ids}
-                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-gget/gget_bgee.py:127: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-gene_id = 'ENSBTAG00000047356', verbose = True
-
-    def _bgee_species(gene_id: str, verbose=True):
-        """
-        Get species ID from Bgee
-        :param gene_id: Ensembl gene ID
-        :param verbose: log progress
-        :return: species ID
-        """
-    
-        if verbose:
-            logger.info(f"Getting species ID for gene {gene_id} from Bgee")
-    
-        response = requests.get(
-            "https://bgee.org/api/",
-            params={
-                "display_type": "json",
-                "page": "gene",
-                "action": "general_info",
-                "gene_id": gene_id,
-            },
-        )
-    
-        if not response.ok:
->           raise RuntimeError(
-                f"Bgee API request returned with error code: {response.status_code}. "
-                "Please double-check the arguments and try again.\n"
-            )
-E           RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
-
-gget/gget_bgee.py:33: RuntimeError
------------------------------- Captured log call -------------------------------
-INFO     gget.utils:gget_bgee.py:20 Getting species ID for gene ENSBTAG00000047356 from Bgee
-_________________________ TestBgee.test_bgee_orthologs _________________________
-
-self = <tests.test_bgee.TestBgee testMethod=test_bgee_orthologs>
-
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
->       result_to_test = do_call(func, td[test]["args"])
-                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-tests/from_json.py:65: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-func = <function bgee at 0x7fbe80e04ae0>
-args = {'gene_id': 'ENSOARG00000019163'}
-
-    def do_call(func, args):
-        if isinstance(args, dict):
->           return func(**args)
-                   ^^^^^^^^^^^^
-
-tests/from_json.py:57: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-gene_id = 'ENSOARG00000019163', type = 'orthologs', json = False, verbose = True
-
-    def bgee(
-        gene_id,
-        type="orthologs",
-        json=False,
-        verbose=True,
-    ):
-        """
-        Get orthologs/expression data for a gene from Bgee (https://www.bgee.org/).
-    
-        Args:
-        type        type of data to retrieve ('expression' or 'orthologs')
-        gene_id     Ensembl gene ID
-        json        return JSON instead of DataFrame
-        verbose     log progress
-    
-        Returns requested information as a DataFrame or JSON.
-        """
-        if type == "expression":
-            return _bgee_expression(gene_id, json=json, verbose=verbose)
-        elif type == "orthologs":
->           return _bgee_orthologs(gene_id, json=json, verbose=verbose)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-gget/gget_bgee.py:201: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-gene_id = 'ENSOARG00000019163', json = False, verbose = True
-
-    def _bgee_orthologs(gene_id, json=False, verbose=True):
-        """
-        Get orthologs for a gene from Bgee
-    
-        Args:
-    
-        :param gene_id: Ensembl gene ID
-        :param json:    return JSON instead of DataFrame
-        :param verbose: log progress
-    
-        Returns requested information as a DataFrame or JSON
-        """
-        # if single Ensembl ID passed as string, convert to list
-        if isinstance(gene_id, list):
-            raise ValueError(
-                "One a single gene ID can be passed at a time for ortholog searches."
-            )
-    
-        # must first obtain species
->       species = _bgee_species(gene_id, verbose=verbose)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-gget/gget_bgee.py:65: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-gene_id = 'ENSOARG00000019163', verbose = True
-
-    def _bgee_species(gene_id: str, verbose=True):
-        """
-        Get species ID from Bgee
-        :param gene_id: Ensembl gene ID
-        :param verbose: log progress
-        :return: species ID
-        """
-    
-        if verbose:
-            logger.info(f"Getting species ID for gene {gene_id} from Bgee")
-    
-        response = requests.get(
-            "https://bgee.org/api/",
-            params={
-                "display_type": "json",
-                "page": "gene",
-                "action": "general_info",
-                "gene_id": gene_id,
-            },
-        )
-    
-        if not response.ok:
->           raise RuntimeError(
-                f"Bgee API request returned with error code: {response.status_code}. "
-                "Please double-check the arguments and try again.\n"
-            )
-E           RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
-
-gget/gget_bgee.py:33: RuntimeError
------------------------------- Captured log call -------------------------------
-INFO     gget.utils:gget_bgee.py:20 Getting species ID for gene ENSOARG00000019163 from Bgee
 _______________________ TestInfo.test_info_WB_transcript _______________________
 
 self = <tests.test_info.TestInfo testMethod=test_info_WB_transcript>
@@ -629,6 +298,359 @@ E            6560443,
 E            6559667]]]
 
 tests/from_json.py:78: AssertionError
+___________________________ TestInfo.test_info_gene ____________________________
+
+self = <tests.test_info.TestInfo testMethod=test_info_gene>
+
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+        result_to_test = do_call(func, td[test]["args"])
+        if test == "test_cosmic_defaults":  # special case for cosmic
+            import numpy as np
+            expected_result = pd.DataFrame(expected_result[0])
+            expected_result = expected_result.replace({None: np.nan})
+            # result_to_test.equals(expected_result)
+            pd.testing.assert_frame_equal(result_to_test, expected_result)
+            return
+    
+        # If result is a DataFrame, convert to list
+        if isinstance(result_to_test, pd.DataFrame):
+            result_to_test = result_to_test.dropna(axis=1).values.tolist()
+    
+>       self.assertEqual(result_to_test, expected_result)
+E       AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3077 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
+E       
+E       First differing element 0:
+E       ['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3076 chars]462]]
+E       ['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2302 chars]462]]
+E       
+E       - [['EnsMUSG00000000001.6',
+E       ?                       ^
+E       
+E       + [['EnsMUSG00000000001.5',
+E       ?                       ^
+E       
+E           'Q9DC51',
+E           '14679',
+E           'mus_musculus',
+E           'GRCm39',
+E           'Gnai3',
+E           'Gnai3',
+E           ['Galphai3', 'Gnai-3', 'Hg1a'],
+E           'Guanine nucleotide-binding protein G(i) subunit alpha-3',
+E           'G protein subunit alpha i3 [Source:MGI Symbol;Acc:MGI:95773]',
+E           'Heterotrimeric guanine nucleotide-binding proteins (G proteins) function as '
+E           'transducers downstream of G protein-coupled receptors (GPCRs) in numerous '
+E           'signaling cascades. The alpha chain contains the guanine nucleotide binding '
+E           'site and alternates between an active, GTP-bound state and an inactive, '
+E           'GDP-bound state. Signaling by an activated GPCR promotes GDP release and '
+E           'GTP binding. The alpha subunit has a low GTPase activity that converts '
+E           'bound GTP to GDP, thereby terminating the signal (By similarity). Both GDP '
+E           'release and GTP hydrolysis are modulated by numerous regulatory proteins '
+E           '(By similarity). Signaling is mediated via effector proteins, such as '
+E           'adenylate cyclase. Inhibits adenylate cyclase activity, leading to '
+E           'decreased intracellular cAMP levels (By similarity). Stimulates the '
+E           'activity of receptor-regulated K(+) channels (By similarity). The active '
+E           'GTP-bound form prevents the association of RGS14 with centrosomes and is '
+E           'required for the translocation of RGS14 from the cytoplasm to the plasma '
+E           'membrane. May play a role in cell division (By similarity). The active '
+E           'GTP-bound form activates the calcium permeant TRPC5 ion channels (By '
+E           'similarity)',
+E           'Predicted to enable several functions, including G-protein '
+E           'beta/gamma-subunit complex binding activity; GDP binding activity; and '
+E           'GTPase activating protein binding activity. Predicted to be involved in '
+E           'several processes, including G protein-coupled receptor signaling pathway; '
+E           'positive regulation of metabolic process; and positive regulation of '
+E           'vascular associated smooth muscle cell proliferation. Predicted to act '
+E           'upstream of or within G protein-coupled receptor signaling pathway. Located '
+E           'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
+E           'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
+E           'Alliance of Genome Resources, Apr 2025]',
+E           ['Cytoplasm',
+E            'Cell membrane',
+E            'Cytoplasm, cytoskeleton, microtubule organizing center, centrosome'],
+E           'Gene',
+E           'protein_coding',
+E       -   'ENSMUST00000000001.6',
+E       ?                       ^
+E       
+E       +   'ENSMUST00000000001.5',
+E       ?                       ^
+E       
+E           '3',
+E           -1,
+E       -   108014590,
+E       ?           ^
+E       
+E       +   108014596,
+E       ?           ^
+E       
+E       -   108053469,
+E       ?           ^
+E       
+E       +   108053462,
+E       ?           ^
+E       
+E       -   ['ENSMUST00000000001.6',
+E       ?                        ^
+E       
+E       +   ['ENSMUST00000000001.5'],
+E       ?                        ^ +
+E       
+E       -    'ENSMUST00000535596.1',
+E       -    'ENSMUST00000535597.1',
+E       -    'ENSMUST00000535598.1',
+E       -    'ENSMUST00000535599.1',
+E       -    'ENSMUST00000535600.1',
+E       -    'ENSMUST00000535601.1',
+E       -    'ENSMUST00000535602.1',
+E       -    'ENSMUST00000535603.1',
+E       -    'ENSMUST00000558104.1'],
+E       -   ['protein_coding',
+E       +   ['protein_coding'],
+E       ?                    +
+E       
+E       -    'protein_coding',
+E       -    'protein_coding',
+E       -    'nonsense_mediated_decay',
+E       -    'protein_coding',
+E       -    'nonsense_mediated_decay',
+E       -    'nonsense_mediated_decay',
+E       -    'protein_coding',
+E       -    'nonsense_mediated_decay',
+E       -    'nonsense_mediated_decay'],
+E       -   ['Gnai3-201',
+E       +   ['Gnai3-201'],
+E       ?               +
+E       
+E       +   [-1],
+E       -    'Gnai3-202',
+E       -    'Gnai3-203',
+E       -    'Gnai3-204',
+E       -    'Gnai3-205',
+E       -    'Gnai3-206',
+E       -    'Gnai3-207',
+E       -    'Gnai3-208',
+E       -    'Gnai3-209',
+E       -    'Gnai3-210'],
+E       -   [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+E       -   [108014596,
+E       +   [108014596],
+E       ?             +
+E       
+E       -    108014596,
+E       -    108014597,
+E       -    108014597,
+E       -    108014592,
+E       -    108014597,
+E       -    108014590,
+E       -    108014613,
+E       -    108014611,
+E       -    108014596],
+E       -   [108053469,
+E       -    108053469,
+E       -    108053469,
+E       -    108053453,
+E       -    108053469,
+E       -    108053443,
+E       -    108053435,
+E       -    108053469,
+E       -    108053426,
+E       -    108053462]]]
+E       ?   ^
+E       
+E       +   [108053462]]]
+E       ?   ^
+
+tests/from_json.py:78: AssertionError
+____________________ TestInfo.test_info_gene_list_non_model ____________________
+
+self = <tests.test_info.TestInfo testMethod=test_info_gene_list_non_model>
+
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+        result_to_test = do_call(func, td[test]["args"])
+        if test == "test_cosmic_defaults":  # special case for cosmic
+            import numpy as np
+            expected_result = pd.DataFrame(expected_result[0])
+            expected_result = expected_result.replace({None: np.nan})
+            # result_to_test.equals(expected_result)
+            pd.testing.assert_frame_equal(result_to_test, expected_result)
+            return
+    
+        # If result is a DataFrame, convert to list
+        if isinstance(result_to_test, pd.DataFrame):
+            result_to_test = result_to_test.dropna(axis=1).values.tolist()
+    
+>       self.assertEqual(result_to_test, expected_result)
+E       AssertionError: Lists differ: [['EN[97 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[875 chars]84]]] != [['EN[97 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[879 chars]84]]]
+E       
+E       First differing element 0:
+E       ['ENS[96 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[874 chars]684]]
+E       ['ENS[96 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[878 chars]684]]
+E       
+E         [['ENSMMUG00000021246.4',
+E           'macaca_mulatta',
+E           'Mmul_10',
+E           'CCDC13',
+E       -   'coiled-coil domain containing 13 [Source:HGNC Symbol;Acc:HGNC:26358]',
+E       +   'coiled-coil domain containing 13 [Source:UniProtKB Gene Name;Acc:F7D2F4]',
+E           'Gene',
+E           'protein_coding',
+E           'ENSMMUT00000029894.4',
+E           '2',
+E           -1,
+E           98646979,
+E           98755023,
+E           ['ENSMMUT00000029893.4',
+E            'ENSMMUT00000053619.2',
+E            'ENSMMUT00000104418.1',
+E            'ENSMMUT00000087615.1',
+E            'ENSMMUT00000103912.1',
+E            'ENSMMUT00000086824.1',
+E            'ENSMMUT00000029894.4',
+E            'ENSMMUT00000104481.1',
+E            'ENSMMUT00000090481.1',
+E            'ENSMMUT00000026408.4'],
+E           ['protein_coding',
+E            'protein_coding',
+E            'protein_coding',
+E            'protein_coding',
+E            'protein_coding',
+E            'protein_coding',
+E            'protein_coding',
+E            'protein_coding',
+E            'protein_coding',
+E            'protein_coding'],
+E           ['CCDC13-201',
+E            'CCDC13-202',
+E            'CCDC13-204',
+E            'CCDC13-203',
+E            'CCDC13-205',
+E            'CCDC13-206',
+E            'CCDC13-207',
+E            'CCDC13-208',
+E            'CCDC13-209',
+E            'CCDC13-210'],
+E           [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+E           [98646979,
+E            98646982,
+E            98646984,
+E            98646984,
+E            98646985,
+E            98662368,
+E            98663259,
+E            98690412,
+E            98737900,
+E            98738870],
+E           [98655536,
+E            98656674,
+E            98688669,
+E            98656968,
+E            98656865,
+E            98713982,
+E            98746548,
+E            98713982,
+E            98755023,
+E            98754684]]]
+
+tests/from_json.py:78: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_info.py:98 We noticed that you passed a version number with your Ensembl ID.
+Please note that gget info will always return information linked to the latest Ensembl ID version (see 'ensembl_id').
+____________________________ TestInfo.test_info_mix ____________________________
+
+self = <tests.test_info.TestInfo testMethod=test_info_mix>
+
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+        result_to_test = do_call(func, td[test]["args"])
+        if test == "test_cosmic_defaults":  # special case for cosmic
+            import numpy as np
+            expected_result = pd.DataFrame(expected_result[0])
+            expected_result = expected_result.replace({None: np.nan})
+            # result_to_test.equals(expected_result)
+            pd.testing.assert_frame_equal(result_to_test, expected_result)
+            return
+    
+        # If result is a DataFrame, convert to list
+        if isinstance(result_to_test, pd.DataFrame):
+            result_to_test = result_to_test.dropna(axis=1).values.tolist()
+    
+>       self.assertEqual(result_to_test, expected_result)
+E       AssertionError: Lists differ: [['EN[219 chars]174.15', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1453 chars]852]] != [['EN[219 chars]174.14', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1453 chars]852]]
+E       
+E       First differing element 1:
+E       ['ENSG00000169174.15', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1452 chars]4852]
+E       ['ENSG00000169174.14', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1452 chars]4852]
+E       
+E         [['ENSTGUT00000027003.1',
+E           'A0A674GVD2',
+E           'taeniopygia_guttata',
+E           'bTaeGut1_v1.p',
+E           'FUNDC1',
+E           'FUNDC1-201',
+E           [],
+E           '',
+E           ['Mitochondrion outer membrane'],
+E           'Transcript',
+E           'protein_coding',
+E           '1',
+E           -1,
+E           107513786,
+E           107526965],
+E       -  ['ENSG00000169174.15',
+E       ?                     ^
+E       
+E       +  ['ENSG00000169174.14',
+E       ?                     ^
+E       
+E           'Q8NBP7',
+E           'homo_sapiens',
+E           'GRCh38',
+E           'PCSK9',
+E           'PCSK9',
+E           ['NARC1'],
+E           'Crucial player in the regulation of plasma cholesterol homeostasis. Binds '
+E           'to low-density lipid receptor family members: low density lipoprotein '
+E           'receptor (LDLR), very low density lipoprotein receptor (VLDLR), '
+E           'apolipoprotein E receptor (LRP1/APOER) and apolipoprotein receptor 2 '
+E           '(LRP8/APOER2), and promotes their degradation in intracellular acidic '
+E           'compartments (PubMed:18039658). Acts via a non-proteolytic mechanism to '
+E           'enhance the degradation of the hepatic LDLR through a clathrin '
+E           'LDLRAP1/ARH-mediated pathway. May prevent the recycling of LDLR from '
+E           'endosomes to the cell surface or direct it to lysosomes for degradation. '
+E           'Can induce ubiquitination of LDLR leading to its subsequent degradation '
+E           '(PubMed:17461796, PubMed:18197702, PubMed:18799458, PubMed:22074827). '
+E           'Inhibits intracellular degradation of APOB via the autophagosome/lysosome '
+E           'pathway in a LDLR-independent manner. Involved in the disposal of '
+E           'non-acetylated intermediates of BACE1 in the early secretory pathway '
+E           '(PubMed:18660751). Inhibits epithelial Na(+) channel (ENaC)-mediated Na(+) '
+E           'absorption by reducing ENaC surface expression primarily by increasing its '
+E           'proteasomal degradation. Regulates neuronal apoptosis via modulation of '
+E           'LRP8/APOER2 levels and related anti-apoptotic signaling pathways',
+E           ['Cytoplasm',
+E            'Secreted',
+E            'Endosome',
+E            'Lysosome',
+E            'Cell surface',
+E            'Endoplasmic reticulum',
+E            'Golgi apparatus'],
+E           'Gene',
+E           'protein_coding',
+E           '1',
+E           1,
+E           55039445,
+E           55064852]]
+
+tests/from_json.py:78: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_info.py:98 We noticed that you passed a version number with your Ensembl ID.
+Please note that gget info will always return information linked to the latest Ensembl ID version (see 'ensembl_id').
+WARNING  gget.utils:utils.py:387 No reviewed UniProt results were found for ID ENSTGUT00000027003. Returning all unreviewed results.
 =============================== warnings summary ===============================
 tests/test_blast.py::TestBlast::test_blast_nt
   /home/runner/work/gget/gget/gget/gget_blast.py:327: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
@@ -675,21 +697,18 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-73.99s call     tests/test_blast.py::TestBlast::test_blast_nt
-45.91s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-36.72s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
-34.54s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-12.54s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-11.74s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-6.33s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-3.78s call     tests/test_cbio.py::TestCbioSearch::test_cbio_search
-3.17s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
-3.16s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_ensembl
+82.66s call     tests/test_blast.py::TestBlast::test_blast_nt
+34.15s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+19.79s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+13.11s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+13.03s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+5.98s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
+4.92s call     tests/test_info.py::TestInfo::test_info_gene
+4.43s call     tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files
+3.43s call     tests/test_bgee.py::TestBgee::test_bgee_expression_multiple
+3.25s call     tests/test_cbio.py::TestCbioSearch::test_cbio_search
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
-FAILED tests/test_bgee.py::TestBgee::test_bgee_expression - RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
-FAILED tests/test_bgee.py::TestBgee::test_bgee_expression_multiple - RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
-FAILED tests/test_bgee.py::TestBgee::test_bgee_orthologs - RuntimeError: Bgee API request returned with error code: 403. Please double-check the arguments and try again.
 FAILED tests/test_info.py::TestInfo::test_info_WB_transcript - AssertionError: Lists differ: [['T1[86 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2746 chars]67]]] != [['T1[86 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2760 chars]67]]]
 
 First differing element 0:
@@ -815,5 +834,282 @@ First differing element 0:
      6560671,
      6560443,
      6559667]]]
+FAILED tests/test_info.py::TestInfo::test_info_gene - AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3077 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
+
+First differing element 0:
+['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3076 chars]462]]
+['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2302 chars]462]]
+
+- [['EnsMUSG00000000001.6',
+?                       ^
+
++ [['EnsMUSG00000000001.5',
+?                       ^
+
+    'Q9DC51',
+    '14679',
+    'mus_musculus',
+    'GRCm39',
+    'Gnai3',
+    'Gnai3',
+    ['Galphai3', 'Gnai-3', 'Hg1a'],
+    'Guanine nucleotide-binding protein G(i) subunit alpha-3',
+    'G protein subunit alpha i3 [Source:MGI Symbol;Acc:MGI:95773]',
+    'Heterotrimeric guanine nucleotide-binding proteins (G proteins) function as '
+    'transducers downstream of G protein-coupled receptors (GPCRs) in numerous '
+    'signaling cascades. The alpha chain contains the guanine nucleotide binding '
+    'site and alternates between an active, GTP-bound state and an inactive, '
+    'GDP-bound state. Signaling by an activated GPCR promotes GDP release and '
+    'GTP binding. The alpha subunit has a low GTPase activity that converts '
+    'bound GTP to GDP, thereby terminating the signal (By similarity). Both GDP '
+    'release and GTP hydrolysis are modulated by numerous regulatory proteins '
+    '(By similarity). Signaling is mediated via effector proteins, such as '
+    'adenylate cyclase. Inhibits adenylate cyclase activity, leading to '
+    'decreased intracellular cAMP levels (By similarity). Stimulates the '
+    'activity of receptor-regulated K(+) channels (By similarity). The active '
+    'GTP-bound form prevents the association of RGS14 with centrosomes and is '
+    'required for the translocation of RGS14 from the cytoplasm to the plasma '
+    'membrane. May play a role in cell division (By similarity). The active '
+    'GTP-bound form activates the calcium permeant TRPC5 ion channels (By '
+    'similarity)',
+    'Predicted to enable several functions, including G-protein '
+    'beta/gamma-subunit complex binding activity; GDP binding activity; and '
+    'GTPase activating protein binding activity. Predicted to be involved in '
+    'several processes, including G protein-coupled receptor signaling pathway; '
+    'positive regulation of metabolic process; and positive regulation of '
+    'vascular associated smooth muscle cell proliferation. Predicted to act '
+    'upstream of or within G protein-coupled receptor signaling pathway. Located '
+    'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
+    'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
+    'Alliance of Genome Resources, Apr 2025]',
+    ['Cytoplasm',
+     'Cell membrane',
+     'Cytoplasm, cytoskeleton, microtubule organizing center, centrosome'],
+    'Gene',
+    'protein_coding',
+-   'ENSMUST00000000001.6',
+?                       ^
+
++   'ENSMUST00000000001.5',
+?                       ^
+
+    '3',
+    -1,
+-   108014590,
+?           ^
+
++   108014596,
+?           ^
+
+-   108053469,
+?           ^
+
++   108053462,
+?           ^
+
+-   ['ENSMUST00000000001.6',
+?                        ^
+
++   ['ENSMUST00000000001.5'],
+?                        ^ +
+
+-    'ENSMUST00000535596.1',
+-    'ENSMUST00000535597.1',
+-    'ENSMUST00000535598.1',
+-    'ENSMUST00000535599.1',
+-    'ENSMUST00000535600.1',
+-    'ENSMUST00000535601.1',
+-    'ENSMUST00000535602.1',
+-    'ENSMUST00000535603.1',
+-    'ENSMUST00000558104.1'],
+-   ['protein_coding',
++   ['protein_coding'],
+?                    +
+
+-    'protein_coding',
+-    'protein_coding',
+-    'nonsense_mediated_decay',
+-    'protein_coding',
+-    'nonsense_mediated_decay',
+-    'nonsense_mediated_decay',
+-    'protein_coding',
+-    'nonsense_mediated_decay',
+-    'nonsense_mediated_decay'],
+-   ['Gnai3-201',
++   ['Gnai3-201'],
+?               +
+
++   [-1],
+-    'Gnai3-202',
+-    'Gnai3-203',
+-    'Gnai3-204',
+-    'Gnai3-205',
+-    'Gnai3-206',
+-    'Gnai3-207',
+-    'Gnai3-208',
+-    'Gnai3-209',
+-    'Gnai3-210'],
+-   [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+-   [108014596,
++   [108014596],
+?             +
+
+-    108014596,
+-    108014597,
+-    108014597,
+-    108014592,
+-    108014597,
+-    108014590,
+-    108014613,
+-    108014611,
+-    108014596],
+-   [108053469,
+-    108053469,
+-    108053469,
+-    108053453,
+-    108053469,
+-    108053443,
+-    108053435,
+-    108053469,
+-    108053426,
+-    108053462]]]
+?   ^
+
++   [108053462]]]
+?   ^
+FAILED tests/test_info.py::TestInfo::test_info_gene_list_non_model - AssertionError: Lists differ: [['EN[97 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[875 chars]84]]] != [['EN[97 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[879 chars]84]]]
+
+First differing element 0:
+['ENS[96 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[874 chars]684]]
+['ENS[96 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[878 chars]684]]
+
+  [['ENSMMUG00000021246.4',
+    'macaca_mulatta',
+    'Mmul_10',
+    'CCDC13',
+-   'coiled-coil domain containing 13 [Source:HGNC Symbol;Acc:HGNC:26358]',
++   'coiled-coil domain containing 13 [Source:UniProtKB Gene Name;Acc:F7D2F4]',
+    'Gene',
+    'protein_coding',
+    'ENSMMUT00000029894.4',
+    '2',
+    -1,
+    98646979,
+    98755023,
+    ['ENSMMUT00000029893.4',
+     'ENSMMUT00000053619.2',
+     'ENSMMUT00000104418.1',
+     'ENSMMUT00000087615.1',
+     'ENSMMUT00000103912.1',
+     'ENSMMUT00000086824.1',
+     'ENSMMUT00000029894.4',
+     'ENSMMUT00000104481.1',
+     'ENSMMUT00000090481.1',
+     'ENSMMUT00000026408.4'],
+    ['protein_coding',
+     'protein_coding',
+     'protein_coding',
+     'protein_coding',
+     'protein_coding',
+     'protein_coding',
+     'protein_coding',
+     'protein_coding',
+     'protein_coding',
+     'protein_coding'],
+    ['CCDC13-201',
+     'CCDC13-202',
+     'CCDC13-204',
+     'CCDC13-203',
+     'CCDC13-205',
+     'CCDC13-206',
+     'CCDC13-207',
+     'CCDC13-208',
+     'CCDC13-209',
+     'CCDC13-210'],
+    [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+    [98646979,
+     98646982,
+     98646984,
+     98646984,
+     98646985,
+     98662368,
+     98663259,
+     98690412,
+     98737900,
+     98738870],
+    [98655536,
+     98656674,
+     98688669,
+     98656968,
+     98656865,
+     98713982,
+     98746548,
+     98713982,
+     98755023,
+     98754684]]]
+FAILED tests/test_info.py::TestInfo::test_info_mix - AssertionError: Lists differ: [['EN[219 chars]174.15', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1453 chars]852]] != [['EN[219 chars]174.14', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1453 chars]852]]
+
+First differing element 1:
+['ENSG00000169174.15', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1452 chars]4852]
+['ENSG00000169174.14', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1452 chars]4852]
+
+  [['ENSTGUT00000027003.1',
+    'A0A674GVD2',
+    'taeniopygia_guttata',
+    'bTaeGut1_v1.p',
+    'FUNDC1',
+    'FUNDC1-201',
+    [],
+    '',
+    ['Mitochondrion outer membrane'],
+    'Transcript',
+    'protein_coding',
+    '1',
+    -1,
+    107513786,
+    107526965],
+-  ['ENSG00000169174.15',
+?                     ^
+
++  ['ENSG00000169174.14',
+?                     ^
+
+    'Q8NBP7',
+    'homo_sapiens',
+    'GRCh38',
+    'PCSK9',
+    'PCSK9',
+    ['NARC1'],
+    'Crucial player in the regulation of plasma cholesterol homeostasis. Binds '
+    'to low-density lipid receptor family members: low density lipoprotein '
+    'receptor (LDLR), very low density lipoprotein receptor (VLDLR), '
+    'apolipoprotein E receptor (LRP1/APOER) and apolipoprotein receptor 2 '
+    '(LRP8/APOER2), and promotes their degradation in intracellular acidic '
+    'compartments (PubMed:18039658). Acts via a non-proteolytic mechanism to '
+    'enhance the degradation of the hepatic LDLR through a clathrin '
+    'LDLRAP1/ARH-mediated pathway. May prevent the recycling of LDLR from '
+    'endosomes to the cell surface or direct it to lysosomes for degradation. '
+    'Can induce ubiquitination of LDLR leading to its subsequent degradation '
+    '(PubMed:17461796, PubMed:18197702, PubMed:18799458, PubMed:22074827). '
+    'Inhibits intracellular degradation of APOB via the autophagosome/lysosome '
+    'pathway in a LDLR-independent manner. Involved in the disposal of '
+    'non-acetylated intermediates of BACE1 in the early secretory pathway '
+    '(PubMed:18660751). Inhibits epithelial Na(+) channel (ENaC)-mediated Na(+) '
+    'absorption by reducing ENaC surface expression primarily by increasing its '
+    'proteasomal degradation. Regulates neuronal apoptosis via modulation of '
+    'LRP8/APOER2 levels and related anti-apoptotic signaling pathways',
+    ['Cytoplasm',
+     'Secreted',
+     'Endosome',
+     'Lysosome',
+     'Cell surface',
+     'Endoplasmic reticulum',
+     'Golgi apparatus'],
+    'Gene',
+    'protein_coding',
+    '1',
+    1,
+    55039445,
+    55064852]]
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======== 4 failed, 80 passed, 28 warnings, 1 error in 375.36s (0:06:15) ========
+======== 4 failed, 84 passed, 28 warnings, 1 error in 244.57s (0:04:04) ========
