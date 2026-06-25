@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-06-22T17:31:17Z
+Pytest results (Python 3.12) - 2026-06-25T16:44:45Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
@@ -697,16 +697,16 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-82.66s call     tests/test_blast.py::TestBlast::test_blast_nt
-34.15s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-19.79s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-13.11s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-13.03s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-5.98s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-4.92s call     tests/test_info.py::TestInfo::test_info_gene
-4.43s call     tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files
-3.43s call     tests/test_bgee.py::TestBgee::test_bgee_expression_multiple
-3.25s call     tests/test_cbio.py::TestCbioSearch::test_cbio_search
+135.18s call     tests/test_blast.py::TestBlast::test_blast_nt
+38.29s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+38.25s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+13.59s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+12.73s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+12.22s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+4.80s call     tests/test_archs4.py::TestArchs4::test_archs4_defaults
+4.34s call     tests/test_info.py::TestInfo::test_info_gene
+3.75s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+3.75s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
 FAILED tests/test_info.py::TestInfo::test_info_WB_transcript - AssertionError: Lists differ: [['T1[86 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2746 chars]67]]] != [['T1[86 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2760 chars]67]]]
@@ -1112,4 +1112,4 @@ First differing element 1:
     55039445,
     55064852]]
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======== 4 failed, 84 passed, 28 warnings, 1 error in 244.57s (0:04:04) ========
+======== 4 failed, 84 passed, 28 warnings, 1 error in 393.32s (0:06:33) ========
