@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-07-06T18:04:17Z
+Pytest results (Python 3.12) - 2026-07-09T17:47:09Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
@@ -56,7 +56,7 @@ tests/test_cbio.py::TestCbioSearch::test_cbio_search PASSED              [ 18%]
 tests/test_cbio.py::TestCbio::test_cbio_download PASSED                  [ 18%]
 tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files PASSED [ 18%]
 tests/test_cbio.py::TestCbio::test_error_cbio_download PASSED            [ 19%]
-tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata PASSED      [ 19%]
+tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata FAILED      [ 19%]
 tests/test_cellxgene.py::TestCellxgene::test_cellxgene_metadata PASSED   [ 20%]
 tests/test_compile.py::TestCompilerWindows::test_compiler_windows PASSED [ 20%]
 tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults ERROR     [ 20%]
@@ -96,7 +96,6 @@ tests/test_info.py::TestInfo::test_info_WB_transcript FAILED             [ 34%]
 tests/test_info.py::TestInfo::test_info_exon PASSED                      [ 34%]
 tests/test_info.py::TestInfo::test_info_gene FAILED                      [ 34%]
 tests/test_info.py::TestInfo::test_info_gene_list_non_model FAILED       [ 35%]
-tests/test_info.py::TestInfo::test_info_mix FAILED                       [ 35%]
 
 ==================================== ERRORS ====================================
 __________ ERROR at setup of TestCosmicWorkflow.test_cosmic_defaults ___________
@@ -150,6 +149,42 @@ INFO     gget.utils:gget_cosmic.py:185 Extracted tar file to /home/runner/work/g
 INFO     gget.utils:gget_cosmic.py:441 Creating modified mutations file for use with gget mutate...
 INFO     gget.utils:gget_cosmic.py:659 Modified mutations file for use with gget mutate created at /home/runner/work/gget/gget/example_GRCh37/CancerMutationCensus_AllData_v104_GRCh37_mutation_workflow.csv
 =================================== FAILURES ===================================
+______________________ TestCellxgene.test_cellxgene_adata ______________________
+
+self = <tests.test_cellxgene.TestCellxgene testMethod=test_cellxgene_adata>
+
+    def test_cellxgene_adata(self):
+        test = "test_cellxgene_adata"
+        expected_result = cellxgene_dict[test]["expected_result"]
+        result_to_test = cellxgene(**cellxgene_dict[test]["args"])
+    
+        # Convert resulting AnnData object to dictionary
+        result_to_test = repr_dict(result_to_test)
+    
+>       self.assertEqual(result_to_test, expected_result)
+E       AssertionError: {'n_o[179 chars]ature_id', 'feature_name', 'feature_length'], 'layers': [None]} != {'n_o[179 chars]ature_id', 'feature_name', 'feature_length']}
+E       - {'layers': [None],
+E       -  'n_obs': 3679,
+E       ? ^
+E       
+E       + {'n_obs': 3679,
+E       ? ^
+E       
+E          'n_vars': 3,
+E          'obs': ['dataset_id',
+E                  'assay',
+E                  'suspension_type',
+E                  'sex',
+E                  'tissue_general',
+E                  'tissue',
+E                  'cell_type',
+E                  'disease',
+E                  'is_primary_data'],
+E          'var': ['soma_joinid', 'feature_id', 'feature_name', 'feature_length']}
+
+tests/test_cellxgene.py:47: AssertionError
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_cellxgene.py:218 Fetching AnnData object from CZ CELLxGENE Discover. This might take a few minutes...
 _______________________ TestInfo.test_info_WB_transcript _______________________
 
 self = <tests.test_info.TestInfo testMethod=test_info_WB_transcript>
@@ -560,97 +595,6 @@ tests/from_json.py:78: AssertionError
 ------------------------------ Captured log call -------------------------------
 INFO     gget.utils:gget_info.py:98 We noticed that you passed a version number with your Ensembl ID.
 Please note that gget info will always return information linked to the latest Ensembl ID version (see 'ensembl_id').
-____________________________ TestInfo.test_info_mix ____________________________
-
-self = <tests.test_info.TestInfo testMethod=test_info_mix>
-
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
-    
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: Lists differ: [['EN[219 chars]174.15', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1453 chars]852]] != [['EN[219 chars]174.14', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1453 chars]852]]
-E       
-E       First differing element 1:
-E       ['ENSG00000169174.15', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1452 chars]4852]
-E       ['ENSG00000169174.14', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1452 chars]4852]
-E       
-E         [['ENSTGUT00000027003.1',
-E           'A0A674GVD2',
-E           'taeniopygia_guttata',
-E           'bTaeGut1_v1.p',
-E           'FUNDC1',
-E           'FUNDC1-201',
-E           [],
-E           '',
-E           ['Mitochondrion outer membrane'],
-E           'Transcript',
-E           'protein_coding',
-E           '1',
-E           -1,
-E           107513786,
-E           107526965],
-E       -  ['ENSG00000169174.15',
-E       ?                     ^
-E       
-E       +  ['ENSG00000169174.14',
-E       ?                     ^
-E       
-E           'Q8NBP7',
-E           'homo_sapiens',
-E           'GRCh38',
-E           'PCSK9',
-E           'PCSK9',
-E           ['NARC1'],
-E           'Crucial player in the regulation of plasma cholesterol homeostasis. Binds '
-E           'to low-density lipid receptor family members: low density lipoprotein '
-E           'receptor (LDLR), very low density lipoprotein receptor (VLDLR), '
-E           'apolipoprotein E receptor (LRP1/APOER) and apolipoprotein receptor 2 '
-E           '(LRP8/APOER2), and promotes their degradation in intracellular acidic '
-E           'compartments (PubMed:18039658). Acts via a non-proteolytic mechanism to '
-E           'enhance the degradation of the hepatic LDLR through a clathrin '
-E           'LDLRAP1/ARH-mediated pathway. May prevent the recycling of LDLR from '
-E           'endosomes to the cell surface or direct it to lysosomes for degradation. '
-E           'Can induce ubiquitination of LDLR leading to its subsequent degradation '
-E           '(PubMed:17461796, PubMed:18197702, PubMed:18799458, PubMed:22074827). '
-E           'Inhibits intracellular degradation of APOB via the autophagosome/lysosome '
-E           'pathway in a LDLR-independent manner. Involved in the disposal of '
-E           'non-acetylated intermediates of BACE1 in the early secretory pathway '
-E           '(PubMed:18660751). Inhibits epithelial Na(+) channel (ENaC)-mediated Na(+) '
-E           'absorption by reducing ENaC surface expression primarily by increasing its '
-E           'proteasomal degradation. Regulates neuronal apoptosis via modulation of '
-E           'LRP8/APOER2 levels and related anti-apoptotic signaling pathways',
-E           ['Cytoplasm',
-E            'Secreted',
-E            'Endosome',
-E            'Lysosome',
-E            'Cell surface',
-E            'Endoplasmic reticulum',
-E            'Golgi apparatus'],
-E           'Gene',
-E           'protein_coding',
-E           '1',
-E           1,
-E           55039445,
-E           55064852]]
-
-tests/from_json.py:78: AssertionError
------------------------------- Captured log call -------------------------------
-INFO     gget.utils:gget_info.py:98 We noticed that you passed a version number with your Ensembl ID.
-Please note that gget info will always return information linked to the latest Ensembl ID version (see 'ensembl_id').
-WARNING  gget.utils:utils.py:387 No reviewed UniProt results were found for ID ENSTGUT00000027003. Returning all unreviewed results.
 =============================== warnings summary ===============================
 tests/test_blast.py::TestBlast::test_blast_nt
   /home/runner/work/gget/gget/gget/gget_blast.py:327: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
@@ -697,18 +641,37 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-73.86s call     tests/test_blast.py::TestBlast::test_blast_nt
-48.97s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-30.84s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-26.63s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
-12.94s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-11.86s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-8.34s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-8.28s call     tests/test_info.py::TestInfo::test_info_WB_transcript
-7.68s call     tests/test_info.py::TestInfo::test_info_gene
-6.60s call     tests/test_info.py::TestInfo::test_info_mix
+81.63s call     tests/test_blast.py::TestBlast::test_blast_nt
+34.07s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+19.60s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+13.01s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+11.37s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+7.74s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
+4.94s call     tests/test_info.py::TestInfo::test_info_gene
+4.94s call     tests/test_cbio.py::TestCbio::test_cbio_download
+4.21s call     tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files
+4.04s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
+FAILED tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata - AssertionError: {'n_o[179 chars]ature_id', 'feature_name', 'feature_length'], 'layers': [None]} != {'n_o[179 chars]ature_id', 'feature_name', 'feature_length']}
+- {'layers': [None],
+-  'n_obs': 3679,
+? ^
+
++ {'n_obs': 3679,
+? ^
+
+   'n_vars': 3,
+   'obs': ['dataset_id',
+           'assay',
+           'suspension_type',
+           'sex',
+           'tissue_general',
+           'tissue',
+           'cell_type',
+           'disease',
+           'is_primary_data'],
+   'var': ['soma_joinid', 'feature_id', 'feature_name', 'feature_length']}
 FAILED tests/test_info.py::TestInfo::test_info_WB_transcript - AssertionError: Lists differ: [['T1[86 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2746 chars]67]]] != [['T1[86 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2760 chars]67]]]
 
 First differing element 0:
@@ -1047,69 +1010,5 @@ First differing element 0:
      98713982,
      98755023,
      98754684]]]
-FAILED tests/test_info.py::TestInfo::test_info_mix - AssertionError: Lists differ: [['EN[219 chars]174.15', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1453 chars]852]] != [['EN[219 chars]174.14', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1453 chars]852]]
-
-First differing element 1:
-['ENSG00000169174.15', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1452 chars]4852]
-['ENSG00000169174.14', 'Q8NBP7', 'homo_sapiens', 'GRCh38', '[1452 chars]4852]
-
-  [['ENSTGUT00000027003.1',
-    'A0A674GVD2',
-    'taeniopygia_guttata',
-    'bTaeGut1_v1.p',
-    'FUNDC1',
-    'FUNDC1-201',
-    [],
-    '',
-    ['Mitochondrion outer membrane'],
-    'Transcript',
-    'protein_coding',
-    '1',
-    -1,
-    107513786,
-    107526965],
--  ['ENSG00000169174.15',
-?                     ^
-
-+  ['ENSG00000169174.14',
-?                     ^
-
-    'Q8NBP7',
-    'homo_sapiens',
-    'GRCh38',
-    'PCSK9',
-    'PCSK9',
-    ['NARC1'],
-    'Crucial player in the regulation of plasma cholesterol homeostasis. Binds '
-    'to low-density lipid receptor family members: low density lipoprotein '
-    'receptor (LDLR), very low density lipoprotein receptor (VLDLR), '
-    'apolipoprotein E receptor (LRP1/APOER) and apolipoprotein receptor 2 '
-    '(LRP8/APOER2), and promotes their degradation in intracellular acidic '
-    'compartments (PubMed:18039658). Acts via a non-proteolytic mechanism to '
-    'enhance the degradation of the hepatic LDLR through a clathrin '
-    'LDLRAP1/ARH-mediated pathway. May prevent the recycling of LDLR from '
-    'endosomes to the cell surface or direct it to lysosomes for degradation. '
-    'Can induce ubiquitination of LDLR leading to its subsequent degradation '
-    '(PubMed:17461796, PubMed:18197702, PubMed:18799458, PubMed:22074827). '
-    'Inhibits intracellular degradation of APOB via the autophagosome/lysosome '
-    'pathway in a LDLR-independent manner. Involved in the disposal of '
-    'non-acetylated intermediates of BACE1 in the early secretory pathway '
-    '(PubMed:18660751). Inhibits epithelial Na(+) channel (ENaC)-mediated Na(+) '
-    'absorption by reducing ENaC surface expression primarily by increasing its '
-    'proteasomal degradation. Regulates neuronal apoptosis via modulation of '
-    'LRP8/APOER2 levels and related anti-apoptotic signaling pathways',
-    ['Cytoplasm',
-     'Secreted',
-     'Endosome',
-     'Lysosome',
-     'Cell surface',
-     'Endoplasmic reticulum',
-     'Golgi apparatus'],
-    'Gene',
-    'protein_coding',
-    '1',
-    1,
-    55039445,
-    55064852]]
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======== 4 failed, 84 passed, 28 warnings, 1 error in 312.96s (0:05:12) ========
+======== 4 failed, 83 passed, 28 warnings, 1 error in 348.67s (0:05:48) ========
