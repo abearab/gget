@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-07-09T17:47:09Z
+Pytest results (Python 3.12) - 2026-07-13T17:48:30Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
@@ -641,16 +641,16 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-81.63s call     tests/test_blast.py::TestBlast::test_blast_nt
-34.07s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-19.60s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-13.01s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-11.37s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-7.74s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-4.94s call     tests/test_info.py::TestInfo::test_info_gene
-4.94s call     tests/test_cbio.py::TestCbio::test_cbio_download
-4.21s call     tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files
-4.04s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+74.31s call     tests/test_blast.py::TestBlast::test_blast_nt
+45.63s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+36.97s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+15.83s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+12.74s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+12.56s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+7.50s call     tests/test_info.py::TestInfo::test_info_gene
+4.20s call     tests/test_info.py::TestInfo::test_info_exon
+3.47s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_metadata
+3.20s call     tests/test_cbio.py::TestCbioSearch::test_cbio_search
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
 FAILED tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata - AssertionError: {'n_o[179 chars]ature_id', 'feature_name', 'feature_length'], 'layers': [None]} != {'n_o[179 chars]ature_id', 'feature_name', 'feature_length']}
@@ -1011,4 +1011,4 @@ First differing element 0:
      98755023,
      98754684]]]
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======== 4 failed, 83 passed, 28 warnings, 1 error in 348.67s (0:05:48) ========
+======== 4 failed, 83 passed, 28 warnings, 1 error in 270.75s (0:04:30) ========
