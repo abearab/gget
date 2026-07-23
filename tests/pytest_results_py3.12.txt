@@ -1,11 +1,11 @@
-Pytest results (Python 3.12) - 2026-07-20T17:19:46Z
+Pytest results (Python 3.12) - 2026-07-23T17:09:18Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/gget/gget
 configfile: pyproject.toml
-plugins: fast-array-utils-1.5, zarr-3.2.1, cov-7.1.0
+plugins: zarr-3.2.1, cov-7.1.0, fast-array-utils-1.5
 collecting ... collected 250 items
 
 tests/test_8cube.py::TestSpecificity::test_specificity_basic PASSED      [  0%]
@@ -19,7 +19,7 @@ tests/test_archs4.py::TestArchs4::test_archs4_bad_which PASSED           [  3%]
 tests/test_archs4.py::TestArchs4::test_archs4_defaults PASSED            [  3%]
 tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl PASSED  [  4%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue PASSED              [  4%]
-tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl PASSED      [  4%]
+tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl FAILED      [  4%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_json PASSED         [  5%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_mouse PASSED        [  5%]
 tests/test_bgee.py::TestBgee::test_bgee_expression PASSED                [  6%]
@@ -70,7 +70,7 @@ tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq PASSED         [ 23%]
 tests/test_elm.py::TestELM::test_elm_uniprot_id_in_elm PASSED            [ 24%]
 tests/test_elm.py::TestELM::test_elm_uniprot_id_new PASSED               [ 24%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_background PASSED       [ 24%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl PASSED [ 25%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl FAILED [ 25%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_background PASSED   [ 25%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_background_list PASSED [ 26%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_database_shortcut PASSED [ 26%]
@@ -78,24 +78,7 @@ tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_gene PASSED         [ 26%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_species PASSED      [ 27%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_celltypes PASSED        [ 27%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_diseases_drugs PASSED   [ 28%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids PASSED      [ 28%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_fish PASSED             [ 28%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_fly PASSED              [ 29%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_json PASSED             [ 29%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_kinase_interactions PASSED [ 30%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_mouse_is_human PASSED   [ 30%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_none PASSED             [ 30%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_ontology PASSED         [ 31%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_pathway PASSED          [ 31%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_plot PASSED             [ 32%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_transcription PASSED    [ 32%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_worm PASSED             [ 32%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_yeast PASSED            [ 33%]
-tests/test_gpt.py::TestGpt::test_gpt PASSED                              [ 33%]
-tests/test_info.py::TestInfo::test_info_WB_transcript FAILED             [ 34%]
-tests/test_info.py::TestInfo::test_info_exon PASSED                      [ 34%]
-tests/test_info.py::TestInfo::test_info_gene FAILED                      [ 34%]
-tests/test_info.py::TestInfo::test_info_gene_list_non_model FAILED       [ 35%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids FAILED      [ 28%]
 
 ==================================== ERRORS ====================================
 __________ ERROR at setup of TestCosmicWorkflow.test_cosmic_defaults ___________
@@ -149,6 +132,224 @@ INFO     gget.utils:gget_cosmic.py:185 Extracted tar file to /home/runner/work/g
 INFO     gget.utils:gget_cosmic.py:441 Creating modified mutations file for use with gget mutate...
 INFO     gget.utils:gget_cosmic.py:659 Modified mutations file for use with gget mutate created at /home/runner/work/gget/gget/example_GRCh37/CancerMutationCensus_AllData_v104_GRCh37_mutation_workflow.csv
 =================================== FAILURES ===================================
+____________________ TestArchs4.test_archs4_tissue_ensembl _____________________
+
+self = <tests.test_archs4.TestArchs4 testMethod=test_archs4_tissue_ensembl>
+
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+>       result_to_test = do_call(func, td[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/from_json.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+func = <function archs4 at 0x7f7da42ec680>
+args = {'gene': 'ENSG00000106443', 'ensembl': True, 'which': 'tissue', 'species': 'mouse'}
+
+    def do_call(func, args):
+        if isinstance(args, dict):
+>           return func(**args)
+                   ^^^^^^^^^^^^
+
+tests/from_json.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene = 'ENSG00000106443', ensembl = True, which = 'tissue', gene_count = 100
+species = 'mouse', json = False, save = False, verbose = True
+
+    def archs4(
+        gene,
+        ensembl=False,
+        which="correlation",
+        gene_count=100,
+        species="human",
+        json=False,
+        save=False,
+        verbose=True,
+    ):
+        """
+        Find the most correlated genes or the tissue expression atlas
+        of a gene of interest using data from the human and mouse RNA-seq
+        database ARCHS4 (https://maayanlab.cloud/archs4/).
+    
+        Args:
+        - gene          Short name (Entrez gene symbol) of gene of interest (str), e.g. 'STAT4'.
+                        Set 'ensembl=True' to input an Ensembl gene ID, e.g. ENSG00000138378.
+        - ensembl       Define as 'True' if 'gene' is an Ensembl gene ID. (Default: False)
+        - which         'correlation' (default) or 'tissue'.
+                        - 'correlation' returns a gene correlation table that contains the
+                        100 most correlated genes to the gene of interest. The Pearson
+                        correlation is calculated over all samples and tissues in ARCHS4.
+                        - 'tissue' returns a tissue expression atlas calculated from
+                        human or mouse samples (as defined by 'species') in ARCHS4.
+        - gene_count    Number of correlated genes to return (default: 100).
+                        (Only for gene correlation.)
+        - species       'human' (default) or 'mouse'.
+                        (Only for tissue expression atlas.)
+        - json          If True, returns results in json format instead of data frame. Default: False.
+        - save          True/False whether to save the results in the local directory.
+        - verbose        True/False whether to print progress information. Default True.
+    
+        Returns a data frame with the requested results.
+        """
+        # Check if 'which' argument is valid
+        whichs = ["correlation", "tissue"]
+        if which not in whichs:
+            raise ValueError(
+                f"'which' argument specified as {which}. Expected one of: {', '.join(whichs)}"
+            )
+    
+        # Check if 'species' argument is valid
+        sps = ["human", "mouse"]
+        if species not in sps:
+            raise ValueError(
+                f"'species' argument specified as {species}. Expected one of: {', '.join(sps)}"
+            )
+    
+        ## Transform Ensembl IDs to gene symbols
+        if ensembl:
+            # Remove version number if passed
+            gene = gene.split(".")[0]
+    
+>           info_df = info(gene, verbose=False, pdb=False, ncbi=False, uniprot=False)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_archs4.py:71: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ens_ids = ['ENSG00000106443'], wrap_text = False, ncbi = False, uniprot = False
+pdb = False, json = False, verbose = False, save = False, expand = False
+ensembl_only = False
+
+    def info(
+        ens_ids,
+        wrap_text=False,
+        ncbi=True,
+        uniprot=True,
+        pdb=False,
+        json=False,
+        verbose=True,
+        save=False,
+        expand=False,
+        ensembl_only=False,
+    ):
+        """
+        Fetch gene and transcript metadata using Ensembl IDs.
+    
+        Args:
+        - ens_ids       One or more Ensembl IDs to look up (string or list of strings).
+                        Also supports WormBase and Flybase IDs.
+        - wrap_text     If True, displays data frame with wrapped text for easy reading. Default: False.
+        - ncbi          If False, does not return data from NCBI. Default: True.
+        - uniprot       If False, does not return data from UniProt. Default: True.
+        - pdb           If True, also returns PDB IDs (might increase run time). Default: False.
+        - json          If True, returns results in json/dictionary format instead of data frame. Default: False.
+        - verbose       True/False whether to print progress information. Default True.
+        - save          True/False wether to save csv with query results in current working directory. Default: False.
+    
+        Returns a data frame containing the requested information.
+    
+        Deprecated arguments:
+        - expand        (gget info now always returns all of the available information)
+        - ensembl_only  If True, only returns results from Ensembl (excludes PDB, UniProt, and NCBI results). Default: False.
+        """
+        # Handle deprecated arguments
+        if expand:
+            if verbose:
+                logger.warning(
+                    "'expand' argument deprecated! gget info now always returns all of the available information."
+                )
+        if ensembl_only:
+            if verbose:
+                logger.warning(
+                    "'ensembl_only' argument deprecated! Please use arguments 'ncbi=False' and 'uniprot=False'."
+                )
+    
+        # Set synonyms found by each database initially to none
+        ncbi_synonyms = None
+        df_uniprot = None
+        df_pdb = pd.DataFrame()
+        df_ncbi = pd.DataFrame()
+    
+        # Rename pdb, uniprot, ncbi arguments
+        fetch_ncbi = ncbi
+        fetch_uniprot = uniprot
+        fetch_pdb = pdb
+    
+        # Define Ensembl REST API server
+        server = ENSEMBL_REST_API
+        # Define type of returned content from REST
+        content_type = "application/json"
+    
+        ## Clean up Ensembl IDs
+        # If single Ensembl ID passed as string, convert to list
+        if type(ens_ids) == str:
+            ens_ids = [ens_ids]
+        # Remove Ensembl ID version if passed
+        ens_ids_clean = []
+        temp = 0
+        for ensembl_ID in ens_ids:
+            # But only for Ensembl ID (and not for flybase/wormbase IDs)
+            if ensembl_ID.startswith("ENS"):
+                ens_ids_clean.append(ensembl_ID.split(".")[0])
+    
+                if "." in ensembl_ID and temp == 0:
+                    if verbose is True:
+                        logger.info(
+                            "We noticed that you passed a version number with your Ensembl ID.\n"
+                            "Please note that gget info will always return information linked to the latest Ensembl ID version (see 'ensembl_id')."
+                        )
+                    temp = +1
+    
+            else:
+                ens_ids_clean.append(ensembl_ID)
+    
+        # Remove duplicates in the Ensembl ID list without changing their order
+        ens_ids_clean = sorted(set(ens_ids_clean), key=ens_ids_clean.index)
+        # Create second clean list of Ensembl IDs which will not include IDs that were not found
+        ens_ids_clean_2 = ens_ids_clean.copy()
+    
+        # Initiate dictionary to save results for all IDs in
+        master_dict = {}
+    
+        # Query REST APIs from https://rest.ensembl.org/
+        endpoint = "lookup/id/"
+        query = {"ids": ens_ids_clean, "expand": True}
+    
+>       results_dict = post_query(server, endpoint, query)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_info.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+server = 'http://rest.ensembl.org/', endpoint = 'lookup/id/'
+query = {'ids': ['ENSG00000106443'], 'expand': True}
+
+    def post_query(server, endpoint, query):
+        """
+        Function to perform a POST API query.
+    
+        :param server:  Server to query .
+        :param endpoint: Server endpoint
+        :param query:   Query that is passed to server.
+    
+        :return: server output
+        """
+    
+        r = requests.post(
+            server + endpoint, json=query, headers={"Content-Type": "application/json"}
+        )
+    
+        if not r.ok:
+>           raise RuntimeError(
+                f"{server} returned error status code {r.status_code}. "
+                "Please double-check arguments and try again.\n"
+            )
+E           RuntimeError: http://rest.ensembl.org/ returned error status code 500. Please double-check arguments and try again.
+
+gget/utils.py:695: RuntimeError
 ______________________ TestCellxgene.test_cellxgene_adata ______________________
 
 self = <tests.test_cellxgene.TestCellxgene testMethod=test_cellxgene_adata>
@@ -185,416 +386,744 @@ E          'var': ['soma_joinid', 'feature_id', 'feature_name', 'feature_length'
 tests/test_cellxgene.py:47: AssertionError
 ------------------------------ Captured log call -------------------------------
 INFO     gget.utils:gget_cellxgene.py:218 Fetching AnnData object from CZ CELLxGENE Discover. This might take a few minutes...
-_______________________ TestInfo.test_info_WB_transcript _______________________
+_________________ TestEnrichr.test_enrichr_background_ensembl __________________
 
-self = <tests.test_info.TestInfo testMethod=test_info_WB_transcript>
+self = <tests.test_enrichr.TestEnrichr testMethod=test_enrichr_background_ensembl>
 
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
+    def test_enrichr_background_ensembl(self):
+        test = "test_enrichr_background_ensembl"
+        expected_result = enrichr_dict[test]["expected_result"]
+>       result_to_test = enrichr(**enrichr_dict[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_enrichr.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+genes = ['ENSG00000120053', 'ENSG00000129596', 'ENSG00000163631', 'ENSG00000167701', 'ENSG00000244067']
+database = 'PanglaoDB_Augmented_2021', species = 'human'
+background_list = ['ENSG00000120053', 'ENSG00000129596', 'ENSG00000131910', 'ENSG00000139631', 'ENSG00000163631', 'ENSG00000167701', ...]
+background = False, ensembl = True, ensembl_bkg = True, plot = False
+figsize = (10, 10), ax = None, kegg_out = None, kegg_rank = 1, json = False
+save = False, verbose = True
+
+    def enrichr(
+        genes,
+        database,
+        species="human",
+        background_list=None,
+        background=False,
+        ensembl=False,
+        ensembl_bkg=False,
+        plot=False,
+        figsize=(10, 10),
+        ax=None,
+        kegg_out=None,
+        kegg_rank=1,
+        json=False,
+        save=False,
+        verbose=True,
+    ):
+        """
+        Perform an enrichment analysis on a list of genes using Enrichr (https://maayanlab.cloud/Enrichr/).
     
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
+        Args:
+        - genes             List of Entrez gene symbols to perform enrichment analysis on, passed as a list of strings, e.g. ['PHF14', 'RBM3', 'MSL1', 'PHF21A'].
+                            Set 'ensembl = True' to input a list of Ensembl gene IDs, e.g. ['ENSG00000106443', 'ENSG00000102317', 'ENSG00000188895'].
+        - database          Database to use as reference for the enrichment analysis.
+                            Supported shortcuts (and their default database), ONLY SUPPORTED FOR HUMAN/MOUSE SPECIES (other species must specify the full database name):
+                            'pathway' (KEGG_2021_Human)
+                            'transcription' (ChEA_2016)
+                            'ontology' (GO_Biological_Process_2021)
+                            'diseases_drugs' (GWAS_Catalog_2019)
+                            'celltypes' (PanglaoDB_Augmented_2021)
+                            'kinase_interactions' (KEA_2015)
+                            or any database listed under Gene-set Library at: https://maayanlab.cloud/Enrichr/#libraries or the species-specific libraries listed below
+        - species           Enrichr species database to query. Options:
+                            'human' (default) [H. sapiens] - https://maayanlab.cloud/Enrichr/#libraries
+                            'mouse' [M. musculus] - equivalent to 'human'
+                            'fly' [D. melanogaster] - https://maayanlab.cloud/FlyEnrichr/#stats
+                            'yeast' [S. cerevisiae] - https://maayanlab.cloud/YeastEnrichr/#stats
+                            'worm' [C. elegans] - https://maayanlab.cloud/WormEnrichr/#stats
+                            'fish' [D. rerio] - https://maayanlab.cloud/FishEnrichr/#stats
+        - background_list   List of gene names/Ensembl IDs to be used as background genes. ONLY SUPPORTED FOR HUMAN/MOUSE SPECIES (Default: None)
+        - background        If True, use set of > 20,000 default background genes listed here: https://github.com/pachterlab/gget/blob/main/gget/constants/enrichr_bkg_genes.txt.
+                            ONLY SUPPORTED FOR HUMAN/MOUSE SPECIES (Default: False)
+        - ensembl           Define as 'True' if 'genes' is a list of Ensembl gene IDs. (Default: False)
+        - ensembl_bkg       Define as 'True' if 'background_list' is a list of Ensembl gene IDs. (Default: False)
+        - plot              True/False whether to provide a graphical overview of the first 15 results. (Default: False)
+        - figsize           (width, height) of plot in inches. (Default: (10,10))
+        - ax                Pass a matplotlib axes object for further customization of the plot. (Default: None)
+        - kegg_out          Path to file to save the highlighted KEGG pathway image, e.g. path/to/folder/kegg_pathway.png. (Default: None)
+        - kegg_rank         Candidate pathway rank to be plotted in KEGG pathway image. (Default: 1)
+        - json              If True, returns results in json format instead of data frame. (Default: False)
+        - save              True/False whether to save the results in the local directory. (Default: False)
+        - verbose           True/False whether to print progress information. (Default: True)
     
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: Lists differ: [['T1[86 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2746 chars]67]]] != [['T1[86 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2760 chars]67]]]
-E       
-E       First differing element 0:
-E       ['T14[85 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2745 chars]667]]
-E       ['T14[85 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2759 chars]667]]
-E       
-E         [['T14E8.4.1',
-E           ['Q5WRS0', 'Q6RYS9'],
-E           'caenorhabditis_elegans',
-E           'WBcel235',
-E           ['aaim-1', 'dop-3'],
-E       +   'aaim-1-201',
-E           [],
-E           'WBGene00043981',
-E           ['Protein aaim-1', 'Dopamine receptor 3'],
-E           ['(Microbial infection) Promotes infection by microsporidian pathogens such '
-E            'as N.parisii in the early larval stages of development (PubMed:34994689). '
-E            'Involved in ensuring the proper orientation and location of the spore '
-E            'proteins of N.parisii during intestinal cell invasion (PubMed:34994689) '
-E            'Plays a role in promoting resistance to bacterial pathogens such as '
-E            'P.aeruginosa by inhibiting bacterial intestinal colonization',
-E       -    'G protein-coupled receptor which binds to the neurotransmitter dopamine '
-E       ?      ^       ^
-E       
-E       +    'G-protein coupled receptor which binds to the neurotransmitter dopamine '
-E       ?      ^       ^
-E       
-E       -    'with high affinity leading to the activation of an associated G protein '
-E       ?                                                                    ^
-E       
-E       +    'with high affinity leading to the activation of an associated G-protein '
-E       ?                                                                    ^
-E       
-E            'and downstream signaling pathways (PubMed:15378064, PubMed:16001968). '
-E       -    'Couples to G proteins to inhibit adenylate cyclase (AC) activity and cAMP '
-E       ?                 ^
-E       
-E       +    'Couples to G-proteins to inhibit adenylate cyclase (AC) activity and cAMP '
-E       ?                 ^
-E       
-E            'production (PubMed:15378064, PubMed:16001968). Antagonizes the D1-like '
-E            'dopamine receptor dop-1 to negatively regulate the rate of locomotion '
-E            '(PubMed:15378064). Negatively regulates locomotion through the activation '
-E            'of goa-1 subunit proteins which inactivates the unc-77/nca-1 and nca-2 '
-E            'ion-channels in the command interneurons (PubMed:28968387). Inhibits '
-E            'early-stage swimming by modulating the unc-77/nca-1 and nca-2 ion channels '
-E            'of premotor interneurons (PubMed:33796839). In GABAergic, RIC, and SIA '
-E            'neurons, antagonizes the function of dop-1 to play a role in behavioral '
-E            'plasticity and regulate the decision-making process when conflicting '
-E            'alternatives are present (PubMed:25536037). Antagonizes octopamine '
-E            'signaling in response to food by promoting the dopamine-mediated '
-E            'suppression of crh-1/CREB1 transcription factor activation in cholinergic '
-E            'SIA neurons (PubMed:19609300). This is most likely in association with the '
-E       -    'G(o)-alpha G protein subunit goa-1 (PubMed:19609300). Promotes male mating '
-E       ?                 ^
-E       
-E       +    'G(o)-alpha G-protein subunit goa-1 (PubMed:19609300). Promotes male mating '
-E       ?                 ^
-E       
-E            'behavior by antagonizing acetylcholine signaling to control the protrusion '
-E            'of copulatory spicules from the tail of males during hermaphrodite vulval '
-E            'location (PubMed:23166505). Under mitochondria stress, plays a role in '
-E            'bacterial preference, resulting in learned avoidance behavior '
-E            '(PubMed:35074444)'],
-E           ['Secreted', 'Cell membrane'],
-E           'Transcript',
-E           'protein_coding',
-E           'X',
-E           -1,
-E           6559466,
-E           6562428,
-E           ['T14E8.4.1.e1',
-E            'T14E8.4.1.e2',
-E            'T14E8.4.1.e3',
-E            'T14E8.4.1.e4',
-E            'T14E8.4.1.e5',
-E            'T14E8.4.1.e6',
-E            'T14E8.4.1.e7',
-E            'T14E8.4.1.e8',
-E            'T14E8.4.1.e9'],
-E           [6562330,
-E            6562225,
-E            6562110,
-E            6561817,
-E            6561252,
-E            6560727,
-E            6560492,
-E            6560197,
-E            6559466],
-E           [6562428,
-E            6562286,
-E            6562183,
-E            6562059,
-E            6561378,
-E            6561206,
-E            6560671,
-E            6560443,
-E            6559667],
-E           ['T14E8.4.1.e1',
-E            'T14E8.4.1.e2',
-E            'T14E8.4.1.e3',
-E            'T14E8.4.1.e4',
-E            'T14E8.4.1.e5',
-E            'T14E8.4.1.e6',
-E            'T14E8.4.1.e7',
-E            'T14E8.4.1.e8',
-E            'T14E8.4.1.e9'],
-E           [6562330,
-E            6562225,
-E            6562110,
-E            6561817,
-E            6561252,
-E            6560727,
-E            6560492,
-E            6560197,
-E            6559466],
-E           [6562428,
-E            6562286,
-E            6562183,
-E            6562059,
-E            6561378,
-E            6561206,
-E            6560671,
-E            6560443,
-E            6559667]]]
-
-tests/from_json.py:78: AssertionError
-___________________________ TestInfo.test_info_gene ____________________________
-
-self = <tests.test_info.TestInfo testMethod=test_info_gene>
-
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
+        Returns a data frame with the Enrichr results.
+        """
     
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
+        if species not in ["human", "mouse", "fly", "yeast", "worm", "fish"]:
+            raise ValueError(
+                f"Argument 'species' must be one of 'human', 'mouse', 'fly', 'yeast', 'worm', or 'fish'."
+            )
     
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3077 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
-E       
-E       First differing element 0:
-E       ['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3076 chars]462]]
-E       ['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2302 chars]462]]
-E       
-E       - [['EnsMUSG00000000001.6',
-E       ?                       ^
-E       
-E       + [['EnsMUSG00000000001.5',
-E       ?                       ^
-E       
-E           'Q9DC51',
-E           '14679',
-E           'mus_musculus',
-E           'GRCm39',
-E           'Gnai3',
-E           'Gnai3',
-E           ['Galphai3', 'Gnai-3', 'Hg1a'],
-E           'Guanine nucleotide-binding protein G(i) subunit alpha-3',
-E           'G protein subunit alpha i3 [Source:MGI Symbol;Acc:MGI:95773]',
-E           'Heterotrimeric guanine nucleotide-binding proteins (G proteins) function as '
-E           'transducers downstream of G protein-coupled receptors (GPCRs) in numerous '
-E           'signaling cascades. The alpha chain contains the guanine nucleotide binding '
-E           'site and alternates between an active, GTP-bound state and an inactive, '
-E           'GDP-bound state. Signaling by an activated GPCR promotes GDP release and '
-E           'GTP binding. The alpha subunit has a low GTPase activity that converts '
-E           'bound GTP to GDP, thereby terminating the signal (By similarity). Both GDP '
-E           'release and GTP hydrolysis are modulated by numerous regulatory proteins '
-E           '(By similarity). Signaling is mediated via effector proteins, such as '
-E           'adenylate cyclase. Inhibits adenylate cyclase activity, leading to '
-E           'decreased intracellular cAMP levels (By similarity). Stimulates the '
-E           'activity of receptor-regulated K(+) channels (By similarity). The active '
-E           'GTP-bound form prevents the association of RGS14 with centrosomes and is '
-E           'required for the translocation of RGS14 from the cytoplasm to the plasma '
-E           'membrane. May play a role in cell division (By similarity). The active '
-E           'GTP-bound form activates the calcium permeant TRPC5 ion channels (By '
-E           'similarity)',
-E           'Predicted to enable several functions, including G-protein '
-E           'beta/gamma-subunit complex binding activity; GDP binding activity; and '
-E           'GTPase activating protein binding activity. Predicted to be involved in '
-E           'several processes, including G protein-coupled receptor signaling pathway; '
-E           'positive regulation of metabolic process; and positive regulation of '
-E           'vascular associated smooth muscle cell proliferation. Predicted to act '
-E           'upstream of or within G protein-coupled receptor signaling pathway. Located '
-E           'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
-E           'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
-E           'Alliance of Genome Resources, Apr 2025]',
-E           ['Cytoplasm',
-E            'Cell membrane',
-E            'Cytoplasm, cytoskeleton, microtubule organizing center, centrosome'],
-E           'Gene',
-E           'protein_coding',
-E       -   'ENSMUST00000000001.6',
-E       ?                       ^
-E       
-E       +   'ENSMUST00000000001.5',
-E       ?                       ^
-E       
-E           '3',
-E           -1,
-E       -   108014590,
-E       ?           ^
-E       
-E       +   108014596,
-E       ?           ^
-E       
-E       -   108053469,
-E       ?           ^
-E       
-E       +   108053462,
-E       ?           ^
-E       
-E       -   ['ENSMUST00000000001.6',
-E       ?                        ^
-E       
-E       +   ['ENSMUST00000000001.5'],
-E       ?                        ^ +
-E       
-E       -    'ENSMUST00000535596.1',
-E       -    'ENSMUST00000535597.1',
-E       -    'ENSMUST00000535598.1',
-E       -    'ENSMUST00000535599.1',
-E       -    'ENSMUST00000535600.1',
-E       -    'ENSMUST00000535601.1',
-E       -    'ENSMUST00000535602.1',
-E       -    'ENSMUST00000535603.1',
-E       -    'ENSMUST00000558104.1'],
-E       -   ['protein_coding',
-E       +   ['protein_coding'],
-E       ?                    +
-E       
-E       -    'protein_coding',
-E       -    'protein_coding',
-E       -    'nonsense_mediated_decay',
-E       -    'protein_coding',
-E       -    'nonsense_mediated_decay',
-E       -    'nonsense_mediated_decay',
-E       -    'protein_coding',
-E       -    'nonsense_mediated_decay',
-E       -    'nonsense_mediated_decay'],
-E       -   ['Gnai3-201',
-E       +   ['Gnai3-201'],
-E       ?               +
-E       
-E       +   [-1],
-E       -    'Gnai3-202',
-E       -    'Gnai3-203',
-E       -    'Gnai3-204',
-E       -    'Gnai3-205',
-E       -    'Gnai3-206',
-E       -    'Gnai3-207',
-E       -    'Gnai3-208',
-E       -    'Gnai3-209',
-E       -    'Gnai3-210'],
-E       -   [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-E       -   [108014596,
-E       +   [108014596],
-E       ?             +
-E       
-E       -    108014596,
-E       -    108014597,
-E       -    108014597,
-E       -    108014592,
-E       -    108014597,
-E       -    108014590,
-E       -    108014613,
-E       -    108014611,
-E       -    108014596],
-E       -   [108053469,
-E       -    108053469,
-E       -    108053469,
-E       -    108053453,
-E       -    108053469,
-E       -    108053443,
-E       -    108053435,
-E       -    108053469,
-E       -    108053426,
-E       -    108053462]]]
-E       ?   ^
-E       
-E       +   [108053462]]]
-E       ?   ^
-
-tests/from_json.py:78: AssertionError
-____________________ TestInfo.test_info_gene_list_non_model ____________________
-
-self = <tests.test_info.TestInfo testMethod=test_info_gene_list_non_model>
-
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
+        if species == "mouse":
+            species = "human"
     
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
+        species_enrichr = f"{species.capitalize()}Enrichr"
+        if species == "human":
+            species_enrichr = "Enrichr"
     
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: Lists differ: [['EN[97 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[875 chars]84]]] != [['EN[97 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[879 chars]84]]]
-E       
-E       First differing element 0:
-E       ['ENS[96 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[874 chars]684]]
-E       ['ENS[96 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[878 chars]684]]
-E       
-E         [['ENSMMUG00000021246.4',
-E           'macaca_mulatta',
-E           'Mmul_10',
-E           'CCDC13',
-E       -   'coiled-coil domain containing 13 [Source:HGNC Symbol;Acc:HGNC:26358]',
-E       +   'coiled-coil domain containing 13 [Source:UniProtKB Gene Name;Acc:F7D2F4]',
-E           'Gene',
-E           'protein_coding',
-E           'ENSMMUT00000029894.4',
-E           '2',
-E           -1,
-E           98646979,
-E           98755023,
-E           ['ENSMMUT00000029893.4',
-E            'ENSMMUT00000053619.2',
-E            'ENSMMUT00000104418.1',
-E            'ENSMMUT00000087615.1',
-E            'ENSMMUT00000103912.1',
-E            'ENSMMUT00000086824.1',
-E            'ENSMMUT00000029894.4',
-E            'ENSMMUT00000104481.1',
-E            'ENSMMUT00000090481.1',
-E            'ENSMMUT00000026408.4'],
-E           ['protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding'],
-E           ['CCDC13-201',
-E            'CCDC13-202',
-E            'CCDC13-204',
-E            'CCDC13-203',
-E            'CCDC13-205',
-E            'CCDC13-206',
-E            'CCDC13-207',
-E            'CCDC13-208',
-E            'CCDC13-209',
-E            'CCDC13-210'],
-E           [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-E           [98646979,
-E            98646982,
-E            98646984,
-E            98646984,
-E            98646985,
-E            98662368,
-E            98663259,
-E            98690412,
-E            98737900,
-E            98738870],
-E           [98655536,
-E            98656674,
-E            98688669,
-E            98656968,
-E            98656865,
-E            98713982,
-E            98746548,
-E            98713982,
-E            98755023,
-E            98754684]]]
+        if species != "human":
+            if database in [
+                "pathway",
+                "transcription",
+                "ontology",
+                "diseases_drugs",
+                "celltypes",
+                "kinase_interactions",
+            ]:
+                raise ValueError(
+                    f"Database '{database}' is not supported for species '{species}'."
+                    f" Please select a database from the species-specific libraries listed at:"
+                    f" https://maayanlab.cloud/{species_enrichr}/#stats."
+                )
+    
+            if background:
+                raise ValueError(
+                    f"Background genes are only supported for species 'human' and 'mouse', not for species '{species}'."
+                    f" Please set 'background=False' or leave it unspecified."
+                )
+    
+            if background_list:
+                raise ValueError(
+                    f"Background genes are only supported for species 'human' and 'mouse', not for species '{species}'."
+                    f" Please do not provide a value for 'background_list'."
+                )
+    
+        # Define database
+        # All available libraries: https://maayanlab.cloud/Enrichr/#libraries
+        if species == "human":
+            db_message = f"""
+            Please note that there might be a more appropriate database for your application.
+            Go to https://maayanlab.cloud/{species_enrichr}/#libraries for a full list of supported databases.
+            """
+        else:
+            db_message = f"""
+            Please note that there might be a more appropriate database for your application.
+            Go to https://maayanlab.cloud/{species_enrichr}/#stats for a full list of supported databases.
+            """
+        if not isinstance(background, bool):
+            raise ValueError(
+                f"Argument`background` must be a boolean True/False. If you are adding a background list, use the argument `background_list` instead."
+            )
+    
+        # Handle database shortcuts
+        if database == "pathway":
+            database = "KEGG_2021_Human"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "transcription":
+            database = "ChEA_2016"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "ontology":
+            database = "GO_Biological_Process_2021"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "diseases_drugs":
+            database = "GWAS_Catalog_2019"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "celltypes":
+            database = "PanglaoDB_Augmented_2021"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "kinase_interactions":
+            database = "KEA_2015"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        else:
+            database = database
+            if verbose:
+                logger.info(f"Performing Enrichr analysis using database {database}.")
+    
+        # To generate a KEGG pathway image, confirm that the database is a KEGG database and pykegg is installed
+        if kegg_out:
+            if not database.startswith("KEGG"):
+                logger.error(
+                    "Please specify a KEGG database when generating a KEGG pathway image."
+                )
+                return
+            try:
+                import pykegg
+            except ImportError:
+                logger.error(
+                    "Please install `pykegg` to generate a KEGG pathway image. Pykegg can be installed using pip: 'pip install pykegg'"
+                )
+                return
+    
+        # If single gene passed as string, convert to list
+        if isinstance(genes, str):
+            genes = [genes]
+    
+        ## Transform Ensembl IDs to gene symbols
+        if ensembl:
+            if verbose:
+                logger.info("Getting gene symbols from Ensembl IDs.")
+    
+>           genes_v2 = ensembl_to_gene_names(genes)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-tests/from_json.py:78: AssertionError
+gget/gget_enrichr.py:248: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ensembl_ids = ['ENSG00000120053', 'ENSG00000129596', 'ENSG00000163631', 'ENSG00000167701', 'ENSG00000244067']
+
+    def ensembl_to_gene_names(ensembl_ids):
+        """
+        Function to fetch gene names from a list of Ensembl IDs using gget info.
+        """
+        genes_v2 = []
+    
+        # Remove version number if passed
+        ensembl_ids = [gene_id.split(".")[0] for gene_id in ensembl_ids]
+    
+>       info_df = info(ensembl_ids, pdb=False, ncbi=False, uniprot=False, verbose=False)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_enrichr.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ens_ids = ['ENSG00000120053', 'ENSG00000129596', 'ENSG00000163631', 'ENSG00000167701', 'ENSG00000244067']
+wrap_text = False, ncbi = False, uniprot = False, pdb = False, json = False
+verbose = False, save = False, expand = False, ensembl_only = False
+
+    def info(
+        ens_ids,
+        wrap_text=False,
+        ncbi=True,
+        uniprot=True,
+        pdb=False,
+        json=False,
+        verbose=True,
+        save=False,
+        expand=False,
+        ensembl_only=False,
+    ):
+        """
+        Fetch gene and transcript metadata using Ensembl IDs.
+    
+        Args:
+        - ens_ids       One or more Ensembl IDs to look up (string or list of strings).
+                        Also supports WormBase and Flybase IDs.
+        - wrap_text     If True, displays data frame with wrapped text for easy reading. Default: False.
+        - ncbi          If False, does not return data from NCBI. Default: True.
+        - uniprot       If False, does not return data from UniProt. Default: True.
+        - pdb           If True, also returns PDB IDs (might increase run time). Default: False.
+        - json          If True, returns results in json/dictionary format instead of data frame. Default: False.
+        - verbose       True/False whether to print progress information. Default True.
+        - save          True/False wether to save csv with query results in current working directory. Default: False.
+    
+        Returns a data frame containing the requested information.
+    
+        Deprecated arguments:
+        - expand        (gget info now always returns all of the available information)
+        - ensembl_only  If True, only returns results from Ensembl (excludes PDB, UniProt, and NCBI results). Default: False.
+        """
+        # Handle deprecated arguments
+        if expand:
+            if verbose:
+                logger.warning(
+                    "'expand' argument deprecated! gget info now always returns all of the available information."
+                )
+        if ensembl_only:
+            if verbose:
+                logger.warning(
+                    "'ensembl_only' argument deprecated! Please use arguments 'ncbi=False' and 'uniprot=False'."
+                )
+    
+        # Set synonyms found by each database initially to none
+        ncbi_synonyms = None
+        df_uniprot = None
+        df_pdb = pd.DataFrame()
+        df_ncbi = pd.DataFrame()
+    
+        # Rename pdb, uniprot, ncbi arguments
+        fetch_ncbi = ncbi
+        fetch_uniprot = uniprot
+        fetch_pdb = pdb
+    
+        # Define Ensembl REST API server
+        server = ENSEMBL_REST_API
+        # Define type of returned content from REST
+        content_type = "application/json"
+    
+        ## Clean up Ensembl IDs
+        # If single Ensembl ID passed as string, convert to list
+        if type(ens_ids) == str:
+            ens_ids = [ens_ids]
+        # Remove Ensembl ID version if passed
+        ens_ids_clean = []
+        temp = 0
+        for ensembl_ID in ens_ids:
+            # But only for Ensembl ID (and not for flybase/wormbase IDs)
+            if ensembl_ID.startswith("ENS"):
+                ens_ids_clean.append(ensembl_ID.split(".")[0])
+    
+                if "." in ensembl_ID and temp == 0:
+                    if verbose is True:
+                        logger.info(
+                            "We noticed that you passed a version number with your Ensembl ID.\n"
+                            "Please note that gget info will always return information linked to the latest Ensembl ID version (see 'ensembl_id')."
+                        )
+                    temp = +1
+    
+            else:
+                ens_ids_clean.append(ensembl_ID)
+    
+        # Remove duplicates in the Ensembl ID list without changing their order
+        ens_ids_clean = sorted(set(ens_ids_clean), key=ens_ids_clean.index)
+        # Create second clean list of Ensembl IDs which will not include IDs that were not found
+        ens_ids_clean_2 = ens_ids_clean.copy()
+    
+        # Initiate dictionary to save results for all IDs in
+        master_dict = {}
+    
+        # Query REST APIs from https://rest.ensembl.org/
+        endpoint = "lookup/id/"
+        query = {"ids": ens_ids_clean, "expand": True}
+    
+>       results_dict = post_query(server, endpoint, query)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_info.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+server = 'http://rest.ensembl.org/', endpoint = 'lookup/id/'
+query = {'ids': ['ENSG00000120053', 'ENSG00000129596', 'ENSG00000163631', 'ENSG00000167701', 'ENSG00000244067'], 'expand': True}
+
+    def post_query(server, endpoint, query):
+        """
+        Function to perform a POST API query.
+    
+        :param server:  Server to query .
+        :param endpoint: Server endpoint
+        :param query:   Query that is passed to server.
+    
+        :return: server output
+        """
+    
+        r = requests.post(
+            server + endpoint, json=query, headers={"Content-Type": "application/json"}
+        )
+    
+        if not r.ok:
+>           raise RuntimeError(
+                f"{server} returned error status code {r.status_code}. "
+                "Please double-check arguments and try again.\n"
+            )
+E           RuntimeError: http://rest.ensembl.org/ returned error status code 500. Please double-check arguments and try again.
+
+gget/utils.py:695: RuntimeError
 ------------------------------ Captured log call -------------------------------
-INFO     gget.utils:gget_info.py:98 We noticed that you passed a version number with your Ensembl ID.
-Please note that gget info will always return information linked to the latest Ensembl ID version (see 'ensembl_id').
+INFO     gget.utils:gget_enrichr.py:208 Performing Enrichr analysis using database PanglaoDB_Augmented_2021. 
+        Please note that there might be a more appropriate database for your application. 
+        Go to https://maayanlab.cloud/Enrichr/#libraries for a full list of supported databases.
+        
+INFO     gget.utils:gget_enrichr.py:246 Getting gene symbols from Ensembl IDs.
+_____________________ TestEnrichr.test_enrichr_ensembl_ids _____________________
+
+self = <tests.test_enrichr.TestEnrichr testMethod=test_enrichr_ensembl_ids>
+
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+>       result_to_test = do_call(func, td[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/from_json.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+func = <function enrichr at 0x7f7da5f376a0>
+args = {'genes': ['ENSG00000106443.2', 'ENSG00000102317', 'ENSG00000188895.4', 'ENSG00000135365'], 'database': 'ontology', 'ensembl': True}
+
+    def do_call(func, args):
+        if isinstance(args, dict):
+>           return func(**args)
+                   ^^^^^^^^^^^^
+
+tests/from_json.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+genes = ['ENSG00000106443.2', 'ENSG00000102317', 'ENSG00000188895.4', 'ENSG00000135365']
+database = 'GO_Biological_Process_2021', species = 'human'
+background_list = None, background = False, ensembl = True, ensembl_bkg = False
+plot = False, figsize = (10, 10), ax = None, kegg_out = None, kegg_rank = 1
+json = False, save = False, verbose = True
+
+    def enrichr(
+        genes,
+        database,
+        species="human",
+        background_list=None,
+        background=False,
+        ensembl=False,
+        ensembl_bkg=False,
+        plot=False,
+        figsize=(10, 10),
+        ax=None,
+        kegg_out=None,
+        kegg_rank=1,
+        json=False,
+        save=False,
+        verbose=True,
+    ):
+        """
+        Perform an enrichment analysis on a list of genes using Enrichr (https://maayanlab.cloud/Enrichr/).
+    
+        Args:
+        - genes             List of Entrez gene symbols to perform enrichment analysis on, passed as a list of strings, e.g. ['PHF14', 'RBM3', 'MSL1', 'PHF21A'].
+                            Set 'ensembl = True' to input a list of Ensembl gene IDs, e.g. ['ENSG00000106443', 'ENSG00000102317', 'ENSG00000188895'].
+        - database          Database to use as reference for the enrichment analysis.
+                            Supported shortcuts (and their default database), ONLY SUPPORTED FOR HUMAN/MOUSE SPECIES (other species must specify the full database name):
+                            'pathway' (KEGG_2021_Human)
+                            'transcription' (ChEA_2016)
+                            'ontology' (GO_Biological_Process_2021)
+                            'diseases_drugs' (GWAS_Catalog_2019)
+                            'celltypes' (PanglaoDB_Augmented_2021)
+                            'kinase_interactions' (KEA_2015)
+                            or any database listed under Gene-set Library at: https://maayanlab.cloud/Enrichr/#libraries or the species-specific libraries listed below
+        - species           Enrichr species database to query. Options:
+                            'human' (default) [H. sapiens] - https://maayanlab.cloud/Enrichr/#libraries
+                            'mouse' [M. musculus] - equivalent to 'human'
+                            'fly' [D. melanogaster] - https://maayanlab.cloud/FlyEnrichr/#stats
+                            'yeast' [S. cerevisiae] - https://maayanlab.cloud/YeastEnrichr/#stats
+                            'worm' [C. elegans] - https://maayanlab.cloud/WormEnrichr/#stats
+                            'fish' [D. rerio] - https://maayanlab.cloud/FishEnrichr/#stats
+        - background_list   List of gene names/Ensembl IDs to be used as background genes. ONLY SUPPORTED FOR HUMAN/MOUSE SPECIES (Default: None)
+        - background        If True, use set of > 20,000 default background genes listed here: https://github.com/pachterlab/gget/blob/main/gget/constants/enrichr_bkg_genes.txt.
+                            ONLY SUPPORTED FOR HUMAN/MOUSE SPECIES (Default: False)
+        - ensembl           Define as 'True' if 'genes' is a list of Ensembl gene IDs. (Default: False)
+        - ensembl_bkg       Define as 'True' if 'background_list' is a list of Ensembl gene IDs. (Default: False)
+        - plot              True/False whether to provide a graphical overview of the first 15 results. (Default: False)
+        - figsize           (width, height) of plot in inches. (Default: (10,10))
+        - ax                Pass a matplotlib axes object for further customization of the plot. (Default: None)
+        - kegg_out          Path to file to save the highlighted KEGG pathway image, e.g. path/to/folder/kegg_pathway.png. (Default: None)
+        - kegg_rank         Candidate pathway rank to be plotted in KEGG pathway image. (Default: 1)
+        - json              If True, returns results in json format instead of data frame. (Default: False)
+        - save              True/False whether to save the results in the local directory. (Default: False)
+        - verbose           True/False whether to print progress information. (Default: True)
+    
+        Returns a data frame with the Enrichr results.
+        """
+    
+        if species not in ["human", "mouse", "fly", "yeast", "worm", "fish"]:
+            raise ValueError(
+                f"Argument 'species' must be one of 'human', 'mouse', 'fly', 'yeast', 'worm', or 'fish'."
+            )
+    
+        if species == "mouse":
+            species = "human"
+    
+        species_enrichr = f"{species.capitalize()}Enrichr"
+        if species == "human":
+            species_enrichr = "Enrichr"
+    
+        if species != "human":
+            if database in [
+                "pathway",
+                "transcription",
+                "ontology",
+                "diseases_drugs",
+                "celltypes",
+                "kinase_interactions",
+            ]:
+                raise ValueError(
+                    f"Database '{database}' is not supported for species '{species}'."
+                    f" Please select a database from the species-specific libraries listed at:"
+                    f" https://maayanlab.cloud/{species_enrichr}/#stats."
+                )
+    
+            if background:
+                raise ValueError(
+                    f"Background genes are only supported for species 'human' and 'mouse', not for species '{species}'."
+                    f" Please set 'background=False' or leave it unspecified."
+                )
+    
+            if background_list:
+                raise ValueError(
+                    f"Background genes are only supported for species 'human' and 'mouse', not for species '{species}'."
+                    f" Please do not provide a value for 'background_list'."
+                )
+    
+        # Define database
+        # All available libraries: https://maayanlab.cloud/Enrichr/#libraries
+        if species == "human":
+            db_message = f"""
+            Please note that there might be a more appropriate database for your application.
+            Go to https://maayanlab.cloud/{species_enrichr}/#libraries for a full list of supported databases.
+            """
+        else:
+            db_message = f"""
+            Please note that there might be a more appropriate database for your application.
+            Go to https://maayanlab.cloud/{species_enrichr}/#stats for a full list of supported databases.
+            """
+        if not isinstance(background, bool):
+            raise ValueError(
+                f"Argument`background` must be a boolean True/False. If you are adding a background list, use the argument `background_list` instead."
+            )
+    
+        # Handle database shortcuts
+        if database == "pathway":
+            database = "KEGG_2021_Human"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "transcription":
+            database = "ChEA_2016"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "ontology":
+            database = "GO_Biological_Process_2021"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "diseases_drugs":
+            database = "GWAS_Catalog_2019"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "celltypes":
+            database = "PanglaoDB_Augmented_2021"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "kinase_interactions":
+            database = "KEA_2015"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        else:
+            database = database
+            if verbose:
+                logger.info(f"Performing Enrichr analysis using database {database}.")
+    
+        # To generate a KEGG pathway image, confirm that the database is a KEGG database and pykegg is installed
+        if kegg_out:
+            if not database.startswith("KEGG"):
+                logger.error(
+                    "Please specify a KEGG database when generating a KEGG pathway image."
+                )
+                return
+            try:
+                import pykegg
+            except ImportError:
+                logger.error(
+                    "Please install `pykegg` to generate a KEGG pathway image. Pykegg can be installed using pip: 'pip install pykegg'"
+                )
+                return
+    
+        # If single gene passed as string, convert to list
+        if isinstance(genes, str):
+            genes = [genes]
+    
+        ## Transform Ensembl IDs to gene symbols
+        if ensembl:
+            if verbose:
+                logger.info("Getting gene symbols from Ensembl IDs.")
+    
+>           genes_v2 = ensembl_to_gene_names(genes)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_enrichr.py:248: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ensembl_ids = ['ENSG00000106443', 'ENSG00000102317', 'ENSG00000188895', 'ENSG00000135365']
+
+    def ensembl_to_gene_names(ensembl_ids):
+        """
+        Function to fetch gene names from a list of Ensembl IDs using gget info.
+        """
+        genes_v2 = []
+    
+        # Remove version number if passed
+        ensembl_ids = [gene_id.split(".")[0] for gene_id in ensembl_ids]
+    
+>       info_df = info(ensembl_ids, pdb=False, ncbi=False, uniprot=False, verbose=False)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_enrichr.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ens_ids = ['ENSG00000106443', 'ENSG00000102317', 'ENSG00000188895', 'ENSG00000135365']
+wrap_text = False, ncbi = False, uniprot = False, pdb = False, json = False
+verbose = False, save = False, expand = False, ensembl_only = False
+
+    def info(
+        ens_ids,
+        wrap_text=False,
+        ncbi=True,
+        uniprot=True,
+        pdb=False,
+        json=False,
+        verbose=True,
+        save=False,
+        expand=False,
+        ensembl_only=False,
+    ):
+        """
+        Fetch gene and transcript metadata using Ensembl IDs.
+    
+        Args:
+        - ens_ids       One or more Ensembl IDs to look up (string or list of strings).
+                        Also supports WormBase and Flybase IDs.
+        - wrap_text     If True, displays data frame with wrapped text for easy reading. Default: False.
+        - ncbi          If False, does not return data from NCBI. Default: True.
+        - uniprot       If False, does not return data from UniProt. Default: True.
+        - pdb           If True, also returns PDB IDs (might increase run time). Default: False.
+        - json          If True, returns results in json/dictionary format instead of data frame. Default: False.
+        - verbose       True/False whether to print progress information. Default True.
+        - save          True/False wether to save csv with query results in current working directory. Default: False.
+    
+        Returns a data frame containing the requested information.
+    
+        Deprecated arguments:
+        - expand        (gget info now always returns all of the available information)
+        - ensembl_only  If True, only returns results from Ensembl (excludes PDB, UniProt, and NCBI results). Default: False.
+        """
+        # Handle deprecated arguments
+        if expand:
+            if verbose:
+                logger.warning(
+                    "'expand' argument deprecated! gget info now always returns all of the available information."
+                )
+        if ensembl_only:
+            if verbose:
+                logger.warning(
+                    "'ensembl_only' argument deprecated! Please use arguments 'ncbi=False' and 'uniprot=False'."
+                )
+    
+        # Set synonyms found by each database initially to none
+        ncbi_synonyms = None
+        df_uniprot = None
+        df_pdb = pd.DataFrame()
+        df_ncbi = pd.DataFrame()
+    
+        # Rename pdb, uniprot, ncbi arguments
+        fetch_ncbi = ncbi
+        fetch_uniprot = uniprot
+        fetch_pdb = pdb
+    
+        # Define Ensembl REST API server
+        server = ENSEMBL_REST_API
+        # Define type of returned content from REST
+        content_type = "application/json"
+    
+        ## Clean up Ensembl IDs
+        # If single Ensembl ID passed as string, convert to list
+        if type(ens_ids) == str:
+            ens_ids = [ens_ids]
+        # Remove Ensembl ID version if passed
+        ens_ids_clean = []
+        temp = 0
+        for ensembl_ID in ens_ids:
+            # But only for Ensembl ID (and not for flybase/wormbase IDs)
+            if ensembl_ID.startswith("ENS"):
+                ens_ids_clean.append(ensembl_ID.split(".")[0])
+    
+                if "." in ensembl_ID and temp == 0:
+                    if verbose is True:
+                        logger.info(
+                            "We noticed that you passed a version number with your Ensembl ID.\n"
+                            "Please note that gget info will always return information linked to the latest Ensembl ID version (see 'ensembl_id')."
+                        )
+                    temp = +1
+    
+            else:
+                ens_ids_clean.append(ensembl_ID)
+    
+        # Remove duplicates in the Ensembl ID list without changing their order
+        ens_ids_clean = sorted(set(ens_ids_clean), key=ens_ids_clean.index)
+        # Create second clean list of Ensembl IDs which will not include IDs that were not found
+        ens_ids_clean_2 = ens_ids_clean.copy()
+    
+        # Initiate dictionary to save results for all IDs in
+        master_dict = {}
+    
+        # Query REST APIs from https://rest.ensembl.org/
+        endpoint = "lookup/id/"
+        query = {"ids": ens_ids_clean, "expand": True}
+    
+>       results_dict = post_query(server, endpoint, query)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_info.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+server = 'http://rest.ensembl.org/', endpoint = 'lookup/id/'
+query = {'ids': ['ENSG00000106443', 'ENSG00000102317', 'ENSG00000188895', 'ENSG00000135365'], 'expand': True}
+
+    def post_query(server, endpoint, query):
+        """
+        Function to perform a POST API query.
+    
+        :param server:  Server to query .
+        :param endpoint: Server endpoint
+        :param query:   Query that is passed to server.
+    
+        :return: server output
+        """
+    
+        r = requests.post(
+            server + endpoint, json=query, headers={"Content-Type": "application/json"}
+        )
+    
+        if not r.ok:
+>           raise RuntimeError(
+                f"{server} returned error status code {r.status_code}. "
+                "Please double-check arguments and try again.\n"
+            )
+E           RuntimeError: http://rest.ensembl.org/ returned error status code 500. Please double-check arguments and try again.
+
+gget/utils.py:695: RuntimeError
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_enrichr.py:194 Performing Enrichr analysis using database GO_Biological_Process_2021. 
+        Please note that there might be a more appropriate database for your application. 
+        Go to https://maayanlab.cloud/Enrichr/#libraries for a full list of supported databases.
+        
+INFO     gget.utils:gget_enrichr.py:246 Getting gene symbols from Ensembl IDs.
 =============================== warnings summary ===============================
 tests/test_blast.py::TestBlast::test_blast_nt
   /home/runner/work/gget/gget/gget/gget_blast.py:327: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
@@ -641,18 +1170,19 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-197.16s call     tests/test_blast.py::TestBlast::test_blast_nt
-40.53s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-40.28s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-31.01s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-13.53s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-13.43s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-13.29s call     tests/test_info.py::TestInfo::test_info_gene
-12.90s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
-12.64s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
-11.24s call     tests/test_info.py::TestInfo::test_info_exon
+873.50s call     tests/test_blast.py::TestBlast::test_blast_nt
+33.07s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+24.35s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+17.86s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+13.49s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+12.85s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+3.94s call     tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files
+3.58s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_ensembl
+3.27s call     tests/test_archs4.py::TestArchs4::test_archs4_bad_gene
+3.22s call     tests/test_cbio.py::TestCbioSearch::test_cbio_search
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
+FAILED tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl - RuntimeError: http://rest.ensembl.org/ returned error status code 500. Please double-check arguments and try again.
 FAILED tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata - AssertionError: {'n_o[179 chars]ature_id', 'feature_name', 'feature_length'], 'layers': [None]} != {'n_o[179 chars]ature_id', 'feature_name', 'feature_length']}
 - {'layers': [None],
 -  'n_obs': 3679,
@@ -672,343 +1202,7 @@ FAILED tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata - AssertionE
            'disease',
            'is_primary_data'],
    'var': ['soma_joinid', 'feature_id', 'feature_name', 'feature_length']}
-FAILED tests/test_info.py::TestInfo::test_info_WB_transcript - AssertionError: Lists differ: [['T1[86 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2746 chars]67]]] != [['T1[86 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2760 chars]67]]]
-
-First differing element 0:
-['T14[85 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2745 chars]667]]
-['T14[85 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2759 chars]667]]
-
-  [['T14E8.4.1',
-    ['Q5WRS0', 'Q6RYS9'],
-    'caenorhabditis_elegans',
-    'WBcel235',
-    ['aaim-1', 'dop-3'],
-+   'aaim-1-201',
-    [],
-    'WBGene00043981',
-    ['Protein aaim-1', 'Dopamine receptor 3'],
-    ['(Microbial infection) Promotes infection by microsporidian pathogens such '
-     'as N.parisii in the early larval stages of development (PubMed:34994689). '
-     'Involved in ensuring the proper orientation and location of the spore '
-     'proteins of N.parisii during intestinal cell invasion (PubMed:34994689) '
-     'Plays a role in promoting resistance to bacterial pathogens such as '
-     'P.aeruginosa by inhibiting bacterial intestinal colonization',
--    'G protein-coupled receptor which binds to the neurotransmitter dopamine '
-?      ^       ^
-
-+    'G-protein coupled receptor which binds to the neurotransmitter dopamine '
-?      ^       ^
-
--    'with high affinity leading to the activation of an associated G protein '
-?                                                                    ^
-
-+    'with high affinity leading to the activation of an associated G-protein '
-?                                                                    ^
-
-     'and downstream signaling pathways (PubMed:15378064, PubMed:16001968). '
--    'Couples to G proteins to inhibit adenylate cyclase (AC) activity and cAMP '
-?                 ^
-
-+    'Couples to G-proteins to inhibit adenylate cyclase (AC) activity and cAMP '
-?                 ^
-
-     'production (PubMed:15378064, PubMed:16001968). Antagonizes the D1-like '
-     'dopamine receptor dop-1 to negatively regulate the rate of locomotion '
-     '(PubMed:15378064). Negatively regulates locomotion through the activation '
-     'of goa-1 subunit proteins which inactivates the unc-77/nca-1 and nca-2 '
-     'ion-channels in the command interneurons (PubMed:28968387). Inhibits '
-     'early-stage swimming by modulating the unc-77/nca-1 and nca-2 ion channels '
-     'of premotor interneurons (PubMed:33796839). In GABAergic, RIC, and SIA '
-     'neurons, antagonizes the function of dop-1 to play a role in behavioral '
-     'plasticity and regulate the decision-making process when conflicting '
-     'alternatives are present (PubMed:25536037). Antagonizes octopamine '
-     'signaling in response to food by promoting the dopamine-mediated '
-     'suppression of crh-1/CREB1 transcription factor activation in cholinergic '
-     'SIA neurons (PubMed:19609300). This is most likely in association with the '
--    'G(o)-alpha G protein subunit goa-1 (PubMed:19609300). Promotes male mating '
-?                 ^
-
-+    'G(o)-alpha G-protein subunit goa-1 (PubMed:19609300). Promotes male mating '
-?                 ^
-
-     'behavior by antagonizing acetylcholine signaling to control the protrusion '
-     'of copulatory spicules from the tail of males during hermaphrodite vulval '
-     'location (PubMed:23166505). Under mitochondria stress, plays a role in '
-     'bacterial preference, resulting in learned avoidance behavior '
-     '(PubMed:35074444)'],
-    ['Secreted', 'Cell membrane'],
-    'Transcript',
-    'protein_coding',
-    'X',
-    -1,
-    6559466,
-    6562428,
-    ['T14E8.4.1.e1',
-     'T14E8.4.1.e2',
-     'T14E8.4.1.e3',
-     'T14E8.4.1.e4',
-     'T14E8.4.1.e5',
-     'T14E8.4.1.e6',
-     'T14E8.4.1.e7',
-     'T14E8.4.1.e8',
-     'T14E8.4.1.e9'],
-    [6562330,
-     6562225,
-     6562110,
-     6561817,
-     6561252,
-     6560727,
-     6560492,
-     6560197,
-     6559466],
-    [6562428,
-     6562286,
-     6562183,
-     6562059,
-     6561378,
-     6561206,
-     6560671,
-     6560443,
-     6559667],
-    ['T14E8.4.1.e1',
-     'T14E8.4.1.e2',
-     'T14E8.4.1.e3',
-     'T14E8.4.1.e4',
-     'T14E8.4.1.e5',
-     'T14E8.4.1.e6',
-     'T14E8.4.1.e7',
-     'T14E8.4.1.e8',
-     'T14E8.4.1.e9'],
-    [6562330,
-     6562225,
-     6562110,
-     6561817,
-     6561252,
-     6560727,
-     6560492,
-     6560197,
-     6559466],
-    [6562428,
-     6562286,
-     6562183,
-     6562059,
-     6561378,
-     6561206,
-     6560671,
-     6560443,
-     6559667]]]
-FAILED tests/test_info.py::TestInfo::test_info_gene - AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3077 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
-
-First differing element 0:
-['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3076 chars]462]]
-['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2302 chars]462]]
-
-- [['EnsMUSG00000000001.6',
-?                       ^
-
-+ [['EnsMUSG00000000001.5',
-?                       ^
-
-    'Q9DC51',
-    '14679',
-    'mus_musculus',
-    'GRCm39',
-    'Gnai3',
-    'Gnai3',
-    ['Galphai3', 'Gnai-3', 'Hg1a'],
-    'Guanine nucleotide-binding protein G(i) subunit alpha-3',
-    'G protein subunit alpha i3 [Source:MGI Symbol;Acc:MGI:95773]',
-    'Heterotrimeric guanine nucleotide-binding proteins (G proteins) function as '
-    'transducers downstream of G protein-coupled receptors (GPCRs) in numerous '
-    'signaling cascades. The alpha chain contains the guanine nucleotide binding '
-    'site and alternates between an active, GTP-bound state and an inactive, '
-    'GDP-bound state. Signaling by an activated GPCR promotes GDP release and '
-    'GTP binding. The alpha subunit has a low GTPase activity that converts '
-    'bound GTP to GDP, thereby terminating the signal (By similarity). Both GDP '
-    'release and GTP hydrolysis are modulated by numerous regulatory proteins '
-    '(By similarity). Signaling is mediated via effector proteins, such as '
-    'adenylate cyclase. Inhibits adenylate cyclase activity, leading to '
-    'decreased intracellular cAMP levels (By similarity). Stimulates the '
-    'activity of receptor-regulated K(+) channels (By similarity). The active '
-    'GTP-bound form prevents the association of RGS14 with centrosomes and is '
-    'required for the translocation of RGS14 from the cytoplasm to the plasma '
-    'membrane. May play a role in cell division (By similarity). The active '
-    'GTP-bound form activates the calcium permeant TRPC5 ion channels (By '
-    'similarity)',
-    'Predicted to enable several functions, including G-protein '
-    'beta/gamma-subunit complex binding activity; GDP binding activity; and '
-    'GTPase activating protein binding activity. Predicted to be involved in '
-    'several processes, including G protein-coupled receptor signaling pathway; '
-    'positive regulation of metabolic process; and positive regulation of '
-    'vascular associated smooth muscle cell proliferation. Predicted to act '
-    'upstream of or within G protein-coupled receptor signaling pathway. Located '
-    'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
-    'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
-    'Alliance of Genome Resources, Apr 2025]',
-    ['Cytoplasm',
-     'Cell membrane',
-     'Cytoplasm, cytoskeleton, microtubule organizing center, centrosome'],
-    'Gene',
-    'protein_coding',
--   'ENSMUST00000000001.6',
-?                       ^
-
-+   'ENSMUST00000000001.5',
-?                       ^
-
-    '3',
-    -1,
--   108014590,
-?           ^
-
-+   108014596,
-?           ^
-
--   108053469,
-?           ^
-
-+   108053462,
-?           ^
-
--   ['ENSMUST00000000001.6',
-?                        ^
-
-+   ['ENSMUST00000000001.5'],
-?                        ^ +
-
--    'ENSMUST00000535596.1',
--    'ENSMUST00000535597.1',
--    'ENSMUST00000535598.1',
--    'ENSMUST00000535599.1',
--    'ENSMUST00000535600.1',
--    'ENSMUST00000535601.1',
--    'ENSMUST00000535602.1',
--    'ENSMUST00000535603.1',
--    'ENSMUST00000558104.1'],
--   ['protein_coding',
-+   ['protein_coding'],
-?                    +
-
--    'protein_coding',
--    'protein_coding',
--    'nonsense_mediated_decay',
--    'protein_coding',
--    'nonsense_mediated_decay',
--    'nonsense_mediated_decay',
--    'protein_coding',
--    'nonsense_mediated_decay',
--    'nonsense_mediated_decay'],
--   ['Gnai3-201',
-+   ['Gnai3-201'],
-?               +
-
-+   [-1],
--    'Gnai3-202',
--    'Gnai3-203',
--    'Gnai3-204',
--    'Gnai3-205',
--    'Gnai3-206',
--    'Gnai3-207',
--    'Gnai3-208',
--    'Gnai3-209',
--    'Gnai3-210'],
--   [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
--   [108014596,
-+   [108014596],
-?             +
-
--    108014596,
--    108014597,
--    108014597,
--    108014592,
--    108014597,
--    108014590,
--    108014613,
--    108014611,
--    108014596],
--   [108053469,
--    108053469,
--    108053469,
--    108053453,
--    108053469,
--    108053443,
--    108053435,
--    108053469,
--    108053426,
--    108053462]]]
-?   ^
-
-+   [108053462]]]
-?   ^
-FAILED tests/test_info.py::TestInfo::test_info_gene_list_non_model - AssertionError: Lists differ: [['EN[97 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[875 chars]84]]] != [['EN[97 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[879 chars]84]]]
-
-First differing element 0:
-['ENS[96 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[874 chars]684]]
-['ENS[96 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[878 chars]684]]
-
-  [['ENSMMUG00000021246.4',
-    'macaca_mulatta',
-    'Mmul_10',
-    'CCDC13',
--   'coiled-coil domain containing 13 [Source:HGNC Symbol;Acc:HGNC:26358]',
-+   'coiled-coil domain containing 13 [Source:UniProtKB Gene Name;Acc:F7D2F4]',
-    'Gene',
-    'protein_coding',
-    'ENSMMUT00000029894.4',
-    '2',
-    -1,
-    98646979,
-    98755023,
-    ['ENSMMUT00000029893.4',
-     'ENSMMUT00000053619.2',
-     'ENSMMUT00000104418.1',
-     'ENSMMUT00000087615.1',
-     'ENSMMUT00000103912.1',
-     'ENSMMUT00000086824.1',
-     'ENSMMUT00000029894.4',
-     'ENSMMUT00000104481.1',
-     'ENSMMUT00000090481.1',
-     'ENSMMUT00000026408.4'],
-    ['protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding'],
-    ['CCDC13-201',
-     'CCDC13-202',
-     'CCDC13-204',
-     'CCDC13-203',
-     'CCDC13-205',
-     'CCDC13-206',
-     'CCDC13-207',
-     'CCDC13-208',
-     'CCDC13-209',
-     'CCDC13-210'],
-    [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-    [98646979,
-     98646982,
-     98646984,
-     98646984,
-     98646985,
-     98662368,
-     98663259,
-     98690412,
-     98737900,
-     98738870],
-    [98655536,
-     98656674,
-     98688669,
-     98656968,
-     98656865,
-     98713982,
-     98746548,
-     98713982,
-     98755023,
-     98754684]]]
+FAILED tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl - RuntimeError: http://rest.ensembl.org/ returned error status code 500. Please double-check arguments and try again.
+FAILED tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids - RuntimeError: http://rest.ensembl.org/ returned error status code 500. Please double-check arguments and try again.
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======== 4 failed, 83 passed, 28 warnings, 1 error in 461.07s (0:07:41) ========
+======= 4 failed, 66 passed, 28 warnings, 1 error in 1027.40s (0:17:07) ========
