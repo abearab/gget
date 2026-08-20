@@ -1,7 +1,7 @@
-Pytest results (Python 3.12) - 2026-08-17T16:14:49Z
+Pytest results (Python 3.12) - 2026-08-20T16:22:09Z
 
 ============================= test session starts ==============================
-platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.13/x64/bin/python
+platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.14/x64/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/gget/gget
 configfile: pyproject.toml
@@ -602,28 +602,28 @@ tests/test_blast.py::TestBlast::test_blast_nt
 
 tests/test_cbio.py::TestCbioSearch::test_cbio_search
 tests/test_cbio.py::TestCbioSearch::test_cbio_search
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/swagger_spec_validator/validator12.py:18: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+  /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/swagger_spec_validator/validator12.py:18: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
     from jsonschema import RefResolver
 
 tests/test_cbio.py::TestCbioSearch::test_cbio_search
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/swagger_spec_validator/ref_validators.py:14: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+  /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/swagger_spec_validator/ref_validators.py:14: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
     from jsonschema.validators import RefResolver
 
 tests/test_cbio.py::TestCbioSearch::test_cbio_search
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/swagger_spec_validator/validator20.py:18: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+  /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/swagger_spec_validator/validator20.py:18: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
     from jsonschema.validators import RefResolver
 
 tests/test_cbio.py::TestCbioSearch::test_cbio_search
 tests/test_cbio.py::TestCbioSearch::test_cbio_search
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/bravado_core/swagger20_validator.py:6: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+  /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/bravado_core/swagger20_validator.py:6: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
     from jsonschema import RefResolver
 
 tests/test_cbio.py::TestCbioSearch::test_cbio_search
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/bravado_core/spec.py:14: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+  /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/bravado_core/spec.py:14: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
     from jsonschema.validators import RefResolver
 
 tests/test_cbio.py: 16 warnings
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/bravado_core/model.py:888: DeprecationWarning: jsonschema.RefResolver.in_scope is deprecated and will be removed in a future release.
+  /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/bravado_core/model.py:888: DeprecationWarning: jsonschema.RefResolver.in_scope is deprecated and will be removed in a future release.
     with spec.resolver.in_scope(additional_uri):
 
 tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
@@ -632,7 +632,7 @@ tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
 
 tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
 tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-  /opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/functools.py:912: ImplicitModificationWarning: Transforming to str index.
+  /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/functools.py:912: ImplicitModificationWarning: Transforming to str index.
     return dispatch(args[0].__class__)(*args, **kw)
 
 tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
@@ -641,16 +641,16 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-1064.92s call     tests/test_blast.py::TestBlast::test_blast_nt
-60.06s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-53.05s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-22.62s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
-21.62s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-19.93s call     tests/test_info.py::TestInfo::test_info_gene_list_non_model
-17.17s call     tests/test_info.py::TestInfo::test_info_exon
-12.82s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-11.03s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-7.57s call     tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl
+87.54s call     tests/test_blast.py::TestBlast::test_blast_nt
+40.17s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+39.44s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+37.80s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+22.81s call     tests/test_info.py::TestInfo::test_info_exon
+22.18s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+14.73s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+10.58s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
+10.05s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+7.81s call     tests/test_info.py::TestInfo::test_info_gene
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
 FAILED tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata - AssertionError: {'n_o[179 chars]ature_id', 'feature_name', 'feature_length'], 'layers': [None]} != {'n_o[179 chars]ature_id', 'feature_name', 'feature_length']}
@@ -1011,4 +1011,4 @@ First differing element 0:
      98755023,
      98754684]]]
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======= 4 failed, 83 passed, 28 warnings, 1 error in 1364.58s (0:22:44) ========
+======== 4 failed, 83 passed, 28 warnings, 1 error in 475.22s (0:07:55) ========
