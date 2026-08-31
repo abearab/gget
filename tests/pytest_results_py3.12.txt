@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-08-28T00:40:59Z
+Pytest results (Python 3.12) - 2026-08-31T21:12:40Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.14/x64/bin/python
@@ -354,10 +354,10 @@ self = <tests.test_info.TestInfo testMethod=test_info_gene>
             result_to_test = result_to_test.dropna(axis=1).values.tolist()
     
 >       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3077 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
+E       AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2358 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
 E       
 E       First differing element 0:
-E       ['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3076 chars]462]]
+E       ['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2357 chars]462]]
 E       ['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2302 chars]462]]
 E       
 E       - [['EnsMUSG00000000001.6',
@@ -367,12 +367,13 @@ E       + [['EnsMUSG00000000001.5',
 E       ?                       ^
 E       
 E           'Q9DC51',
-E           '14679',
+E       +   '14679',
 E           'mus_musculus',
 E           'GRCm39',
 E           'Gnai3',
 E           'Gnai3',
-E           ['Galphai3', 'Gnai-3', 'Hg1a'],
+E       -   [],
+E       +   ['Galphai3', 'Gnai-3', 'Hg1a'],
 E           'Guanine nucleotide-binding protein G(i) subunit alpha-3',
 E           'G protein subunit alpha i3 [Source:MGI Symbol;Acc:MGI:95773]',
 E           'Heterotrimeric guanine nucleotide-binding proteins (G proteins) function as '
@@ -392,16 +393,16 @@ E           'required for the translocation of RGS14 from the cytoplasm to the p
 E           'membrane. May play a role in cell division (By similarity). The active '
 E           'GTP-bound form activates the calcium permeant TRPC5 ion channels (By '
 E           'similarity)',
-E           'Predicted to enable several functions, including G-protein '
-E           'beta/gamma-subunit complex binding activity; GDP binding activity; and '
-E           'GTPase activating protein binding activity. Predicted to be involved in '
-E           'several processes, including G protein-coupled receptor signaling pathway; '
-E           'positive regulation of metabolic process; and positive regulation of '
-E           'vascular associated smooth muscle cell proliferation. Predicted to act '
-E           'upstream of or within G protein-coupled receptor signaling pathway. Located '
-E           'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
-E           'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
-E           'Alliance of Genome Resources, Apr 2025]',
+E       +   'Predicted to enable several functions, including G-protein '
+E       +   'beta/gamma-subunit complex binding activity; GDP binding activity; and '
+E       +   'GTPase activating protein binding activity. Predicted to be involved in '
+E       +   'several processes, including G protein-coupled receptor signaling pathway; '
+E       +   'positive regulation of metabolic process; and positive regulation of '
+E       +   'vascular associated smooth muscle cell proliferation. Predicted to act '
+E       +   'upstream of or within G protein-coupled receptor signaling pathway. Located '
+E       +   'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
+E       +   'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
+E       +   'Alliance of Genome Resources, Apr 2025]',
 E           ['Cytoplasm',
 E            'Cell membrane',
 E            'Cytoplasm, cytoskeleton, microtubule organizing center, centrosome'],
@@ -641,16 +642,16 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-13513.46s call     tests/test_blast.py::TestBlast::test_blast_nt
-232.86s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-64.43s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-32.93s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
-31.44s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-26.58s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-16.07s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
-13.41s call     tests/test_info.py::TestInfo::test_info_gene
-10.28s call     tests/test_info.py::TestInfo::test_info_exon
-7.21s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+3095.22s call     tests/test_blast.py::TestBlast::test_blast_nt
+85.14s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+36.41s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+28.48s call     tests/test_8cube.py::TestSpecificity::test_specificity_basic
+25.61s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
+24.23s call     tests/test_info.py::TestInfo::test_info_gene_list_non_model
+19.49s call     tests/test_info.py::TestInfo::test_info_gene
+17.96s call     tests/test_info.py::TestInfo::test_info_WB_transcript
+14.63s call     tests/test_info.py::TestInfo::test_info_exon
+13.66s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
 FAILED tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata - AssertionError: {'n_o[179 chars]ature_id', 'feature_name', 'feature_length'], 'layers': [None]} != {'n_o[179 chars]ature_id', 'feature_name', 'feature_length']}
@@ -797,10 +798,10 @@ First differing element 0:
      6560671,
      6560443,
      6559667]]]
-FAILED tests/test_info.py::TestInfo::test_info_gene - AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3077 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
+FAILED tests/test_info.py::TestInfo::test_info_gene - AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2358 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
 
 First differing element 0:
-['EnsMUSG00000000001.6', 'Q9DC51', '14679', 'mus_musculus', 'G[3076 chars]462]]
+['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2357 chars]462]]
 ['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2302 chars]462]]
 
 - [['EnsMUSG00000000001.6',
@@ -810,12 +811,13 @@ First differing element 0:
 ?                       ^
 
     'Q9DC51',
-    '14679',
++   '14679',
     'mus_musculus',
     'GRCm39',
     'Gnai3',
     'Gnai3',
-    ['Galphai3', 'Gnai-3', 'Hg1a'],
+-   [],
++   ['Galphai3', 'Gnai-3', 'Hg1a'],
     'Guanine nucleotide-binding protein G(i) subunit alpha-3',
     'G protein subunit alpha i3 [Source:MGI Symbol;Acc:MGI:95773]',
     'Heterotrimeric guanine nucleotide-binding proteins (G proteins) function as '
@@ -835,16 +837,16 @@ First differing element 0:
     'membrane. May play a role in cell division (By similarity). The active '
     'GTP-bound form activates the calcium permeant TRPC5 ion channels (By '
     'similarity)',
-    'Predicted to enable several functions, including G-protein '
-    'beta/gamma-subunit complex binding activity; GDP binding activity; and '
-    'GTPase activating protein binding activity. Predicted to be involved in '
-    'several processes, including G protein-coupled receptor signaling pathway; '
-    'positive regulation of metabolic process; and positive regulation of '
-    'vascular associated smooth muscle cell proliferation. Predicted to act '
-    'upstream of or within G protein-coupled receptor signaling pathway. Located '
-    'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
-    'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
-    'Alliance of Genome Resources, Apr 2025]',
++   'Predicted to enable several functions, including G-protein '
++   'beta/gamma-subunit complex binding activity; GDP binding activity; and '
++   'GTPase activating protein binding activity. Predicted to be involved in '
++   'several processes, including G protein-coupled receptor signaling pathway; '
++   'positive regulation of metabolic process; and positive regulation of '
++   'vascular associated smooth muscle cell proliferation. Predicted to act '
++   'upstream of or within G protein-coupled receptor signaling pathway. Located '
++   'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
++   'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
++   'Alliance of Genome Resources, Apr 2025]',
     ['Cytoplasm',
      'Cell membrane',
      'Cytoplasm, cytoskeleton, microtubule organizing center, centrosome'],
@@ -1011,4 +1013,4 @@ First differing element 0:
      98755023,
      98754684]]]
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======= 4 failed, 83 passed, 28 warnings, 1 error in 14028.58s (3:53:48) =======
+======= 4 failed, 83 passed, 28 warnings, 1 error in 3438.41s (0:57:18) ========
