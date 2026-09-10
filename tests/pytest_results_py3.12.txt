@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-09-07T19:29:36Z
+Pytest results (Python 3.12) - 2026-09-10T18:50:35Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.14/x64/bin/python
@@ -34,7 +34,7 @@ tests/test_blast.py::TestBlast::test_blast_bad_fasta PASSED              [  9%]
 tests/test_blast.py::TestBlast::test_blast_bad_program PASSED            [  9%]
 tests/test_blast.py::TestBlast::test_blast_bad_seq PASSED                [ 10%]
 tests/test_blast.py::TestBlast::test_blast_db_missing PASSED             [ 10%]
-tests/test_blast.py::TestBlast::test_blast_nt PASSED                     [ 10%]
+tests/test_blast.py::TestBlast::test_blast_nt FAILED                     [ 10%]
 tests/test_blat.py::TestBlat::test_blat_aa PASSED                        [ 11%]
 tests/test_blat.py::TestBlat::test_blat_aa_RNA PASSED                    [ 11%]
 tests/test_blat.py::TestBlat::test_blat_aa_protein PASSED                [ 12%]
@@ -70,7 +70,7 @@ tests/test_elm.py::TestELM::test_elm_uniprot_aminoacidseq PASSED         [ 23%]
 tests/test_elm.py::TestELM::test_elm_uniprot_id_in_elm PASSED            [ 24%]
 tests/test_elm.py::TestELM::test_elm_uniprot_id_new PASSED               [ 24%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_background PASSED       [ 24%]
-tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl PASSED [ 25%]
+tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl FAILED [ 25%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_background PASSED   [ 25%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_background_list PASSED [ 26%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_bad_database_shortcut PASSED [ 26%]
@@ -93,9 +93,6 @@ tests/test_enrichr.py::TestEnrichr::test_enrichr_worm PASSED             [ 32%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_yeast PASSED            [ 33%]
 tests/test_gpt.py::TestGpt::test_gpt PASSED                              [ 33%]
 tests/test_info.py::TestInfo::test_info_WB_transcript FAILED             [ 34%]
-tests/test_info.py::TestInfo::test_info_exon PASSED                      [ 34%]
-tests/test_info.py::TestInfo::test_info_gene FAILED                      [ 34%]
-tests/test_info.py::TestInfo::test_info_gene_list_non_model FAILED       [ 35%]
 
 ==================================== ERRORS ====================================
 __________ ERROR at setup of TestCosmicWorkflow.test_cosmic_defaults ___________
@@ -149,6 +146,835 @@ INFO     gget.utils:gget_cosmic.py:185 Extracted tar file to /home/runner/work/g
 INFO     gget.utils:gget_cosmic.py:441 Creating modified mutations file for use with gget mutate...
 INFO     gget.utils:gget_cosmic.py:659 Modified mutations file for use with gget mutate created at /home/runner/work/gget/gget/example_GRCh37/CancerMutationCensus_AllData_v104_GRCh37_mutation_workflow.csv
 =================================== FAILURES ===================================
+___________________________ TestBlast.test_blast_nt ____________________________
+
+self = <tests.test_blast.TestBlast testMethod=test_blast_nt>
+
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+>       result_to_test = do_call(func, td[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/from_json.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+func = <function blast at 0x7f1344e6d4e0>
+args = {'sequence': 'MSKGEELFTGVVPILVELDGDVNGQKFSVSGEGEGDATYGKL', 'limit': 1}
+
+    def do_call(func, args):
+        if isinstance(args, dict):
+>           return func(**args)
+                   ^^^^^^^^^^^^
+
+tests/from_json.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+sequence = 'MSKGEELFTGVVPILVELDGDVNGQKFSVSGEGEGDATYGKL', program = 'blastp'
+database = 'nr', limit = 1, expect = 10.0, low_comp_filt = None
+megablast = 'on', verbose = True, wrap_text = False, json = False, save = False
+
+    def blast(
+        sequence,
+        program="default",
+        database="default",
+        limit=50,
+        expect=10.0,
+        low_comp_filt=False,
+        megablast=True,
+        verbose=True,
+        wrap_text=False,
+        json=False,
+        save=False,
+    ):
+        """
+        BLAST a nucleotide or amino acid sequence against any BLAST DB.
+        Args:
+         - sequence       Sequence (str) or path to FASTA file.
+                          (If more than one sequence in FASTA file, only the first will be submitted to BLAST.)
+         - program        'blastn', 'blastp', 'blastx', 'tblastn', or 'tblastx'.
+                          Default: 'blastn' for nucleotide sequences; 'blastp' for amino acid sequences.
+         - database       'nt', 'nr', 'refseq_rna', 'refseq_protein', 'swissprot', 'pdbaa', or 'pdbnt'.
+                          Default: 'nt' for nucleotide sequences; 'nr' for amino acid sequences.
+                          More info on BLAST databases: https://ncbi.github.io/blast-cloud/blastdb/available-blastdbs.html
+         - limit          Limits number of hits to return. Default 50.
+         - expect         float or None. An expect value cutoff. Default 10.0.
+         - low_comp_filt  True/False whether to apply low complexity filter. Default False.
+         - megablast      True/False whether to use the MegaBLAST algorithm (blastn only). Default True.
+         - verbose        True/False whether to print progress information. Default True.
+         - wrap_text      If True, displays data frame with wrapped text for easy reading. Default: False.
+         - json           If True, returns results in json format instead of data frame. Default: False.
+         - save           If True, the data frame is saved as a csv in the current directory (default: False).
+         - verbose        True/False whether to print progress information. Default True.
+    
+        Returns a data frame with the BLAST results.
+    
+        NCBI server rule:
+        Run scripts weekends or between 9 pm and 5 am Eastern time
+        on weekdays if more than 50 searches will be submitted.
+    
+        Note: This function does not check the validity of the arguments
+        and passes the values to the server as is.
+        """
+        # Server rules:
+        # 1. Do not contact the server more often than once every 10 seconds.
+        # 2. Do not poll for any single RID more often than once a minute.
+        # 3. Use the URL parameter email and tool, so that the NCBI
+        #    can contact you if there is a problem.
+        # 4. Run scripts weekends or between 9 pm and 5 am Eastern time
+        #    on weekdays if more than 50 searches will be submitted.
+        # Reference: https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=DeveloperInfo
+    
+        # Please note that NCBI uses the new Common URL API for BLAST searches
+        # on the internet (http://ncbi.github.io/blast-cloud/dev/api.html). Thus,
+        # some of the arguments used by this function are not (or are no longer)
+        # officially supported by NCBI. Although they are still functioning, this
+        # may change in the future.
+    
+        # Define server URL and client
+        url = BLAST_URL
+        client = BLAST_CLIENT
+    
+        ## Clean up arguments
+        # If the path to a fasta file was provided instead of a nucleotide sequence,
+        # read the file and extract the first sequence
+        if "." in sequence:
+            if ".txt" in sequence or ".fa" in sequence:
+                _, seqs = read_fasta(sequence)
+    
+            else:
+                raise ValueError(
+                    "File format not recognized. gget BLAST currently only supports '.txt' or '.fa' files. "
+                )
+    
+            # Set the first sequence from the fasta file as 'sequence'
+            sequence = seqs[0]
+            if len(seqs) > 1:
+                logger.warning(
+                    "File contains more than one sequence. Only the first sequence will be submitted to BLAST."
+                )
+    
+        # Convert sequence to upper case
+        sequence = sequence.upper()
+    
+        ## Set program and database
+    
+        # Convert program and database to lower case
+        program = program.lower()
+        database = database.lower()
+        # Valid program and database options
+        programs = ["blastn", "blastp", "blastx", "tblastn", "tblastx"]
+        dbs = ["nt", "nr", "refseq_rna", "refseq_protein", "swissprot", "pdbaa", "pdbnt"]
+    
+        # If user does not specify the program,
+        # check if a nulceotide or amino acid sequence was passed
+        if program == "default":
+            # Set of all possible nucleotides and amino acids
+            nucleotides = set("ATGCN")
+            amino_acids = set("ARNDCQEGHILKMFPSTWYVBZXBJZ")
+    
+            # If sequence is a nucleotide sequence, set program to blastn
+            if set(sequence) <= nucleotides:
+                program = "blastn"
+    
+                # Set database to nt (unless user specified another database)
+                if database == "default":
+                    database = "nt"
+                    if verbose:
+                        logger.info("Sequence recognized as nucleotide sequence.")
+                        logger.info("BLAST will use program 'blastn' with database 'nt'.")
+                else:
+                    # Check if the user specified database is valid
+                    if database not in dbs:
+                        raise ValueError(
+                            f"Database specified is {database}. Expected one of: {', '.join(dbs)}"
+                        )
+    
+                    else:
+                        if verbose:
+                            logger.info("Sequence recognized as nucleotide sequence.")
+                            logger.info(
+                                "BLAST will use program 'blastn' with user-specified database."
+                            )
+            # If sequence is an amino acid sequence, set program to blastp
+            elif set(sequence) <= amino_acids:
+                program = "blastp"
+    
+                # Set database to nr (unless user specified another database)
+                if database == "default":
+                    database = "nr"
+                    if verbose:
+                        logger.info("Sequence recognized as amino acid sequence.")
+                        logger.info("BLAST will use program 'blastp' with database 'nr'.")
+                else:
+                    # Check if the user specified database is valid
+                    if database not in dbs:
+                        raise ValueError(
+                            f"Database specified is {database}. Expected one of: {', '.join(dbs)}"
+                        )
+    
+                    else:
+                        if verbose:
+                            logger.info("Sequence recognized as amino acid sequence.")
+                            logger.info(
+                                "BLAST will use program 'blastp' with user-specified database."
+                            )
+            else:
+                raise ValueError(
+                    f"""
+                    Sequence not automatically recognized as a nucleotide or amino acid sequence.
+                    Please specify 'program' and 'database'.
+                    Program options: {', '.join(programs)}
+                    Database options:  {', '.join(dbs)}
+                    """
+                )
+    
+        else:
+            # Check if the user specified program is valid
+            if program not in programs:
+                raise ValueError(
+                    f"Program specified is {program}. Expected one of: {', '.join(programs)}"
+                )
+    
+            # Ask user to also specify database
+            if database == "default":
+                raise ValueError(
+                    f"""
+                    User-specified program requires user-specified database. Please also specify argument 'database'.
+                    Database options:  {', '.join(dbs)}
+                    """
+                )
+            else:
+                # Check if the user specified database is valid
+                if database not in dbs:
+                    raise ValueError(
+                        f"Database specified is {database}. Expected one of: {', '.join(dbs)}"
+                    )
+    
+        ## Translate filter arguments
+        if low_comp_filt is False:
+            low_comp_filt = None
+        else:
+            low_comp_filt = "T"
+    
+        if megablast is False:
+            megablast = None
+        else:
+            megablast = "on"
+    
+        ## Submit search
+        #  The following code was partly adapted from the Biopython BLAST NCBIWWW project written
+        #  by Jeffrey Chang (Copyright 1999), Brad Chapman, and Chris Wroe distributed under the
+        #  Biopython License Agreement and BSD 3-Clause License
+        #  https://github.com/biopython/biopython/blob/171697883aca6894f8367f8f20f1463ce7784d0c/LICENSE.rst
+    
+        # Args for the PUT command
+        put_args = [
+            ("PROGRAM", program),
+            ("DATABASE", database),
+            ("QUERY", sequence),
+            ("DESCRIPTIONS", limit),
+            ("HITLIST_SIZE", limit),
+            ("ALIGNMENTS", 0),
+            ("EXPECT", expect),
+            ("FILTER", low_comp_filt),
+            ("MEGABLAST", megablast),
+            ("CMD", "Put"),
+        ]
+    
+        # Define query
+        put_query = [x for x in put_args if x[1] is not None]
+        put_message = urlencode(put_query).encode()
+    
+        # Submit search to server
+        request = Request(url, put_message, {"User-Agent": client})
+        handle = urlopen(request)
+    
+        ## Fetch Request ID (RID) and estimated time to completion (RTOE)
+        RID, RTOE = parse_blast_ref_page(handle)
+    
+        # Wait for search to complete
+        # (At least 11 seconds to comply with server rule 1)
+        if RTOE < 11:
+            # Communicate RTOE
+            if verbose:
+                logger.info(f"BLAST initiated. Estimated time to completion: 11 seconds.")
+            time.sleep(11)
+        else:
+            # Communicate RTOE
+            if verbose:
+                logger.info(
+                    f"BLAST initiated with search ID {RID}. Estimated time to completion: {RTOE} seconds."
+                )
+            time.sleep(int(RTOE))
+    
+        ## Poll server for status and fetch search results
+        # Args for the GET command
+        get_args = [
+            ("RID", RID),
+            ("DESCRIPTIONS", limit),
+            ("HITLIST_SIZE", limit),
+            ("ALIGNMENTS", 0),
+            ("FORMAT_TYPE", "HTML"),
+            ("CMD", "Get"),
+        ]
+        get_query = [x for x in get_args if x[1] is not None]
+        get_message = urlencode(get_query).encode()
+    
+        ## Poll NCBI until the results are ready
+        searching = True
+        i = 0
+        while searching:
+            if i > 0:
+                # Sleep for 61 seconds if first fetch was not succesful
+                # to comply with server rules
+                time.sleep(61)
+    
+            # Query for search status
+            request = Request(url, get_message, {"User-Agent": client})
+>           handle = urlopen(request)
+                     ^^^^^^^^^^^^^^^^
+
+gget/gget_blast.py:281: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+url = <urllib.request.Request object at 0x7f1341ee5e20>, data = None
+timeout = <object object at 0x7f136ff789a0>, cafile = None, capath = None
+cadefault = False, context = None
+
+    def urlopen(url, data=None, timeout=socket._GLOBAL_DEFAULT_TIMEOUT,
+                *, cafile=None, capath=None, cadefault=False, context=None):
+        '''Open the URL url, which can be either a string or a Request object.
+    
+        *data* must be an object specifying additional data to be sent to
+        the server, or None if no such data is needed.  See Request for
+        details.
+    
+        urllib.request module uses HTTP/1.1 and includes a "Connection:close"
+        header in its HTTP requests.
+    
+        The optional *timeout* parameter specifies a timeout in seconds for
+        blocking operations like the connection attempt (if not specified, the
+        global default timeout setting will be used). This only works for HTTP,
+        HTTPS and FTP connections.
+    
+        If *context* is specified, it must be a ssl.SSLContext instance describing
+        the various SSL options. See HTTPSConnection for more details.
+    
+        The optional *cafile* and *capath* parameters specify a set of trusted CA
+        certificates for HTTPS requests. cafile should point to a single file
+        containing a bundle of CA certificates, whereas capath should point to a
+        directory of hashed certificate files. More information can be found in
+        ssl.SSLContext.load_verify_locations().
+    
+        The *cadefault* parameter is ignored.
+    
+    
+        This function always returns an object which can work as a
+        context manager and has the properties url, headers, and status.
+        See urllib.response.addinfourl for more detail on these properties.
+    
+        For HTTP and HTTPS URLs, this function returns a http.client.HTTPResponse
+        object slightly modified. In addition to the three new methods above, the
+        msg attribute contains the same information as the reason attribute ---
+        the reason phrase returned by the server --- instead of the response
+        headers as it is specified in the documentation for HTTPResponse.
+    
+        For FTP, file, and data URLs and requests explicitly handled by legacy
+        URLopener and FancyURLopener classes, this function returns a
+        urllib.response.addinfourl object.
+    
+        Note that None may be returned if no handler handles the request (though
+        the default installed global OpenerDirector uses UnknownHandler to ensure
+        this never happens).
+    
+        In addition, if proxy settings are detected (for example, when a *_proxy
+        environment variable like http_proxy is set), ProxyHandler is default
+        installed and makes sure the requests are handled through the proxy.
+    
+        '''
+        global _opener
+        if cafile or capath or cadefault:
+            import warnings
+            warnings.warn("cafile, capath and cadefault are deprecated, use a "
+                          "custom context instead.", DeprecationWarning, 2)
+            if context is not None:
+                raise ValueError(
+                    "You can't pass both context and any of cafile, capath, and "
+                    "cadefault"
+                )
+            if not _have_ssl:
+                raise ValueError('SSL support not available')
+            context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH,
+                                                 cafile=cafile,
+                                                 capath=capath)
+            # send ALPN extension to indicate HTTP/1.1 protocol
+            context.set_alpn_protocols(['http/1.1'])
+            https_handler = HTTPSHandler(context=context)
+            opener = build_opener(https_handler)
+        elif context:
+            https_handler = HTTPSHandler(context=context)
+            opener = build_opener(https_handler)
+        elif _opener is None:
+            _opener = opener = build_opener()
+        else:
+            opener = _opener
+>       return opener.open(url, data, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py:215: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <urllib.request.OpenerDirector object at 0x7f1341f53650>
+fullurl = <urllib.request.Request object at 0x7f1341ee5e20>, data = None
+timeout = <object object at 0x7f136ff789a0>
+
+    def open(self, fullurl, data=None, timeout=socket._GLOBAL_DEFAULT_TIMEOUT):
+        # accept a URL or a Request object
+        if isinstance(fullurl, str):
+            req = Request(fullurl, data)
+        else:
+            req = fullurl
+            if data is not None:
+                req.data = data
+    
+        req.timeout = timeout
+        protocol = req.type
+    
+        # pre-process request
+        meth_name = protocol+"_request"
+        for processor in self.process_request.get(protocol, []):
+            meth = getattr(processor, meth_name)
+            req = meth(req)
+    
+        sys.audit('urllib.Request', req.full_url, req.data, req.headers, req.get_method())
+>       response = self._open(req, data)
+                   ^^^^^^^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py:515: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <urllib.request.OpenerDirector object at 0x7f1341f53650>
+req = <urllib.request.Request object at 0x7f1341ee5e20>, data = None
+
+    def _open(self, req, data=None):
+        result = self._call_chain(self.handle_open, 'default',
+                                  'default_open', req)
+        if result:
+            return result
+    
+        protocol = req.type
+>       result = self._call_chain(self.handle_open, protocol, protocol +
+                                  '_open', req)
+
+/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py:532: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <urllib.request.OpenerDirector object at 0x7f1341f53650>
+chain = {'unknown': [<urllib.request.UnknownHandler object at 0x7f1341f50680>], 'http': [<urllib.request.HTTPHandler object at...ib.request.FTPHandler object at 0x7f1341f514f0>], 'file': [<urllib.request.FileHandler object at 0x7f1341f51610>], ...}
+kind = 'https', meth_name = 'https_open'
+args = (<urllib.request.Request object at 0x7f1341ee5e20>,)
+
+    def _call_chain(self, chain, kind, meth_name, *args):
+        # Handlers raise an exception if no one else should try to handle
+        # the request, or return None if they can't but another handler
+        # could.  Otherwise, they return the response.
+        handlers = chain.get(kind, ())
+        for handler in handlers:
+            func = getattr(handler, meth_name)
+>           result = func(*args)
+                     ^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py:492: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <urllib.request.HTTPSHandler object at 0x7f1341f50d70>
+req = <urllib.request.Request object at 0x7f1341ee5e20>
+
+    def https_open(self, req):
+>       return self.do_open(http.client.HTTPSConnection, req,
+                            context=self._context)
+
+/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py:1392: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <urllib.request.HTTPSHandler object at 0x7f1341f50d70>
+http_class = <class 'http.client.HTTPSConnection'>
+req = <urllib.request.Request object at 0x7f1341ee5e20>
+http_conn_args = {'context': <ssl.SSLContext object at 0x7f1341c79e50>}
+
+    def do_open(self, http_class, req, **http_conn_args):
+        """Return an HTTPResponse object for the request, using http_class.
+    
+        http_class must implement the HTTPConnection API from http.client.
+        """
+        host = req.host
+        if not host:
+            raise URLError('no host given')
+    
+        # will parse host:port
+        h = http_class(host, timeout=req.timeout, **http_conn_args)
+        h.set_debuglevel(self._debuglevel)
+    
+        headers = dict(req.unredirected_hdrs)
+        headers.update({k: v for k, v in req.headers.items()
+                        if k not in headers})
+    
+        # TODO(jhylton): Should this be redesigned to handle
+        # persistent connections?
+    
+        # We want to make an HTTP/1.1 request, but the addinfourl
+        # class isn't prepared to deal with a persistent connection.
+        # It will try to read all remaining data from the socket,
+        # which will block while the server waits for the next request.
+        # So make sure the connection gets closed after the (only)
+        # request.
+        headers["Connection"] = "close"
+        headers = {name.title(): val for name, val in headers.items()}
+    
+        if req._tunnel_host:
+            tunnel_headers = {}
+            proxy_auth_hdr = "Proxy-Authorization"
+            if proxy_auth_hdr in headers:
+                tunnel_headers[proxy_auth_hdr] = headers[proxy_auth_hdr]
+                # Proxy-Authorization should not be sent to origin
+                # server.
+                del headers[proxy_auth_hdr]
+            h.set_tunnel(req._tunnel_host, headers=tunnel_headers)
+    
+        try:
+            try:
+                h.request(req.get_method(), req.selector, req.data, headers,
+                          encode_chunked=req.has_header('Transfer-encoding'))
+            except OSError as err: # timeout error
+                raise URLError(err)
+>           r = h.getresponse()
+                ^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/urllib/request.py:1348: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <http.client.HTTPSConnection object at 0x7f1341ee5040>
+
+    def getresponse(self):
+        """Get the response from the server.
+    
+        If the HTTPConnection is in the correct state, returns an
+        instance of HTTPResponse or of whatever object is returned by
+        the response_class variable.
+    
+        If a request has not been sent or if a previous response has
+        not be handled, ResponseNotReady is raised.  If the HTTP
+        response indicates that the connection should be closed, then
+        it will be closed before the response is returned.  When the
+        connection is closed, the underlying socket is closed.
+        """
+    
+        # if a prior response has been completed, then forget about it.
+        if self.__response and self.__response.isclosed():
+            self.__response = None
+    
+        # if a prior response exists, then it must be completed (otherwise, we
+        # cannot read this response's header to determine the connection-close
+        # behavior)
+        #
+        # note: if a prior response existed, but was connection-close, then the
+        # socket and response were made independent of this HTTPConnection
+        # object since a new request requires that we open a whole new
+        # connection
+        #
+        # this means the prior response had one of two states:
+        #   1) will_close: this connection was reset and the prior socket and
+        #                  response operate independently
+        #   2) persistent: the response was retained and we await its
+        #                  isclosed() status to become true.
+        #
+        if self.__state != _CS_REQ_SENT or self.__response:
+            raise ResponseNotReady(self.__state)
+    
+        if self.debuglevel > 0:
+            response = self.response_class(self.sock, self.debuglevel,
+                                           method=self._method)
+        else:
+            response = self.response_class(self.sock, method=self._method)
+    
+        try:
+            try:
+>               response.begin()
+
+/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/http/client.py:1478: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <http.client.HTTPResponse object at 0x7f1341ee7640>
+
+    def begin(self):
+        if self.headers is not None:
+            # we've already started reading the response
+            return
+    
+        # read until we get a non-100 response
+        for _ in range(_MAXINTERIMRESPONSES):
+>           version, status, reason = self._read_status()
+                                      ^^^^^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/http/client.py:343: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <http.client.HTTPResponse object at 0x7f1341ee7640>
+
+    def _read_status(self):
+        line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+        if len(line) > _MAXLINE:
+            raise LineTooLong("status line")
+        if self.debuglevel > 0:
+            print("reply:", repr(line))
+        if not line:
+            # Presumably, the server closed the connection before
+            # sending a valid response.
+>           raise RemoteDisconnected("Remote end closed connection without"
+                                     " response")
+E           http.client.RemoteDisconnected: Remote end closed connection without response
+
+/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/http/client.py:312: RemoteDisconnected
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_blast.py:153 Sequence recognized as amino acid sequence.
+INFO     gget.utils:gget_blast.py:154 BLAST will use program 'blastp' with database 'nr'.
+INFO     gget.utils:gget_blast.py:252 BLAST initiated with search ID A5Z0VW8U016. Estimated time to completion: 11 seconds.
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
+INFO     gget.utils:gget_blast.py:291 BLASTING...
 ______________________ TestCellxgene.test_cellxgene_adata ______________________
 
 self = <tests.test_cellxgene.TestCellxgene testMethod=test_cellxgene_adata>
@@ -185,6 +1011,381 @@ E          'var': ['soma_joinid', 'feature_id', 'feature_name', 'feature_length'
 tests/test_cellxgene.py:47: AssertionError
 ------------------------------ Captured log call -------------------------------
 INFO     gget.utils:gget_cellxgene.py:218 Fetching AnnData object from CZ CELLxGENE Discover. This might take a few minutes...
+_________________ TestEnrichr.test_enrichr_background_ensembl __________________
+
+self = <tests.test_enrichr.TestEnrichr testMethod=test_enrichr_background_ensembl>
+
+    def test_enrichr_background_ensembl(self):
+        test = "test_enrichr_background_ensembl"
+        expected_result = enrichr_dict[test]["expected_result"]
+>       result_to_test = enrichr(**enrichr_dict[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_enrichr.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+genes = ['ENSG00000120053', 'ENSG00000129596', 'ENSG00000163631', 'ENSG00000167701', 'ENSG00000244067']
+database = 'PanglaoDB_Augmented_2021', species = 'human'
+background_list = ['ENSG00000120053', 'ENSG00000129596', 'ENSG00000131910', 'ENSG00000139631', 'ENSG00000163631', 'ENSG00000167701', ...]
+background = False, ensembl = True, ensembl_bkg = True, plot = False
+figsize = (10, 10), ax = None, kegg_out = None, kegg_rank = 1, json = False
+save = False, verbose = True
+
+    def enrichr(
+        genes,
+        database,
+        species="human",
+        background_list=None,
+        background=False,
+        ensembl=False,
+        ensembl_bkg=False,
+        plot=False,
+        figsize=(10, 10),
+        ax=None,
+        kegg_out=None,
+        kegg_rank=1,
+        json=False,
+        save=False,
+        verbose=True,
+    ):
+        """
+        Perform an enrichment analysis on a list of genes using Enrichr (https://maayanlab.cloud/Enrichr/).
+    
+        Args:
+        - genes             List of Entrez gene symbols to perform enrichment analysis on, passed as a list of strings, e.g. ['PHF14', 'RBM3', 'MSL1', 'PHF21A'].
+                            Set 'ensembl = True' to input a list of Ensembl gene IDs, e.g. ['ENSG00000106443', 'ENSG00000102317', 'ENSG00000188895'].
+        - database          Database to use as reference for the enrichment analysis.
+                            Supported shortcuts (and their default database), ONLY SUPPORTED FOR HUMAN/MOUSE SPECIES (other species must specify the full database name):
+                            'pathway' (KEGG_2021_Human)
+                            'transcription' (ChEA_2016)
+                            'ontology' (GO_Biological_Process_2021)
+                            'diseases_drugs' (GWAS_Catalog_2019)
+                            'celltypes' (PanglaoDB_Augmented_2021)
+                            'kinase_interactions' (KEA_2015)
+                            or any database listed under Gene-set Library at: https://maayanlab.cloud/Enrichr/#libraries or the species-specific libraries listed below
+        - species           Enrichr species database to query. Options:
+                            'human' (default) [H. sapiens] - https://maayanlab.cloud/Enrichr/#libraries
+                            'mouse' [M. musculus] - equivalent to 'human'
+                            'fly' [D. melanogaster] - https://maayanlab.cloud/FlyEnrichr/#stats
+                            'yeast' [S. cerevisiae] - https://maayanlab.cloud/YeastEnrichr/#stats
+                            'worm' [C. elegans] - https://maayanlab.cloud/WormEnrichr/#stats
+                            'fish' [D. rerio] - https://maayanlab.cloud/FishEnrichr/#stats
+        - background_list   List of gene names/Ensembl IDs to be used as background genes. ONLY SUPPORTED FOR HUMAN/MOUSE SPECIES (Default: None)
+        - background        If True, use set of > 20,000 default background genes listed here: https://github.com/pachterlab/gget/blob/main/gget/constants/enrichr_bkg_genes.txt.
+                            ONLY SUPPORTED FOR HUMAN/MOUSE SPECIES (Default: False)
+        - ensembl           Define as 'True' if 'genes' is a list of Ensembl gene IDs. (Default: False)
+        - ensembl_bkg       Define as 'True' if 'background_list' is a list of Ensembl gene IDs. (Default: False)
+        - plot              True/False whether to provide a graphical overview of the first 15 results. (Default: False)
+        - figsize           (width, height) of plot in inches. (Default: (10,10))
+        - ax                Pass a matplotlib axes object for further customization of the plot. (Default: None)
+        - kegg_out          Path to file to save the highlighted KEGG pathway image, e.g. path/to/folder/kegg_pathway.png. (Default: None)
+        - kegg_rank         Candidate pathway rank to be plotted in KEGG pathway image. (Default: 1)
+        - json              If True, returns results in json format instead of data frame. (Default: False)
+        - save              True/False whether to save the results in the local directory. (Default: False)
+        - verbose           True/False whether to print progress information. (Default: True)
+    
+        Returns a data frame with the Enrichr results.
+        """
+    
+        if species not in ["human", "mouse", "fly", "yeast", "worm", "fish"]:
+            raise ValueError(
+                f"Argument 'species' must be one of 'human', 'mouse', 'fly', 'yeast', 'worm', or 'fish'."
+            )
+    
+        if species == "mouse":
+            species = "human"
+    
+        species_enrichr = f"{species.capitalize()}Enrichr"
+        if species == "human":
+            species_enrichr = "Enrichr"
+    
+        if species != "human":
+            if database in [
+                "pathway",
+                "transcription",
+                "ontology",
+                "diseases_drugs",
+                "celltypes",
+                "kinase_interactions",
+            ]:
+                raise ValueError(
+                    f"Database '{database}' is not supported for species '{species}'."
+                    f" Please select a database from the species-specific libraries listed at:"
+                    f" https://maayanlab.cloud/{species_enrichr}/#stats."
+                )
+    
+            if background:
+                raise ValueError(
+                    f"Background genes are only supported for species 'human' and 'mouse', not for species '{species}'."
+                    f" Please set 'background=False' or leave it unspecified."
+                )
+    
+            if background_list:
+                raise ValueError(
+                    f"Background genes are only supported for species 'human' and 'mouse', not for species '{species}'."
+                    f" Please do not provide a value for 'background_list'."
+                )
+    
+        # Define database
+        # All available libraries: https://maayanlab.cloud/Enrichr/#libraries
+        if species == "human":
+            db_message = f"""
+            Please note that there might be a more appropriate database for your application.
+            Go to https://maayanlab.cloud/{species_enrichr}/#libraries for a full list of supported databases.
+            """
+        else:
+            db_message = f"""
+            Please note that there might be a more appropriate database for your application.
+            Go to https://maayanlab.cloud/{species_enrichr}/#stats for a full list of supported databases.
+            """
+        if not isinstance(background, bool):
+            raise ValueError(
+                f"Argument`background` must be a boolean True/False. If you are adding a background list, use the argument `background_list` instead."
+            )
+    
+        # Handle database shortcuts
+        if database == "pathway":
+            database = "KEGG_2021_Human"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "transcription":
+            database = "ChEA_2016"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "ontology":
+            database = "GO_Biological_Process_2021"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "diseases_drugs":
+            database = "GWAS_Catalog_2019"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "celltypes":
+            database = "PanglaoDB_Augmented_2021"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        elif database == "kinase_interactions":
+            database = "KEA_2015"
+            if verbose:
+                logger.info(
+                    f"Performing Enrichr analysis using database {database}. " + db_message
+                )
+    
+        else:
+            database = database
+            if verbose:
+                logger.info(f"Performing Enrichr analysis using database {database}.")
+    
+        # To generate a KEGG pathway image, confirm that the database is a KEGG database and pykegg is installed
+        if kegg_out:
+            if not database.startswith("KEGG"):
+                logger.error(
+                    "Please specify a KEGG database when generating a KEGG pathway image."
+                )
+                return
+            try:
+                import pykegg
+            except ImportError:
+                logger.error(
+                    "Please install `pykegg` to generate a KEGG pathway image. Pykegg can be installed using pip: 'pip install pykegg'"
+                )
+                return
+    
+        # If single gene passed as string, convert to list
+        if isinstance(genes, str):
+            genes = [genes]
+    
+        ## Transform Ensembl IDs to gene symbols
+        if ensembl:
+            if verbose:
+                logger.info("Getting gene symbols from Ensembl IDs.")
+    
+            genes_v2 = ensembl_to_gene_names(genes)
+    
+        else:
+            genes_v2 = genes
+    
+        if len(genes_v2) == 0 and ensembl:
+            logger.error("No gene symbols found for given Ensembl IDs.")
+            return
+    
+        # Transform Ensembl IDs to gene symbols for background genes
+        if background_list and ensembl_bkg:
+>           background_list = ensembl_to_gene_names(background_list)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_enrichr.py:259: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ensembl_ids = ['ENSG00000120053', 'ENSG00000129596', 'ENSG00000131910', 'ENSG00000139631', 'ENSG00000163631', 'ENSG00000167701', ...]
+
+    def ensembl_to_gene_names(ensembl_ids):
+        """
+        Function to fetch gene names from a list of Ensembl IDs using gget info.
+        """
+        genes_v2 = []
+    
+        # Remove version number if passed
+        ensembl_ids = [gene_id.split(".")[0] for gene_id in ensembl_ids]
+    
+>       info_df = info(ensembl_ids, pdb=False, ncbi=False, uniprot=False, verbose=False)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_enrichr.py:34: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ens_ids = ['ENSG00000120053', 'ENSG00000129596', 'ENSG00000131910', 'ENSG00000139631', 'ENSG00000163631', 'ENSG00000167701', ...]
+wrap_text = False, ncbi = False, uniprot = False, pdb = False, json = False
+verbose = False, save = False, expand = False, ensembl_only = False
+
+    def info(
+        ens_ids,
+        wrap_text=False,
+        ncbi=True,
+        uniprot=True,
+        pdb=False,
+        json=False,
+        verbose=True,
+        save=False,
+        expand=False,
+        ensembl_only=False,
+    ):
+        """
+        Fetch gene and transcript metadata using Ensembl IDs.
+    
+        Args:
+        - ens_ids       One or more Ensembl IDs to look up (string or list of strings).
+                        Also supports WormBase and Flybase IDs.
+        - wrap_text     If True, displays data frame with wrapped text for easy reading. Default: False.
+        - ncbi          If False, does not return data from NCBI. Default: True.
+        - uniprot       If False, does not return data from UniProt. Default: True.
+        - pdb           If True, also returns PDB IDs (might increase run time). Default: False.
+        - json          If True, returns results in json/dictionary format instead of data frame. Default: False.
+        - verbose       True/False whether to print progress information. Default True.
+        - save          True/False wether to save csv with query results in current working directory. Default: False.
+    
+        Returns a data frame containing the requested information.
+    
+        Deprecated arguments:
+        - expand        (gget info now always returns all of the available information)
+        - ensembl_only  If True, only returns results from Ensembl (excludes PDB, UniProt, and NCBI results). Default: False.
+        """
+        # Handle deprecated arguments
+        if expand:
+            if verbose:
+                logger.warning(
+                    "'expand' argument deprecated! gget info now always returns all of the available information."
+                )
+        if ensembl_only:
+            if verbose:
+                logger.warning(
+                    "'ensembl_only' argument deprecated! Please use arguments 'ncbi=False' and 'uniprot=False'."
+                )
+    
+        # Set synonyms found by each database initially to none
+        ncbi_synonyms = None
+        df_uniprot = None
+        df_pdb = pd.DataFrame()
+        df_ncbi = pd.DataFrame()
+    
+        # Rename pdb, uniprot, ncbi arguments
+        fetch_ncbi = ncbi
+        fetch_uniprot = uniprot
+        fetch_pdb = pdb
+    
+        # Define Ensembl REST API server
+        server = ENSEMBL_REST_API
+        # Define type of returned content from REST
+        content_type = "application/json"
+    
+        ## Clean up Ensembl IDs
+        # If single Ensembl ID passed as string, convert to list
+        if type(ens_ids) == str:
+            ens_ids = [ens_ids]
+        # Remove Ensembl ID version if passed
+        ens_ids_clean = []
+        temp = 0
+        for ensembl_ID in ens_ids:
+            # But only for Ensembl ID (and not for flybase/wormbase IDs)
+            if ensembl_ID.startswith("ENS"):
+                ens_ids_clean.append(ensembl_ID.split(".")[0])
+    
+                if "." in ensembl_ID and temp == 0:
+                    if verbose is True:
+                        logger.info(
+                            "We noticed that you passed a version number with your Ensembl ID.\n"
+                            "Please note that gget info will always return information linked to the latest Ensembl ID version (see 'ensembl_id')."
+                        )
+                    temp = +1
+    
+            else:
+                ens_ids_clean.append(ensembl_ID)
+    
+        # Remove duplicates in the Ensembl ID list without changing their order
+        ens_ids_clean = sorted(set(ens_ids_clean), key=ens_ids_clean.index)
+        # Create second clean list of Ensembl IDs which will not include IDs that were not found
+        ens_ids_clean_2 = ens_ids_clean.copy()
+    
+        # Initiate dictionary to save results for all IDs in
+        master_dict = {}
+    
+        # Query REST APIs from https://rest.ensembl.org/
+        endpoint = "lookup/id/"
+        query = {"ids": ens_ids_clean, "expand": True}
+    
+>       results_dict = post_query(server, endpoint, query)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_info.py:119: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+server = 'http://rest.ensembl.org/', endpoint = 'lookup/id/'
+query = {'ids': ['ENSG00000120053', 'ENSG00000129596', 'ENSG00000131910', 'ENSG00000139631', 'ENSG00000163631', 'ENSG00000167701', ...], 'expand': True}
+
+    def post_query(server, endpoint, query):
+        """
+        Function to perform a POST API query.
+    
+        :param server:  Server to query .
+        :param endpoint: Server endpoint
+        :param query:   Query that is passed to server.
+    
+        :return: server output
+        """
+    
+        r = requests.post(
+            server + endpoint, json=query, headers={"Content-Type": "application/json"}
+        )
+    
+        if not r.ok:
+>           raise RuntimeError(
+                f"{server} returned error status code {r.status_code}. "
+                "Please double-check arguments and try again.\n"
+            )
+E           RuntimeError: http://rest.ensembl.org/ returned error status code 503. Please double-check arguments and try again.
+
+gget/utils.py:695: RuntimeError
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_enrichr.py:208 Performing Enrichr analysis using database PanglaoDB_Augmented_2021. 
+        Please note that there might be a more appropriate database for your application. 
+        Go to https://maayanlab.cloud/Enrichr/#libraries for a full list of supported databases.
+        
+INFO     gget.utils:gget_enrichr.py:246 Getting gene symbols from Ensembl IDs.
 _______________________ TestInfo.test_info_WB_transcript _______________________
 
 self = <tests.test_info.TestInfo testMethod=test_info_WB_transcript>
@@ -333,274 +1534,7 @@ E            6560443,
 E            6559667]]]
 
 tests/from_json.py:78: AssertionError
-___________________________ TestInfo.test_info_gene ____________________________
-
-self = <tests.test_info.TestInfo testMethod=test_info_gene>
-
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
-    
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2358 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
-E       
-E       First differing element 0:
-E       ['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2357 chars]462]]
-E       ['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2302 chars]462]]
-E       
-E       - [['EnsMUSG00000000001.6',
-E       ?                       ^
-E       
-E       + [['EnsMUSG00000000001.5',
-E       ?                       ^
-E       
-E           'Q9DC51',
-E       +   '14679',
-E           'mus_musculus',
-E           'GRCm39',
-E           'Gnai3',
-E           'Gnai3',
-E       -   [],
-E       +   ['Galphai3', 'Gnai-3', 'Hg1a'],
-E           'Guanine nucleotide-binding protein G(i) subunit alpha-3',
-E           'G protein subunit alpha i3 [Source:MGI Symbol;Acc:MGI:95773]',
-E           'Heterotrimeric guanine nucleotide-binding proteins (G proteins) function as '
-E           'transducers downstream of G protein-coupled receptors (GPCRs) in numerous '
-E           'signaling cascades. The alpha chain contains the guanine nucleotide binding '
-E           'site and alternates between an active, GTP-bound state and an inactive, '
-E           'GDP-bound state. Signaling by an activated GPCR promotes GDP release and '
-E           'GTP binding. The alpha subunit has a low GTPase activity that converts '
-E           'bound GTP to GDP, thereby terminating the signal (By similarity). Both GDP '
-E           'release and GTP hydrolysis are modulated by numerous regulatory proteins '
-E           '(By similarity). Signaling is mediated via effector proteins, such as '
-E           'adenylate cyclase. Inhibits adenylate cyclase activity, leading to '
-E           'decreased intracellular cAMP levels (By similarity). Stimulates the '
-E           'activity of receptor-regulated K(+) channels (By similarity). The active '
-E           'GTP-bound form prevents the association of RGS14 with centrosomes and is '
-E           'required for the translocation of RGS14 from the cytoplasm to the plasma '
-E           'membrane. May play a role in cell division (By similarity). The active '
-E           'GTP-bound form activates the calcium permeant TRPC5 ion channels (By '
-E           'similarity)',
-E       +   'Predicted to enable several functions, including G-protein '
-E       +   'beta/gamma-subunit complex binding activity; GDP binding activity; and '
-E       +   'GTPase activating protein binding activity. Predicted to be involved in '
-E       +   'several processes, including G protein-coupled receptor signaling pathway; '
-E       +   'positive regulation of metabolic process; and positive regulation of '
-E       +   'vascular associated smooth muscle cell proliferation. Predicted to act '
-E       +   'upstream of or within G protein-coupled receptor signaling pathway. Located '
-E       +   'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
-E       +   'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
-E       +   'Alliance of Genome Resources, Apr 2025]',
-E           ['Cytoplasm',
-E            'Cell membrane',
-E            'Cytoplasm, cytoskeleton, microtubule organizing center, centrosome'],
-E           'Gene',
-E           'protein_coding',
-E       -   'ENSMUST00000000001.6',
-E       ?                       ^
-E       
-E       +   'ENSMUST00000000001.5',
-E       ?                       ^
-E       
-E           '3',
-E           -1,
-E       -   108014590,
-E       ?           ^
-E       
-E       +   108014596,
-E       ?           ^
-E       
-E       -   108053469,
-E       ?           ^
-E       
-E       +   108053462,
-E       ?           ^
-E       
-E       -   ['ENSMUST00000000001.6',
-E       ?                        ^
-E       
-E       +   ['ENSMUST00000000001.5'],
-E       ?                        ^ +
-E       
-E       -    'ENSMUST00000535596.1',
-E       -    'ENSMUST00000535597.1',
-E       -    'ENSMUST00000535598.1',
-E       -    'ENSMUST00000535599.1',
-E       -    'ENSMUST00000535600.1',
-E       -    'ENSMUST00000535601.1',
-E       -    'ENSMUST00000535602.1',
-E       -    'ENSMUST00000535603.1',
-E       -    'ENSMUST00000558104.1'],
-E       -   ['protein_coding',
-E       +   ['protein_coding'],
-E       ?                    +
-E       
-E       -    'protein_coding',
-E       -    'protein_coding',
-E       -    'nonsense_mediated_decay',
-E       -    'protein_coding',
-E       -    'nonsense_mediated_decay',
-E       -    'nonsense_mediated_decay',
-E       -    'protein_coding',
-E       -    'nonsense_mediated_decay',
-E       -    'nonsense_mediated_decay'],
-E       -   ['Gnai3-201',
-E       +   ['Gnai3-201'],
-E       ?               +
-E       
-E       +   [-1],
-E       -    'Gnai3-202',
-E       -    'Gnai3-203',
-E       -    'Gnai3-204',
-E       -    'Gnai3-205',
-E       -    'Gnai3-206',
-E       -    'Gnai3-207',
-E       -    'Gnai3-208',
-E       -    'Gnai3-209',
-E       -    'Gnai3-210'],
-E       -   [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-E       -   [108014596,
-E       +   [108014596],
-E       ?             +
-E       
-E       -    108014596,
-E       -    108014597,
-E       -    108014597,
-E       -    108014592,
-E       -    108014597,
-E       -    108014590,
-E       -    108014613,
-E       -    108014611,
-E       -    108014596],
-E       -   [108053469,
-E       -    108053469,
-E       -    108053469,
-E       -    108053453,
-E       -    108053469,
-E       -    108053443,
-E       -    108053435,
-E       -    108053469,
-E       -    108053426,
-E       -    108053462]]]
-E       ?   ^
-E       
-E       +   [108053462]]]
-E       ?   ^
-
-tests/from_json.py:78: AssertionError
-____________________ TestInfo.test_info_gene_list_non_model ____________________
-
-self = <tests.test_info.TestInfo testMethod=test_info_gene_list_non_model>
-
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
-    
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: Lists differ: [['EN[97 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[875 chars]84]]] != [['EN[97 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[879 chars]84]]]
-E       
-E       First differing element 0:
-E       ['ENS[96 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[874 chars]684]]
-E       ['ENS[96 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[878 chars]684]]
-E       
-E         [['ENSMMUG00000021246.4',
-E           'macaca_mulatta',
-E           'Mmul_10',
-E           'CCDC13',
-E       -   'coiled-coil domain containing 13 [Source:HGNC Symbol;Acc:HGNC:26358]',
-E       +   'coiled-coil domain containing 13 [Source:UniProtKB Gene Name;Acc:F7D2F4]',
-E           'Gene',
-E           'protein_coding',
-E           'ENSMMUT00000029894.4',
-E           '2',
-E           -1,
-E           98646979,
-E           98755023,
-E           ['ENSMMUT00000029893.4',
-E            'ENSMMUT00000053619.2',
-E            'ENSMMUT00000104418.1',
-E            'ENSMMUT00000087615.1',
-E            'ENSMMUT00000103912.1',
-E            'ENSMMUT00000086824.1',
-E            'ENSMMUT00000029894.4',
-E            'ENSMMUT00000104481.1',
-E            'ENSMMUT00000090481.1',
-E            'ENSMMUT00000026408.4'],
-E           ['protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding'],
-E           ['CCDC13-201',
-E            'CCDC13-202',
-E            'CCDC13-204',
-E            'CCDC13-203',
-E            'CCDC13-205',
-E            'CCDC13-206',
-E            'CCDC13-207',
-E            'CCDC13-208',
-E            'CCDC13-209',
-E            'CCDC13-210'],
-E           [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-E           [98646979,
-E            98646982,
-E            98646984,
-E            98646984,
-E            98646985,
-E            98662368,
-E            98663259,
-E            98690412,
-E            98737900,
-E            98738870],
-E           [98655536,
-E            98656674,
-E            98688669,
-E            98656968,
-E            98656865,
-E            98713982,
-E            98746548,
-E            98713982,
-E            98755023,
-E            98754684]]]
-
-tests/from_json.py:78: AssertionError
------------------------------- Captured log call -------------------------------
-INFO     gget.utils:gget_info.py:98 We noticed that you passed a version number with your Ensembl ID.
-Please note that gget info will always return information linked to the latest Ensembl ID version (see 'ensembl_id').
 =============================== warnings summary ===============================
-tests/test_blast.py::TestBlast::test_blast_nt
-  /home/runner/work/gget/gget/gget/gget_blast.py:327: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
-    results_df = pd.read_html(str(dsc_table))[0]
-
 tests/test_cbio.py::TestCbioSearch::test_cbio_search
 tests/test_cbio.py::TestCbioSearch::test_cbio_search
   /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/swagger_spec_validator/validator12.py:18: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
@@ -642,18 +1576,19 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-18586.27s call     tests/test_blast.py::TestBlast::test_blast_nt
-42.31s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-13.04s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-12.56s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-12.38s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-6.32s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-3.57s call     tests/test_cbio.py::TestCbioSearch::test_cbio_search
-3.47s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_metadata
-3.34s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
-2.96s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_in_elm
+14425.24s call     tests/test_blast.py::TestBlast::test_blast_nt
+61.82s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+38.61s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+23.54s call     tests/test_info.py::TestInfo::test_info_WB_transcript
+13.85s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+13.28s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
+9.30s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+4.63s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+4.05s call     tests/test_cbio.py::TestCbio::test_cbio_download
+3.43s call     tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
+FAILED tests/test_blast.py::TestBlast::test_blast_nt - http.client.RemoteDisconnected: Remote end closed connection without response
 FAILED tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata - AssertionError: {'n_o[179 chars]ature_id', 'feature_name', 'feature_length'], 'layers': [None]} != {'n_o[179 chars]ature_id', 'feature_name', 'feature_length']}
 - {'layers': [None],
 -  'n_obs': 3679,
@@ -673,6 +1608,7 @@ FAILED tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata - AssertionE
            'disease',
            'is_primary_data'],
    'var': ['soma_joinid', 'feature_id', 'feature_name', 'feature_length']}
+FAILED tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl - RuntimeError: http://rest.ensembl.org/ returned error status code 503. Please double-check arguments and try again.
 FAILED tests/test_info.py::TestInfo::test_info_WB_transcript - AssertionError: Lists differ: [['T1[86 chars]3'], [], 'WBGene00043981', ['Protein aaim-1', [2746 chars]67]]] != [['T1[86 chars]3'], 'aaim-1-201', [], 'WBGene00043981', ['Pro[2760 chars]67]]]
 
 First differing element 0:
@@ -798,219 +1734,5 @@ First differing element 0:
      6560671,
      6560443,
      6559667]]]
-FAILED tests/test_info.py::TestInfo::test_info_gene - AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2358 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
-
-First differing element 0:
-['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2357 chars]462]]
-['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2302 chars]462]]
-
-- [['EnsMUSG00000000001.6',
-?                       ^
-
-+ [['EnsMUSG00000000001.5',
-?                       ^
-
-    'Q9DC51',
-+   '14679',
-    'mus_musculus',
-    'GRCm39',
-    'Gnai3',
-    'Gnai3',
--   [],
-+   ['Galphai3', 'Gnai-3', 'Hg1a'],
-    'Guanine nucleotide-binding protein G(i) subunit alpha-3',
-    'G protein subunit alpha i3 [Source:MGI Symbol;Acc:MGI:95773]',
-    'Heterotrimeric guanine nucleotide-binding proteins (G proteins) function as '
-    'transducers downstream of G protein-coupled receptors (GPCRs) in numerous '
-    'signaling cascades. The alpha chain contains the guanine nucleotide binding '
-    'site and alternates between an active, GTP-bound state and an inactive, '
-    'GDP-bound state. Signaling by an activated GPCR promotes GDP release and '
-    'GTP binding. The alpha subunit has a low GTPase activity that converts '
-    'bound GTP to GDP, thereby terminating the signal (By similarity). Both GDP '
-    'release and GTP hydrolysis are modulated by numerous regulatory proteins '
-    '(By similarity). Signaling is mediated via effector proteins, such as '
-    'adenylate cyclase. Inhibits adenylate cyclase activity, leading to '
-    'decreased intracellular cAMP levels (By similarity). Stimulates the '
-    'activity of receptor-regulated K(+) channels (By similarity). The active '
-    'GTP-bound form prevents the association of RGS14 with centrosomes and is '
-    'required for the translocation of RGS14 from the cytoplasm to the plasma '
-    'membrane. May play a role in cell division (By similarity). The active '
-    'GTP-bound form activates the calcium permeant TRPC5 ion channels (By '
-    'similarity)',
-+   'Predicted to enable several functions, including G-protein '
-+   'beta/gamma-subunit complex binding activity; GDP binding activity; and '
-+   'GTPase activating protein binding activity. Predicted to be involved in '
-+   'several processes, including G protein-coupled receptor signaling pathway; '
-+   'positive regulation of metabolic process; and positive regulation of '
-+   'vascular associated smooth muscle cell proliferation. Predicted to act '
-+   'upstream of or within G protein-coupled receptor signaling pathway. Located '
-+   'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
-+   'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
-+   'Alliance of Genome Resources, Apr 2025]',
-    ['Cytoplasm',
-     'Cell membrane',
-     'Cytoplasm, cytoskeleton, microtubule organizing center, centrosome'],
-    'Gene',
-    'protein_coding',
--   'ENSMUST00000000001.6',
-?                       ^
-
-+   'ENSMUST00000000001.5',
-?                       ^
-
-    '3',
-    -1,
--   108014590,
-?           ^
-
-+   108014596,
-?           ^
-
--   108053469,
-?           ^
-
-+   108053462,
-?           ^
-
--   ['ENSMUST00000000001.6',
-?                        ^
-
-+   ['ENSMUST00000000001.5'],
-?                        ^ +
-
--    'ENSMUST00000535596.1',
--    'ENSMUST00000535597.1',
--    'ENSMUST00000535598.1',
--    'ENSMUST00000535599.1',
--    'ENSMUST00000535600.1',
--    'ENSMUST00000535601.1',
--    'ENSMUST00000535602.1',
--    'ENSMUST00000535603.1',
--    'ENSMUST00000558104.1'],
--   ['protein_coding',
-+   ['protein_coding'],
-?                    +
-
--    'protein_coding',
--    'protein_coding',
--    'nonsense_mediated_decay',
--    'protein_coding',
--    'nonsense_mediated_decay',
--    'nonsense_mediated_decay',
--    'protein_coding',
--    'nonsense_mediated_decay',
--    'nonsense_mediated_decay'],
--   ['Gnai3-201',
-+   ['Gnai3-201'],
-?               +
-
-+   [-1],
--    'Gnai3-202',
--    'Gnai3-203',
--    'Gnai3-204',
--    'Gnai3-205',
--    'Gnai3-206',
--    'Gnai3-207',
--    'Gnai3-208',
--    'Gnai3-209',
--    'Gnai3-210'],
--   [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
--   [108014596,
-+   [108014596],
-?             +
-
--    108014596,
--    108014597,
--    108014597,
--    108014592,
--    108014597,
--    108014590,
--    108014613,
--    108014611,
--    108014596],
--   [108053469,
--    108053469,
--    108053469,
--    108053453,
--    108053469,
--    108053443,
--    108053435,
--    108053469,
--    108053426,
--    108053462]]]
-?   ^
-
-+   [108053462]]]
-?   ^
-FAILED tests/test_info.py::TestInfo::test_info_gene_list_non_model - AssertionError: Lists differ: [['EN[97 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[875 chars]84]]] != [['EN[97 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[879 chars]84]]]
-
-First differing element 0:
-['ENS[96 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[874 chars]684]]
-['ENS[96 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[878 chars]684]]
-
-  [['ENSMMUG00000021246.4',
-    'macaca_mulatta',
-    'Mmul_10',
-    'CCDC13',
--   'coiled-coil domain containing 13 [Source:HGNC Symbol;Acc:HGNC:26358]',
-+   'coiled-coil domain containing 13 [Source:UniProtKB Gene Name;Acc:F7D2F4]',
-    'Gene',
-    'protein_coding',
-    'ENSMMUT00000029894.4',
-    '2',
-    -1,
-    98646979,
-    98755023,
-    ['ENSMMUT00000029893.4',
-     'ENSMMUT00000053619.2',
-     'ENSMMUT00000104418.1',
-     'ENSMMUT00000087615.1',
-     'ENSMMUT00000103912.1',
-     'ENSMMUT00000086824.1',
-     'ENSMMUT00000029894.4',
-     'ENSMMUT00000104481.1',
-     'ENSMMUT00000090481.1',
-     'ENSMMUT00000026408.4'],
-    ['protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding'],
-    ['CCDC13-201',
-     'CCDC13-202',
-     'CCDC13-204',
-     'CCDC13-203',
-     'CCDC13-205',
-     'CCDC13-206',
-     'CCDC13-207',
-     'CCDC13-208',
-     'CCDC13-209',
-     'CCDC13-210'],
-    [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-    [98646979,
-     98646982,
-     98646984,
-     98646984,
-     98646985,
-     98662368,
-     98663259,
-     98690412,
-     98737900,
-     98738870],
-    [98655536,
-     98656674,
-     98688669,
-     98656968,
-     98656865,
-     98713982,
-     98746548,
-     98713982,
-     98755023,
-     98754684]]]
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======= 4 failed, 83 passed, 28 warnings, 1 error in 18731.86s (5:12:11) =======
+======= 4 failed, 80 passed, 27 warnings, 1 error in 14647.54s (4:04:07) =======
