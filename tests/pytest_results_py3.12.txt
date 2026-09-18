@@ -1,11 +1,11 @@
-Pytest results (Python 3.12) - 2026-09-14T20:01:53Z
+Pytest results (Python 3.12) - 2026-09-17T19:24:30Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.14, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.14/x64/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/gget/gget
 configfile: pyproject.toml
-plugins: zarr-3.3.0, fast-array-utils-1.5, cov-7.1.0
+plugins: zarr-3.4.0, fast-array-utils-1.5, cov-7.1.0
 collecting ... collected 250 items
 
 tests/test_8cube.py::TestSpecificity::test_specificity_basic PASSED      [  0%]
@@ -19,7 +19,7 @@ tests/test_archs4.py::TestArchs4::test_archs4_bad_which PASSED           [  3%]
 tests/test_archs4.py::TestArchs4::test_archs4_defaults PASSED            [  3%]
 tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl PASSED  [  4%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue PASSED              [  4%]
-tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl PASSED      [  4%]
+tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl FAILED      [  4%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_json PASSED         [  5%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_mouse PASSED        [  5%]
 tests/test_bgee.py::TestBgee::test_bgee_expression PASSED                [  6%]
