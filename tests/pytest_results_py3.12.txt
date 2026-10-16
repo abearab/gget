@@ -1,7 +1,7 @@
-Pytest results (Python 3.12) - 2026-10-12T22:40:08Z
+Pytest results (Python 3.12) - 2026-10-15T19:34:44Z
 
 ============================= test session starts ==============================
-platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.15/x64/bin/python
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.7.0 -- /opt/hostedtoolcache/Python/3.12.15/x64/bin/python
 cachedir: .pytest_cache
 rootdir: /home/runner/work/gget/gget
 configfile: pyproject.toml
@@ -17,9 +17,9 @@ tests/test_archs4.py::TestArchs4::test_archs4_bad_gene_tissue PASSED     [  2%]
 tests/test_archs4.py::TestArchs4::test_archs4_bad_species PASSED         [  2%]
 tests/test_archs4.py::TestArchs4::test_archs4_bad_which PASSED           [  3%]
 tests/test_archs4.py::TestArchs4::test_archs4_defaults PASSED            [  3%]
-tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl PASSED  [  4%]
+tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl FAILED  [  4%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue PASSED              [  4%]
-tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl PASSED      [  4%]
+tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl FAILED      [  4%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_json PASSED         [  5%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_mouse PASSED        [  5%]
 tests/test_bgee.py::TestBgee::test_bgee_expression PASSED                [  6%]
