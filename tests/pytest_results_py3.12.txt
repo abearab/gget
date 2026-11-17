@@ -1,4 +1,4 @@
-Pytest results (Python 3.12) - 2026-11-12T21:58:38Z
+Pytest results (Python 3.12) - 2026-11-16T23:55:02Z
 
 ============================= test session starts ==============================
 platform linux -- Python 3.12.16, pytest-9.2.0, pluggy-1.7.0 -- /opt/hostedtoolcache/Python/3.12.16/x64/bin/python
@@ -19,8 +19,8 @@ tests/test_archs4.py::TestArchs4::test_archs4_bad_which PASSED           [  3%]
 tests/test_archs4.py::TestArchs4::test_archs4_defaults PASSED            [  3%]
 tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl PASSED  [  4%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue PASSED              [  4%]
-tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl PASSED      [  4%]
-tests/test_archs4.py::TestArchs4::test_archs4_tissue_json PASSED         [  5%]
+tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl FAILED      [  4%]
+tests/test_archs4.py::TestArchs4::test_archs4_tissue_json FAILED         [  5%]
 tests/test_archs4.py::TestArchs4::test_archs4_tissue_mouse PASSED        [  5%]
 tests/test_bgee.py::TestBgee::test_bgee_expression PASSED                [  6%]
 tests/test_bgee.py::TestBgee::test_bgee_expression_multiple PASSED       [  6%]
@@ -93,9 +93,6 @@ tests/test_enrichr.py::TestEnrichr::test_enrichr_worm PASSED             [ 32%]
 tests/test_enrichr.py::TestEnrichr::test_enrichr_yeast PASSED            [ 33%]
 tests/test_gpt.py::TestGpt::test_gpt PASSED                              [ 33%]
 tests/test_info.py::TestInfo::test_info_WB_transcript FAILED             [ 34%]
-tests/test_info.py::TestInfo::test_info_exon PASSED                      [ 34%]
-tests/test_info.py::TestInfo::test_info_gene FAILED                      [ 34%]
-tests/test_info.py::TestInfo::test_info_gene_list_non_model FAILED       [ 35%]
 
 ==================================== ERRORS ====================================
 __________ ERROR at setup of TestCosmicWorkflow.test_cosmic_defaults ___________
@@ -149,6 +146,1024 @@ INFO     gget.utils:gget_cosmic.py:185 Extracted tar file to /home/runner/work/g
 INFO     gget.utils:gget_cosmic.py:441 Creating modified mutations file for use with gget mutate...
 INFO     gget.utils:gget_cosmic.py:659 Modified mutations file for use with gget mutate created at /home/runner/work/gget/gget/example_GRCh37/CancerMutationCensus_AllData_v104_GRCh37_mutation_workflow.csv
 =================================== FAILURES ===================================
+____________________ TestArchs4.test_archs4_tissue_ensembl _____________________
+
+self = <tests.test_archs4.TestArchs4 testMethod=test_archs4_tissue_ensembl>
+
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+>       result_to_test = do_call(func, td[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/from_json.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+func = <function archs4 at 0x7fb6d75427a0>
+args = {'gene': 'ENSG00000106443', 'ensembl': True, 'which': 'tissue', 'species': 'mouse'}
+
+    def do_call(func, args):
+        if isinstance(args, dict):
+>           return func(**args)
+                   ^^^^^^^^^^^^
+
+tests/from_json.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene = 'PHF14', ensembl = True, which = 'tissue', gene_count = 100
+species = 'mouse', json = False, save = False, verbose = True
+
+    def archs4(
+        gene,
+        ensembl=False,
+        which="correlation",
+        gene_count=100,
+        species="human",
+        json=False,
+        save=False,
+        verbose=True,
+    ):
+        """
+        Find the most correlated genes or the tissue expression atlas
+        of a gene of interest using data from the human and mouse RNA-seq
+        database ARCHS4 (https://maayanlab.cloud/archs4/).
+    
+        Args:
+        - gene          Short name (Entrez gene symbol) of gene of interest (str), e.g. 'STAT4'.
+                        Set 'ensembl=True' to input an Ensembl gene ID, e.g. ENSG00000138378.
+        - ensembl       Define as 'True' if 'gene' is an Ensembl gene ID. (Default: False)
+        - which         'correlation' (default) or 'tissue'.
+                        - 'correlation' returns a gene correlation table that contains the
+                        100 most correlated genes to the gene of interest. The Pearson
+                        correlation is calculated over all samples and tissues in ARCHS4.
+                        - 'tissue' returns a tissue expression atlas calculated from
+                        human or mouse samples (as defined by 'species') in ARCHS4.
+        - gene_count    Number of correlated genes to return (default: 100).
+                        (Only for gene correlation.)
+        - species       'human' (default) or 'mouse'.
+                        (Only for tissue expression atlas.)
+        - json          If True, returns results in json format instead of data frame. Default: False.
+        - save          True/False whether to save the results in the local directory.
+        - verbose        True/False whether to print progress information. Default True.
+    
+        Returns a data frame with the requested results.
+        """
+        # Check if 'which' argument is valid
+        whichs = ["correlation", "tissue"]
+        if which not in whichs:
+            raise ValueError(
+                f"'which' argument specified as {which}. Expected one of: {', '.join(whichs)}"
+            )
+    
+        # Check if 'species' argument is valid
+        sps = ["human", "mouse"]
+        if species not in sps:
+            raise ValueError(
+                f"'species' argument specified as {species}. Expected one of: {', '.join(sps)}"
+            )
+    
+        ## Transform Ensembl IDs to gene symbols
+        if ensembl:
+            # Remove version number if passed
+            gene = gene.split(".")[0]
+    
+            info_df = info(gene, verbose=False, pdb=False, ncbi=False, uniprot=False)
+    
+            # Check if Ensembl ID was found
+            if isinstance(info_df, type(None)):
+                logger.error(
+                    f"ID '{gene}' not found. Please double-check spelling/arguments and try again."
+                )
+                return
+    
+            gene_symbol = info_df.loc[gene]["ensembl_gene_name"]
+    
+            # If more than one gene symbol was returned, use first entry
+            if isinstance(gene_symbol, list):
+                gene = gene_symbol[0]
+            else:
+                gene = gene_symbol
+    
+        # Make all gene letters uppercase
+        gene = gene.upper()
+    
+        if which == "correlation":
+            if verbose:
+                logger.info(
+                    f"Fetching the {gene_count} most correlated genes to {gene} from ARCHS4."
+                )
+    
+            ## Find most similar genes based on co-expression
+            # Define number of correlated genes to return (+1 to account for Python indexing)
+            gene_count = gene_count + 1
+    
+            # Dictionary with arguments
+            json_dict = {"id": gene, "count": gene_count}
+    
+            r = requests.post(url=GENECORR_URL, json=json_dict)
+    
+            if not r.ok:
+                raise RuntimeError(
+                    f"Gene correlation API request returned with error code: {r.status_code}. "
+                    "Please double-check the arguments and try again.\n"
+                )
+    
+            corr_data = r.json()
+    
+            # Check if the request returned an error (e.g. gene not found)
+            if "error" in corr_data.keys():
+                if corr_data["error"] == f"{gene} not in colids":
+                    logger.error(
+                        f"Gene '{gene}' did not return any gene correlation results. \n"
+                        "If the gene is an Ensembl ID, please set argument 'ensembl=True' (for terminal, add flag: [--ensembl])."
+                    )
+                    return
+                else:
+                    logger.error(
+                        f"Gene correlation request for search term '{gene}' returned error: {corr_data['error']}"
+                    )
+                    return
+    
+            else:
+                # Build data frame from returned results
+                corr_df = pd.DataFrame()
+                corr_df["gene_symbol"] = corr_data["rowids"]
+                corr_df["pearson_correlation"] = corr_data["values"]
+                # Drop the first row (since that is the searched gene against itself)
+                corr_df = corr_df.iloc[1:, :]
+    
+            if json:
+                results_dict = json_package.loads(corr_df.to_json(orient="records"))
+                if save:
+                    with open(
+                        f"gget_archs4_gene-correlation_{gene}.json", "w", encoding="utf-8"
+                    ) as f:
+                        json_package.dump(results_dict, f, ensure_ascii=False, indent=4)
+    
+                return results_dict
+    
+            else:
+                if save:
+                    corr_df.to_csv(f"gget_archs4_gene-correlation_{gene}.csv", index=False)
+    
+                return corr_df
+    
+        if which == "tissue":
+            if verbose:
+                logger.info(
+                    f"Fetching the tissue expression atlas of {gene} from {species} ARCHS4 data."
+                )
+    
+            ## Find tissue expression data
+            ## Define API query
+            # # Query for cell line data
+            # query = f"search={gene}&species={species}&type=cellline"
+            # Query for tissue data
+            query = f"search={gene}&species={species}&type=tissue"
+            url = EXPRESSION_URL + query
+    
+            # Submit API query
+            r = requests.post(url=url, headers={"Content-Type": "application/json"})
+    
+            if not r.ok:
+                raise RuntimeError(
+                    f"Tissue expression API request returned with error code: {r.status_code}. "
+                    "Please double-check the arguments and try again.\n"
+                )
+    
+            # Read query results into data frame
+            tissue_exp_df = pd.read_csv(io.StringIO(r.content.decode("utf-8")))
+            # Check if any results were returned
+            if len(tissue_exp_df) < 2:
+                logger.error(
+                    f"Gene '{gene}' did not return any tissue expression results. \n"
+                    "If the gene is an Ensembl ID, please set argument 'ensembl=True' (for terminal, add flag: [--ensembl])."
+                )
+                return
+    
+            # Drop NaN rows
+            tissue_exp_df = tissue_exp_df.dropna()
+    
+            # Drop color columns
+>           tissue_exp_df = tissue_exp_df.drop(["color"], axis=1)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_archs4.py:189: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self =                                               <br />
+0  <b>Warning</b>:  mysqli::__construct(): (HY000...
+1            Connection failed: Too many connections
+labels = ['color'], axis = 1, index = None, columns = None, level = None
+inplace = False, errors = 'raise'
+
+    def drop(
+        self,
+        labels: IndexLabel | None = None,
+        *,
+        axis: Axis = 0,
+        index: IndexLabel | None = None,
+        columns: IndexLabel | None = None,
+        level: Level | None = None,
+        inplace: bool = False,
+        errors: IgnoreRaise = "raise",
+    ) -> DataFrame | None:
+        """
+        Drop specified labels from rows or columns.
+    
+        Remove rows or columns by specifying label names and corresponding
+        axis, or by directly specifying index or column names. When using a
+        multi-index, labels on different levels can be removed by specifying
+        the level. See the :ref:`user guide <advanced.shown_levels>`
+        for more information about the now unused levels.
+    
+        Parameters
+        ----------
+        labels : single label or list-like
+            Index or column labels to drop. A tuple will be used as a single
+            label and not treated as a list-like.
+        axis : {0 or 'index', 1 or 'columns'}, default 0
+            Whether to drop labels from the index (0 or 'index') or
+            columns (1 or 'columns').
+        index : single label or list-like
+            Alternative to specifying axis (``labels, axis=0``
+            is equivalent to ``index=labels``).
+        columns : single label or list-like
+            Alternative to specifying axis (``labels, axis=1``
+            is equivalent to ``columns=labels``).
+        level : int or level name, optional
+            For MultiIndex, level from which the labels will be removed.
+        inplace : bool, default False
+            If False, return a copy. Otherwise, do operation
+            in place and return None.
+        errors : {'ignore', 'raise'}, default 'raise'
+            If 'ignore', suppress error and only existing labels are
+            dropped.
+    
+        Returns
+        -------
+        DataFrame or None
+            Returns DataFrame or None DataFrame with the specified
+            index or column labels removed or None if inplace=True.
+    
+        Raises
+        ------
+        KeyError
+            If any of the labels is not found in the selected axis.
+    
+        See Also
+        --------
+        DataFrame.loc : Label-location based indexer for selection by label.
+        DataFrame.dropna : Return DataFrame with labels on given axis omitted
+            where (all or any) data are missing.
+        DataFrame.drop_duplicates : Return DataFrame with duplicate rows
+            removed, optionally only considering certain columns.
+        Series.drop : Return Series with specified index labels removed.
+    
+        Examples
+        --------
+        >>> df = pd.DataFrame(np.arange(12).reshape(3, 4),
+        ...                   columns=['A', 'B', 'C', 'D'])
+        >>> df
+           A  B   C   D
+        0  0  1   2   3
+        1  4  5   6   7
+        2  8  9  10  11
+    
+        Drop columns
+    
+        >>> df.drop(['B', 'C'], axis=1)
+           A   D
+        0  0   3
+        1  4   7
+        2  8  11
+    
+        >>> df.drop(columns=['B', 'C'])
+           A   D
+        0  0   3
+        1  4   7
+        2  8  11
+    
+        Drop a row by index
+    
+        >>> df.drop([0, 1])
+           A  B   C   D
+        2  8  9  10  11
+    
+        Drop columns and/or rows of MultiIndex DataFrame
+    
+        >>> midx = pd.MultiIndex(levels=[['llama', 'cow', 'falcon'],
+        ...                              ['speed', 'weight', 'length']],
+        ...                      codes=[[0, 0, 0, 1, 1, 1, 2, 2, 2],
+        ...                             [0, 1, 2, 0, 1, 2, 0, 1, 2]])
+        >>> df = pd.DataFrame(index=midx, columns=['big', 'small'],
+        ...                   data=[[45, 30], [200, 100], [1.5, 1], [30, 20],
+        ...                         [250, 150], [1.5, 0.8], [320, 250],
+        ...                         [1, 0.8], [0.3, 0.2]])
+        >>> df
+                        big     small
+        llama   speed   45.0    30.0
+                weight  200.0   100.0
+                length  1.5     1.0
+        cow     speed   30.0    20.0
+                weight  250.0   150.0
+                length  1.5     0.8
+        falcon  speed   320.0   250.0
+                weight  1.0     0.8
+                length  0.3     0.2
+    
+        Drop a specific index combination from the MultiIndex
+        DataFrame, i.e., drop the combination ``'falcon'`` and
+        ``'weight'``, which deletes only the corresponding row
+    
+        >>> df.drop(index=('falcon', 'weight'))
+                        big     small
+        llama   speed   45.0    30.0
+                weight  200.0   100.0
+                length  1.5     1.0
+        cow     speed   30.0    20.0
+                weight  250.0   150.0
+                length  1.5     0.8
+        falcon  speed   320.0   250.0
+                length  0.3     0.2
+    
+        >>> df.drop(index='cow', columns='small')
+                        big
+        llama   speed   45.0
+                weight  200.0
+                length  1.5
+        falcon  speed   320.0
+                weight  1.0
+                length  0.3
+    
+        >>> df.drop(index='length', level=1)
+                        big     small
+        llama   speed   45.0    30.0
+                weight  200.0   100.0
+        cow     speed   30.0    20.0
+                weight  250.0   150.0
+        falcon  speed   320.0   250.0
+                weight  1.0     0.8
+        """
+>       return super().drop(
+            labels=labels,
+            axis=axis,
+            index=index,
+            columns=columns,
+            level=level,
+            inplace=inplace,
+            errors=errors,
+        )
+
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/frame.py:5603: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self =                                               <br />
+0  <b>Warning</b>:  mysqli::__construct(): (HY000...
+1            Connection failed: Too many connections
+labels = ['color'], axis = 'columns', index = None, columns = None, level = None
+inplace = False, errors = 'raise'
+
+    def drop(
+        self,
+        labels: IndexLabel | None = None,
+        *,
+        axis: Axis = 0,
+        index: IndexLabel | None = None,
+        columns: IndexLabel | None = None,
+        level: Level | None = None,
+        inplace: bool_t = False,
+        errors: IgnoreRaise = "raise",
+    ) -> Self | None:
+        inplace = validate_bool_kwarg(inplace, "inplace")
+    
+        if labels is not None:
+            if index is not None or columns is not None:
+                raise ValueError("Cannot specify both 'labels' and 'index'/'columns'")
+            axis_name = self._get_axis_name(axis)
+            axes = {axis_name: labels}
+        elif index is not None or columns is not None:
+            axes = {"index": index}
+            if self.ndim == 2:
+                axes["columns"] = columns
+        else:
+            raise ValueError(
+                "Need to specify at least one of 'labels', 'index' or 'columns'"
+            )
+    
+        obj = self
+    
+        for axis, labels in axes.items():
+            if labels is not None:
+>               obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/generic.py:4810: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self =                                               <br />
+0  <b>Warning</b>:  mysqli::__construct(): (HY000...
+1            Connection failed: Too many connections
+labels = ['color'], axis = Index(['<br />'], dtype='object'), level = None
+errors = 'raise', only_slice = False
+
+    @final
+    def _drop_axis(
+        self,
+        labels,
+        axis,
+        level=None,
+        errors: IgnoreRaise = "raise",
+        only_slice: bool_t = False,
+    ) -> Self:
+        """
+        Drop labels from specified axis. Used in the ``drop`` method
+        internally.
+    
+        Parameters
+        ----------
+        labels : single label or list-like
+        axis : int or axis name
+        level : int or level name, default None
+            For MultiIndex
+        errors : {'ignore', 'raise'}, default 'raise'
+            If 'ignore', suppress error and existing labels are dropped.
+        only_slice : bool, default False
+            Whether indexing along columns should be view-only.
+    
+        """
+        axis_num = self._get_axis_number(axis)
+        axis = self._get_axis(axis)
+    
+        if axis.is_unique:
+            if level is not None:
+                if not isinstance(axis, MultiIndex):
+                    raise AssertionError("axis must be a MultiIndex")
+                new_axis = axis.drop(labels, level=level, errors=errors)
+            else:
+>               new_axis = axis.drop(labels, errors=errors)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/generic.py:4852: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Index(['<br />'], dtype='object')
+labels = array(['color'], dtype=object), errors = 'raise'
+
+    def drop(
+        self,
+        labels: Index | np.ndarray | Iterable[Hashable],
+        errors: IgnoreRaise = "raise",
+    ) -> Index:
+        """
+        Make new Index with passed list of labels deleted.
+    
+        Parameters
+        ----------
+        labels : array-like or scalar
+        errors : {'ignore', 'raise'}, default 'raise'
+            If 'ignore', suppress error and existing labels are dropped.
+    
+        Returns
+        -------
+        Index
+            Will be same type as self, except for RangeIndex.
+    
+        Raises
+        ------
+        KeyError
+            If not all of the labels are found in the selected axis
+    
+        Examples
+        --------
+        >>> idx = pd.Index(['a', 'b', 'c'])
+        >>> idx.drop(['a'])
+        Index(['b', 'c'], dtype='object')
+        """
+        if not isinstance(labels, Index):
+            # avoid materializing e.g. RangeIndex
+            arr_dtype = "object" if self.dtype == "object" else None
+            labels = com.index_labels_to_array(labels, dtype=arr_dtype)
+    
+        indexer = self.get_indexer_for(labels)
+        mask = indexer == -1
+        if mask.any():
+            if errors != "ignore":
+>               raise KeyError(f"{labels[mask].tolist()} not found in axis")
+E               KeyError: "['color'] not found in axis"
+
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/indexes/base.py:7136: KeyError
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_archs4.py:154 Fetching the tissue expression atlas of PHF14 from mouse ARCHS4 data.
+______________________ TestArchs4.test_archs4_tissue_json ______________________
+
+self = <tests.test_archs4.TestArchs4 testMethod=test_archs4_tissue_json>
+
+    def assert_equal(self: unittest.TestCase):
+        test = name
+        expected_result = td[test]["expected_result"]
+>       result_to_test = do_call(func, td[test]["args"])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/from_json.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+func = <function archs4 at 0x7fb6d75427a0>
+args = {'gene': 'fuNdC1', 'which': 'tissue', 'json': True}
+
+    def do_call(func, args):
+        if isinstance(args, dict):
+>           return func(**args)
+                   ^^^^^^^^^^^^
+
+tests/from_json.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+gene = 'FUNDC1', ensembl = False, which = 'tissue', gene_count = 100
+species = 'human', json = True, save = False, verbose = True
+
+    def archs4(
+        gene,
+        ensembl=False,
+        which="correlation",
+        gene_count=100,
+        species="human",
+        json=False,
+        save=False,
+        verbose=True,
+    ):
+        """
+        Find the most correlated genes or the tissue expression atlas
+        of a gene of interest using data from the human and mouse RNA-seq
+        database ARCHS4 (https://maayanlab.cloud/archs4/).
+    
+        Args:
+        - gene          Short name (Entrez gene symbol) of gene of interest (str), e.g. 'STAT4'.
+                        Set 'ensembl=True' to input an Ensembl gene ID, e.g. ENSG00000138378.
+        - ensembl       Define as 'True' if 'gene' is an Ensembl gene ID. (Default: False)
+        - which         'correlation' (default) or 'tissue'.
+                        - 'correlation' returns a gene correlation table that contains the
+                        100 most correlated genes to the gene of interest. The Pearson
+                        correlation is calculated over all samples and tissues in ARCHS4.
+                        - 'tissue' returns a tissue expression atlas calculated from
+                        human or mouse samples (as defined by 'species') in ARCHS4.
+        - gene_count    Number of correlated genes to return (default: 100).
+                        (Only for gene correlation.)
+        - species       'human' (default) or 'mouse'.
+                        (Only for tissue expression atlas.)
+        - json          If True, returns results in json format instead of data frame. Default: False.
+        - save          True/False whether to save the results in the local directory.
+        - verbose        True/False whether to print progress information. Default True.
+    
+        Returns a data frame with the requested results.
+        """
+        # Check if 'which' argument is valid
+        whichs = ["correlation", "tissue"]
+        if which not in whichs:
+            raise ValueError(
+                f"'which' argument specified as {which}. Expected one of: {', '.join(whichs)}"
+            )
+    
+        # Check if 'species' argument is valid
+        sps = ["human", "mouse"]
+        if species not in sps:
+            raise ValueError(
+                f"'species' argument specified as {species}. Expected one of: {', '.join(sps)}"
+            )
+    
+        ## Transform Ensembl IDs to gene symbols
+        if ensembl:
+            # Remove version number if passed
+            gene = gene.split(".")[0]
+    
+            info_df = info(gene, verbose=False, pdb=False, ncbi=False, uniprot=False)
+    
+            # Check if Ensembl ID was found
+            if isinstance(info_df, type(None)):
+                logger.error(
+                    f"ID '{gene}' not found. Please double-check spelling/arguments and try again."
+                )
+                return
+    
+            gene_symbol = info_df.loc[gene]["ensembl_gene_name"]
+    
+            # If more than one gene symbol was returned, use first entry
+            if isinstance(gene_symbol, list):
+                gene = gene_symbol[0]
+            else:
+                gene = gene_symbol
+    
+        # Make all gene letters uppercase
+        gene = gene.upper()
+    
+        if which == "correlation":
+            if verbose:
+                logger.info(
+                    f"Fetching the {gene_count} most correlated genes to {gene} from ARCHS4."
+                )
+    
+            ## Find most similar genes based on co-expression
+            # Define number of correlated genes to return (+1 to account for Python indexing)
+            gene_count = gene_count + 1
+    
+            # Dictionary with arguments
+            json_dict = {"id": gene, "count": gene_count}
+    
+            r = requests.post(url=GENECORR_URL, json=json_dict)
+    
+            if not r.ok:
+                raise RuntimeError(
+                    f"Gene correlation API request returned with error code: {r.status_code}. "
+                    "Please double-check the arguments and try again.\n"
+                )
+    
+            corr_data = r.json()
+    
+            # Check if the request returned an error (e.g. gene not found)
+            if "error" in corr_data.keys():
+                if corr_data["error"] == f"{gene} not in colids":
+                    logger.error(
+                        f"Gene '{gene}' did not return any gene correlation results. \n"
+                        "If the gene is an Ensembl ID, please set argument 'ensembl=True' (for terminal, add flag: [--ensembl])."
+                    )
+                    return
+                else:
+                    logger.error(
+                        f"Gene correlation request for search term '{gene}' returned error: {corr_data['error']}"
+                    )
+                    return
+    
+            else:
+                # Build data frame from returned results
+                corr_df = pd.DataFrame()
+                corr_df["gene_symbol"] = corr_data["rowids"]
+                corr_df["pearson_correlation"] = corr_data["values"]
+                # Drop the first row (since that is the searched gene against itself)
+                corr_df = corr_df.iloc[1:, :]
+    
+            if json:
+                results_dict = json_package.loads(corr_df.to_json(orient="records"))
+                if save:
+                    with open(
+                        f"gget_archs4_gene-correlation_{gene}.json", "w", encoding="utf-8"
+                    ) as f:
+                        json_package.dump(results_dict, f, ensure_ascii=False, indent=4)
+    
+                return results_dict
+    
+            else:
+                if save:
+                    corr_df.to_csv(f"gget_archs4_gene-correlation_{gene}.csv", index=False)
+    
+                return corr_df
+    
+        if which == "tissue":
+            if verbose:
+                logger.info(
+                    f"Fetching the tissue expression atlas of {gene} from {species} ARCHS4 data."
+                )
+    
+            ## Find tissue expression data
+            ## Define API query
+            # # Query for cell line data
+            # query = f"search={gene}&species={species}&type=cellline"
+            # Query for tissue data
+            query = f"search={gene}&species={species}&type=tissue"
+            url = EXPRESSION_URL + query
+    
+            # Submit API query
+            r = requests.post(url=url, headers={"Content-Type": "application/json"})
+    
+            if not r.ok:
+                raise RuntimeError(
+                    f"Tissue expression API request returned with error code: {r.status_code}. "
+                    "Please double-check the arguments and try again.\n"
+                )
+    
+            # Read query results into data frame
+            tissue_exp_df = pd.read_csv(io.StringIO(r.content.decode("utf-8")))
+            # Check if any results were returned
+            if len(tissue_exp_df) < 2:
+                logger.error(
+                    f"Gene '{gene}' did not return any tissue expression results. \n"
+                    "If the gene is an Ensembl ID, please set argument 'ensembl=True' (for terminal, add flag: [--ensembl])."
+                )
+                return
+    
+            # Drop NaN rows
+            tissue_exp_df = tissue_exp_df.dropna()
+    
+            # Drop color columns
+>           tissue_exp_df = tissue_exp_df.drop(["color"], axis=1)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+gget/gget_archs4.py:189: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self =                                               <br />
+0  <b>Warning</b>:  mysqli::__construct(): (HY000...
+1            Connection failed: Too many connections
+labels = ['color'], axis = 1, index = None, columns = None, level = None
+inplace = False, errors = 'raise'
+
+    def drop(
+        self,
+        labels: IndexLabel | None = None,
+        *,
+        axis: Axis = 0,
+        index: IndexLabel | None = None,
+        columns: IndexLabel | None = None,
+        level: Level | None = None,
+        inplace: bool = False,
+        errors: IgnoreRaise = "raise",
+    ) -> DataFrame | None:
+        """
+        Drop specified labels from rows or columns.
+    
+        Remove rows or columns by specifying label names and corresponding
+        axis, or by directly specifying index or column names. When using a
+        multi-index, labels on different levels can be removed by specifying
+        the level. See the :ref:`user guide <advanced.shown_levels>`
+        for more information about the now unused levels.
+    
+        Parameters
+        ----------
+        labels : single label or list-like
+            Index or column labels to drop. A tuple will be used as a single
+            label and not treated as a list-like.
+        axis : {0 or 'index', 1 or 'columns'}, default 0
+            Whether to drop labels from the index (0 or 'index') or
+            columns (1 or 'columns').
+        index : single label or list-like
+            Alternative to specifying axis (``labels, axis=0``
+            is equivalent to ``index=labels``).
+        columns : single label or list-like
+            Alternative to specifying axis (``labels, axis=1``
+            is equivalent to ``columns=labels``).
+        level : int or level name, optional
+            For MultiIndex, level from which the labels will be removed.
+        inplace : bool, default False
+            If False, return a copy. Otherwise, do operation
+            in place and return None.
+        errors : {'ignore', 'raise'}, default 'raise'
+            If 'ignore', suppress error and only existing labels are
+            dropped.
+    
+        Returns
+        -------
+        DataFrame or None
+            Returns DataFrame or None DataFrame with the specified
+            index or column labels removed or None if inplace=True.
+    
+        Raises
+        ------
+        KeyError
+            If any of the labels is not found in the selected axis.
+    
+        See Also
+        --------
+        DataFrame.loc : Label-location based indexer for selection by label.
+        DataFrame.dropna : Return DataFrame with labels on given axis omitted
+            where (all or any) data are missing.
+        DataFrame.drop_duplicates : Return DataFrame with duplicate rows
+            removed, optionally only considering certain columns.
+        Series.drop : Return Series with specified index labels removed.
+    
+        Examples
+        --------
+        >>> df = pd.DataFrame(np.arange(12).reshape(3, 4),
+        ...                   columns=['A', 'B', 'C', 'D'])
+        >>> df
+           A  B   C   D
+        0  0  1   2   3
+        1  4  5   6   7
+        2  8  9  10  11
+    
+        Drop columns
+    
+        >>> df.drop(['B', 'C'], axis=1)
+           A   D
+        0  0   3
+        1  4   7
+        2  8  11
+    
+        >>> df.drop(columns=['B', 'C'])
+           A   D
+        0  0   3
+        1  4   7
+        2  8  11
+    
+        Drop a row by index
+    
+        >>> df.drop([0, 1])
+           A  B   C   D
+        2  8  9  10  11
+    
+        Drop columns and/or rows of MultiIndex DataFrame
+    
+        >>> midx = pd.MultiIndex(levels=[['llama', 'cow', 'falcon'],
+        ...                              ['speed', 'weight', 'length']],
+        ...                      codes=[[0, 0, 0, 1, 1, 1, 2, 2, 2],
+        ...                             [0, 1, 2, 0, 1, 2, 0, 1, 2]])
+        >>> df = pd.DataFrame(index=midx, columns=['big', 'small'],
+        ...                   data=[[45, 30], [200, 100], [1.5, 1], [30, 20],
+        ...                         [250, 150], [1.5, 0.8], [320, 250],
+        ...                         [1, 0.8], [0.3, 0.2]])
+        >>> df
+                        big     small
+        llama   speed   45.0    30.0
+                weight  200.0   100.0
+                length  1.5     1.0
+        cow     speed   30.0    20.0
+                weight  250.0   150.0
+                length  1.5     0.8
+        falcon  speed   320.0   250.0
+                weight  1.0     0.8
+                length  0.3     0.2
+    
+        Drop a specific index combination from the MultiIndex
+        DataFrame, i.e., drop the combination ``'falcon'`` and
+        ``'weight'``, which deletes only the corresponding row
+    
+        >>> df.drop(index=('falcon', 'weight'))
+                        big     small
+        llama   speed   45.0    30.0
+                weight  200.0   100.0
+                length  1.5     1.0
+        cow     speed   30.0    20.0
+                weight  250.0   150.0
+                length  1.5     0.8
+        falcon  speed   320.0   250.0
+                length  0.3     0.2
+    
+        >>> df.drop(index='cow', columns='small')
+                        big
+        llama   speed   45.0
+                weight  200.0
+                length  1.5
+        falcon  speed   320.0
+                weight  1.0
+                length  0.3
+    
+        >>> df.drop(index='length', level=1)
+                        big     small
+        llama   speed   45.0    30.0
+                weight  200.0   100.0
+        cow     speed   30.0    20.0
+                weight  250.0   150.0
+        falcon  speed   320.0   250.0
+                weight  1.0     0.8
+        """
+>       return super().drop(
+            labels=labels,
+            axis=axis,
+            index=index,
+            columns=columns,
+            level=level,
+            inplace=inplace,
+            errors=errors,
+        )
+
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/frame.py:5603: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self =                                               <br />
+0  <b>Warning</b>:  mysqli::__construct(): (HY000...
+1            Connection failed: Too many connections
+labels = ['color'], axis = 'columns', index = None, columns = None, level = None
+inplace = False, errors = 'raise'
+
+    def drop(
+        self,
+        labels: IndexLabel | None = None,
+        *,
+        axis: Axis = 0,
+        index: IndexLabel | None = None,
+        columns: IndexLabel | None = None,
+        level: Level | None = None,
+        inplace: bool_t = False,
+        errors: IgnoreRaise = "raise",
+    ) -> Self | None:
+        inplace = validate_bool_kwarg(inplace, "inplace")
+    
+        if labels is not None:
+            if index is not None or columns is not None:
+                raise ValueError("Cannot specify both 'labels' and 'index'/'columns'")
+            axis_name = self._get_axis_name(axis)
+            axes = {axis_name: labels}
+        elif index is not None or columns is not None:
+            axes = {"index": index}
+            if self.ndim == 2:
+                axes["columns"] = columns
+        else:
+            raise ValueError(
+                "Need to specify at least one of 'labels', 'index' or 'columns'"
+            )
+    
+        obj = self
+    
+        for axis, labels in axes.items():
+            if labels is not None:
+>               obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/generic.py:4810: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self =                                               <br />
+0  <b>Warning</b>:  mysqli::__construct(): (HY000...
+1            Connection failed: Too many connections
+labels = ['color'], axis = Index(['<br />'], dtype='object'), level = None
+errors = 'raise', only_slice = False
+
+    @final
+    def _drop_axis(
+        self,
+        labels,
+        axis,
+        level=None,
+        errors: IgnoreRaise = "raise",
+        only_slice: bool_t = False,
+    ) -> Self:
+        """
+        Drop labels from specified axis. Used in the ``drop`` method
+        internally.
+    
+        Parameters
+        ----------
+        labels : single label or list-like
+        axis : int or axis name
+        level : int or level name, default None
+            For MultiIndex
+        errors : {'ignore', 'raise'}, default 'raise'
+            If 'ignore', suppress error and existing labels are dropped.
+        only_slice : bool, default False
+            Whether indexing along columns should be view-only.
+    
+        """
+        axis_num = self._get_axis_number(axis)
+        axis = self._get_axis(axis)
+    
+        if axis.is_unique:
+            if level is not None:
+                if not isinstance(axis, MultiIndex):
+                    raise AssertionError("axis must be a MultiIndex")
+                new_axis = axis.drop(labels, level=level, errors=errors)
+            else:
+>               new_axis = axis.drop(labels, errors=errors)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/generic.py:4852: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = Index(['<br />'], dtype='object')
+labels = array(['color'], dtype=object), errors = 'raise'
+
+    def drop(
+        self,
+        labels: Index | np.ndarray | Iterable[Hashable],
+        errors: IgnoreRaise = "raise",
+    ) -> Index:
+        """
+        Make new Index with passed list of labels deleted.
+    
+        Parameters
+        ----------
+        labels : array-like or scalar
+        errors : {'ignore', 'raise'}, default 'raise'
+            If 'ignore', suppress error and existing labels are dropped.
+    
+        Returns
+        -------
+        Index
+            Will be same type as self, except for RangeIndex.
+    
+        Raises
+        ------
+        KeyError
+            If not all of the labels are found in the selected axis
+    
+        Examples
+        --------
+        >>> idx = pd.Index(['a', 'b', 'c'])
+        >>> idx.drop(['a'])
+        Index(['b', 'c'], dtype='object')
+        """
+        if not isinstance(labels, Index):
+            # avoid materializing e.g. RangeIndex
+            arr_dtype = "object" if self.dtype == "object" else None
+            labels = com.index_labels_to_array(labels, dtype=arr_dtype)
+    
+        indexer = self.get_indexer_for(labels)
+        mask = indexer == -1
+        if mask.any():
+            if errors != "ignore":
+>               raise KeyError(f"{labels[mask].tolist()} not found in axis")
+E               KeyError: "['color'] not found in axis"
+
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/indexes/base.py:7136: KeyError
+------------------------------ Captured log call -------------------------------
+INFO     gget.utils:gget_archs4.py:154 Fetching the tissue expression atlas of FUNDC1 from human ARCHS4 data.
 ______________________ TestCellxgene.test_cellxgene_adata ______________________
 
 self = <tests.test_cellxgene.TestCellxgene testMethod=test_cellxgene_adata>
@@ -333,269 +1348,6 @@ E            6560443,
 E            6559667]]]
 
 tests/from_json.py:78: AssertionError
-___________________________ TestInfo.test_info_gene ____________________________
-
-self = <tests.test_info.TestInfo testMethod=test_info_gene>
-
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
-    
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2358 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
-E       
-E       First differing element 0:
-E       ['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2357 chars]462]]
-E       ['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2302 chars]462]]
-E       
-E       - [['EnsMUSG00000000001.6',
-E       ?                       ^
-E       
-E       + [['EnsMUSG00000000001.5',
-E       ?                       ^
-E       
-E           'Q9DC51',
-E       +   '14679',
-E           'mus_musculus',
-E           'GRCm39',
-E           'Gnai3',
-E           'Gnai3',
-E       -   [],
-E       +   ['Galphai3', 'Gnai-3', 'Hg1a'],
-E           'Guanine nucleotide-binding protein G(i) subunit alpha-3',
-E           'G protein subunit alpha i3 [Source:MGI Symbol;Acc:MGI:95773]',
-E           'Heterotrimeric guanine nucleotide-binding proteins (G proteins) function as '
-E           'transducers downstream of G protein-coupled receptors (GPCRs) in numerous '
-E           'signaling cascades. The alpha chain contains the guanine nucleotide binding '
-E           'site and alternates between an active, GTP-bound state and an inactive, '
-E           'GDP-bound state. Signaling by an activated GPCR promotes GDP release and '
-E           'GTP binding. The alpha subunit has a low GTPase activity that converts '
-E           'bound GTP to GDP, thereby terminating the signal (By similarity). Both GDP '
-E           'release and GTP hydrolysis are modulated by numerous regulatory proteins '
-E           '(By similarity). Signaling is mediated via effector proteins, such as '
-E           'adenylate cyclase. Inhibits adenylate cyclase activity, leading to '
-E           'decreased intracellular cAMP levels (By similarity). Stimulates the '
-E           'activity of receptor-regulated K(+) channels (By similarity). The active '
-E           'GTP-bound form prevents the association of RGS14 with centrosomes and is '
-E           'required for the translocation of RGS14 from the cytoplasm to the plasma '
-E           'membrane. May play a role in cell division (By similarity). The active '
-E           'GTP-bound form activates the calcium permeant TRPC5 ion channels (By '
-E           'similarity)',
-E       +   'Predicted to enable several functions, including G-protein '
-E       +   'beta/gamma-subunit complex binding activity; GDP binding activity; and '
-E       +   'GTPase activating protein binding activity. Predicted to be involved in '
-E       +   'several processes, including G protein-coupled receptor signaling pathway; '
-E       +   'positive regulation of metabolic process; and positive regulation of '
-E       +   'vascular associated smooth muscle cell proliferation. Predicted to act '
-E       +   'upstream of or within G protein-coupled receptor signaling pathway. Located '
-E       +   'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
-E       +   'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
-E       +   'Alliance of Genome Resources, Apr 2025]',
-E           ['Cytoplasm',
-E            'Cell membrane',
-E            'Cytoplasm, cytoskeleton, microtubule organizing center, centrosome'],
-E           'Gene',
-E           'protein_coding',
-E       -   'ENSMUST00000000001.6',
-E       ?                       ^
-E       
-E       +   'ENSMUST00000000001.5',
-E       ?                       ^
-E       
-E           '3',
-E           -1,
-E       -   108014590,
-E       ?           ^
-E       
-E       +   108014596,
-E       ?           ^
-E       
-E       -   108053469,
-E       ?           ^
-E       
-E       +   108053462,
-E       ?           ^
-E       
-E       -   ['ENSMUST00000000001.6',
-E       ?                        ^
-E       
-E       +   ['ENSMUST00000000001.5'],
-E       ?                        ^ +
-E       
-E       -    'ENSMUST00000535596.1',
-E       -    'ENSMUST00000535597.1',
-E       -    'ENSMUST00000535598.1',
-E       -    'ENSMUST00000535599.1',
-E       -    'ENSMUST00000535600.1',
-E       -    'ENSMUST00000535601.1',
-E       -    'ENSMUST00000535602.1',
-E       -    'ENSMUST00000535603.1',
-E       -    'ENSMUST00000558104.1'],
-E       -   ['protein_coding',
-E       +   ['protein_coding'],
-E       ?                    +
-E       
-E       -    'protein_coding',
-E       -    'protein_coding',
-E       -    'nonsense_mediated_decay',
-E       -    'protein_coding',
-E       -    'nonsense_mediated_decay',
-E       -    'nonsense_mediated_decay',
-E       -    'protein_coding',
-E       -    'nonsense_mediated_decay',
-E       -    'nonsense_mediated_decay'],
-E       -   ['Gnai3-201',
-E       +   ['Gnai3-201'],
-E       ?               +
-E       
-E       +   [-1],
-E       -    'Gnai3-202',
-E       -    'Gnai3-203',
-E       -    'Gnai3-204',
-E       -    'Gnai3-205',
-E       -    'Gnai3-206',
-E       -    'Gnai3-207',
-E       -    'Gnai3-208',
-E       -    'Gnai3-209',
-E       -    'Gnai3-210'],
-E       -   [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-E       -   [108014596,
-E       +   [108014596],
-E       ?             +
-E       
-E       -    108014596,
-E       -    108014597,
-E       -    108014597,
-E       -    108014592,
-E       -    108014597,
-E       -    108014590,
-E       -    108014613,
-E       -    108014611,
-E       -    108014596],
-E       -   [108053469,
-E       -    108053469,
-E       -    108053469,
-E       -    108053453,
-E       -    108053469,
-E       -    108053443,
-E       -    108053435,
-E       -    108053469,
-E       -    108053426,
-E       -    108053462]]]
-E       ?   ^
-E       
-E       +   [108053462]]]
-E       ?   ^
-
-tests/from_json.py:78: AssertionError
-____________________ TestInfo.test_info_gene_list_non_model ____________________
-
-self = <tests.test_info.TestInfo testMethod=test_info_gene_list_non_model>
-
-    def assert_equal(self: unittest.TestCase):
-        test = name
-        expected_result = td[test]["expected_result"]
-        result_to_test = do_call(func, td[test]["args"])
-        if test == "test_cosmic_defaults":  # special case for cosmic
-            import numpy as np
-            expected_result = pd.DataFrame(expected_result[0])
-            expected_result = expected_result.replace({None: np.nan})
-            # result_to_test.equals(expected_result)
-            pd.testing.assert_frame_equal(result_to_test, expected_result)
-            return
-    
-        # If result is a DataFrame, convert to list
-        if isinstance(result_to_test, pd.DataFrame):
-            result_to_test = result_to_test.dropna(axis=1).values.tolist()
-    
->       self.assertEqual(result_to_test, expected_result)
-E       AssertionError: Lists differ: [['EN[97 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[875 chars]84]]] != [['EN[97 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[879 chars]84]]]
-E       
-E       First differing element 0:
-E       ['ENS[96 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[874 chars]684]]
-E       ['ENS[96 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[878 chars]684]]
-E       
-E         [['ENSMMUG00000021246.4',
-E           'macaca_mulatta',
-E           'Mmul_10',
-E           'CCDC13',
-E       -   'coiled-coil domain containing 13 [Source:HGNC Symbol;Acc:HGNC:26358]',
-E       +   'coiled-coil domain containing 13 [Source:UniProtKB Gene Name;Acc:F7D2F4]',
-E           'Gene',
-E           'protein_coding',
-E           'ENSMMUT00000029894.4',
-E           '2',
-E           -1,
-E           98646979,
-E           98755023,
-E           ['ENSMMUT00000029893.4',
-E            'ENSMMUT00000053619.2',
-E            'ENSMMUT00000104418.1',
-E            'ENSMMUT00000087615.1',
-E            'ENSMMUT00000103912.1',
-E            'ENSMMUT00000086824.1',
-E            'ENSMMUT00000029894.4',
-E            'ENSMMUT00000104481.1',
-E            'ENSMMUT00000090481.1',
-E            'ENSMMUT00000026408.4'],
-E           ['protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding',
-E            'protein_coding'],
-E           ['CCDC13-201',
-E            'CCDC13-202',
-E            'CCDC13-204',
-E            'CCDC13-203',
-E            'CCDC13-205',
-E            'CCDC13-206',
-E            'CCDC13-207',
-E            'CCDC13-208',
-E            'CCDC13-209',
-E            'CCDC13-210'],
-E           [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-E           [98646979,
-E            98646982,
-E            98646984,
-E            98646984,
-E            98646985,
-E            98662368,
-E            98663259,
-E            98690412,
-E            98737900,
-E            98738870],
-E           [98655536,
-E            98656674,
-E            98688669,
-E            98656968,
-E            98656865,
-E            98713982,
-E            98746548,
-E            98713982,
-E            98755023,
-E            98754684]]]
-
-tests/from_json.py:78: AssertionError
------------------------------- Captured log call -------------------------------
-INFO     gget.utils:gget_info.py:98 We noticed that you passed a version number with your Ensembl ID.
-Please note that gget info will always return information linked to the latest Ensembl ID version (see 'ensembl_id').
 =============================== warnings summary ===============================
 tests/test_blast.py::TestBlast::test_blast_nt
   /home/runner/work/gget/gget/gget/gget_blast.py:327: FutureWarning: Passing literal html to 'read_html' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
@@ -642,18 +1394,20 @@ tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ============================= slowest 10 durations =============================
-20117.35s call     tests/test_blast.py::TestBlast::test_blast_nt
-75.76s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
-29.39s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
-26.11s call     tests/test_info.py::TestInfo::test_info_gene
-16.93s call     tests/test_info.py::TestInfo::test_info_exon
-13.94s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
-10.64s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
-8.64s call     tests/test_info.py::TestInfo::test_info_gene_list_non_model
-8.38s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
-8.16s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+7214.81s call     tests/test_blast.py::TestBlast::test_blast_nt
+35.79s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_background_ensembl
+23.84s call     tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata
+13.27s setup    tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults
+10.04s call     tests/test_elm.py::TestELM::test_elm_uniprot_id_new
+6.92s call     tests/test_enrichr.py::TestEnrichr::test_enrichr_ensembl_ids
+5.27s call     tests/test_cbio.py::TestCbio::test_cbio_download
+4.50s call     tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl
+4.30s call     tests/test_archs4.py::TestArchs4::test_archs4_mouse_json_ensembl
+3.58s call     tests/test_cbio.py::TestCbio::test_cbio_download_partially_existing_files
 =========================== short test summary info ============================
 ERROR tests/test_cosmic.py::TestCosmicWorkflow::test_cosmic_defaults - FileNotFoundError: Expected COSMIC files were not found after download.
+FAILED tests/test_archs4.py::TestArchs4::test_archs4_tissue_ensembl - KeyError: "['color'] not found in axis"
+FAILED tests/test_archs4.py::TestArchs4::test_archs4_tissue_json - KeyError: "['color'] not found in axis"
 FAILED tests/test_cellxgene.py::TestCellxgene::test_cellxgene_adata - AssertionError: {'n_o[179 chars]ature_id', 'feature_name', 'feature_length'], 'layers': [None]} != {'n_o[179 chars]ature_id', 'feature_name', 'feature_length']}
 - {'layers': [None],
 -  'n_obs': 3679,
@@ -798,219 +1552,5 @@ First differing element 0:
      6560671,
      6560443,
      6559667]]]
-FAILED tests/test_info.py::TestInfo::test_info_gene - AssertionError: Lists differ: [['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2358 chars]62]]] != [['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2303 chars]62]]]
-
-First differing element 0:
-['EnsMUSG00000000001.6', 'Q9DC51', 'mus_musculus', 'GRCm39', '[2357 chars]462]]
-['EnsMUSG00000000001.5', 'Q9DC51', '14679', 'mus_musculus', 'G[2302 chars]462]]
-
-- [['EnsMUSG00000000001.6',
-?                       ^
-
-+ [['EnsMUSG00000000001.5',
-?                       ^
-
-    'Q9DC51',
-+   '14679',
-    'mus_musculus',
-    'GRCm39',
-    'Gnai3',
-    'Gnai3',
--   [],
-+   ['Galphai3', 'Gnai-3', 'Hg1a'],
-    'Guanine nucleotide-binding protein G(i) subunit alpha-3',
-    'G protein subunit alpha i3 [Source:MGI Symbol;Acc:MGI:95773]',
-    'Heterotrimeric guanine nucleotide-binding proteins (G proteins) function as '
-    'transducers downstream of G protein-coupled receptors (GPCRs) in numerous '
-    'signaling cascades. The alpha chain contains the guanine nucleotide binding '
-    'site and alternates between an active, GTP-bound state and an inactive, '
-    'GDP-bound state. Signaling by an activated GPCR promotes GDP release and '
-    'GTP binding. The alpha subunit has a low GTPase activity that converts '
-    'bound GTP to GDP, thereby terminating the signal (By similarity). Both GDP '
-    'release and GTP hydrolysis are modulated by numerous regulatory proteins '
-    '(By similarity). Signaling is mediated via effector proteins, such as '
-    'adenylate cyclase. Inhibits adenylate cyclase activity, leading to '
-    'decreased intracellular cAMP levels (By similarity). Stimulates the '
-    'activity of receptor-regulated K(+) channels (By similarity). The active '
-    'GTP-bound form prevents the association of RGS14 with centrosomes and is '
-    'required for the translocation of RGS14 from the cytoplasm to the plasma '
-    'membrane. May play a role in cell division (By similarity). The active '
-    'GTP-bound form activates the calcium permeant TRPC5 ion channels (By '
-    'similarity)',
-+   'Predicted to enable several functions, including G-protein '
-+   'beta/gamma-subunit complex binding activity; GDP binding activity; and '
-+   'GTPase activating protein binding activity. Predicted to be involved in '
-+   'several processes, including G protein-coupled receptor signaling pathway; '
-+   'positive regulation of metabolic process; and positive regulation of '
-+   'vascular associated smooth muscle cell proliferation. Predicted to act '
-+   'upstream of or within G protein-coupled receptor signaling pathway. Located '
-+   'in Golgi apparatus. Is expressed in early conceptus; inner ear; and oocyte. '
-+   'Orthologous to human GNAI3 (G protein subunit alpha i3). [provided by '
-+   'Alliance of Genome Resources, Apr 2025]',
-    ['Cytoplasm',
-     'Cell membrane',
-     'Cytoplasm, cytoskeleton, microtubule organizing center, centrosome'],
-    'Gene',
-    'protein_coding',
--   'ENSMUST00000000001.6',
-?                       ^
-
-+   'ENSMUST00000000001.5',
-?                       ^
-
-    '3',
-    -1,
--   108014590,
-?           ^
-
-+   108014596,
-?           ^
-
--   108053469,
-?           ^
-
-+   108053462,
-?           ^
-
--   ['ENSMUST00000000001.6',
-?                        ^
-
-+   ['ENSMUST00000000001.5'],
-?                        ^ +
-
--    'ENSMUST00000535596.1',
--    'ENSMUST00000535597.1',
--    'ENSMUST00000535598.1',
--    'ENSMUST00000535599.1',
--    'ENSMUST00000535600.1',
--    'ENSMUST00000535601.1',
--    'ENSMUST00000535602.1',
--    'ENSMUST00000535603.1',
--    'ENSMUST00000558104.1'],
--   ['protein_coding',
-+   ['protein_coding'],
-?                    +
-
--    'protein_coding',
--    'protein_coding',
--    'nonsense_mediated_decay',
--    'protein_coding',
--    'nonsense_mediated_decay',
--    'nonsense_mediated_decay',
--    'protein_coding',
--    'nonsense_mediated_decay',
--    'nonsense_mediated_decay'],
--   ['Gnai3-201',
-+   ['Gnai3-201'],
-?               +
-
-+   [-1],
--    'Gnai3-202',
--    'Gnai3-203',
--    'Gnai3-204',
--    'Gnai3-205',
--    'Gnai3-206',
--    'Gnai3-207',
--    'Gnai3-208',
--    'Gnai3-209',
--    'Gnai3-210'],
--   [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
--   [108014596,
-+   [108014596],
-?             +
-
--    108014596,
--    108014597,
--    108014597,
--    108014592,
--    108014597,
--    108014590,
--    108014613,
--    108014611,
--    108014596],
--   [108053469,
--    108053469,
--    108053469,
--    108053453,
--    108053469,
--    108053443,
--    108053435,
--    108053469,
--    108053426,
--    108053462]]]
-?   ^
-
-+   [108053462]]]
-?   ^
-FAILED tests/test_info.py::TestInfo::test_info_gene_list_non_model - AssertionError: Lists differ: [['EN[97 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[875 chars]84]]] != [['EN[97 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[879 chars]84]]]
-
-First differing element 0:
-['ENS[96 chars]urce:HGNC Symbol;Acc:HGNC:26358]', 'Gene', 'pr[874 chars]684]]
-['ENS[96 chars]urce:UniProtKB Gene Name;Acc:F7D2F4]', 'Gene',[878 chars]684]]
-
-  [['ENSMMUG00000021246.4',
-    'macaca_mulatta',
-    'Mmul_10',
-    'CCDC13',
--   'coiled-coil domain containing 13 [Source:HGNC Symbol;Acc:HGNC:26358]',
-+   'coiled-coil domain containing 13 [Source:UniProtKB Gene Name;Acc:F7D2F4]',
-    'Gene',
-    'protein_coding',
-    'ENSMMUT00000029894.4',
-    '2',
-    -1,
-    98646979,
-    98755023,
-    ['ENSMMUT00000029893.4',
-     'ENSMMUT00000053619.2',
-     'ENSMMUT00000104418.1',
-     'ENSMMUT00000087615.1',
-     'ENSMMUT00000103912.1',
-     'ENSMMUT00000086824.1',
-     'ENSMMUT00000029894.4',
-     'ENSMMUT00000104481.1',
-     'ENSMMUT00000090481.1',
-     'ENSMMUT00000026408.4'],
-    ['protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding',
-     'protein_coding'],
-    ['CCDC13-201',
-     'CCDC13-202',
-     'CCDC13-204',
-     'CCDC13-203',
-     'CCDC13-205',
-     'CCDC13-206',
-     'CCDC13-207',
-     'CCDC13-208',
-     'CCDC13-209',
-     'CCDC13-210'],
-    [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-    [98646979,
-     98646982,
-     98646984,
-     98646984,
-     98646985,
-     98662368,
-     98663259,
-     98690412,
-     98737900,
-     98738870],
-    [98655536,
-     98656674,
-     98688669,
-     98656968,
-     98656865,
-     98713982,
-     98746548,
-     98713982,
-     98755023,
-     98754684]]]
 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
-======= 4 failed, 83 passed, 28 warnings, 1 error in 20379.95s (5:39:39) =======
+======= 4 failed, 80 passed, 28 warnings, 1 error in 7380.58s (2:03:00) ========
